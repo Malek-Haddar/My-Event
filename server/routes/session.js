@@ -1,17 +1,16 @@
-import express from "express";
-import {
-    getSession,
-    createSession,
-    DeleteSession,
-    updateSession,
-} from "../controllers/session.js";
+const express = require("express");
+const sessionController = require("../controllers/session");
 
-import { body, validationResult } from "express-validator";
+const { body, validationResult } = require("express-validator");
 const SessionRouter = express.Router();
 
-SessionRouter.route("/").get(getSession);
-SessionRouter.post("/add", body("name").isLength({ min: 3 }), createSession);
-SessionRouter.patch("/:id", updateSession);
-SessionRouter.delete("/:id", DeleteSession);
+SessionRouter.route("/").get(sessionController.getSession);
+SessionRouter.post(
+    "/add",
+    body("name").isLength({ min: 3 }),
+    sessionController.createSession
+);
+SessionRouter.patch("/:id", sessionController.updateSession);
+SessionRouter.delete("/:id", sessionController.DeleteSession);
 
-export default SessionRouter;
+module.exports = SessionRouter;

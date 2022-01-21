@@ -1,8 +1,8 @@
-import Session from "../models/session.js";
-import { body, validationResult } from "express-validator";
-import mongoose from "mongoose";
+var Session = require("../models/session");
+const mongoose = require("mongoose");
+const { body, validationResult } = require("express-validator");
 
-export const getSession = async(req, res) => {
+const getSession = async(req, res) => {
     try {
         const allSessions = await Session.find();
         res.status(200).json(allSessions);
@@ -11,7 +11,7 @@ export const getSession = async(req, res) => {
     }
 };
 
-export const createSession = async(req, res) => {
+const createSession = async(req, res) => {
     var newSession = new Session();
     newSession.name = req.body.name;
     newSession.start = req.body.start;
@@ -30,7 +30,7 @@ export const createSession = async(req, res) => {
     }
 };
 
-export const updateSession = async(req, res) => {
+const updateSession = async(req, res) => {
     const { id } = req.params;
     const { name, start, end, details } = req.body;
 
@@ -43,7 +43,7 @@ export const updateSession = async(req, res) => {
     res.json(updatedSession);
 };
 
-export const DeleteSession = async(req, res) => {
+const DeleteSession = async(req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -52,3 +52,5 @@ export const DeleteSession = async(req, res) => {
     await Session.findByIdAndRemove(id);
     res.json({ message: "Task deleted successfully." });
 };
+
+module.exports = { getSession, createSession, updateSession, DeleteSession };

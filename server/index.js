@@ -1,30 +1,21 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
-
-import userRoute from "./routes/user.js";
-import SessionRouter from "./routes/session.js";
-
+const connection = require("./DataBase");
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
 
+const userRoute = require("./routes/user");
+const SessionRouter = require("./routes/session");
+
+connection();
 app.use(express.json());
+app.use(cors());
+
 app.use("/user", userRoute);
 app.use("/session", SessionRouter);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const CONNECTION_URL =
-    "mongodb+srv://root:root@my-event-cluster.f107j.mongodb.net/Event?retryWrites=true&w=majority";
-const PORT = process.env.PORT || 5000;
-
-mongoose
-    .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() =>
-        app.listen(PORT, () =>
-            console.log(`Server Running on Port: http://localhost:${PORT}`)
-        )
-    )
-    .catch((error) => console.log(`${error} did not connect`));
+const port = process.env.PORT || 4000;
+app.listen(port, () => console.log(`Listening on port ${port}.`));
