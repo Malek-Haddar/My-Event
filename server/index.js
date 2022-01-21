@@ -6,6 +6,7 @@ const app = express();
 
 const userRoute = require("./routes/user");
 const SessionRouter = require("./routes/session");
+const EventRouter = require("./routes/event");
 
 connection();
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use("/user", userRoute);
 app.use("/session", SessionRouter);
+app.use("/event", EventRouter);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
