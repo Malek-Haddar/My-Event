@@ -1,11 +1,11 @@
 const express = require("express");
 const eventController = require("../controllers/event");
-
 const { body, validationResult } = require("express-validator");
+const { auth } = require("../middleware/auth")
 
 const EventRouter = express.Router();
 
-EventRouter.route("/").get(eventController.getEvent);
+EventRouter.get("/", auth, eventController.getEvent);
 EventRouter.post(
     "/add",
     body("name").isLength({ min: 3 }),

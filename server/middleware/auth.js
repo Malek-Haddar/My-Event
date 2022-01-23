@@ -1,29 +1,69 @@
-import jwt from "jsonwebtoken";
-
+const jwt = require("jsonwebtoken");
+const User = require("../models/user")
 const secret = "test";
 
 const auth = async(req, res, next) => {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
-        const isCustomAuth = token.length < 500;
+    let token
 
-        let decodedData;
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        try {
+            token = req.headers.authorization.split(' ')[1]
 
-        if (token && isCustomAuth) {
-            decodedData = jwt.verify(token, secret);
+            const decoded = jwt.verify(token, secret)
 
-            req.userId = decodedData ? .id;
-        } else {
-            decodedData = jwt.decode(token);
+            req.user = await User.findById(decoded.id).select('-password')
 
-            req.userId = decodedData ? .sub;
+            next()
+        } catch (error) {
+            console.error(error)
+            res.status(401)
+            throw new Error('Not authorized, token failed')
         }
+    }
 
-        next();
-    } catch (error) {
-        console.log(error);
+    if (!token) {
+        res.status(401)
+        throw new Error('Not authorized, no token')
     }
 };
 
+const admin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        console.log(req);
+        next()
+        res.send("you're user")
+    } else {
+        res.status(401)
+        res.send("Not authorized as an admin")
+    }
+}
+const instractor = (req, res, next) => {
+    if (req.user && req.user.instractor) {
+        next()
+    } else {
+        res.status(401)
+        res.send("Not authorized as an admin")
+    }
+}
+const moderator = (req, res, next) => {
+    if (req.user && req.user.isModerator) {
+        next()
+    } else {
+        res.status(401)
+        res.send("Not authorized as an admin")
+    }
+}
+const user = (req, res, next) => {
+    if (req.user && req.user.isUser) {
+        next()
+    } else {
+        res.status(401)
+        res.send("Not authorized as an admin")
+    }
+}
 
-export default auth;
+
+module.exports = { auth, admin, moderator, instractor, user };

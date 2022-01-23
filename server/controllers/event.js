@@ -2,10 +2,12 @@ var Event = require("../models/event");
 const mongoose = require("mongoose");
 const { body, validationResult } = require("express-validator");
 const EventRouter = require("../routes/event");
+const { getSessionById } = require("./session");
 
 const getEvent = async(req, res) => {
     try {
         const allEvents = await Event.find();
+
         res.status(200).json(allEvents);
     } catch (error) {
         res.status(404).json({ message: error.message() });
@@ -18,6 +20,7 @@ const createEvent = async(req, res) => {
     newEvent.description = req.body.description;
     newEvent.date = req.body.date;
     newEvent.location = req.body.location;
+    newEvent.sessions = req.body.sessions;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });

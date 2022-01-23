@@ -58,4 +58,10 @@ const signup = async(req, res) => {
     }
 };
 
-module.exports = { signin, signup };
+const ChangeRole = async(req, res) => {
+
+}
+
+
+
+module.exports = { signin, signup, ChangeRole };

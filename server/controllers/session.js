@@ -52,5 +52,20 @@ const DeleteSession = async(req, res) => {
     await Session.findByIdAndRemove(id);
     res.json({ message: "Task deleted successfully." });
 };
+const getSessionById = async(id) => {
+    try {
+        const course = await Session.findById(id);
+        console.log(course);
+        return course;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
-module.exports = { getSession, createSession, updateSession, DeleteSession };
+module.exports = {
+    getSession,
+    createSession,
+    updateSession,
+    DeleteSession,
+    getSessionById,
+};
