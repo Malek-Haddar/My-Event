@@ -8,7 +8,7 @@ module.exports = async() => {
             useUnifiedTopology: true,
         };
         await mongoose.connect(process.env.DATABASE_URL, connectionParams);
-        console.log("Connected to DataBase");
+        console.log("Connected to Mongo DB..");
     } catch (error) {
         console.log("Could not connect to DataBase. ", error);
     }
