@@ -1,8 +1,10 @@
 const UserModal = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+const mongoose = require("mongoose");
 
-const secret = "test";
+
 
 const signin = async(req, res) => {
     const { email, password } = req.body;
@@ -18,7 +20,7 @@ const signin = async(req, res) => {
         if (!isPasswordCorrect)
             return res.status(400).json({ message: "Invalid credentials" });
 
-        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, {
+        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, process.env.SECRET, {
             expiresIn: "1h",
         });
 
@@ -59,7 +61,16 @@ const signup = async(req, res) => {
 };
 
 const ChangeRole = async(req, res) => {
+    const { id } = req.params;
+    const { isUser, isModerator, isInstructor } = req.body;
 
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send("No Task Found ! ");
+
+    const changedRole = { isUser, isModerator, isInstructor, _id: id };
+
+    await User.findByIdAndUpdate(id, changedRole, { new: true });
+    res.json(changedRole);
 }
 
 
