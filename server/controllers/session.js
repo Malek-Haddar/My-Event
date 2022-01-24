@@ -17,6 +17,7 @@ const createSession = async(req, res) => {
     newSession.start = req.body.start;
     newSession.end = req.body.end;
     newSession.details = req.body.details;
+    newSession.category = req.body.category;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -32,12 +33,12 @@ const createSession = async(req, res) => {
 
 const updateSession = async(req, res) => {
     const { id } = req.params;
-    const { name, start, end, details } = req.body;
+    const { name, start, end, details, category } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send("No Task Found ! ");
 
-    const updatedSession = { name, start, end, details, _id: id };
+    const updatedSession = { name, start, end, details, category, _id: id };
 
     await Session.findByIdAndUpdate(id, updatedSession, { new: true });
     res.json(updatedSession);

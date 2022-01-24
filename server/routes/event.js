@@ -5,7 +5,7 @@ const { auth } = require("../middleware/auth")
 
 const EventRouter = express.Router();
 
-EventRouter.get("/", auth, eventController.getEvent);
+EventRouter.get("/", eventController.getEvent);
 EventRouter.post(
     "/add",
     body("name").isLength({ min: 3 }),
