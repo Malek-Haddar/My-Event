@@ -31,7 +31,7 @@ const auth = async(req, res, next) => {
 };
 
 const admin = (req, res, next) => {
-    if (req.user && req.user.isAdmin) {
+    if (req.user && req.user.role === 3) {
         console.log(req);
         next()
         res.send("you're user")
@@ -41,7 +41,7 @@ const admin = (req, res, next) => {
     }
 }
 const instractor = (req, res, next) => {
-    if (req.user && req.user.instractor) {
+    if (req.user && req.user.role === 2) {
         next()
     } else {
         res.status(401)
@@ -49,7 +49,7 @@ const instractor = (req, res, next) => {
     }
 }
 const moderator = (req, res, next) => {
-    if (req.user && req.user.isModerator) {
+    if (req.user && req.user.role === 1) {
         next()
     } else {
         res.status(401)
@@ -57,7 +57,7 @@ const moderator = (req, res, next) => {
     }
 }
 const user = (req, res, next) => {
-    if (req.user && req.user.isUser) {
+    if (req.user && req.user.role === 0) {
         next()
     } else {
         res.status(401)

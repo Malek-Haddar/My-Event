@@ -1,13 +1,18 @@
 var Session = require("../models/session");
 const mongoose = require("mongoose");
 const { body, validationResult } = require("express-validator");
+const { getCategoryById } = require("./category.js");
+const Category = require("../models/category");
+
+
 
 const getSession = async(req, res) => {
     try {
-        const allSessions = await Session.find();
-        res.status(200).json(allSessions);
+        const allSessions = await Session.find().populate('category');
+
+        res.status(200).send(allSessions);
     } catch (error) {
-        res.status(404).json({ message: error.message() });
+        res.status(404).json({ message: error });
     }
 };
 
@@ -53,15 +58,18 @@ const DeleteSession = async(req, res) => {
     await Session.findByIdAndRemove(id);
     res.json({ message: "Task deleted successfully." });
 };
-const getSessionById = async(id) => {
+const getSessionById = async(req, res) => {
+    const { id } = req.params;
     try {
-        const course = await Session.findById(id);
-        console.log(course);
-        return course;
+
+        const session = await Session.find({ _id: id }).populate('category')
+
+        res.status(200).send(session);
     } catch (error) {
         console.log(error);
     }
 };
+
 
 module.exports = {
     getSession,

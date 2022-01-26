@@ -13,4 +13,7 @@ SessionRouter.post(
 SessionRouter.patch("/:id", sessionController.updateSession);
 SessionRouter.delete("/:id", sessionController.DeleteSession);
 
+SessionRouter.get("/session/:id", sessionController.getSessionById);
+
+
 module.exports = SessionRouter;

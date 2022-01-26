@@ -9,7 +9,7 @@ const sessionSchema = new Schema({
     details: { type: String },
     category: [{
         type: mongoose.Types.ObjectId,
-        ref: "category",
+        ref: "Category",
     }],
 });
 

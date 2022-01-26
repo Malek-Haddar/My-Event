@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const mongoose = require("mongoose");
 
-
-
 const signin = async(req, res) => {
     const { email, password } = req.body;
 
@@ -20,9 +18,11 @@ const signin = async(req, res) => {
         if (!isPasswordCorrect)
             return res.status(400).json({ message: "Invalid credentials" });
 
-        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, process.env.SECRET, {
-            expiresIn: "1h",
-        });
+        const token = jwt.sign({ email: oldUser.email, id: oldUser._id },
+            process.env.SECRET, {
+                expiresIn: "1h",
+            }
+        );
 
         res.status(200).json({ result: oldUser, token });
     } catch (err) {
@@ -32,7 +32,7 @@ const signin = async(req, res) => {
 
 const signup = async(req, res) => {
     console.log("email: ", req.body);
-    const { email, password, firstName, lastName } = req.body;
+    const { email, password, firstName, lastName, role } = req.body;
 
     try {
         const oldUser = await UserModal.findOne({ email });
@@ -46,11 +46,14 @@ const signup = async(req, res) => {
             email,
             password: hashedPassword,
             name: `${firstName} ${lastName}`,
+            role,
         });
 
-        const token = jwt.sign({ email: result.email, id: result._id }, secret, {
-            expiresIn: "1h",
-        });
+        const token = jwt.sign({ email: result.email, id: result._id },
+            process.env.SECRET, {
+                expiresIn: "1h",
+            }
+        );
 
         res.status(201).json({ result, token });
     } catch (error) {
@@ -62,17 +65,15 @@ const signup = async(req, res) => {
 
 const ChangeRole = async(req, res) => {
     const { id } = req.params;
-    const { isUser, isModerator, isInstructor } = req.body;
+    const { role } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send("No Task Found ! ");
 
-    const changedRole = { isUser, isModerator, isInstructor, _id: id };
-
-    await User.findByIdAndUpdate(id, changedRole, { new: true });
-    res.json(changedRole);
-}
-
-
+    const updated = await User.findByIdAndUpdate(
+        id, { role: role }, { new: true }
+    );
+    res.status(200).send(updated);
+};
 
 module.exports = { signin, signup, ChangeRole };
