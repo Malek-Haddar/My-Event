@@ -8,6 +8,7 @@ const userRoute = require("./routes/user");
 const SessionRouter = require("./routes/session");
 const EventRouter = require("./routes/event");
 const CategoryRouter = require("./routes/category");
+const ReclamationRouter = require("./routes/reclamation");
 
 connection();
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use("/user", userRoute);
 app.use("/session", SessionRouter);
 app.use("/event", EventRouter);
 app.use("/categories", CategoryRouter);
+app.use("/reclamation", ReclamationRouter);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
