@@ -1,15 +1,19 @@
-const connection = require("./config/database");
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const app = express();
+import connection from "./config/database.js";
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
-const userRoute = require("./routes/user");
-const SessionRouter = require("./routes/session");
-const EventRouter = require("./routes/event");
-const CategoryRouter = require("./routes/category");
-const ReclamationRouter = require("./routes/reclamation");
-const QuizzRouter = require("./routes/quizz");
+
+const app = express();
+import userRoute from "./routes/user.js";
+import SessionRouter from "./routes/session.js";
+import EventRouter from "./routes/event.js";
+import CategoryRouter from "./routes/category.js";
+import ReclamationRouter from "./routes/reclamation.js";
+import QuizzRouter from "./routes/quizz.js";
+import postRoutes from './routes/posts.js';
+
+
 
 connection();
 app.use(express.json());
@@ -21,6 +25,8 @@ app.use("/event", EventRouter);
 app.use("/categories", CategoryRouter);
 app.use("/reclamation", ReclamationRouter);
 app.use("/quizz", QuizzRouter);
+app.use('/posts', postRoutes);
+
 
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));

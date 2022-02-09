@@ -1,12 +1,14 @@
-var Session = require("../models/session");
-const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
-const { getCategoryById } = require("./category.js");
-const Category = require("../models/category");
+import express from 'express';
+import Session from "../models/session.js";
+import mongoose from 'mongoose';
+import { body, validationResult } from "express-validator";
+/* import { getCategoryById } from "./category";*/
+import Category from "../models/category.js";
+const router = express.Router();
 
 
 
-const getSession = async(req, res) => {
+export const getSession = async(req, res) => {
     try {
         const allSessions = await Session.find().populate('category');
 
@@ -16,7 +18,7 @@ const getSession = async(req, res) => {
     }
 };
 
-const createSession = async(req, res) => {
+export const createSession = async(req, res) => {
     var newSession = new Session();
     newSession.name = req.body.name;
     newSession.start = req.body.start;
@@ -36,7 +38,7 @@ const createSession = async(req, res) => {
     }
 };
 
-const updateSession = async(req, res) => {
+export const updateSession = async(req, res) => {
     const { id } = req.params;
     const { name, start, end, details, category } = req.body;
 
@@ -49,7 +51,7 @@ const updateSession = async(req, res) => {
     res.json(updatedSession);
 };
 
-const DeleteSession = async(req, res) => {
+export const DeleteSession = async(req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -58,7 +60,7 @@ const DeleteSession = async(req, res) => {
     await Session.findByIdAndRemove(id);
     res.json({ message: "Task deleted successfully." });
 };
-const getSessionById = async(req, res) => {
+export const getSessionById = async(req, res) => {
     const { id } = req.params;
     try {
 
@@ -71,10 +73,4 @@ const getSessionById = async(req, res) => {
 };
 
 
-module.exports = {
-    getSession,
-    createSession,
-    updateSession,
-    DeleteSession,
-    getSessionById,
-};
+export default router

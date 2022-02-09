@@ -1,9 +1,13 @@
-var Quizz = require("../models/quizz");
-const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
+import express from 'express';
+
+import Quizz from '../models/quizz.js';
+
+import mongoose from 'mongoose';
+import { body, validationResult } from "express-validator";
+const router = express.Router();
 
 
-const getQuizz = async(req, res) => {
+export const getQuizz = async(req, res) => {
     try {
         const allQuizzs = await Quizz.find();
         res.status(200).send(allQuizzs);
@@ -12,7 +16,7 @@ const getQuizz = async(req, res) => {
     }
 }
 
-const createQuizz = async(req, res) => {
+export const createQuizz = async(req, res) => {
     var newQuizz = new Quizz();
     newQuizz.question = req.body.question;
     /* newReclamation.users = req.body.users; */
@@ -30,7 +34,7 @@ const createQuizz = async(req, res) => {
     }
 }
 
-const DeleteQuizz = async(req, res) => {
+export const DeleteQuizz = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send(" No Quizz found with id : ${id} ");
@@ -43,4 +47,4 @@ const DeleteQuizz = async(req, res) => {
 
 
 
-module.exports = { getQuizz, createQuizz, DeleteQuizz };
+export default router;

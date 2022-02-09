@@ -1,10 +1,15 @@
-var Event = require("../models/event")
-const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
-const EventRouter = require("../routes/event");
-const { getSessionById } = require("./session");
+import express from 'express';
+import mongoose from 'mongoose';
 
-const getEvent = async(req, res) => {
+import { body, validationResult } from "express-validator";
+import Event from '../models/event.js';
+
+const router = express.Router();
+
+
+import { getSessionById } from "./session.js";
+
+export const getEvent = async(req, res) => {
     try {
         const allEvents = await Event.find();
 
@@ -15,7 +20,7 @@ const getEvent = async(req, res) => {
     }
 };
 
-const createEvent = async(req, res) => {
+export const createEvent = async(req, res) => {
     var newEvent = new Event();
     newEvent.name = req.body.name;
     newEvent.description = req.body.description;
@@ -35,7 +40,7 @@ const createEvent = async(req, res) => {
     }
 };
 
-const updateEvent = async(req, res) => {
+export const updateEvent = async(req, res) => {
     const { id } = req.params;
     const { name, description, date, location } = req.body;
 
@@ -48,7 +53,7 @@ const updateEvent = async(req, res) => {
     res.json(updatedEvent);
 };
 
-const DeleteEvent = async(req, res) => {
+export const DeleteEvent = async(req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -58,4 +63,4 @@ const DeleteEvent = async(req, res) => {
     res.json({ message: "Task deleted successfully." });
 };
 
-module.exports = { getEvent, createEvent, updateEvent, DeleteEvent };
+export default router;

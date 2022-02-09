@@ -1,7 +1,8 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
-module.exports = async() => {
+const connection = async() => {
     try {
         const connectionParams = {
             useNewUrlParser: true,
@@ -13,3 +14,5 @@ module.exports = async() => {
         console.log("Could not connect to DataBase. ", error);
     }
 };
+
+export default connection;

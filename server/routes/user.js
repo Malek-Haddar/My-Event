@@ -1,5 +1,5 @@
-const express = require("express");
-const userController = require("../controllers/User");
+import express from "express";
+import userController from "../controllers/User.js";
 
 const UserRouter = express.Router();
 
@@ -8,4 +8,4 @@ UserRouter.post("/signup", userController.signup);
 UserRouter.patch("/role/:id", userController.ChangeRole);
 
 
-module.exports = UserRouter;
+export default UserRouter;

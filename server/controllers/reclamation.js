@@ -1,9 +1,13 @@
-var Reclamation = require("../models/reclamation");
-const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
+import express from 'express';
+
+import Reclamation from '../models/reclamation.js';
+
+import mongoose from 'mongoose';
+import { body, validationResult } from "express-validator";
+const router = express.Router();
 
 
-const getReclamation = async(req, res) => {
+export const getReclamation = async(req, res) => {
     try {
         const allReclamations = await Reclamation.find();
         res.status(200).send(allReclamations);
@@ -12,7 +16,7 @@ const getReclamation = async(req, res) => {
     }
 }
 
-const createReclamation = async(req, res) => {
+export const createReclamation = async(req, res) => {
     var newReclamation = new Reclamation();
     newReclamation.text = req.body.text;
     /* newReclamation.users = req.body.users; */
@@ -30,7 +34,7 @@ const createReclamation = async(req, res) => {
     }
 }
 
-const DeleteReclamation = async(req, res) => {
+export const DeleteReclamation = async(req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send(" No Reclamation found with id : ${id} ");
@@ -42,5 +46,4 @@ const DeleteReclamation = async(req, res) => {
 
 
 
-
-module.exports = { getReclamation, createReclamation, DeleteReclamation };
+export default router;

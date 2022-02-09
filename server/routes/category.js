@@ -1,16 +1,13 @@
-const express = require("express");
-const categoryController = require("../controllers/category");
-const { body, validationResult } = require("express-validator");
-const { auth } = require("../middleware/auth")
+import express from 'express';
+import { getCategory, createCategory, updateCategory, DeleteCategory } from "../controllers/category.js";
 
-const CategoryRouter = express.Router();
+const router = express.Router();
 
-CategoryRouter.get("/", categoryController.getCategory);
-CategoryRouter.post(
+router.get("/", getCategory);
+router.post(
     "/add",
-    body("name").isLength({ min: 3 }),
-    categoryController.createCategory);
-CategoryRouter.patch("/:id", categoryController.updateCategory);
-CategoryRouter.delete("/:id", categoryController.DeleteCategory);
+    createCategory);
+router.patch("/:id", updateCategory);
+router.delete("/:id", DeleteCategory);
 
-module.exports = CategoryRouter;
+export default router;

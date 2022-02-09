@@ -1,13 +1,10 @@
-const express = require("express");
-const reclamationController = require("../controllers/reclamation");
-const { body, validationResult } = require("express-validator");
-const { auth } = require("../middleware/auth")
+import express from 'express';
+import { getReclamation, createReclamation, DeleteReclamation } from "../controllers/reclamation.js";
+const router = express.Router();
 
-const ReclamationRouter = express.Router();
 
-ReclamationRouter.get("/", reclamationController.getReclamation);
-ReclamationRouter.post("/add", body("text").isLength({ min: 8 }),
-    reclamationController.createReclamation);
-ReclamationRouter.delete("/:id", reclamationController.DeleteReclamation);
+router.get("/", getReclamation);
+router.post("/add", createReclamation);
+router.delete("/:id", DeleteReclamation);
 
-module.exports = ReclamationRouter;
+export default router;

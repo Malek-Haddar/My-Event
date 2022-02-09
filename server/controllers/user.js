@@ -1,14 +1,13 @@
-const UserModal = require("../models/user");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const mongoose = require("mongoose");
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import User from "../models/user.js";
 
 const signin = async(req, res) => {
     const { email, password } = req.body;
 
     try {
-        const oldUser = await UserModal.findOne({ email });
+        const oldUser = await User.findOne({ email });
 
         if (!oldUser)
             return res.status(404).json({ message: "User doesn't exist" });
@@ -35,14 +34,14 @@ const signup = async(req, res) => {
     const { email, password, firstName, lastName, role } = req.body;
 
     try {
-        const oldUser = await UserModal.findOne({ email });
+        const oldUser = await User.findOne({ email });
 
         if (oldUser)
             return res.status(400).json({ message: "User already exists" });
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await UserModal.create({
+        const result = await User.create({
             email,
             password: hashedPassword,
             name: `${firstName} ${lastName}`,
@@ -76,4 +75,4 @@ const ChangeRole = async(req, res) => {
     res.status(200).send(updated);
 };
 
-module.exports = { signin, signup, ChangeRole };
+export default { signin, signup, ChangeRole };

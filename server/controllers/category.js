@@ -1,8 +1,12 @@
-var Category = require("../models/category");
-const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
+import Category from '../models/category.js';
+import express from 'express';
 
-const getCategory = async(req, res) => {
+import mongoose from 'mongoose';
+import { body, validationResult } from "express-validator";
+
+const router = express.Router();
+
+export const getCategory = async(req, res) => {
     try {
         const allCategories = await Category.find().populate('sessions');;
 
@@ -12,7 +16,7 @@ const getCategory = async(req, res) => {
     }
 };
 
-const createCategory = async(req, res) => {
+export const createCategory = async(req, res) => {
     var newCategory = new Category();
     newCategory.name = req.body.name;
     const errors = validationResult(req);
@@ -29,7 +33,7 @@ const createCategory = async(req, res) => {
 };
 
 
-const updateCategory = async(req, res) => {
+export const updateCategory = async(req, res) => {
     const { id } = req.params;
     const { name, sessions } = req.body;
 
@@ -45,7 +49,7 @@ const updateCategory = async(req, res) => {
 
 
 
-const DeleteCategory = async(req, res) => {
+export const DeleteCategory = async(req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -54,4 +58,4 @@ const DeleteCategory = async(req, res) => {
     await Category.findByIdAndRemove(id);
     res.json({ message: "Category deleted successfully." });
 };
-module.exports = { getCategory, createCategory, updateCategory, DeleteCategory };
+export default router;

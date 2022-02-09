@@ -1,17 +1,11 @@
-const express = require("express");
-const eventController = require("../controllers/event");
-const { body, validationResult } = require("express-validator");
-const { auth } = require("../middleware/auth")
+import express from 'express';
+import { getEvent, createEvent, updateEvent, DeleteEvent } from '../controllers/event.js';
 
-const EventRouter = express.Router();
+const router = express.Router();
 
-EventRouter.get("/", eventController.getEvent);
-EventRouter.post(
-    "/add",
-    body("name").isLength({ min: 3 }),
-    eventController.createEvent
-);
-EventRouter.patch("/:id", eventController.updateEvent);
-EventRouter.delete("/:id", eventController.DeleteEvent);
+router.get("/", getEvent);
+router.post("/add", createEvent);
+router.patch("/:id", updateEvent);
+router.delete("/:id", DeleteEvent);
 
-module.exports = EventRouter;
+export default router;
