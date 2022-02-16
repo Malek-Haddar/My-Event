@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from './authService'
 
-//get user from localStorage 
+//get user from localStorage if connected
 const user = JSON.parse(localStorage.getItem('user'))
 
 
@@ -93,7 +93,7 @@ export const authSlice = createSlice ({
             .addCase(logout.fulfilled, (state) => {
                 state.user = null
             })
-    }
+    }       
 })
 
 export const {reset} = authSlice.actions
