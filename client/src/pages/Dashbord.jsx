@@ -1,6 +1,6 @@
 function Dashbord() {
   return (
-    <div>Dashbord</div>
+    <div>Dashbord Admin</div>
   )
 }
 
