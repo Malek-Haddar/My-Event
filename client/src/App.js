@@ -1,28 +1,31 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Dashbord from './pages/Dashbord'
-import Login from './pages/Login'
-import Register from './pages/Register'
-
+import Contact from "./pages/Contact";
+import Dashbord from "./pages/Dashbord";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
     <>
       <Router>
-        <div className="container">
-          <Header/>
+        <Header />
         <Routes>
-          <Route path='/' element={ <Dashbord/> } /> 
-          <Route path='/login' element= { <Login/> }/>
-          <Route path='/register' element= { <Register/> }/>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashbord" element={<Dashbord />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
-        </div>
+        <Footer />
       </Router>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
- }
+}
 
 export default App;
