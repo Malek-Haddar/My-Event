@@ -58,7 +58,132 @@ dispatch(reset())
 
   return (
     <>
-    <section className="heading">
+      {" "}
+      <section className="page-header bg_img padding-tb">
+        <div className="overlay"></div>
+        <div className="container">
+          <div className="page-header-content-area">
+            <h4 className="ph-title">Registration Page</h4>
+            <ul className="lab-ul">
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="#">Features</a>
+              </li>
+              <li>
+                <a class="active">Registration</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <div className="login-section padding-tb">
+        <div className="container">
+          <div className="account-wrapper">
+            <h3 className="title">Register Now</h3>
+            <form className="account-form">
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className="form-control"
+                  id="firstName"
+                  name="firstName"
+                  value={firstName}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  name="lastname"
+                  className="form-control"
+                  id="lastName"
+                  value={lastName}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  value={email}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  className="form-control"
+                  id="password"
+                  value={password}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="form-control"
+                  id="password2"
+                  name="password2"
+                  value={password2}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <button className="d-block lab-btn">
+                  <span>Get Started Now</span>
+                </button>
+              </div>
+            </form>
+            <div className="account-bottom">
+              <span className="d-block cate pt-10">
+                Are you a member? <a href="login.html">Login</a>
+              </span>
+              <span className="or">
+                <span>or</span>
+              </span>
+              <h5 className="subtitle">Register With Social Media</h5>
+              <ul className="social-media social-color justify-content-center d-flex lab-ul">
+                <li>
+                  <a href="#" className="facebook">
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="twitter">
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="linkedin">
+                    <i className="fab fa-linkedin-in"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="instagram">
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="pinterest">
+                    <i className="fab fa-pinterest"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <section classNameName="heading">
       <h1>
         <FaUser/> Register
       </h1>
@@ -105,9 +230,9 @@ dispatch(reset())
           <button type="submit" className="btn btn-block">Submit</button>
         </div>
       </form>
-    </section>
+    </section> */}
     </>
-  )
+  );
 }
 
 export default Register

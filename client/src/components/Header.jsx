@@ -50,60 +50,60 @@ function Header() {
                         <a href="/">Home</a>
                       </li>
 
-                      {/* <li>
-                      <a href="#0">Features</a>
-                      <ul className="submenu">
-                        <li>
-                          <a href="gallery.html">Gallery</a>
-                        </li>
-                        <li>
-                          <a href="login.html">Log In</a>
-                        </li>
-                        <li>
-                          <a href="registration.html">Sign Up</a>
-                        </li>
-                        <li>
-                          <a href="pricing-plan.html">Pricing Plan</a>
-                        </li>
-                        <li>
-                          <a href="shop.html">Shop</a>
-                        </li>
-                        <li>
-                          <a href="shop-single.html">Shop Single</a>
-                        </li>
-                        <li>
-                          <a href="cart.html">Cart Page</a>
-                        </li>
-                        <li>
-                          <a href="404.html">404 Page</a>
-                        </li>
-                        <li>
-                          <a href="coming-soon.html">Coming-soon</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#0">Speakers</a>
-                      <ul className="submenu">
-                        <li>
-                          <a href="speakers.html">All Speakers</a>
-                        </li>
-                        <li>
-                          <a href="speaker-details.html">Speaker Details</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#0">Blog</a>
-                      <ul className="submenu">
-                        <li>
-                          <a href="blog.html">Blog</a>
-                        </li>
-                        <li>
-                          <a href="blog-single.html">Blog Single</a>
-                        </li>
-                      </ul>
-                    </li> */}
+                      <li>
+                        <a href="#0">Features</a>
+                        <ul className="submenu">
+                          <li>
+                            <a href="gallery.html">Gallery</a>
+                          </li>
+                          <li>
+                            <a href="login.html">Log In</a>
+                          </li>
+                          <li>
+                            <a href="registration.html">Sign Up</a>
+                          </li>
+                          <li>
+                            <a href="pricing-plan.html">Pricing Plan</a>
+                          </li>
+                          <li>
+                            <a href="shop.html">Shop</a>
+                          </li>
+                          <li>
+                            <a href="shop-single.html">Shop Single</a>
+                          </li>
+                          <li>
+                            <a href="cart.html">Cart Page</a>
+                          </li>
+                          <li>
+                            <a href="404.html">404 Page</a>
+                          </li>
+                          <li>
+                            <a href="coming-soon.html">Coming-soon</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href="#0">Speakers</a>
+                        <ul className="submenu">
+                          <li>
+                            <a href="speakers.html">All Speakers</a>
+                          </li>
+                          <li>
+                            <a href="speaker-details.html">Speaker Details</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href="#0">Blog</a>
+                        <ul className="submenu">
+                          <li>
+                            <a href="blog.html">Blog</a>
+                          </li>
+                          <li>
+                            <a href="blog-single.html">Blog Single</a>
+                          </li>
+                        </ul>
+                      </li>
                       <li>
                         <a href="/contact">Contact</a>
                       </li>
@@ -215,7 +215,7 @@ function Header() {
                   <div className="menu-area">
                     <ul className="menu">
                       <li>
-                        <a href="index.html">Home</a>
+                        <a href="/">Home</a>
                       </li>
                       <Link to="/login" className="ticket-btn lab-btn ">
                         <span>
