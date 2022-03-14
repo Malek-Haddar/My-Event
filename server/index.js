@@ -19,13 +19,13 @@ connection();
 app.use(express.json());
 app.use(cors());
 
-app.use("/user", userRoute);
-app.use("/session", SessionRouter);
-app.use("/event", EventRouter);
-app.use("/categories", CategoryRouter);
-app.use("/reclamation", ReclamationRouter);
-app.use("/quizz", QuizzRouter);
-app.use('/posts', postRoutes);
+app.use("/api/user", userRoute);
+app.use("/api/session", SessionRouter);
+app.use("/api/event", EventRouter);
+app.use("/api/categories", CategoryRouter);
+app.use("/api/reclamation", ReclamationRouter);
+app.use("/api/quizz", QuizzRouter);
+app.use("/api/posts", postRoutes);
 
 
 

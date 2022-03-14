@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Session from "../components/Session";
 
 function Home() {
   const { user } = useSelector((state) => state.auth);
@@ -73,6 +74,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <Session />
     </>
   );
 }

@@ -18,7 +18,9 @@ export const getReclamation = async(req, res) => {
 
 export const createReclamation = async(req, res) => {
     var newReclamation = new Reclamation();
-    newReclamation.text = req.body.text;
+    newReclamation.email = req.body.email;
+    newReclamation.subject = req.body.subject;
+    newReclamation.messages = req.body.messages;
     /* newReclamation.users = req.body.users; */
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

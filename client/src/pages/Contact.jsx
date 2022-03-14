@@ -1,6 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
+import {
+  getContacts,
+  createContact,
+  reset,
+} from "../features/contacts/contactSlice";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    email: "",
+    subject: "",
+    messages: "",
+  });
+
+  const { email, subject, messages } = formData;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+
+  const { contacts, isLoading, isError, message } = useSelector(
+    (state) => state.contacts
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    dispatch(getContacts());
+    return () => {
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
+  console.log(contacts);
+
+  const onChange = (e) => {
+    setFormData((prevSate) => ({
+      ...prevSate,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const contactData = {
+      email,
+      subject,
+      messages,
+    };
+    dispatch(createContact(contactData));
+    setFormData("");
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <>
       <section className="page-header bg_img padding-tb">
@@ -20,6 +83,17 @@ function Contact() {
         </div>
       </section>
 
+      {/* <section className="contact">
+        {contacts.length > 0 ? (
+          <div className="card">
+            {contacts.map((c) => (
+              <div class="text-primary">{c.subject}</div>
+            ))}
+          </div>
+        ) : (
+          <h3>You have not set any contacts</h3>
+        )}
+      </section> */}
       <div className="contact-section">
         <div className="contact-top padding-tb aside-bg padding-b">
           <div className="container">
@@ -35,41 +109,38 @@ function Contact() {
                       we’ll normally ge.
                     </p>
                     <form
-                      action="#"
-                      method="POST"
+                      onSubmit={onSubmit}
                       id="commentform"
                       className="comment-form"
                     >
-                      <input
-                        type="text"
-                        name="name"
-                        className=""
-                        placeholder="Name*"
-                      />
                       <input
                         type="email"
                         name="email"
                         className=""
                         placeholder="Email*"
+                        id="email"
+                        value={email}
+                        onChange={onChange}
                       />
+
                       <input
-                        type="text"
-                        name="number"
-                        className=""
-                        placeholder="Number*"
-                      />
-                      <input
-                        type="email"
                         name="subject"
                         className=""
                         placeholder="Subject*"
+                        type="text"
+                        id="subject"
+                        value={subject}
+                        onChange={onChange}
                       />
                       <textarea
-                        name="text"
-                        id="role"
                         cols="30"
                         rows="9"
                         placeholder="Message*"
+                        type="textarea"
+                        id="messages"
+                        name="messages"
+                        value={messages}
+                        onChange={onChange}
                       ></textarea>
                       <button type="submit" className="lab-btn">
                         <span>Send Our Message</span>
