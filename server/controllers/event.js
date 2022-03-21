@@ -3,41 +3,41 @@ import mongoose from 'mongoose';
 
 import { body, validationResult } from "express-validator";
 import Event from '../models/event.js';
+import { Temporal } from "@js-temporal/polyfill";
 
 const router = express.Router();
 
-
 import { getSessionById } from "./session.js";
 
-export const getEvent = async(req, res) => {
-    try {
-        const allEvents = await Event.find();
+export const getEvent = async (req, res) => {
+  try {
+    const allEvents = await Event.find();
 
-        res.status(200).json(allEvents);
-        getSessionById();
-    } catch (error) {
-        res.status(404).json({ message: error.message() });
-    }
+    res.status(200).json(allEvents);
+    getSessionById();
+  } catch (error) {
+    res.status(404).json({ message: error.message() });
+  }
 };
 
-export const createEvent = async(req, res) => {
-    var newEvent = new Event();
-    newEvent.name = req.body.name;
-    newEvent.description = req.body.description;
-    newEvent.date = req.body.date;
-    newEvent.location = req.body.location;
-    newEvent.sessions = req.body.sessions;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    } else {
-        try {
-            await newEvent.save();
-            return res.status(200).json(newEvent);
-        } catch (err) {
-            console.log(err);
-        }
+export const createEvent = async (req, res) => {
+  var newEvent = new Event();
+  newEvent.name = req.body.name;
+  newEvent.description = req.body.description;
+  newEvent.date = req.body.date;
+  newEvent.location = req.body.location;
+  newEvent.sessions = req.body.sessions;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  } else {
+    try {
+      await newEvent.save();
+      return res.status(200).json(newEvent);
+    } catch (err) {
+      console.log(err);
     }
+  }
 };
 
 export const updateEvent = async(req, res) => {

@@ -193,8 +193,7 @@ function Footer() {
               <div className="col-12">
                 <div className="footer-bottom-content text-center">
                   <p>
-                    &copy;2021 <a href="index.html">Kagont</a> -Best For Event
-                    HTML Template.
+                    &copy;2022 <a href="/">My Event</a> - Powered by I Techrity.
                   </p>
                 </div>
               </div>

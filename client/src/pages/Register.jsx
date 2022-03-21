@@ -66,7 +66,7 @@ dispatch(reset())
             <h4 className="ph-title">Registration Page</h4>
             <ul className="lab-ul">
               <li>
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
                 <a href="#">Features</a>

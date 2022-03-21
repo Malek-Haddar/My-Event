@@ -73,7 +73,7 @@ function Contact() {
             <h4 className="ph-title">Contact us via mail</h4>
             <ul className="lab-ul">
               <li>
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
                 <a className="active">Contact us</a>

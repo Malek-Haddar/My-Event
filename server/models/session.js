@@ -1,16 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const sessionSchema = new Schema({
-    name: { type: String },
-    start: { type: Date },
-    end: { type: Date },
-    details: { type: String },
-    category: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Category",
-    }],
-});
+const sessionSchema = new Schema(
+  {
+    name: { type: String, required: [true, "Please add a name"] },
+    start: { type: Date, required: [true, "Please add the start date"] },
+    end: { type: Date, required: [true, "Please add the end date"] },
+    details: { type: String, required: [true, "Please add some details"] },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 export default mongoose.model("Session", sessionSchema);

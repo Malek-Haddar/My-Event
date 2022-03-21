@@ -54,7 +54,7 @@ function Header() {
                         <a href="#0">Features</a>
                         <ul className="submenu">
                           <li>
-                            <a href="gallery.html">Gallery</a>
+                            <a href="/gallery">Gallery</a>
                           </li>
                           <li>
                             <a href="login.html">Log In</a>

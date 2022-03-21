@@ -14,6 +14,7 @@
     "author": "Malek Haddar <malek.haddar1@esprit.tn>",
     "license": "ISC",
     "dependencies": {
+        "@js-temporal/polyfill": "^0.4.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.1",
         "concurrently": "^7.0.0",

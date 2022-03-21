@@ -58,4 +58,18 @@ export const DeleteCategory = async(req, res) => {
     await Category.findByIdAndRemove(id);
     res.json({ message: "Category deleted successfully." });
 };
+
+export const affectSessions2Category = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+
+
+
+
+
+
+
+
 export default router;

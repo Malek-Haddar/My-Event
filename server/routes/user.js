@@ -1,11 +1,14 @@
 import express from "express";
-import userController from "../controllers/User.js";
+import { ChangeRole, getSession, signin, signup } from "../controllers/user.js";
+import auth from "../middleware/auth.js";
 
-const UserRouter = express.Router();
+const router = express.Router();
 
-UserRouter.post("/signin", userController.signin);
-UserRouter.post("/signup", userController.signup);
-UserRouter.patch("/role/:id", userController.ChangeRole);
+// const UserRouter = express.Router();
 
+router.post("/signin", signin);
+router.post("/signup", signup);
+router.patch("/role/:id", ChangeRole);
+router.get("/session", auth, getSession);
 
-export default UserRouter;
+export default router;

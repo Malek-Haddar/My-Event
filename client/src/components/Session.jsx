@@ -88,88 +88,110 @@ function Session() {
             <p>A Representation of the event planning</p>
           </div>
           <section className="content">
-            {sessions.length > 0 ? (
+            {sessions?.length > 0 ? (
               <div className="container">
-                {sessions.map((session) => (
-                  <div className="section-wrapper shape-b" key={session._id}>
-                    <div className="row gx-4 gy-5">
+                <div className="section-wrapper shape-b">
+                  <div className="row gx-4 gy-5">
+                    {sessions[0]?.category[0]?.sessions?.map((session) => (
                       <div className="col-lg-6">
                         <div className="schedule-left schedule-pack">
-                          <h5> {session.name} </h5>
-
-                          <div className="schedule-list" id="accordionExample">
-                            <div className="accordion-item">
-                              <div className="accordion-header" id="headingOne">
-                                <button
-                                  className="accordion-button collapsed"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#collapseOne"
-                                  aria-expanded="true"
-                                  aria-controls="collapseOne"
-                                >
-                                  <span className="accor-header-inner d-flex flex-wrap align-items-center">
-                                    <span className="accor-thumb">
-                                      <img
-                                        src={require("../assets/images/event/member/01.png")}
-                                        alt="speaker"
-                                      />
-                                      <span className="child-thumb">
-                                        <img
-                                          src={require("../assets/images/event/member/02.png")}
-                                          alt="speaker"
-                                        />
-                                      </span>
-                                      <span className="child-thumb-2">
-                                        <img
-                                          src={require("../assets/images/event/member/03.png")}
-                                          alt="speaker"
-                                        />
-                                      </span>
-                                    </span>
-                                    <span className="h7">
-                                      Registration & Breakfast
-                                    </span>
-                                  </span>
-                                </button>
-                              </div>
+                          <h5>
+                            {new Date(session.start).toLocaleDateString()}
+                          </h5>
+                          {sessions[0]?.category[0]?.sessions?.map(
+                            (session) => (
                               <div
-                                id="collapseOne"
-                                className="accordion-collapse collapse"
-                                aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample"
+                                className="schedule-list"
+                                id="accordionExample"
+                                key={session._id}
                               >
-                                <div className="accordion-body">
-                                  <p>{session.details}</p>
-                                  <ul className="ev-schedule-meta d-flex flex-wrap">
-                                    <li>
-                                      <span>
-                                        <i className="icofont-user"></i>
+                                <div className="accordion-item">
+                                  <div
+                                    className="accordion-header"
+                                    id="headingOne"
+                                  >
+                                    <button
+                                      className="accordion-button collapsed"
+                                      type="button"
+                                      data-bs-toggle="collapse"
+                                      data-bs-target={
+                                        "#collapseOne" + session._id
+                                      }
+                                      aria-expanded="true"
+                                      aria-controls={
+                                        "collapseOne" + session._id
+                                      }
+                                    >
+                                      <span className="accor-header-inner d-flex flex-wrap align-items-center">
+                                        <span className="accor-thumb">
+                                          <img
+                                            src={require("../assets/images/event/member/01.png")}
+                                            alt="speaker"
+                                          />
+                                          <span className="child-thumb">
+                                            <img
+                                              src={require("../assets/images/event/member/02.png")}
+                                              alt="speaker"
+                                            />
+                                          </span>
+                                          <span className="child-thumb-2">
+                                            <img
+                                              src={require("../assets/images/event/member/03.png")}
+                                              alt="speaker"
+                                            />
+                                          </span>
+                                        </span>
+                                        <span className="h7">
+                                          {session.name}
+                                        </span>
                                       </span>
-                                      {session.category[0].name}
-                                    </li>
-                                    <li>
-                                      <span>
-                                        <i className="icofont-clock-time"></i>
-                                      </span>
-                                      {session.start} to {session.end}
-                                    </li>
-                                    <li>
-                                      <span>
-                                        <i className="icofont-location-pin"></i>
-                                      </span>
-                                      Summer C
-                                    </li>
-                                  </ul>
+                                    </button>
+                                  </div>
+                                  <div
+                                    id={"collapseOne" + session._id}
+                                    className="accordion-collapse collapse"
+                                    aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample"
+                                  >
+                                    <div className="accordion-body">
+                                      <ul className="ev-schedule-meta d-flex flex-wrap">
+                                        <li>
+                                          <p>{session.details}</p>
+                                          <span>
+                                            <i className="icofont-user"></i>
+                                          </span>
+                                          {sessions[0]?.category[0]?.name}
+                                        </li>
+                                        <li>
+                                          <span>
+                                            <i className="icofont-clock-time"></i>
+                                          </span>
+                                          {new Date(
+                                            session.start
+                                          ).toLocaleString("en-us")}
+                                          -
+                                          {new Date(session.end)
+                                            .getHours()
+                                            .toLocaleString("en-us")}
+                                        </li>
+                                        <li>
+                                          <span>
+                                            <i className="icofont-location-pin"></i>
+                                          </span>
+                                          Summer C
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
+                            )
+                          )}
                         </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
             ) : (
               <h3>You have not set any goals</h3>
