@@ -49,45 +49,25 @@ function Event() {
                   <ul
                     id="countdown"
                     className="countdown count-down"
-                    data-date="June 31, 2021 21:14:01"
+                    data-date={event.date}
                   >
                     <li className="clock-item">
-                      <span className="count-number days">
-                        {/* {date2.toString()} */}
-                        {Temporal.Now.plainDateISO()
-                          .subtract({ days: 10 })
-                          .toString()}
-                      </span>
+                      <span className="count-number days"></span>
                       <p className="count-text">Days</p>
                     </li>
 
                     <li className="clock-item">
-                      <span className="count-number hours">
-                        {" "}
-                        {new Date(event.date)
-                          .getUTCHours()
-                          .toLocaleString("en-US")}
-                      </span>
+                      <span className="count-number hours"></span>
                       <p className="count-text">Hour</p>
                     </li>
 
                     <li className="clock-item">
-                      <span className="count-number minutes">
-                        {" "}
-                        {new Date(event.date)
-                          .getUTCMinutes()
-                          .toLocaleString("en-US")}
-                      </span>
+                      <span className="count-number minutes"></span>
                       <p className="count-text">Min</p>
                     </li>
 
                     <li className="clock-item">
-                      <span className="count-number seconds">
-                        {" "}
-                        {new Date(event.date)
-                          .getUTCSeconds()
-                          .toLocaleString("en-US")}
-                      </span>
+                      <span className="count-number seconds"></span>
                       <p className="count-text">Sec</p>
                     </li>
                   </ul>
