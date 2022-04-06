@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getSessions, reset } from "../features/sessions/sessionSlice";
+import { getUserSession, reset } from "../features/sessions/sessionSlice";
 import Spinner from "./Spinner";
 
 function Session() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { sessions, isLoading, isError, message } = useSelector(
+  const { sessions, userSession, isLoading, isError, message } = useSelector(
     (state) => state.sessions
   );
 
@@ -21,13 +21,14 @@ function Session() {
       navigate("/login");
     }
 
-    dispatch(getSessions());
+    dispatch(getUserSession());
+
     return () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(sessions);
 
+  console.log(userSession);
   if (isLoading) {
     return <Spinner />;
   }
@@ -88,17 +89,17 @@ function Session() {
             <p>A Representation of the event planning</p>
           </div>
           <section className="content">
-            {sessions?.length > 0 ? (
+            {userSession?.length > 0 ? (
               <div className="container">
                 <div className="section-wrapper shape-b">
                   <div className="row gx-4 gy-5">
-                    {sessions[0]?.category[0]?.sessions?.map((session) => (
+                    {userSession[0]?.category[0]?.sessions?.map((session) => (
                       <div className="col-lg-6">
                         <div className="schedule-left schedule-pack">
                           <h5>
                             {new Date(session.start).toLocaleDateString()}
                           </h5>
-                          {sessions[0]?.category[0]?.sessions?.map(
+                          {userSession[0]?.category[0]?.sessions?.map(
                             (session) => (
                               <div
                                 className="schedule-list"
@@ -160,7 +161,7 @@ function Session() {
                                           <span>
                                             <i className="icofont-user"></i>
                                           </span>
-                                          {sessions[0]?.category[0]?.name}
+                                          {userSession[0]?.category[0]?.name}
                                         </li>
                                         <li>
                                           <span>

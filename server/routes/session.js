@@ -1,16 +1,19 @@
 import express from 'express';
 import {
-    getSession,
-    createSession,
-    updateSession,
-    DeleteSession,
-    getSessionById,
+  getSession,
+  createSession,
+  updateSession,
+  DeleteSession,
+  getSessionById,
+  getAllSession,
 } from "../controllers/session.js";
 
 import { body, validationResult } from "express-validator";
 const router = express.Router();
 
 router.route("/").get(getSession);
+
+router.route("/all").get(getAllSession);
 router.post(
     "/add",
     body("name").isLength({ min: 3 }),

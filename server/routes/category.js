@@ -10,4 +10,4 @@ router.post(
 router.patch("/:id", updateCategory);
 router.delete("/:id", DeleteCategory);
 
-export default router;
+export default router;  

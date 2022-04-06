@@ -3,6 +3,7 @@ import sessionService from "./sessionService";
 
 const initialState = {
   sessions: [],
+  userSession: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -46,6 +47,24 @@ export const getSessions = createAsyncThunk(
     }
   }
 );
+// Get user session
+export const getUserSession = createAsyncThunk(
+  "sessions/getusersession",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await sessionService.getUserSession(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const sessionSlice = createSlice({
   name: "session",
@@ -78,6 +97,20 @@ export const sessionSlice = createSlice({
         state.sessions = action.payload;
       })
       .addCase(getSessions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getUserSession.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserSession.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userSession = action.payload;
+      })
+      .addCase(getUserSession.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

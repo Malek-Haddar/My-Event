@@ -1,4 +1,3 @@
-import { Temporal } from "@js-temporal/polyfill";
 import React, { useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +12,6 @@ function Event() {
   const { events, isLoading, isError, message } = useSelector(
     (state) => state.events
   );
-  const date2 = Temporal.Now.plainDateTimeISO();
-
-  const today = Temporal.Now.plainDateISO();
-  const yesterday = today.subtract({ days: 1 });
-  console.log(today.since(yesterday).toString());
 
   useEffect(() => {
     if (isError) {
@@ -52,7 +46,7 @@ function Event() {
                     data-date={event.date}
                   >
                     <li className="clock-item">
-                      <span className="count-number days"></span>
+                      <span className="count-number days px-1"></span>
                       <p className="count-text">Days</p>
                     </li>
 

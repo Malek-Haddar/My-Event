@@ -3,6 +3,8 @@ import authReducer from '../features/auth/authSlice';
 import contactReducer from "../features/contacts/contactSlice";
 import sessionReducer from "../features/sessions/sessionSlice";
 import eventReducer from "../features/events/eventSlice";
+import galleryReducer from "../features/gallery/gallerySlice";
+import userReducer from "../features/users/userSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +12,7 @@ export const store = configureStore({
     contacts: contactReducer,
     sessions: sessionReducer,
     events: eventReducer,
+    galleries: galleryReducer,
+    users: userReducer,
   },
 });

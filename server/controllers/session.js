@@ -16,6 +16,24 @@ export const getSession = async (req, res) => {
     //     },
     //   },
     // ]);
+    const Sessions = await Session.find();
+
+    res.status(200).send(Sessions);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+export const getAllSession = async (req, res) => {
+  try {
+    // const allSessions = await Session.aggregate([
+    //   {
+    //     $group: {
+    //       _id: { start: "$start" },
+    //       totalSession: { $sum: 1 },
+    //       averageSession: { $avg: "$start" },
+    //     },
+    //   },
+    // ]);
     const allSessions = await Session.find().populate("category");
 
     res.status(200).send(allSessions);

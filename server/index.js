@@ -11,9 +11,9 @@ import EventRouter from "./routes/event.js";
 import CategoryRouter from "./routes/category.js";
 import ReclamationRouter from "./routes/reclamation.js";
 import QuizzRouter from "./routes/quizz.js";
-import postRoutes from './routes/posts.js';
-
-
+import postRoutes from "./routes/posts.js";
+import galleryRoutes from "./routes/gallery.js";
+import attendeeRoutes from "./routes/attendee.js";
 
 connection();
 app.use(express.json());
@@ -26,6 +26,8 @@ app.use("/api/categories", CategoryRouter);
 app.use("/api/reclamation", ReclamationRouter);
 app.use("/api/quizz", QuizzRouter);
 app.use("/api/posts", postRoutes);
+app.use("/api/gallery", galleryRoutes);
+app.use("/api/check", attendeeRoutes);
 
 
 

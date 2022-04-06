@@ -124,11 +124,11 @@ function Contact() {
                       />
 
                       <input
-                        name="subject"
                         className=""
                         placeholder="Subject*"
                         type="text"
                         id="subject"
+                        name="subject"
                         value={subject}
                         onChange={onChange}
                       />

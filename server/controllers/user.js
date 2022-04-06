@@ -99,4 +99,36 @@ export const getSession = async (req, res) => {
   }
 };
 
+export const checkIn = async (req, res) => {
+  const { role } = req.user;
+  const idUser = req.params.idUser;
+  console.log(req.user);
+
+  try {
+    if (role === 1 || role === 2) {
+      const updatedUser = await User.findByIdAndUpdate(
+        idUser,
+        {
+          checkIn: Date.now(),
+        },
+        { new: true }
+      );
+      res.status(200).send();
+    }
+    res.status(400).json({ message: "Auth Error" });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({ role: 0 });
+
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
 export default router;

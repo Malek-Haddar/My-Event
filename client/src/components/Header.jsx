@@ -197,10 +197,7 @@ function Header() {
                         onClick={onLogout}
                         className="ticket-btn lab-btn "
                       >
-                        <span>
-                          {" "}
-                          <FaSignOutAlt /> Logout
-                        </span>
+                        <span> {/* <FaSignOutAlt /> */} Logout</span>
                       </button>
                     </div>
 
@@ -251,7 +248,7 @@ function Header() {
     //     { user ? (
     //         <li>
     //         <button className='btn' onClick={onLogout}>
-    //           <FaSignOutAlt /> Logout
+    //           /* <FaSignOutAlt /> */ Logout
     //         </button>
     //       </li>
     //     ): (
