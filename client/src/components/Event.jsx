@@ -27,7 +27,7 @@ function Event() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  // console.log(events);
+  console.log(events);
 
   if (isLoading) {
     return <Spinner />;

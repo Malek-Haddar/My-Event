@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -56,6 +58,7 @@ function Login() {
 
   return (
     <>
+    <Header />
       <section className="page-header padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -185,6 +188,7 @@ function Login() {
         </div>
       </form>
     </section> */}
+     <Footer />
     </>
   );
 }

@@ -25,16 +25,42 @@ export const getSession = async (req, res) => {
 };
 export const getAllSession = async (req, res) => {
   try {
-    // const allSessions = await Session.aggregate([
-    //   {
-    //     $group: {
-    //       _id: { start: "$start" },
-    //       totalSession: { $sum: 1 },
-    //       averageSession: { $avg: "$start" },
-    //     },
-    //   },
-    // ]);
-    const allSessions = await Session.find().populate("category");
+    const pipeline = [
+      {
+        $match: {
+          start: {
+            $exists: true,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$start",
+            },
+          },
+          data: {
+            $push: {
+              name: "$name",
+              details: "$details",
+            },
+          },
+        },
+      },
+      {
+        $sort: {
+          _id: 1,
+        },
+      },
+      {
+        $project: {
+          result: "$data",
+        },
+      },
+    ];
+    const allSessions = await Session.aggregate(pipeline);
 
     res.status(200).send(allSessions);
   } catch (error) {
@@ -48,7 +74,7 @@ export const createSession = async (req, res) => {
   newSession.start = req.body.start;
   newSession.end = req.body.end;
   newSession.details = req.body.details;
-  newSession.category = req.body.category;
+  // newSession.category = req.body.category;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

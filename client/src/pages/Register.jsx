@@ -2,63 +2,70 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUser } from "react-icons/fa"
+import { FaUser } from "react-icons/fa";
 import { register, reset } from "../features/auth/authSlice";
-import Spinner from '../components/Spinner'
+import Spinner from "../components/Spinner";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Register() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: ''
-  })
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const { firstName, lastName, email, password, password2 } = formData
+  const { firstName, lastName, email, password, password2 } = formData;
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth )
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
 
-useEffect(() => {
-if ( isError) {
-  toast.error(message)
-}
-if (isSuccess || user) {
-  navigate('/')
-}
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess || user) {
+      navigate("/");
+    }
 
-dispatch(reset())
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-}, [ user, isError, isSuccess, message, navigate, dispatch ] )
-
-
-  const onChange = (e) => { 
+  const onChange = (e) => {
     setFormData((prevSate) => ({
-    ...prevSate, [e.target.name]: e.target.value,
-  })) }
+      ...prevSate,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (password !== password2) {
-      toast.error('Password do not match!')
-    }else {
+      toast.error("Password do not match!");
+    } else {
       const userData = {
-       firstName, lastName, email, password
-      }
-      dispatch(register(userData))
+        firstName,
+        lastName,
+        email,
+        password,
+      };
+      dispatch(register(userData));
     }
-  }
+  };
 
   if (isLoading) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
   return (
     <>
-      {" "}
+      <Header />
       <section className="page-header bg_img padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -231,6 +238,7 @@ dispatch(reset())
         </div>
       </form>
     </section> */}
+     <Footer />
     </>
   );
 }

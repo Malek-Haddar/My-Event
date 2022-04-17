@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import Spinner from "../components/Spinner";
 import { getGalleries, reset } from "../features/gallery/gallerySlice";
 
@@ -33,11 +35,13 @@ function Gallery() {
   }
   return (
     <>
+      <Header />
       {/* {galleries.map((gallery) => (
         <div key={gallery._id}>
           <img src={gallery.selectedFile} alt={gallery.name} />
         </div>
       ))} */}
+
       <section className="page-header bg_img padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -85,10 +89,7 @@ function Gallery() {
                     <img src={gallery.selectedFile} alt={gallery.name} />
                   </div>
                   <div className="grid-content p-2">
-                    <a
-                      href="../assets/images/gallery/mason/01.jpg"
-                      data-rel="lightcase"
-                    >
+                    <a href={gallery.selectedFile} data-rel="lightcase">
                       <i className="icofont-expand"></i>
                     </a>
                     <h5>Title Goes Here</h5>
@@ -260,6 +261,7 @@ function Gallery() {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 }

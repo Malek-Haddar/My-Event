@@ -12,7 +12,7 @@ const createSession = async (sessionData, token) => {
   };
 
   const response = await axios.post(
-    API_URL + "session/add",
+    API_URL_SESSION + "session/add",
     sessionData,
     config
   );

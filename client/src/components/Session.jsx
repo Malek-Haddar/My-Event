@@ -28,7 +28,6 @@ function Session() {
     };
   }, [user, navigate, isError, message, dispatch]);
 
-  console.log(userSession);
   if (isLoading) {
     return <Spinner />;
   }
@@ -37,7 +36,7 @@ function Session() {
       <section className="about-section padding-tb padding-b">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-10">
+            <div className="col-lg-8">
               <div className="about-image">
                 <img
                   src={require("../assets/images/about/01.jpg")}

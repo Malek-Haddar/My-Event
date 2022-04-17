@@ -83,6 +83,27 @@ export const ChangeRole = async (req, res) => {
   res.status(200).send(updated);
 };
 
+// export const getSession = async (req, res) => {
+//   const { id } = req.user;
+//   console.log(req.user.id);
+
+//   try {
+//     const pipeline = [
+//       {
+//         '$lookup': {
+//           'from': 'categories', 
+//           'localField': 'category', 
+//           'foreignField': '_id', 
+//           'as': 'cat'
+//         }
+//       }
+//     ]
+//     const Userdetails = await User.aggregate(pipeline)
+//     res.status(200).send(Userdetails);
+//   } catch (error) {
+//     res.status(404).json({ message: error });
+//   }
+// };
 export const getSession = async (req, res) => {
   const { id } = req.user;
   console.log(req.user.id);

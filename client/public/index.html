@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="assets/css/lightcase.css">
     <link rel="stylesheet" href="assets/css/swiper.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+        <!-- dash style -->
+        <link rel="stylesheet" href="assets/vendor/chartist/css/chartist.min.css">
+        <link href="assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+        <link href="assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
 
     <title>My Event</title>
   </head>
@@ -36,5 +44,65 @@
     <script src="assets/js/isotope.pkgd.min.js"></script>
     <script src="assets/js/lightcase.js"></script>
     <script src="assets/js/functions.js"></script>
+    <!-- dash scripts -->
+    <script src="assets/vendor/global/global.min.js"></script>
+    <script src="assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="assets/vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="assets/js/custom.min.js"></script>
+    <script src="assets/js/deznav-init.js"></script>
+    <script src="assets/vendor/owl-carousel/owl.carousel.js"></script>
+    
+    <!-- Chart piety plugin files -->
+    <script src="assets/vendor/peity/jquery.peity.min.js"></script>
+    
+    <!-- Apex Chart -->
+    <script src="assets/vendor/apexchart/apexchart.js"></script>
+    
+    <!-- Dashboard 1 -->
+    <script src="assets/js/dashboard/dashboard-1.js"></script>
+    
+    <script>
+      function carouselReview() {
+        /*  event-bx one function by = owl.carousel.js */
+        jQuery('.event-bx').owlCarousel({
+          loop: true,
+          margin: 30,
+          nav: true,
+          center: true,
+          autoplaySpeed: 3000,
+          navSpeed: 3000,
+          paginationSpeed: 3000,
+          slideSpeed: 3000,
+          smartSpeed: 3000,
+          autoplay: false,
+          navText: ['<i class="fa fa-caret-left" aria-hidden="true"></i>', '<i class="fa fa-caret-right" aria-hidden="true"></i>'],
+          dots: true,
+          responsive: {
+            0: {
+              items: 1
+            },
+            720: {
+              items: 2
+            },
+
+            1150: {
+              items: 3
+            },
+
+            1200: {
+              items: 2
+            },
+            1749: {
+              items: 3
+            }
+          }
+        })
+      }
+      jQuery(window).on('load', function () {
+        setTimeout(function () {
+          carouselReview();
+        }, 1000);
+      });
+    </script>
   </body>
 </html>

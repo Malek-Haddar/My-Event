@@ -2,7 +2,7 @@ import connection from "./config/database.js";
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-
+import compression from "compression";
 
 const app = express();
 import userRoute from "./routes/user.js";
@@ -18,6 +18,7 @@ import attendeeRoutes from "./routes/attendee.js";
 connection();
 app.use(express.json());
 app.use(cors());
+app.use(compression());
 
 app.use("/api/user", userRoute);
 app.use("/api/session", SessionRouter);
@@ -29,9 +30,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/check", attendeeRoutes);
 
-
-
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.json({ limit: "500mb", extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 4000;

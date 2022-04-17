@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import Spinner from "../components/Spinner";
 import {
   getContacts,
@@ -66,6 +68,7 @@ function Contact() {
   }
   return (
     <>
+      <Header />
       <section className="page-header bg_img padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -238,6 +241,7 @@ function Contact() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
