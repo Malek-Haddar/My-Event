@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashbord" element={<Dashbord />} />
@@ -23,7 +23,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
       <ToastContainer />
     </>
