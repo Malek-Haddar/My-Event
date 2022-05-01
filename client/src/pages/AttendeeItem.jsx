@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUsers, reset } from "../features/users/userSlice";
@@ -105,7 +105,9 @@ function AttendeeItem() {
                         </td>
 
                         <td>
-                          <span className="text-primary">{user.category} </span>
+                          {user.category.map((c) => (
+                            <span className="text-primary">{c.name} </span>
+                          ))}
                         </td>
                         <td>
                           <div className="d-flex align-items-center">

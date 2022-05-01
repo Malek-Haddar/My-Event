@@ -81,9 +81,12 @@ function Gallery() {
               Reunions <span className="filter-item-num">03</span>
             </li>
           </ul>
-          {galleries.map((gallery) => (
-            <div className="grid pb-15" key={gallery._id}>
-              <div className="grid-item eid-ul-adha eid-ul-fitr">
+          <div className="grid pb-15">
+            {galleries.map((gallery) => (
+              <div
+                className="grid-item eid-ul-adha eid-ul-fitr"
+                key={gallery._id}
+              >
                 <div className="grid-inner">
                   <div className="grid-thumb">
                     <img src={gallery.selectedFile} alt={gallery.name} />
@@ -97,168 +100,8 @@ function Gallery() {
                   </div>
                 </div>
               </div>
-              <div className="grid-item ramadan">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/02.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/02.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item ramadan shab-e-barat">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/03.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/03.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item ramadan eid-ul-fitr">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/04.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/04.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item shab-e-barat eid-ul-fitr">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/05.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/05.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item eid-ul-fitr eid-ul-adha">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/06.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/06.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item ramadan shab-e-barat">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/09.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/09.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item ramadan eid-ul-fitr">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/08.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/08.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-              <div className="grid-item ramadan eid-ul-adha">
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img
-                      src={require("../assets/images/gallery/mason/07.jpg")}
-                      alt="gallery-img"
-                    />
-                  </div>
-                  <div className="grid-content">
-                    <a
-                      href="../assets/images/gallery/mason/07.jpg"
-                      data-rel="lightcase"
-                    >
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <Footer />
