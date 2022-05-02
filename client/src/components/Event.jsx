@@ -23,6 +23,7 @@ function Event() {
     }
 
     dispatch(getEvents());
+    console.log(events);
     return () => {
       dispatch(reset());
     };
@@ -38,59 +39,59 @@ function Event() {
         <div className="banner-wrapper shape-a">
           <div className="row gy-5 align-items-center">
             <div className="col-lg-6 col-12">
-              {events.map((event) => (
-                <div className="banner-content">
-                  <ul
-                    id="countdown"
-                    className="countdown count-down"
-                    data-date={event.date}
-                  >
-                    <li className="clock-item">
-                      <span className="count-number days px-1"></span>
-                      <p className="count-text">Days</p>
-                    </li>
+              {/* {events.map((event) => ( */}
+              <div className="banner-content">
+                <ul
+                  id="countdown"
+                  className="countdown count-down"
+                  data-date={events[0]?.date}
+                >
+                  <li className="clock-item">
+                    <span className="count-number days px-1"></span>
+                    <p className="count-text">Days</p>
+                  </li>
 
-                    <li className="clock-item">
-                      <span className="count-number hours"></span>
-                      <p className="count-text">Hour</p>
-                    </li>
+                  <li className="clock-item">
+                    <span className="count-number hours"></span>
+                    <p className="count-text">Hour</p>
+                  </li>
 
-                    <li className="clock-item">
-                      <span className="count-number minutes"></span>
-                      <p className="count-text">Min</p>
-                    </li>
+                  <li className="clock-item">
+                    <span className="count-number minutes"></span>
+                    <p className="count-text">Min</p>
+                  </li>
 
-                    <li className="clock-item">
-                      <span className="count-number seconds"></span>
-                      <p className="count-text">Sec</p>
-                    </li>
-                  </ul>
-                  <h1> {event.name} </h1>
-                  <p>
-                    {event.description} <br />{" "}
-                    <h5>
-                      <FaMapMarkerAlt />
-                      {event.location}
-                    </h5>
-                  </p>
-                  {user ? (
-                    <Link to="/" className="lab-btn">
-                      <span>Join Now</span>{" "}
-                    </Link>
-                  ) : (
-                    <Link to="/register" className="lab-btn">
-                      <span>Register Now</span>{" "}
-                    </Link>
-                  )}
-                  <div className="event-sponsored">
-                    <p>Event Sponsored By:</p>
-                    <img
-                      src={require("../assets/images/banner/02.png")}
-                      alt="sponsor"
-                    />
-                  </div>
+                  <li className="clock-item">
+                    <span className="count-number seconds"></span>
+                    <p className="count-text">Sec</p>
+                  </li>
+                </ul>
+                <h1> {events[0]?.name} </h1>
+                <p>
+                  {events[0]?.description} <br />{" "}
+                  <h5>
+                    <FaMapMarkerAlt />
+                    {events[0]?.location}
+                  </h5>
+                </p>
+                {user ? (
+                  <Link to="/" className="lab-btn">
+                    <span>Join Now</span>{" "}
+                  </Link>
+                ) : (
+                  <Link to="/register" className="lab-btn">
+                    <span>Register Now</span>{" "}
+                  </Link>
+                )}
+                <div className="event-sponsored">
+                  <p>Event Sponsored By:</p>
+                  <img
+                    src={require("../assets/images/banner/02.png")}
+                    alt="sponsor"
+                  />
                 </div>
-              ))}
+              </div>
+              {/* ))} */}
             </div>
             <div className="col-lg-6 col-12">
               <div className="banner-image">

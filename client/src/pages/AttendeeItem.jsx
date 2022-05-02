@@ -105,7 +105,9 @@ function AttendeeItem() {
                         </td>
 
                         <td>
-                          <span className="text-primary">{user.category} </span>
+                          <span className="text-primary">
+                            {user.category[0]?.name}{" "}
+                          </span>
                         </td>
                         <td>
                           <div className="d-flex align-items-center">

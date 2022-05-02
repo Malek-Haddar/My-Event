@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "api/";
+const API_URL = "http://localhost:5000/api/";
 
 // Create new event
 const createEvent = async (eventData, token) => {

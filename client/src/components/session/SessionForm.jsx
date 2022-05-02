@@ -84,7 +84,7 @@ function SessionForm() {
               <div className="form-group">
                 <label className="text-black font-w500">Session Start</label>
                 <input
-                  type="time"
+                  type="datetime-local"
                   className="form-control"
                   name="start"
                   value={start}
@@ -94,7 +94,7 @@ function SessionForm() {
               <div className="form-group">
                 <label className="text-black font-w500">Session End</label>
                 <input
-                  type="time"
+                  type="datetime-local"
                   className="form-control"
                   name="end"
                   value={end}

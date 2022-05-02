@@ -106,7 +106,6 @@ export const ChangeRole = async (req, res) => {
 // };
 export const getSession = async (req, res) => {
   const { id } = req.user;
-  console.log(req.user.id);
 
   try {
     const Userdetails = await User.find({ _id: id }).populate({
@@ -144,7 +143,7 @@ export const checkIn = async (req, res) => {
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({ role: 0 });
+    const users = await User.find()?.populate("category");
 
     res.status(200).send(users);
   } catch (error) {

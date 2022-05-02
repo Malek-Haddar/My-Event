@@ -7,14 +7,14 @@ import { Temporal } from "@js-temporal/polyfill";
 
 const router = express.Router();
 
-import { getSessionById } from "./session.js";
+// import { getSessionById } from "./session.js";
 
 export const getEvent = async (req, res) => {
   try {
     const allEvents = await Event.find();
 
     res.status(200).json(allEvents);
-    getSessionById();
+    // getSessionById();
   } catch (error) {
     res.status(404).json({ message: error.message() });
   }

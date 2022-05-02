@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "api/user/";
-const API_URL_SESSION = "api/";
+const API_URL = "http://localhost:5000/api/user/";
+const API_URL_SESSION = "http://localhost:5000/api/";
 
 // Create new session
 const createSession = async (sessionData, token) => {

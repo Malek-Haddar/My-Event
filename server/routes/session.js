@@ -4,7 +4,7 @@ import {
   createSession,
   updateSession,
   DeleteSession,
-  getSessionById,
+  // getSessionById,
   getAllSession,
 } from "../controllers/session.js";
 
@@ -22,7 +22,7 @@ router.post(
 router.patch("/:id", updateSession);
 router.delete("/:id", DeleteSession);
 
-router.get("/session/:id", getSessionById);
+// router.get("/session/:id", getSessionById);
 
 
 export default router;

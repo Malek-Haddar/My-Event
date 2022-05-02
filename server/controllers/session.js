@@ -110,15 +110,15 @@ export const DeleteSession = async (req, res) => {
   await Session.findByIdAndRemove(id);
   res.json({ message: "Task deleted successfully." });
 };
-export const getSessionById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const session = await Session.find({ _id: id }).populate("category");
+// export const getSessionById = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const session = await Session.find({ _id: id }).populate("category");
 
-    res.status(200).send(session);
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     res.status(200).send(session);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export default router;   
