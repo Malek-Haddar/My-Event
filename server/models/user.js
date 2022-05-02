@@ -11,13 +11,19 @@ const userSchema = mongoose.Schema(
     },
     password: { type: String, required: [true, "Please add a password"] },
     role: { type: Number, required: true, default: 0 },
-    checkIn: [{ type: Date }],
     category: [
       {
         type: mongoose.Types.ObjectId,
         ref: "Category",
       },
     ],
+    sessions: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Session",
+      },
+    ],
+    checkIn: [{ type: Date }],
   },
   {
     timestamps: true,
