@@ -27,6 +27,7 @@ function Session() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
+  console.log(userSession);
 
   if (isLoading) {
     return <Spinner />;

@@ -16,7 +16,7 @@ export const getSession = async (req, res) => {
     //     },
     //   },
     // ]);
-    const Sessions = await Session.find();
+    const Sessions = await Session.find()?.populate("event");
 
     res.status(200).send(Sessions);
   } catch (error) {
@@ -110,6 +110,45 @@ export const DeleteSession = async (req, res) => {
   await Session.findByIdAndRemove(id);
   res.json({ message: "Task deleted successfully." });
 };
+
+// affect session to event
+export const affectSessionToEvent = async (req, res) => {
+  try {
+    const { idSession, idEvent } = req.body;
+
+    const updatedSession = { event: idEvent };
+
+    const sessionEvent = await Session.findByIdAndUpdate(
+      idSession,
+      updatedSession
+    );
+
+    res.status(200).send(sessionEvent);
+  } catch (error) {
+    res.send(error);
+  }
+};
+// affect session to category
+export const affectSessionToCategory = async (req, res) => {
+  try {
+    const { idSession, idCategory } = req.body;
+
+    const updatedSession = { categories: idCategory };
+
+    const sessionEvent = await Session.findByIdAndUpdate(
+      idSession,
+      updatedSession
+    );
+
+    res.status(200).send(sessionEvent);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+
+
+
 // export const getSessionById = async (req, res) => {
 //   const { id } = req.params;
 //   try {

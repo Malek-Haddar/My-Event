@@ -65,7 +65,7 @@ function Pictures() {
                             />
                             <label
                               className="custom-control-label"
-                              for="checkAll"
+                              htmlFor="checkAll"
                             ></label>
                           </div>
                         </div>
@@ -93,7 +93,7 @@ function Pictures() {
                               />
                               <label
                                 className="custom-control-label"
-                                for="customCheckBox2"
+                                htmlFor="customCheckBox2"
                               ></label>
                             </div>
                           </div>
@@ -118,10 +118,10 @@ function Pictures() {
                         </td>
                         <td>
                           <div className="d-flex align-items-center">
-                            <a href="javascript:void(0)" className="mr-4">
+                            <a href="" className="mr-4">
                               <i className="las la-pencil-alt scale-2 text-danger"></i>
                             </a>
-                            <a href="javascript:void(0)">
+                            <a href="">
                               <i className="las la-trash-alt scale-2 text-danger"></i>
                             </a>
                           </div>

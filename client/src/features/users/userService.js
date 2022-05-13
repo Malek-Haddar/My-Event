@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "api/user/";
-const API_URL_check = "api/check/checkIn/";
+const API_URL = "http://localhost:5000/api/user/";
+const API_URL_check = "http://localhost:5000/api/check/checkIn/";
 
 // Create new user
 const checkIn = async (userData, token) => {

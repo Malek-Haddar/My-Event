@@ -10,9 +10,11 @@ function EventForm() {
     date: "",
     description: "",
     location: "",
+    isPublic: "false",
+    status: "",
   });
 
-  const { name, date, description, location } = formData;
+  const { name, date, description, location, isPublic, status } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,6 +54,8 @@ function EventForm() {
       date,
       description,
       location,
+      isPublic,
+      status,
     };
     dispatch(createEvent(eventData), setFormData(""), navigate("/dashbord"));
   };
@@ -108,6 +112,26 @@ function EventForm() {
                   className="form-control"
                   name="location"
                   value={location}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <label className="text-black font-w500">Public</label>
+                <input
+                  type="checkbox"
+                  // className="form-control"
+                  name="isPublic"
+                  value={isPublic}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <label className="text-black font-w500">Status</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="status"
+                  value={status}
                   onChange={onChange}
                 />
               </div>

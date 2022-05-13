@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "api/";
+const API_URL = "http://localhost:5000/api/";
 
 // Create new event
 const createGallery = async (galleryData, token) => {
@@ -19,7 +19,7 @@ const createGallery = async (galleryData, token) => {
   return response.data;
 };
 
-// Get events
+// Get galleries
 const getGalleries = async (token) => {
   const config = {
     headers: {
@@ -31,9 +31,9 @@ const getGalleries = async (token) => {
   return response.data;
 };
 
-const eventService = {
+const galleryService = {
   createGallery,
   getGalleries,
 };
 
-export default eventService;
+export default galleryService;

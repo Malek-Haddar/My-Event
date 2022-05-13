@@ -56,9 +56,9 @@ function GalleryForm() {
     dispatch(createGallery(galleryData), setFormData(""));
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <div className="modal fade" id="addOrderModalside">
       <div className="modal-dialog" role="document">

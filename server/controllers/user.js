@@ -151,4 +151,20 @@ export const getUsers = async (req, res) => {
   }
 };
 
+export const affectAttendeeToCategory = async (req, res) => {
+  try {
+    const { idUser, idCategory } = req.body;
+    console.log("user" + idUser);
+    console.log("category" + idCategory);
+    const updatedUser = { category: idCategory };
+    console.log("updated+>" + updatedUser);
+
+    const categoryUser = await User.findByIdAndUpdate(idUser, updatedUser);
+
+    res.status(200).send(categoryUser);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 export default router;

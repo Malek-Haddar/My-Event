@@ -1,18 +1,34 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUsers, reset } from "../features/users/userSlice";
+import {
+  affectAttendeeToCategory,
+  getUsers,
+  reset,
+} from "../features/users/userSlice";
 
 import Spinner from "../components/Spinner";
 import Navbar from "../components/dashboard/Navbar";
+import { getCategories } from "../features/categories/categorySlice";
 
 function AttendeeItem() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { categories } = useSelector((state) => state.categories);
   const { users, isLoading, isError, message } = useSelector(
     (state) => state.users
   );
+
+  const [categoryId, setCategoryId] = useState("");
+  const [attendeeId, setAttendeeId] = useState("");
+
+  const role = (a) => {
+    if (a === 0) return "User";
+    if (a === 1) return "Moderator";
+    if (a === 2) return "Admin";
+    return "Admin";
+  };
 
   useEffect(() => {
     if (isError) {
@@ -24,12 +40,21 @@ function AttendeeItem() {
     }
 
     dispatch(getUsers());
+    dispatch(getCategories());
 
     return () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
   console.log(users);
+
+  const affectCategory = () => {
+    const data = {
+      idUser: attendeeId,
+      idCategory: categoryId,
+    };
+    dispatch(affectAttendeeToCategory(data));
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -53,25 +78,10 @@ function AttendeeItem() {
                 >
                   <thead>
                     <tr>
-                      <th>
-                        <div className="checkbox mr-0 align-self-center">
-                          <div className="custom-control custom-checkbox ">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input"
-                              id="checkAll"
-                              required=""
-                            />
-                            <label
-                              className="custom-control-label"
-                              for="checkAll"
-                            ></label>
-                          </div>
-                        </div>
-                      </th>
-                      <th>Attendee_ID</th>
-                      <th>Role</th>
+                      <th></th>
+
                       <th>Name</th>
+                      <th>Role</th>
                       <th>Email</th>
 
                       <th>Category</th>
@@ -87,34 +97,57 @@ function AttendeeItem() {
                               <input
                                 type="checkbox"
                                 className="custom-control-input"
-                                id="customCheckBox2"
+                                id={user._id}
                                 required=""
+                                onChange={(e) => setAttendeeId(e.target.value)}
+                                value={user._id}
                               />
+
                               <label
                                 className="custom-control-label"
-                                for="customCheckBox2"
+                                htmlFor={user._id}
                               ></label>
                             </div>
                           </div>
                         </td>
-                        <td>{user._id}</td>
-                        <td>{user.role}</td>
+
                         <td>{user.name}</td>
+                        <td>{role(user.role)} </td>
                         <td>
                           <span className="text-nowrap">{user.email}</span>
                         </td>
 
                         <td>
-                          <span className="text-primary">
-                            {user.category[0]?.name}{" "}
-                          </span>
+                          <select
+                            className="text-primary"
+                            onChange={(e) => setCategoryId(e.target.value)}
+                          >
+                            {users ? (
+                              <option value="">
+                                {user?.category[0]?.name}
+                              </option>
+                            ) : (
+                              <option value="">- Select -</option>
+                            )}
+                            {categories.map((category) => (
+                              <option key={category._id} value={category._id}>
+                                {category.name}
+                              </option>
+                            ))}
+                          </select>
                         </td>
                         <td>
                           <div className="d-flex align-items-center">
-                            <a href="javascript:void(0)" className="mr-4">
+                            <a
+                              className="mr-4"
+                              type="submit"
+                              onClick={() => {
+                                affectCategory();
+                              }}
+                            >
                               <i className="las la-pencil-alt scale-2 text-danger"></i>
                             </a>
-                            <a href="javascript:void(0)">
+                            <a>
                               <i className="las la-trash-alt scale-2 text-danger"></i>
                             </a>
                           </div>

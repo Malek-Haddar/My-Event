@@ -6,6 +6,7 @@ import {
   signup,
   checkIn,
   getUsers,
+  affectAttendeeToCategory,
 } from "../controllers/user.js";
 import auth from "../middleware/auth.js";
 
@@ -19,5 +20,6 @@ router.patch("/role/:id", ChangeRole);
 router.get("/session", auth, getSession);
 router.patch("/checkIn/:idUser", auth, checkIn);
 router.get("/users", auth, getUsers);
+router.patch("/users/affect", auth, affectAttendeeToCategory);
 
 export default router;

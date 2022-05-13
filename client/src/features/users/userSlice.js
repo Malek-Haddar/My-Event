@@ -66,6 +66,25 @@ export const getUsers = createAsyncThunk(
       }
     )
 
+    export const affectAttendeeToCategory = createAsyncThunk(
+      "users/affect",
+      async (data, thunkAPI) => {
+        try {
+          // console.log("slice: "+data.event);
+          const token = thunkAPI.getState().auth.user.token;
+          return await userService.affectAttendeeToCategory(token, data);
+        } catch (error) {
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          return thunkAPI.rejectWithValue(message);
+        }
+      }
+    );
+
 export const userSlice = createSlice({
   name: "user",
   initialState,

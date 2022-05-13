@@ -289,7 +289,7 @@ function (_Emitter) {
          * How the images should be scaled down in case both, `thumbnailWidth` and `thumbnailHeight` are provided.
          * Can be either `contain` or `crop`.
          */
-        thumbnailMethod: 'crop',
+        thumbnailMethod: "crop",
 
         /**
          * If set, images will be resized to these dimensions before being **uploaded**.
@@ -322,7 +322,7 @@ function (_Emitter) {
          * How the images should be scaled down in case both, `resizeWidth` and `resizeHeight` are provided.
          * Can be either `contain` or `crop`.
          */
-        resizeMethod: 'contain',
+        resizeMethod: "contain",
 
         /**
          * The base that is used to calculate the filesize. You can change this to
@@ -457,20 +457,23 @@ function (_Emitter) {
         /**
          * The text that replaces the default message text it the browser is not supported.
          */
-        dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
+        dictFallbackMessage:
+          "Your browser does not support drag'n'drop file uploads.",
 
         /**
          * The text that will be added before the fallback form.
          * If you provide a  fallback element yourself, or if this option is `null` this will
          * be ignored.
          */
-        dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
+        dictFallbackText:
+          "Please use the fallback form below to upload your files like in the olden days.",
 
         /**
          * If the filesize is too big.
          * `{{filesize}}` and `{{maxFilesize}}` will be replaced with the respective configuration values.
          */
-        dictFileTooBig: "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
+        dictFileTooBig:
+          "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
 
         /**
          * If the file doesn't match the file type.
@@ -496,7 +499,8 @@ function (_Emitter) {
         /**
          * If `addRemoveLinks` is true, the text to be used for confirmation when cancelling upload.
          */
-        dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
+        dictCancelUploadConfirmation:
+          "Are you sure you want to cancel this upload?",
 
         /**
          * If `addRemoveLinks` is true, the text to be used to remove a file.
@@ -523,7 +527,7 @@ function (_Emitter) {
           gb: "GB",
           mb: "MB",
           kb: "KB",
-          b: "b"
+          b: "b",
         },
 
         /**
@@ -550,7 +554,7 @@ function (_Emitter) {
               dztotalfilesize: chunk.file.size,
               dzchunksize: this.options.chunkSize,
               dztotalchunkcount: chunk.file.upload.totalChunkCount,
-              dzchunkbyteoffset: chunk.index * this.options.chunkSize
+              dzchunkbyteoffset: chunk.index * this.options.chunkSize,
             };
           }
         },
@@ -586,13 +590,23 @@ function (_Emitter) {
         fallback: function fallback() {
           // This code should pass in IE7... :(
           var messageElement;
-          this.element.className = "".concat(this.element.className, " dz-browser-not-supported");
+          this.element.className = "".concat(
+            this.element.className,
+            " dz-browser-not-supported"
+          );
           var _iteratorNormalCompletion2 = true;
           var _didIteratorError2 = false;
           var _iteratorError2 = undefined;
 
           try {
-            for (var _iterator2 = this.element.getElementsByTagName("div")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            for (
+              var _iterator2 = this.element
+                  .getElementsByTagName("div")
+                  [Symbol.iterator](),
+                _step2;
+              !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done);
+              _iteratorNormalCompletion2 = true
+            ) {
               var child = _step2.value;
 
               if (/(^| )dz-message($| )/.test(child.className)) {
@@ -618,7 +632,9 @@ function (_Emitter) {
           }
 
           if (!messageElement) {
-            messageElement = Dropzone.createElement("<div class=\"dz-message\"><span></span></div>");
+            messageElement = Dropzone.createElement(
+              '<div class="dz-message"><span></span></div>'
+            );
             this.element.appendChild(messageElement);
           }
 
@@ -652,7 +668,7 @@ function (_Emitter) {
             srcX: 0,
             srcY: 0,
             srcWidth: file.width,
-            srcHeight: file.height
+            srcHeight: file.height,
           };
           var srcRatio = file.width / file.height; // Automatically calculate dimensions if not specified
 
@@ -665,14 +681,13 @@ function (_Emitter) {
             height = width / srcRatio;
           } // Make sure images aren't upscaled
 
-
           width = Math.min(width, info.srcWidth);
           height = Math.min(height, info.srcHeight);
           var trgRatio = width / height;
 
           if (info.srcWidth > width || info.srcHeight > height) {
             // Image is bigger and needs rescaling
-            if (resizeMethod === 'crop') {
+            if (resizeMethod === "crop") {
               if (srcRatio > trgRatio) {
                 info.srcHeight = file.height;
                 info.srcWidth = info.srcHeight * trgRatio;
@@ -680,7 +695,7 @@ function (_Emitter) {
                 info.srcWidth = file.width;
                 info.srcHeight = info.srcWidth / trgRatio;
               }
-            } else if (resizeMethod === 'contain') {
+            } else if (resizeMethod === "contain") {
               // Method 'contain'
               if (srcRatio > trgRatio) {
                 height = width / srcRatio;
@@ -688,7 +703,9 @@ function (_Emitter) {
                 width = height * srcRatio;
               }
             } else {
-              throw new Error("Unknown resizeMethod '".concat(resizeMethod, "'"));
+              throw new Error(
+                "Unknown resizeMethod '".concat(resizeMethod, "'")
+              );
             }
           }
 
@@ -709,8 +726,17 @@ function (_Emitter) {
          * to be invoked with the file when the transformation is done.
          */
         transformFile: function transformFile(file, done) {
-          if ((this.options.resizeWidth || this.options.resizeHeight) && file.type.match(/image.*/)) {
-            return this.resizeImage(file, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
+          if (
+            (this.options.resizeWidth || this.options.resizeHeight) &&
+            file.type.match(/image.*/)
+          ) {
+            return this.resizeImage(
+              file,
+              this.options.resizeWidth,
+              this.options.resizeHeight,
+              this.options.resizeMethod,
+              done
+            );
           } else {
             return done(file);
           }
@@ -730,7 +756,8 @@ function (_Emitter) {
          *       .innerHTML
          *
          */
-        previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-image\"><img data-dz-thumbnail /></div>\n  <div class=\"dz-details\">\n    <div class=\"dz-size\"><span data-dz-size></span></div>\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n  </div>\n  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n  <div class=\"dz-success-mark\">\n    <svg width=\"54px\" height=\"54px\" viewBox=\"0 0 54 54\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n      <title>Check</title>\n      <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <path d=\"M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\" stroke-opacity=\"0.198794158\" stroke=\"#747474\" fill-opacity=\"0.816519475\" fill=\"#FFFFFF\"></path>\n      </g>\n    </svg>\n  </div>\n  <div class=\"dz-error-mark\">\n    <svg width=\"54px\" height=\"54px\" viewBox=\"0 0 54 54\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n      <title>Error</title>\n      <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g stroke=\"#747474\" stroke-opacity=\"0.198794158\" fill=\"#FFFFFF\" fill-opacity=\"0.816519475\">\n          <path d=\"M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\"></path>\n        </g>\n      </g>\n    </svg>\n  </div>\n</div>",
+        previewTemplate:
+          '<div class="dz-preview dz-file-preview">\n  <div class="dz-image"><img data-dz-thumbnail /></div>\n  <div class="dz-details">\n    <div class="dz-size"><span data-dz-size></span></div>\n    <div class="dz-filename"><span data-dz-name></span></div>\n  </div>\n  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>\n  <div class="dz-error-message"><span data-dz-errormessage></span></div>\n  <div class="dz-success-mark">\n    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n      <title>Check</title>\n      <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">\n        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF"></path>\n      </g>\n    </svg>\n  </div>\n  <div class="dz-error-mark">\n    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n      <title>Error</title>\n      <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">\n        <g stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">\n          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"></path>\n        </g>\n      </g>\n    </svg>\n  </div>\n</div>',
         // END OPTIONS
         // (Required by the dropzone documentation parser)
 
@@ -775,7 +802,9 @@ function (_Emitter) {
           }
 
           if (this.previewsContainer) {
-            file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
+            file.previewElement = Dropzone.createElement(
+              this.options.previewTemplate.trim()
+            );
             file.previewTemplate = file.previewElement; // Backwards compatibility
 
             this.previewsContainer.appendChild(file.previewElement);
@@ -784,7 +813,15 @@ function (_Emitter) {
             var _iteratorError3 = undefined;
 
             try {
-              for (var _iterator3 = file.previewElement.querySelectorAll("[data-dz-name]")[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              for (
+                var _iterator3 = file.previewElement
+                    .querySelectorAll("[data-dz-name]")
+                    [Symbol.iterator](),
+                  _step3;
+                !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next())
+                  .done);
+                _iteratorNormalCompletion3 = true
+              ) {
                 var node = _step3.value;
                 node.textContent = file.name;
               }
@@ -793,7 +830,10 @@ function (_Emitter) {
               _iteratorError3 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+                if (
+                  !_iteratorNormalCompletion3 &&
+                  _iterator3["return"] != null
+                ) {
                   _iterator3["return"]();
                 }
               } finally {
@@ -808,7 +848,15 @@ function (_Emitter) {
             var _iteratorError4 = undefined;
 
             try {
-              for (var _iterator4 = file.previewElement.querySelectorAll("[data-dz-size]")[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+              for (
+                var _iterator4 = file.previewElement
+                    .querySelectorAll("[data-dz-size]")
+                    [Symbol.iterator](),
+                  _step4;
+                !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next())
+                  .done);
+                _iteratorNormalCompletion4 = true
+              ) {
                 node = _step4.value;
                 node.innerHTML = this.filesize(file.size);
               }
@@ -817,7 +865,10 @@ function (_Emitter) {
               _iteratorError4 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+                if (
+                  !_iteratorNormalCompletion4 &&
+                  _iterator4["return"] != null
+                ) {
                   _iterator4["return"]();
                 }
               } finally {
@@ -828,7 +879,12 @@ function (_Emitter) {
             }
 
             if (this.options.addRemoveLinks) {
-              file._removeLink = Dropzone.createElement("<a class=\"dz-remove\" href=\"javascript:undefined;\" data-dz-remove>".concat(this.options.dictRemoveFile, "</a>"));
+              file._removeLink = Dropzone.createElement(
+                '<a class="dz-remove" href="javascript:undefined;" data-dz-remove>'.concat(
+                  this.options.dictRemoveFile,
+                  "</a>"
+                )
+              );
               file.previewElement.appendChild(file._removeLink);
             }
 
@@ -837,14 +893,20 @@ function (_Emitter) {
               e.stopPropagation();
 
               if (file.status === Dropzone.UPLOADING) {
-                return Dropzone.confirm(_this2.options.dictCancelUploadConfirmation, function () {
-                  return _this2.removeFile(file);
-                });
+                return Dropzone.confirm(
+                  _this2.options.dictCancelUploadConfirmation,
+                  function () {
+                    return _this2.removeFile(file);
+                  }
+                );
               } else {
                 if (_this2.options.dictRemoveFileConfirmation) {
-                  return Dropzone.confirm(_this2.options.dictRemoveFileConfirmation, function () {
-                    return _this2.removeFile(file);
-                  });
+                  return Dropzone.confirm(
+                    _this2.options.dictRemoveFileConfirmation,
+                    function () {
+                      return _this2.removeFile(file);
+                    }
+                  );
                 } else {
                   return _this2.removeFile(file);
                 }
@@ -856,7 +918,15 @@ function (_Emitter) {
             var _iteratorError5 = undefined;
 
             try {
-              for (var _iterator5 = file.previewElement.querySelectorAll("[data-dz-remove]")[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+              for (
+                var _iterator5 = file.previewElement
+                    .querySelectorAll("[data-dz-remove]")
+                    [Symbol.iterator](),
+                  _step5;
+                !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next())
+                  .done);
+                _iteratorNormalCompletion5 = true
+              ) {
                 var removeLink = _step5.value;
                 removeLink.addEventListener("click", removeFileEvent);
               }
@@ -865,7 +935,10 @@ function (_Emitter) {
               _iteratorError5 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
+                if (
+                  !_iteratorNormalCompletion5 &&
+                  _iterator5["return"] != null
+                ) {
                   _iterator5["return"]();
                 }
               } finally {
@@ -878,7 +951,10 @@ function (_Emitter) {
         },
         // Called whenever a file is removed.
         removedfile: function removedfile(file) {
-          if (file.previewElement != null && file.previewElement.parentNode != null) {
+          if (
+            file.previewElement != null &&
+            file.previewElement.parentNode != null
+          ) {
             file.previewElement.parentNode.removeChild(file.previewElement);
           }
 
@@ -894,7 +970,15 @@ function (_Emitter) {
             var _iteratorError6 = undefined;
 
             try {
-              for (var _iterator6 = file.previewElement.querySelectorAll("[data-dz-thumbnail]")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+              for (
+                var _iterator6 = file.previewElement
+                    .querySelectorAll("[data-dz-thumbnail]")
+                    [Symbol.iterator](),
+                  _step6;
+                !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next())
+                  .done);
+                _iteratorNormalCompletion6 = true
+              ) {
                 var thumbnailElement = _step6.value;
                 thumbnailElement.alt = file.name;
                 thumbnailElement.src = dataUrl;
@@ -904,7 +988,10 @@ function (_Emitter) {
               _iteratorError6 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
+                if (
+                  !_iteratorNormalCompletion6 &&
+                  _iterator6["return"] != null
+                ) {
                   _iterator6["return"]();
                 }
               } finally {
@@ -934,7 +1021,15 @@ function (_Emitter) {
             var _iteratorError7 = undefined;
 
             try {
-              for (var _iterator7 = file.previewElement.querySelectorAll("[data-dz-errormessage]")[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+              for (
+                var _iterator7 = file.previewElement
+                    .querySelectorAll("[data-dz-errormessage]")
+                    [Symbol.iterator](),
+                  _step7;
+                !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next())
+                  .done);
+                _iteratorNormalCompletion7 = true
+              ) {
                 var node = _step7.value;
                 node.textContent = message;
               }
@@ -943,7 +1038,10 @@ function (_Emitter) {
               _iteratorError7 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion7 && _iterator7["return"] != null) {
+                if (
+                  !_iteratorNormalCompletion7 &&
+                  _iterator7["return"] != null
+                ) {
                   _iterator7["return"]();
                 }
               } finally {
@@ -963,7 +1061,8 @@ function (_Emitter) {
             file.previewElement.classList.add("dz-processing");
 
             if (file._removeLink) {
-              return file._removeLink.innerHTML = this.options.dictCancelUpload;
+              return (file._removeLink.innerHTML =
+                this.options.dictCancelUpload);
             }
           }
         },
@@ -978,16 +1077,29 @@ function (_Emitter) {
             var _iteratorError8 = undefined;
 
             try {
-              for (var _iterator8 = file.previewElement.querySelectorAll("[data-dz-uploadprogress]")[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+              for (
+                var _iterator8 = file.previewElement
+                    .querySelectorAll("[data-dz-uploadprogress]")
+                    [Symbol.iterator](),
+                  _step8;
+                !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next())
+                  .done);
+                _iteratorNormalCompletion8 = true
+              ) {
                 var node = _step8.value;
-                node.nodeName === 'PROGRESS' ? node.value = progress : node.style.width = "".concat(progress, "%");
+                node.nodeName === "PROGRESS"
+                  ? (node.value = progress)
+                  : (node.style.width = "".concat(progress, "%"));
               }
             } catch (err) {
               _didIteratorError8 = true;
               _iteratorError8 = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion8 && _iterator8["return"] != null) {
+                if (
+                  !_iteratorNormalCompletion8 &&
+                  _iterator8["return"] != null
+                ) {
                   _iterator8["return"]();
                 }
               } finally {
@@ -1034,7 +1146,7 @@ function (_Emitter) {
         maxfilesexceeded: function maxfilesexceeded() {},
         maxfilesreached: function maxfilesreached() {},
         queuecomplete: function queuecomplete() {},
-        addedfiles: function addedfiles() {}
+        addedfiles: function addedfiles() {},
       };
       this.prototype._thumbnailQueue = [];
       this.prototype._processingThumbnail = false;

@@ -18,17 +18,15 @@ function Event() {
       console.log(message);
     }
 
-    if (!user) {
-      navigate("/login");
-    }
+    // if (!user) {
+    //   navigate("/login");
+    // }
 
     dispatch(getEvents());
-    console.log(events);
     return () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(events);
 
   if (isLoading) {
     return <Spinner />;
@@ -74,15 +72,36 @@ function Event() {
                     {events[0]?.location}
                   </h5>
                 </p>
-                {user ? (
-                  <Link to="/" className="lab-btn">
-                    <span>Join Now</span>{" "}
-                  </Link>
+                {!user ? (
+                  <>
+                    {events[0]?.isPublic === true &&
+                    events[0]?.status === "open" ? (
+                      <Link to="/" className="lab-btn">
+                        <span>Join Now</span>{" "}
+                      </Link>
+                    ) : (
+                      [
+                        events[0]?.status === "closed" ||
+                        events[0]?.status === "full" ? (
+                          <Link to="#" className="lab-btn disable ">
+                            <span>closed</span>{" "}
+                          </Link>
+                        ) : (
+                          [
+                            <Link to="/login" className="lab-btn">
+                              <span>Sign In</span>{" "}
+                            </Link>,
+                          ]
+                        ),
+                      ]
+                    )}
+                  </>
                 ) : (
-                  <Link to="/register" className="lab-btn">
-                    <span>Register Now</span>{" "}
+                  <Link to="#" className="lab-btn disable ">
+                    <span>consulte schedule</span>{" "}
                   </Link>
                 )}
+
                 <div className="event-sponsored">
                   <p>Event Sponsored By:</p>
                   <img

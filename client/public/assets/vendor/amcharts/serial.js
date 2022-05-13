@@ -66,11 +66,222 @@ handleCursorPanning:function(a){var b=a.target,c,d=a.deltaX,g=a.deltaY,h=a.delta
 d,a=!0);if(b.zoomable&&(0<Math.abs(d)||0<Math.abs(h)))if(c.parseDates&&!c.equalSpacing){if(f=this.startTime0,g=this.endTime0,c=g-f,h*=c,k=this.firstTime,l=this.lastTime,m=c,a||(m=0),a=Math.round(e.fitToBounds(f-c*d,k,l-m)),h=Math.round(e.fitToBounds(g-h,k+m,l)),this.startTime!=a||this.endTime!=h)n={chart:this,target:b,type:"zoomed",start:a,end:h},this.skipZoomed=!0,b.fire(n),this.zoom(a,h),n=!0}else if(f=this.start0,g=this.end0,c=g-f,d=Math.round(c*d),h=Math.round(c*h),k=this.chartData.length-1,a||
 (c=0),a=e.fitToBounds(f-d,0,k-c),c=e.fitToBounds(g-h,c,k),this.start!=a||this.end!=c)this.skipZoomed=!0,b.fire({chart:this,target:b,type:"zoomed",start:a,end:c}),this.zoom(a,c),n=!0;!n&&p&&this.updateAfterValueZoom()},arrangeBalloons:function(a){var b=this.plotAreaHeight;a.sort(this.compareY);var c,d,e,h=this.plotAreaWidth,f=a.length;for(c=0;c<f;c++)d=a[c].balloon,d.setBounds(0,0,h,b),d.restorePrevious(),d.draw(),b=d.yPos-3;a.reverse();for(c=0;c<f;c++){d=a[c].balloon;var b=d.bottom,l=d.bottom-d.yPos;
 0<c&&b-l<e+3&&d.setBounds&&(d.setBounds(0,e+3,h,e+l+3),d.restorePrevious(),d.draw());d.set&&d.set.show();e=d.bottom}},compareY:function(a,b){return a.y<b.y?1:-1}})})();(function(){var e=window.AmCharts;e.Cuboid=e.Class({construct:function(a,b,c,d,e,h,f,l,k,m,p,n,u,v,x,E,t){this.set=a.set();this.container=a;this.h=Math.round(c);this.w=Math.round(b);this.dx=d;this.dy=e;this.colors=h;this.alpha=f;this.bwidth=l;this.bcolor=k;this.balpha=m;this.dashLength=v;this.topRadius=E;this.pattern=x;this.rotate=u;this.bcn=t;u?0>b&&0===p&&(p=180):0>c&&270==p&&(p=90);this.gradientRotation=p;0===d&&0===e&&(this.cornerRadius=n);this.draw()},draw:function(){var a=this.set;a.clear();
-var b=this.container,c=b.chart,d=this.w,g=this.h,h=this.dx,f=this.dy,l=this.colors,k=this.alpha,m=this.bwidth,p=this.bcolor,n=this.balpha,u=this.gradientRotation,v=this.cornerRadius,x=this.dashLength,E=this.pattern,t=this.topRadius,r=this.bcn,B=l,q=l;"object"==typeof l&&(B=l[0],q=l[l.length-1]);var w,y,C,F,D,A,z,L,M,Q=k;E&&(k=0);var G,H,I,J,K=this.rotate;if(0<Math.abs(h)||0<Math.abs(f))if(isNaN(t))z=q,q=e.adjustLuminosity(B,-.2),q=e.adjustLuminosity(B,-.2),w=e.polygon(b,[0,h,d+h,d,0],[0,f,f,0,0],
-q,k,1,p,0,u),0<n&&(M=e.line(b,[0,h,d+h],[0,f,f],p,n,m,x)),y=e.polygon(b,[0,0,d,d,0],[0,g,g,0,0],q,k,1,p,0,u),y.translate(h,f),0<n&&(C=e.line(b,[h,h],[f,f+g],p,n,m,x)),F=e.polygon(b,[0,0,h,h,0],[0,g,g+f,f,0],q,k,1,p,0,u),D=e.polygon(b,[d,d,d+h,d+h,d],[0,g,g+f,f,0],q,k,1,p,0,u),0<n&&(A=e.line(b,[d,d+h,d+h,d],[0,f,g+f,g],p,n,m,x)),q=e.adjustLuminosity(z,.2),z=e.polygon(b,[0,h,d+h,d,0],[g,g+f,g+f,g,g],q,k,1,p,0,u),0<n&&(L=e.line(b,[0,h,d+h],[g,g+f,g+f],p,n,m,x));else{var N,O,P;K?(N=g/2,q=h/2,P=g/2,O=
-d+h/2,H=Math.abs(g/2),G=Math.abs(h/2)):(q=d/2,N=f/2,O=d/2,P=g+f/2+1,G=Math.abs(d/2),H=Math.abs(f/2));I=G*t;J=H*t;.1<G&&.1<G&&(w=e.circle(b,G,B,k,m,p,n,!1,H),w.translate(q,N));.1<I&&.1<I&&(z=e.circle(b,I,e.adjustLuminosity(B,.5),k,m,p,n,!1,J),z.translate(O,P))}k=Q;1>Math.abs(g)&&(g=0);1>Math.abs(d)&&(d=0);!isNaN(t)&&(0<Math.abs(h)||0<Math.abs(f))?(l=[B],l={fill:l,stroke:p,"stroke-width":m,"stroke-opacity":n,"fill-opacity":k},K?(k="M0,0 L"+d+","+(g/2-g/2*t),m=" B",0<d&&(m=" A"),e.VML?(k+=m+Math.round(d-
-I)+","+Math.round(g/2-J)+","+Math.round(d+I)+","+Math.round(g/2+J)+","+d+",0,"+d+","+g,k=k+(" L0,"+g)+(m+Math.round(-G)+","+Math.round(g/2-H)+","+Math.round(G)+","+Math.round(g/2+H)+",0,"+g+",0,0")):(k+="A"+I+","+J+",0,0,0,"+d+","+(g-g/2*(1-t))+"L0,"+g,k+="A"+G+","+H+",0,0,1,0,0"),G=90):(m=d/2-d/2*t,k="M0,0 L"+m+","+g,e.VML?(k="M0,0 L"+m+","+g,m=" B",0>g&&(m=" A"),k+=m+Math.round(d/2-I)+","+Math.round(g-J)+","+Math.round(d/2+I)+","+Math.round(g+J)+",0,"+g+","+d+","+g,k+=" L"+d+",0",k+=m+Math.round(d/
-2+G)+","+Math.round(H)+","+Math.round(d/2-G)+","+Math.round(-H)+","+d+",0,0,0"):(k+="A"+I+","+J+",0,0,0,"+(d-d/2*(1-t))+","+g+"L"+d+",0",k+="A"+G+","+H+",0,0,1,0,0"),G=180),b=b.path(k).attr(l),b.gradient("linearGradient",[B,e.adjustLuminosity(B,-.3),e.adjustLuminosity(B,-.3),B],G),K?b.translate(h/2,0):b.translate(0,f/2)):b=0===g?e.line(b,[0,d],[0,0],p,n,m,x):0===d?e.line(b,[0,0],[0,g],p,n,m,x):0<v?e.rect(b,d,g,l,k,m,p,n,v,u,x):e.polygon(b,[0,0,d,d,0],[0,g,g,0,0],l,k,m,p,n,u,!1,x);d=isNaN(t)?0>g?[w,
+var b=this.container,c=b.chart,d=this.w,g=this.h,h=this.dx,f=this.dy,l=this.colors,k=this.alpha,m=this.bwidth,p=this.bcolor,n=this.balpha,u=this.gradientRotation,v=this.cornerRadius,x=this.dashLength,E=this.pattern,t=this.topRadius,r=this.bcn,B=l,q=l;"object"==typeof l&&(B=l[0],q=l[l.length-1]);var w,y,C,F,D,A,z,L,M,Q=k;E&&(k=0);var G,H,I,J,K=this.rotate;if (0 < Math.abs(h) || 0 < Math.abs(f))
+  if (isNaN(t))
+    (z = q),
+      (q = e.adjustLuminosity(B, -0.2)),
+      (q = e.adjustLuminosity(B, -0.2)),
+      (w = e.polygon(
+        b,
+        [0, h, d + h, d, 0],
+        [0, f, f, 0, 0],
+        q,
+        k,
+        1,
+        p,
+        0,
+        u
+      )),
+      0 < n && (M = e.line(b, [0, h, d + h], [0, f, f], p, n, m, x)),
+      (y = e.polygon(b, [0, 0, d, d, 0], [0, g, g, 0, 0], q, k, 1, p, 0, u)),
+      y.translate(h, f),
+      0 < n && (C = e.line(b, [h, h], [f, f + g], p, n, m, x)),
+      (F = e.polygon(
+        b,
+        [0, 0, h, h, 0],
+        [0, g, g + f, f, 0],
+        q,
+        k,
+        1,
+        p,
+        0,
+        u
+      )),
+      (D = e.polygon(
+        b,
+        [d, d, d + h, d + h, d],
+        [0, g, g + f, f, 0],
+        q,
+        k,
+        1,
+        p,
+        0,
+        u
+      )),
+      0 < n &&
+        (A = e.line(b, [d, d + h, d + h, d], [0, f, g + f, g], p, n, m, x)),
+      (q = e.adjustLuminosity(z, 0.2)),
+      (z = e.polygon(
+        b,
+        [0, h, d + h, d, 0],
+        [g, g + f, g + f, g, g],
+        q,
+        k,
+        1,
+        p,
+        0,
+        u
+      )),
+      0 < n && (L = e.line(b, [0, h, d + h], [g, g + f, g + f], p, n, m, x));
+  else {
+    var N, O, P;
+    K
+      ? ((N = g / 2),
+        (q = h / 2),
+        (P = g / 2),
+        (O = d + h / 2),
+        (H = Math.abs(g / 2)),
+        (G = Math.abs(h / 2)))
+      : ((q = d / 2),
+        (N = f / 2),
+        (O = d / 2),
+        (P = g + f / 2 + 1),
+        (G = Math.abs(d / 2)),
+        (H = Math.abs(f / 2)));
+    I = G * t;
+    J = H * t;
+    0.1 < G &&
+      0.1 < G &&
+      ((w = e.circle(b, G, B, k, m, p, n, !1, H)), w.translate(q, N));
+    0.1 < I &&
+      0.1 < I &&
+      ((z = e.circle(b, I, e.adjustLuminosity(B, 0.5), k, m, p, n, !1, J)),
+      z.translate(O, P));
+  }
+k = Q;
+1 > Math.abs(g) && (g = 0);
+1 > Math.abs(d) && (d = 0);
+!isNaN(t) && (0 < Math.abs(h) || 0 < Math.abs(f))
+  ? ((l = [B]),
+    (l = {
+      fill: l,
+      stroke: p,
+      strokeWidth: m,
+      "stroke-opacity": n,
+      "fill-opacity": k,
+    }),
+    K
+      ? ((k = "M0,0 L" + d + "," + (g / 2 - (g / 2) * t)),
+        (m = " B"),
+        0 < d && (m = " A"),
+        e.VML
+          ? ((k +=
+              m +
+              Math.round(d - I) +
+              "," +
+              Math.round(g / 2 - J) +
+              "," +
+              Math.round(d + I) +
+              "," +
+              Math.round(g / 2 + J) +
+              "," +
+              d +
+              ",0," +
+              d +
+              "," +
+              g),
+            (k =
+              k +
+              (" L0," + g) +
+              (m +
+                Math.round(-G) +
+                "," +
+                Math.round(g / 2 - H) +
+                "," +
+                Math.round(G) +
+                "," +
+                Math.round(g / 2 + H) +
+                ",0," +
+                g +
+                ",0,0")))
+          : ((k +=
+              "A" +
+              I +
+              "," +
+              J +
+              ",0,0,0," +
+              d +
+              "," +
+              (g - (g / 2) * (1 - t)) +
+              "L0," +
+              g),
+            (k += "A" + G + "," + H + ",0,0,1,0,0")),
+        (G = 90))
+      : ((m = d / 2 - (d / 2) * t),
+        (k = "M0,0 L" + m + "," + g),
+        e.VML
+          ? ((k = "M0,0 L" + m + "," + g),
+            (m = " B"),
+            0 > g && (m = " A"),
+            (k +=
+              m +
+              Math.round(d / 2 - I) +
+              "," +
+              Math.round(g - J) +
+              "," +
+              Math.round(d / 2 + I) +
+              "," +
+              Math.round(g + J) +
+              ",0," +
+              g +
+              "," +
+              d +
+              "," +
+              g),
+            (k += " L" + d + ",0"),
+            (k +=
+              m +
+              Math.round(d / 2 + G) +
+              "," +
+              Math.round(H) +
+              "," +
+              Math.round(d / 2 - G) +
+              "," +
+              Math.round(-H) +
+              "," +
+              d +
+              ",0,0,0"))
+          : ((k +=
+              "A" +
+              I +
+              "," +
+              J +
+              ",0,0,0," +
+              (d - (d / 2) * (1 - t)) +
+              "," +
+              g +
+              "L" +
+              d +
+              ",0"),
+            (k += "A" + G + "," + H + ",0,0,1,0,0")),
+        (G = 180)),
+    (b = b.path(k).attr(l)),
+    b.gradient(
+      "linearGradient",
+      [B, e.adjustLuminosity(B, -0.3), e.adjustLuminosity(B, -0.3), B],
+      G
+    ),
+    K ? b.translate(h / 2, 0) : b.translate(0, f / 2))
+  : (b =
+      0 === g
+        ? e.line(b, [0, d], [0, 0], p, n, m, x)
+        : 0 === d
+        ? e.line(b, [0, 0], [0, g], p, n, m, x)
+        : 0 < v
+        ? e.rect(b, d, g, l, k, m, p, n, v, u, x)
+        : e.polygon(
+            b,
+            [0, 0, d, d, 0],
+            [0, g, g, 0, 0],
+            l,
+            k,
+            m,
+            p,
+            n,
+            u,
+            !1,
+            x
+          ));d=isNaN(t)?0>g?[w,
 M,y,C,F,D,A,z,L,b]:[z,L,y,C,F,D,w,M,A,b]:K?0<d?[w,b,z]:[z,b,w]:0>g?[w,b,z]:[z,b,w];e.setCN(c,b,r+"front");e.setCN(c,y,r+"back");e.setCN(c,z,r+"top");e.setCN(c,w,r+"bottom");e.setCN(c,F,r+"left");e.setCN(c,D,r+"right");for(w=0;w<d.length;w++)if(y=d[w])a.push(y),e.setCN(c,y,r+"element");E&&b.pattern(E,NaN,c.path)},width:function(a){isNaN(a)&&(a=0);this.w=Math.round(a);this.draw()},height:function(a){isNaN(a)&&(a=0);this.h=Math.round(a);this.draw()},animateHeight:function(a,b){var c=this;c.animationFinished=
 !1;c.easing=b;c.totalFrames=a*e.updateRate;c.rh=c.h;c.frame=0;c.height(1);setTimeout(function(){c.updateHeight.call(c)},1E3/e.updateRate)},updateHeight:function(){var a=this;a.frame++;var b=a.totalFrames;a.frame<=b?(b=a.easing(0,a.frame,1,a.rh-1,b),a.height(b),window.requestAnimationFrame?window.requestAnimationFrame(function(){a.updateHeight.call(a)}):setTimeout(function(){a.updateHeight.call(a)},1E3/e.updateRate)):(a.height(a.rh),a.animationFinished=!0)},animateWidth:function(a,b){var c=this;c.animationFinished=
 !1;c.easing=b;c.totalFrames=a*e.updateRate;c.rw=c.w;c.frame=0;c.width(1);setTimeout(function(){c.updateWidth.call(c)},1E3/e.updateRate)},updateWidth:function(){var a=this;a.frame++;var b=a.totalFrames;a.frame<=b?(b=a.easing(0,a.frame,1,a.rw-1,b),a.width(b),window.requestAnimationFrame?window.requestAnimationFrame(function(){a.updateWidth.call(a)}):setTimeout(function(){a.updateWidth.call(a)},1E3/e.updateRate)):(a.width(a.rw),a.animationFinished=!0)}})})();(function(){var e=window.AmCharts;e.CategoryAxis=e.Class({inherits:e.AxisBase,construct:function(a){this.cname="CategoryAxis";e.CategoryAxis.base.construct.call(this,a);this.minPeriod="DD";this.equalSpacing=this.parseDates=!1;this.position="bottom";this.startOnAxis=!1;this.gridPosition="middle";this.safeDistance=30;this.stickBalloonToCategory=!1;e.applyTheme(this,a,this.cname)},draw:function(){e.CategoryAxis.base.draw.call(this);this.generateDFObject();var a=this.chart.chartData;this.data=a;this.labelRotationR=

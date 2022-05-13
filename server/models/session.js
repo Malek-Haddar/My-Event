@@ -18,6 +18,7 @@ const sessionSchema = new Schema(
       type: mongoose.Types.ObjectId,
       ref: "Event",
     },
+
     users: [
       {
         type: mongoose.Types.ObjectId,

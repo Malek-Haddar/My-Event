@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
 import { getGalleries, reset } from "../features/gallery/gallerySlice";
+import Footer from "../components/Footer";
 
 function Gallery() {
   const navigate = useNavigate();
@@ -24,11 +24,11 @@ function Gallery() {
     }
 
     dispatch(getGalleries());
+
     return () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(galleries);
 
   if (isLoading) {
     return <Spinner />;
@@ -36,12 +36,6 @@ function Gallery() {
   return (
     <>
       <Header />
-      {/* {galleries.map((gallery) => (
-        <div key={gallery._id}>
-          <img src={gallery.selectedFile} alt={gallery.name} />
-        </div>
-      ))} */}
-
       <section className="page-header bg_img padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -61,7 +55,6 @@ function Gallery() {
           </div>
         </div>
       </section>
-
       <div className="gallery-section padding-tb">
         <div className="container">
           <ul className="filter-button-group lab-ul d-flex justify-content-center mb-4">

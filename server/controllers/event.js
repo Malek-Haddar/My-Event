@@ -26,6 +26,8 @@ export const createEvent = async (req, res) => {
   newEvent.description = req.body.description;
   newEvent.date = req.body.date;
   newEvent.location = req.body.location;
+  newEvent.isPublic = req.body.isPublic;
+  newEvent.status = req.body.status;
   newEvent.sessions = req.body.sessions;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

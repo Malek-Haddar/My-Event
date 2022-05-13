@@ -121,8 +121,8 @@
 ///////////////////
 .amcharts-graph-g2 .amcharts-graph-stroke {
     stroke-dasharray: 3px 3px;
-    stroke-linejoin: round;
-    stroke-linecap: round;
+    strokeLinejoin: round;
+        strokeLinecap: round;
     -webkit-animation: am-moving-dashes 1s linear infinite;
     animation: am-moving-dashes 1s linear infinite;
 }
@@ -147,22 +147,22 @@
 @-webkit-keyframes am-pulsating {
     0% {
         stroke-opacity: 1;
-        stroke-width: 0px;
+        strokeWidth: 0px;
     }
     100% {
         stroke-opacity: 0;
-        stroke-width: 3.125rem;
+        strokeWidth: 3.125rem;
     }
 }
 
 @keyframes am-pulsating {
     0% {
         stroke-opacity: 1;
-        stroke-width: 0px;
+        strokeWidth: 0px;
     }
     100% {
         stroke-opacity: 0;
-        stroke-width: 3.125rem;
+        strokeWidth: 3.125rem;
     }
 }
 

@@ -16,22 +16,25 @@ import galleryRoutes from "./routes/gallery.js";
 import attendeeRoutes from "./routes/attendee.js";
 
 connection();
-app.use(express.json());
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb" }));
+
 app.use(cors());
 app.use(compression());
 
 app.use("/api/user", userRoute);
 app.use("/api/session", SessionRouter);
 app.use("/api/event", EventRouter);
-app.use("/api/categories", CategoryRouter);
+app.use("/api/category", CategoryRouter);
 app.use("/api/reclamation", ReclamationRouter);
 app.use("/api/quizz", QuizzRouter);
 app.use("/api/posts", postRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/check", attendeeRoutes);
 
-app.use(bodyParser.json({ limit: "500mb", extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Listening on port ${port}.`));

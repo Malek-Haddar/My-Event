@@ -10,8 +10,10 @@ function Home() {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <><Header />
+    <>
+      <Header />
       <Event />
+      {/* {user ? <Session /> : ""} */}
       <Session />
       <Footer />
     </>

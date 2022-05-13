@@ -58,7 +58,7 @@ function Login() {
 
   return (
     <>
-    <Header />
+      <Header />
       <section className="page-header padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -109,7 +109,7 @@ function Login() {
                 <div className="d-flex justify-content-between flex-wrap pt-sm-2">
                   <div className="checkgroup">
                     <input type="checkbox" name="remember" id="remember" />
-                    <label for="remember">Remember Me</label>
+                    <label htmlFor="remember">Remember Me</label>
                   </div>
                   <a href="#">Forget Password?</a>
                 </div>
@@ -188,7 +188,7 @@ function Login() {
         </div>
       </form>
     </section> */}
-     <Footer />
+      <Footer />
     </>
   );
 }

@@ -208,72 +208,85 @@
                   this.midYear=y;
                   var yearHtml =
                       '<div class="dtp-picker-year hidden" >' +
-                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
+                      '<div><a href=";" class="btn btn-default dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
                       yearPicker +
-                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
+                      '<div><a href=";" class="btn btn-default dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
                       '</div>';
 
-                 this.template = '<div class="dtp hidden" id="' + this.name + '">' +
-                         '<div class="dtp-content">' +
-                         '<div class="dtp-date-view">' +
-                         '<header class="dtp-header">' +
-                         '<div class="dtp-actual-day">Lundi</div>' +
-                         '<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></a></div>' +
-                         '</header>' +
-                         '<div class="dtp-date hidden">' +
-                         '<div>' +
-                         '<div class="left center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-month-before"><i class="material-icons">chevron_left</i></a>' +
-                         '</div>' +
-                         '<div class="dtp-actual-month p80">MAR</div>' +
-                         '<div class="right center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-month-after"><i class="material-icons">chevron_right</i></a>' +
-                         '</div>' +
-                         '<div class="clearfix"></div>' +
-                         '</div>' +
-                         '<div class="dtp-actual-num">13</div>' +
-                         '<div>' +
-                         '<div class="left center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
-                         '</div>' +
-                         '<div class="dtp-actual-year p80'+(this.params.year?"":" disabled")+'">2014</div>' +
-                         '<div class="right center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
-                         '</div>' +
-                         '<div class="clearfix"></div>' +
-                         '</div>' +
-                         '</div>' +
-                         '<div class="dtp-time hidden">' +
-                         '<div class="dtp-actual-maxtime">23:55</div>' +
-                         '</div>' +
-                         '<div class="dtp-picker">' +
-                         '<div class="dtp-picker-calendar"></div>' +
-                         '<div class="dtp-picker-datetime hidden">' +
-                         '<div class="dtp-actual-meridien">' +
-                         '<div class="left p20">' +
-                         '<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
-                         '</div>' +
-                         '<div class="dtp-actual-time p60"></div>' +
-                         '<div class="right p20">' +
-                         '<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
-                         '</div>' +
-                         '<div class="clearfix"></div>' +
-                         '</div>' +
-                         '<div id="dtp-svg-clock">' +
-                         '</div>' +
-                         '</div>' +
-                         yearHtml+
-                         '</div>' +
-                         '</div>' +
-                         '<div class="dtp-buttons">' +
-                         '<button class="dtp-btn-now btn btn-flat hidden">' + this.params.nowText + '</button>' +
-                         '<button class="dtp-btn-clear btn btn-flat hidden">' + this.params.clearText + '</button>' +
-                         '<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
-                         '<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
-                         '<div class="clearfix"></div>' +
-                         '</div>' +
-                         '</div>' +
-                         '</div>';
+                 this.template =
+                   '<div class="dtp hidden" id="' +
+                   this.name +
+                   '">' +
+                   '<div class="dtp-content">' +
+                   '<div class="dtp-date-view">' +
+                   '<header class="dtp-header">' +
+                   '<div class="dtp-actual-day">Lundi</div>' +
+                   '<div class="dtp-close"><a href=";"><i class="material-icons">clear</i></a></div>' +
+                   "</header>" +
+                   '<div class="dtp-date hidden">' +
+                   "<div>" +
+                   '<div class="left center p10">' +
+                   '<a href=";" class="dtp-select-month-before"><i class="material-icons">chevron_left</i></a>' +
+                   "</div>" +
+                   '<div class="dtp-actual-month p80">MAR</div>' +
+                   '<div class="right center p10">' +
+                   '<a href=";" class="dtp-select-month-after"><i class="material-icons">chevron_right</i></a>' +
+                   "</div>" +
+                   '<div class="clearfix"></div>' +
+                   "</div>" +
+                   '<div class="dtp-actual-num">13</div>' +
+                   "<div>" +
+                   '<div class="left center p10">' +
+                   '<a href=";" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
+                   "</div>" +
+                   '<div class="dtp-actual-year p80' +
+                   (this.params.year ? "" : " disabled") +
+                   '">2014</div>' +
+                   '<div class="right center p10">' +
+                   '<a href=";" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
+                   "</div>" +
+                   '<div class="clearfix"></div>' +
+                   "</div>" +
+                   "</div>" +
+                   '<div class="dtp-time hidden">' +
+                   '<div class="dtp-actual-maxtime">23:55</div>' +
+                   "</div>" +
+                   '<div class="dtp-picker">' +
+                   '<div class="dtp-picker-calendar"></div>' +
+                   '<div class="dtp-picker-datetime hidden">' +
+                   '<div class="dtp-actual-meridien">' +
+                   '<div class="left p20">' +
+                   '<a class="dtp-meridien-am" href=";">AM</a>' +
+                   "</div>" +
+                   '<div class="dtp-actual-time p60"></div>' +
+                   '<div class="right p20">' +
+                   '<a class="dtp-meridien-pm" href=";">PM</a>' +
+                   "</div>" +
+                   '<div class="clearfix"></div>' +
+                   "</div>" +
+                   '<div id="dtp-svg-clock">' +
+                   "</div>" +
+                   "</div>" +
+                   yearHtml +
+                   "</div>" +
+                   "</div>" +
+                   '<div class="dtp-buttons">' +
+                   '<button class="dtp-btn-now btn btn-flat hidden">' +
+                   this.params.nowText +
+                   "</button>" +
+                   '<button class="dtp-btn-clear btn btn-flat hidden">' +
+                   this.params.clearText +
+                   "</button>" +
+                   '<button class="dtp-btn-cancel btn btn-flat">' +
+                   this.params.cancelText +
+                   "</button>" +
+                   '<button class="dtp-btn-ok btn btn-flat">' +
+                   this.params.okText +
+                   "</button>" +
+                   '<div class="clearfix"></div>' +
+                   "</div>" +
+                   "</div>" +
+                   "</div>";
 
                  if ($('body').find("#" + this.name).length <= 0)
                  {
@@ -527,25 +540,63 @@
 
                  var svgElement = this.createSVGElement("svg", {class: 'svg-clock', viewBox: '0,0,400,400'});
                  var svgGElement = this.createSVGElement("g", {transform: 'translate(200,200) '});
-                 var svgClockFace = this.createSVGElement("circle", {r: '192', fill: '#eee', stroke: '#bdbdbd', 'stroke-width': 2});
-                 var svgClockCenter = this.createSVGElement("circle", {r: '15', fill: '#757575'});
+                 var svgClockFace = this.createSVGElement("circle", {
+                   r: "192",
+                   fill: "#eee",
+                   stroke: "#bdbdbd",
+                   strokeWidth: 2,
+                 });
+                 var svgClockCenter = this.createSVGElement("circle", {
+                   r: "15",
+                   fill: "#757575",
+                 });
 
-                 svgGElement.appendChild(svgClockFace)
+                 svgGElement.appendChild(svgClockFace);
 
-                 if (isHour)
-                 {
-                    var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: '#bdbdbd', 'stroke-width': 2});
-                    var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: '#8BC34A', 'stroke-width': 8});
+                 if (isHour) {
+                   var svgMinuteHand = this.createSVGElement("line", {
+                     class: "minute-hand",
+                     x1: 0,
+                     y1: 0,
+                     x2: 0,
+                     y2: -150,
+                     stroke: "#bdbdbd",
+                     strokeWidth: 2,
+                   });
+                   var svgHourHand = this.createSVGElement("line", {
+                     class: "hour-hand",
+                     x1: 0,
+                     y1: 0,
+                     x2: 0,
+                     y2: hl,
+                     stroke: "#8BC34A",
+                     strokeWidth: 8,
+                   });
 
-                    svgGElement.appendChild(svgMinuteHand);
-                    svgGElement.appendChild(svgHourHand);
-                 } else
-                 {
-                    var svgMinuteHand = this.createSVGElement("line", {class: 'minute-hand', x1: 0, y1: 0, x2: 0, y2: -150, stroke: '#8BC34A', 'stroke-width': 2});
-                    var svgHourHand = this.createSVGElement("line", {class: 'hour-hand', x1: 0, y1: 0, x2: 0, y2: hl, stroke: '#bdbdbd', 'stroke-width': 8});
+                   svgGElement.appendChild(svgMinuteHand);
+                   svgGElement.appendChild(svgHourHand);
+                 } else {
+                   var svgMinuteHand = this.createSVGElement("line", {
+                     class: "minute-hand",
+                     x1: 0,
+                     y1: 0,
+                     x2: 0,
+                     y2: -150,
+                     stroke: "#8BC34A",
+                     strokeWidth: 2,
+                   });
+                   var svgHourHand = this.createSVGElement("line", {
+                     class: "hour-hand",
+                     x1: 0,
+                     y1: 0,
+                     x2: 0,
+                     y2: hl,
+                     stroke: "#bdbdbd",
+                     strokeWidth: 8,
+                   });
 
-                    svgGElement.appendChild(svgHourHand);
-                    svgGElement.appendChild(svgMinuteHand);
+                   svgGElement.appendChild(svgHourHand);
+                   svgGElement.appendChild(svgMinuteHand);
                  }
 
                  svgGElement.appendChild(svgClockCenter)
@@ -753,10 +804,10 @@
                         {
                             if (moment(calendar.days[i]).locale(this.params.lang).format("DD") === moment(this.currentDate).locale(this.params.lang).format("DD"))
                             {
-                                _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                                _template += '<a href=";" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
                             } else
                             {
-                                _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                                _template += '<a href=";" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
                             }
                         }
 
