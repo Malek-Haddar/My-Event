@@ -14,6 +14,7 @@ import Session from "./pages/Session";
 import Pictures from "./pages/Pictures";
 import Category from "./pages/Category";
 import Event from "./pages/Event";
+import Vote from "./pages/Vote";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/pictures" element={<Pictures />} />
           <Route path="/category" element={<Category />} />
           <Route path="/event" element={<Event />} />
+          <Route path="/vote" element={<Vote />} />
         </Routes>
         {/* <Footer /> */}
       </Router>

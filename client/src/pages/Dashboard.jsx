@@ -1060,7 +1060,6 @@ function Dashboard() {
           className="container-fluid "
           style={{ backgroundColor: "#F4F6FA" }}
         >
-          <EventForm />
           <div className="row">
             <div className="col-xl-3 col-xxl-4">
               <div className="row">

@@ -25,6 +25,14 @@ const sessionSchema = new Schema(
         ref: "User",
       },
     ],
+    likes: [
+      {
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -1,6 +1,6 @@
-import express from 'express';
+import express from "express";
 import Session from "../models/session.js";
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import { body, validationResult } from "express-validator";
 import Category from "../models/category.js";
 const router = express.Router();
@@ -101,14 +101,13 @@ export const updateSession = async (req, res) => {
   res.json(updatedSession);
 };
 
-export const DeleteSession = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No Task Found with id : ${id} ");
-
-  await Session.findByIdAndRemove(id);
-  res.json({ message: "Task deleted successfully." });
+export const deleteSession = async (req, res) => {
+  const { sessionId } = req.params;
+  console.log({ sessionId });
+  Session.findByIdAndRemove(sessionId).then((result) => {
+    console.log({ result });
+    res.json({ message: "Session deleted successfully." });
+  });
 };
 
 // affect session to event
@@ -145,9 +144,49 @@ export const affectSessionToCategory = async (req, res) => {
     res.send(error);
   }
 };
+// like session
+export const likeSession = async (req, res) => {
+  try {
+    const session = await Session.findById(req.params.id);
+    console.log(session);
+    // Check if the post has already been liked
+    if (session.likes.some((like) => like.user.toString() === req.user.id)) {
+      return res.status(400).json({ msg: "Session already liked" });
+    }
 
+    session.likes.unshift({ user: req.user.id });
 
+    await session.save();
 
+    return res.json(session.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+// unlike session
+export const unlikeSession = async (req, res) => {
+  try {
+    const session = await Session.findById(req.params.id);
+    console.log(session);
+    // Check if the post has not yet been liked
+    if (!session.likes.some((like) => like.user.toString() === req.user.id)) {
+      return res.status(400).json({ msg: "Session has not yet been liked" });
+    }
+
+    // remove the like
+    session.likes = session.likes.filter(
+      ({ user }) => user.toString() !== req.user.id
+    );
+
+    await session.save();
+
+    return res.json(session.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
 
 // export const getSessionById = async (req, res) => {
 //   const { id } = req.params;
@@ -160,4 +199,4 @@ export const affectSessionToCategory = async (req, res) => {
 //   }
 // };
 
-export default router;   
+export default router;

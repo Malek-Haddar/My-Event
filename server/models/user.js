@@ -23,6 +23,12 @@ const userSchema = mongoose.Schema(
         ref: "Session",
       },
     ],
+    events: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
     checkIn: [{ type: Date }],
   },
   {

@@ -72,7 +72,6 @@ export const affectSessionToEvent = createAsyncThunk(
   "sessions/affect",
   async (data, thunkAPI) => {
     try {
-      
       const token = thunkAPI.getState().auth.user.token;
       return await sessionService.affectSessionToEvent(token, data);
     } catch (error) {
@@ -86,26 +85,64 @@ export const affectSessionToEvent = createAsyncThunk(
     }
   }
 );
-// affect session to category
+// delete session
 
-export const affectSessionToCategory = createAsyncThunk(
-  "sessions/category/affect",
+export const deleteSession = createAsyncThunk(
+  "sessions/delete",
   async (data, thunkAPI) => {
     try {
-      
       const token = thunkAPI.getState().auth.user.token;
-      return await sessionService.affectSessionToCategory(token, data);
+      return await sessionService.deleteSession(token, data.sessionId);
     } catch (error) {
       const message =
         (error.response &&
           error.response.data &&
-          error.response.data.message) || 
+          error.response.data.message) ||
         error.message ||
         error.toString();
       return thunkAPI.rejectWithValue(message);
     }
   }
 );
+
+// like session
+export const likeSession = createAsyncThunk(
+  "sessions/like",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await sessionService.likeSession(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// affect session to category
+
+// export const affectSessionToCategory = createAsyncThunk(
+//   "sessions/category/affect",
+//   async (data, thunkAPI) => {
+//     try {
+//       const token = thunkAPI.getState().auth.user.token;
+//       return await sessionService.affectSessionToCategory(token, data);
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
 
 export const sessionSlice = createSlice({
   name: "session",
@@ -152,6 +189,22 @@ export const sessionSlice = createSlice({
         state.userSession = action.payload;
       })
       .addCase(getUserSession.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(deleteSession.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteSession.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.sessions = state.sessions.filter(
+          (session) => session._id !== action.payload.data.sessionId
+        );
+      })
+      .addCase(deleteSession.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -9,6 +9,7 @@ import { getEvents } from "../features/events/eventSlice";
 import {
   affectSessionToCategory,
   affectSessionToEvent,
+  deleteSession,
   getSessions,
   reset,
 } from "../features/sessions/sessionSlice";
@@ -52,23 +53,31 @@ function Session() {
       idSession: sessionId,
       idEvent: eventId,
     };
-    console.log(data);
+    // console.log(data);
     dispatch(affectSessionToEvent(data));
   };
-  const affectCategory = () => {
+  const clearSession = () => {
     const data = {
-      idSession: sessionId,
-      idCategory: categoryId,
+      sessionId,
     };
-    console.log(data);
-    dispatch(affectSessionToCategory(data));
+    dispatch(deleteSession(data));
+    console.log("iddsss" + sessionId);
   };
+  // const affectCategory = () => {
+  //   const data = {
+  //     idSession: sessionId,
+  //     idCategory: categoryId,
+  //   };
+  //   console.log(data);
+  //   dispatch(affectSessionToCategory(data));
+  // };
   if (isLoading) {
     return <Spinner />;
   }
   return (
     <>
       <Navbar />
+      <SessionForm />
       <div className="content-body ">
         <div className="container-fluid">
           <div className="row">
@@ -157,7 +166,12 @@ function Session() {
                             >
                               <i className="las la-pencil-alt scale-2 text-danger"></i>
                             </a>
-                            <a>
+                            <a
+                              type="submit"
+                              onClick={() => {
+                                clearSession();
+                              }}
+                            >
                               <i className="las la-trash-alt scale-2 text-danger"></i>
                             </a>
                           </div>

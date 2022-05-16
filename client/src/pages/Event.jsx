@@ -8,6 +8,7 @@ import Navbar from "../components/dashboard/Navbar";
 import { getCategories } from "../features/categories/categorySlice";
 import { getEvents } from "../features/events/eventSlice";
 import { getSessions } from "../features/sessions/sessionSlice";
+import EventForm from "../components/event/EventForm";
 
 function Event() {
   const navigate = useNavigate();
@@ -41,6 +42,8 @@ function Event() {
   return (
     <>
       <Navbar />
+      <EventForm />
+
       <div className="content-body ">
         <div className="container-fluid">
           <div className="row">

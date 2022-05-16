@@ -10,6 +10,7 @@ import {
   getCategories,
 } from "../features/categories/categorySlice";
 import { getSessions } from "../features/sessions/sessionSlice";
+import CategoryForm from "../components/category/CategoryForm";
 
 function Category() {
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ function Category() {
   return (
     <>
       <Navbar />
+      <CategoryForm />
       <div className="content-body ">
         <div className="container-fluid">
           <div className="row">

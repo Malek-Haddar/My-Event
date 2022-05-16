@@ -74,17 +74,21 @@ function Gallery() {
               Reunions <span className="filter-item-num">03</span>
             </li>
           </ul>
-          <div className="grid pb-15">
+          <div className="grid flex d-flex flex-wrap  pb-15">
             {galleries.map((gallery) => (
               <div
                 className="grid-item eid-ul-adha eid-ul-fitr"
                 key={gallery._id}
               >
-                <div className="grid-inner">
-                  <div className="grid-thumb">
-                    <img src={gallery.selectedFile} alt={gallery.name} />
+                <div className="grid-inner d-flex h-100">
+                  <div className="grid-thumb ">
+                    <img
+                      style={{ backgroundSize: "contain" }}
+                      src={gallery.selectedFile}
+                      alt={gallery.name}
+                    />
                   </div>
-                  <div className="grid-content p-2">
+                  <div className="grid-content p-2  ">
                     <a href={gallery.selectedFile} data-rel="lightcase">
                       <i className="icofont-expand"></i>
                     </a>

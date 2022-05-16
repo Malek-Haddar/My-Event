@@ -26,6 +26,12 @@ const eventSchema = new Schema(
       type: String,
       required: [true, "Please add status"],
     },
+    users: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,

@@ -54,11 +54,53 @@ const affectSessionToEvent = async (token, data) => {
     idSession: data.idSession,
     idEvent: data.idEvent,
   };
-  const response = await axios.patch(API_URL_SESSION + "session/sessions/affect", body, config);
+  const response = await axios.patch(
+    API_URL_SESSION + "session/sessions/affect",
+    body,
+    config
+  );
   console.log("data: ", response);
 
   return response.data;
 };
+// delete session
+
+// Delete user goal
+const deleteSession = async (token, sessionId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(
+    API_URL_SESSION + "session/delete/" + sessionId,
+    config
+  );
+
+  return response.data;
+};
+
+// const deleteSession = async (token, data) => {
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   };
+
+//   const body = {
+//     sessionId: data.sessionId,
+//   };
+
+//   const response = await axios.delete(
+//     API_URL_SESSION + "session/delete",
+//     body,
+//     config
+//   );
+//   console.log("here" + sessionId);
+//   // console.log("data: ", response);
+
+//   return response.data;
+// };
 // affect session to category
 const affectSessionToCategory = async (token, data) => {
   const config = {
@@ -70,7 +112,31 @@ const affectSessionToCategory = async (token, data) => {
     idSession: data.idSession,
     idCategory: data.idCategory,
   };
-  const response = await axios.patch(API_URL_SESSION + "session/sessions/category/affect", body, config);
+  const response = await axios.patch(
+    API_URL_SESSION + "session/sessions/category/affect",
+    body,
+    config
+  );
+  console.log("data: ", response);
+
+  return response.data;
+};
+// like session
+const likeSession = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  // const id = {
+  //   idSession: data.idSession,
+  //   idCategory: data.idCategory,
+  // };
+
+  const response = await axios.patch(
+    API_URL_SESSION + "session/like/" + id,
+    config
+  );
   console.log("data: ", response);
 
   return response.data;
@@ -81,7 +147,9 @@ const sessionService = {
   getSessions,
   getUserSession,
   affectSessionToEvent,
-  affectSessionToCategory
+  affectSessionToCategory,
+  deleteSession,
+  likeSession,
 };
 
 export default sessionService;
