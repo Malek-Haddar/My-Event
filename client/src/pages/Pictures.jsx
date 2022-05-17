@@ -80,56 +80,54 @@ function Pictures() {
                     </tr>
                   </thead>
                   <tbody>
-                    <div className="flex d-flex">
-                      {galleries.map((gallery) => (
-                        <tr key={gallery._id}>
-                          <td>
-                            <div className="checkbox mr-0 align-self-center">
-                              <div className="custom-control custom-checkbox ">
-                                <input
-                                  type="checkbox"
-                                  className="custom-control-input"
-                                  id="customCheckBox2"
-                                  required=""
-                                />
-                                <label
-                                  className="custom-control-label"
-                                  htmlFor="customCheckBox2"
-                                ></label>
-                              </div>
-                            </div>
-                          </td>
-                          <td>{gallery._id}</td>
-
-                          <td>{gallery.name}</td>
-                          <td>
-                            <span className="text-nowrap">
-                              {gallery.category}
-                            </span>
-                          </td>
-
-                          <td>
-                            <span className="text-primary">
-                              <img
-                                src={gallery.selectedFile}
-                                alt=""
-                                style={{ width: "10%", height: "10%" }}
+                    {galleries.map((gallery) => (
+                      <tr key={gallery._id}>
+                        <td>
+                          <div className="checkbox mr-0 align-self-center">
+                            <div className="custom-control custom-checkbox ">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                id="customCheckBox2"
+                                required=""
                               />
-                            </span>
-                          </td>
-                          <td>
-                            <div className="d-flex align-items-center">
-                              <a href="" className="mr-4">
-                                <i className="las la-pencil-alt scale-2 text-danger"></i>
-                              </a>
-                              <a href="">
-                                <i className="las la-trash-alt scale-2 text-danger"></i>
-                              </a>
+                              <label
+                                className="custom-control-label"
+                                htmlFor="customCheckBox2"
+                              ></label>
                             </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </div>
+                          </div>
+                        </td>
+                        <td>{gallery._id}</td>
+
+                        <td>{gallery.name}</td>
+                        <td>
+                          <span className="text-nowrap">
+                            {gallery.category}
+                          </span>
+                        </td>
+
+                        <td>
+                          <span className="text-primary">
+                            <img
+                              src={gallery.selectedFile}
+                              alt=""
+                              style={{ width: "10%", height: "10%" }}
+                            />
+                          </span>
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <a href="" className="mr-4">
+                              <i className="las la-pencil-alt scale-2 text-danger"></i>
+                            </a>
+                            <a href="">
+                              <i className="las la-trash-alt scale-2 text-danger"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
