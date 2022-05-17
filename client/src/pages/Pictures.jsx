@@ -70,7 +70,6 @@ function Pictures() {
                           </div>
                         </div>
                       </th>
-                      <th>Attendee_ID</th>
 
                       <th>Name</th>
                       <th>Category</th>
@@ -98,7 +97,6 @@ function Pictures() {
                             </div>
                           </div>
                         </td>
-                        <td>{gallery._id}</td>
 
                         <td>{gallery.name}</td>
                         <td>
