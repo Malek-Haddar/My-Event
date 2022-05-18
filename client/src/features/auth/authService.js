@@ -33,11 +33,32 @@ const logout = ()=> {
     localStorage.removeItem('user')
 }
 
+// affect category to Attendee
+const affectCategoryToAttendee = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const body = {
+    idCategory: data.idCategory,
+    idUser: data.idUser,
+  };
+  const response = await axios.patch(
+    API_URL + "user/users/affect",
+    body,
+    config
+  );
+  console.log("data: ", response);
 
+  return response.data;
+};
 
 const authService = {
-    register, logout, login
-}
+  register,
+  logout,
+  login,
+  affectCategoryToAttendee
+};
 
-
-export default authService
+export default authService;

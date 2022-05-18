@@ -75,7 +75,6 @@ function Pictures() {
                       <th>Category</th>
 
                       <th>Picture</th>
-                      <th></th>
                     </tr>
                   </thead>
                   <tbody>

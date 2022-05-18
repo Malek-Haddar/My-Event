@@ -5,6 +5,7 @@ import {
   getUserSession,
   likeSession,
   reset,
+  unlikeSession,
 } from "../features/sessions/sessionSlice";
 import Spinner from "./Spinner";
 
@@ -12,9 +13,9 @@ function Session() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const [sessionId, setSessionId] = useState("");
+  // const [sessionId, setSessionId] = useState("");
 
-  const { sessions, userSession, isLoading, isError, message } = useSelector(
+  const { userSession, isLoading, isError, message } = useSelector(
     (state) => state.sessions
   );
 
@@ -35,11 +36,12 @@ function Session() {
   }, [user, navigate, isError, message, dispatch]);
   console.log({ userSession });
 
-  const addLike = () => {
-    const data = {
-      sessionId,
-    };
-    dispatch(likeSession());
+  const addLike = (data) => {
+    // const data = {
+    //   sessionId,
+    // };
+    dispatch(likeSession(data));
+    console.log("kali", data.sessionId);
   };
 
   if (isLoading) {
@@ -50,7 +52,7 @@ function Session() {
       <section className="about-section padding-tb padding-b">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-8">
+            <div className="col-lg-10">
               <div className="about-image">
                 <img
                   src={require("../assets/images/about/01.jpg")}
@@ -195,25 +197,29 @@ function Session() {
                                     <a href="/vote" className="btn-link ">
                                       <i class="icofont-thumbs-down"></i>{" "}
                                     </a> */}
-                                    <button
-                                      onClick={() => addLike()}
-                                      type="button"
+                                    <a
+                                      onClick={() =>
+                                        dispatch(likeSession(session._id))
+                                      }
+                                      type="submit"
                                       className="btn btn-light"
                                     >
-                                      <i className="icofont-thumbs-up" />{" "}
-                                      {/* <span>
-                                        {likes.length > 0 && (
-                                          <span>{likes.length}</span>
+                                      <i className="icofont-thumbs-up" />
+                                      <span>
+                                        {session.likes?.length > 0 && (
+                                          <span>{session.likes?.length}</span>
                                         )}
-                                      </span> */}
-                                    </button>
-                                    <button
-                                      // onClick={() => removeLike(_id)}
-                                      type="button"
+                                      </span>
+                                    </a>
+                                    <a
+                                      onClick={() =>
+                                        dispatch(unlikeSession(session._id))
+                                      }
+                                      type="submit"
                                       className="btn btn-light"
                                     >
                                       <i className="icofont-thumbs-down" />
-                                    </button>
+                                    </a>
                                   </ul>
                                 </div>
                               </div>

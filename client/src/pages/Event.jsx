@@ -82,7 +82,6 @@ function Event() {
                       <th>Date</th>
                       <th>Public</th>
                       <th>Status</th>
-                      <th>Date</th>
 
                       <th>Description</th>
 
@@ -90,8 +89,8 @@ function Event() {
                     </tr>
                   </thead>
                   <tbody>
-                    {events.map((event) => (
-                      <tr key={event._id}>
+                    {events?.map((event) => (
+                      <tr key={event?._id}>
                         <td>
                           <div className="checkbox mr-0 align-self-center">
                             <div className="custom-control custom-checkbox ">
@@ -109,20 +108,20 @@ function Event() {
                           </div>
                         </td>
 
-                        <td>{event.name}</td>
-                        <td>{event.location} </td>
+                        <td>{event?.name}</td>
+                        <td>{event?.location} </td>
                         <td>
                           {" "}
-                          {new Date(event.date).toLocaleString("en-US")}{" "}
+                          {new Date(event?.date).toLocaleString("en-US")}{" "}
                         </td>
                         <td>
-                          <div className="radio">{event.isPublic}</div>
+                          <div className="radio">{event?.isPublic}</div>
                         </td>
 
-                        <td>{event.status}</td>
+                        <td>{event?.status}</td>
                         <td>
                           <span className="text-nowrap">
-                            {event.description}{" "}
+                            {event?.description}{" "}
                           </span>
                         </td>
 

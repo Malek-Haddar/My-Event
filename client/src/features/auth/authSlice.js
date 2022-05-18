@@ -45,6 +45,26 @@ export const logout = createAsyncThunk('auth/logout', async() => {
     await authService.logout()
 })
 
+// affect category to attendee
+export const affectCategoryToAttendee = createAsyncThunk(
+    "auth/affectCategory",
+    async (data, thunkAPI) => {
+      try {
+        const token = thunkAPI.getState().auth.user.token;
+        return await authService.affectCategoryToAttendee(token, data);
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+    }
+  );
+  
+
 
 export const authSlice = createSlice ({
     name: 'auth',

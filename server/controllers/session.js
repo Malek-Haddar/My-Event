@@ -101,14 +101,7 @@ export const updateSession = async (req, res) => {
   res.json(updatedSession);
 };
 
-export const deleteSession = async (req, res) => {
-  const { sessionId } = req.params;
-  console.log({ sessionId });
-  Session.findByIdAndRemove(sessionId).then((result) => {
-    console.log({ result });
-    res.json({ message: "Session deleted successfully." });
-  });
-};
+
 
 // affect session to event
 export const affectSessionToEvent = async (req, res) => {
@@ -144,11 +137,21 @@ export const affectSessionToCategory = async (req, res) => {
     res.send(error);
   }
 };
+// delete session
+export const deleteSession = async (req, res) => {
+  const { sessionId } = req.params;
+  console.log({ sessionId });
+  Session.findByIdAndRemove(sessionId).then((result) => {
+    console.log({ result });
+    res.json({ message: "Session deleted successfully." });
+  });
+};
 // like session
 export const likeSession = async (req, res) => {
   try {
-    const session = await Session.findById(req.params.id);
-    console.log(session);
+    console.log("hello");
+    console.log(req.body);
+    const session = await Session.findById(req.body._id);
     // Check if the post has already been liked
     if (session.likes.some((like) => like.user.toString() === req.user.id)) {
       return res.status(400).json({ msg: "Session already liked" });
@@ -167,7 +170,9 @@ export const likeSession = async (req, res) => {
 // unlike session
 export const unlikeSession = async (req, res) => {
   try {
-    const session = await Session.findById(req.params.id);
+    console.log("hello");
+    console.log(req.body);
+    const session = await Session.findById(req.body._id);
     console.log(session);
     // Check if the post has not yet been liked
     if (!session.likes.some((like) => like.user.toString() === req.user.id)) {

@@ -66,14 +66,45 @@ const affectSessionToEvent = async (token, data) => {
 // delete session
 
 // Delete user goal
-const deleteSession = async (token, sessionId) => {
+const deleteSession = async (token, data) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.delete(
-    API_URL_SESSION + "session/delete/" + sessionId,
+    API_URL_SESSION + "session/delete/" + data,
+    config
+  );
+
+  return response.data;
+};
+// like session
+const likeSession = async (_id, token) => {
+  console.log({ _id, token });
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.patch(
+    API_URL_SESSION + "session/like",
+    { _id },
+    config
+  );
+
+  return response.data;
+};
+// unlike session
+const unlikeSession = async (_id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.patch(
+    API_URL_SESSION + "session/unlike",
+    { _id },
     config
   );
 
@@ -121,26 +152,6 @@ const affectSessionToCategory = async (token, data) => {
 
   return response.data;
 };
-// like session
-const likeSession = async (id, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  // const id = {
-  //   idSession: data.idSession,
-  //   idCategory: data.idCategory,
-  // };
-
-  const response = await axios.patch(
-    API_URL_SESSION + "session/like/" + id,
-    config
-  );
-  console.log("data: ", response);
-
-  return response.data;
-};
 
 const sessionService = {
   createSession,
@@ -150,6 +161,7 @@ const sessionService = {
   affectSessionToCategory,
   deleteSession,
   likeSession,
+  unlikeSession,
 };
 
 export default sessionService;

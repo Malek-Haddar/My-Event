@@ -37,7 +37,6 @@ function Event() {
         <div className="banner-wrapper shape-a">
           <div className="row gy-5 align-items-center">
             <div className="col-lg-6 col-12">
-              {/* {events.map((event) => ( */}
               <div className="banner-content">
                 <ul
                   id="countdown"
@@ -107,6 +106,11 @@ function Event() {
                   <img
                     src={require("../assets/images/banner/02.png")}
                     alt="sponsor"
+                    style={{
+                      width: "210px",
+                      height: "65px",
+                      borderRadius: "2%",
+                    }}
                   />
                 </div>
               </div>

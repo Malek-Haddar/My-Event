@@ -10,6 +10,7 @@ import {
 import Spinner from "../components/Spinner";
 import Navbar from "../components/dashboard/Navbar";
 import { getCategories } from "../features/categories/categorySlice";
+import { affectCategoryToAttendee } from "../features/auth/authSlice";
 
 function AttendeeItem() {
   const navigate = useNavigate();
@@ -53,11 +54,11 @@ function AttendeeItem() {
       idUser: attendeeId,
       idCategory: categoryId,
     };
-    dispatch(affectAttendeeToCategory(data));
+    dispatch(affectCategoryToAttendee(data));
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner />; 
   }
   return (
     <>

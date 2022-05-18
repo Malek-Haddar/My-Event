@@ -20,12 +20,12 @@ router.route("/").get(getSession);
 
 router.route("/all").get(getAllSession);
 router.post("/add", body("name").isLength({ min: 3 }), createSession);
-router.patch("/:id", updateSession);
+router.patch("/update/:id", updateSession);
 router.delete("/delete/:sessionId", deleteSession);
 router.patch("/sessions/affect", affectSessionToEvent);
 router.patch("/sessions/category/affect", affectSessionToCategory);
-router.patch("/like/:id", auth, likeSession);
-router.patch("/unlike/:id", auth, unlikeSession);
+router.patch("/like", auth, likeSession);
+router.patch("/unlike", auth, unlikeSession);
 
 
 // router.get("/session/:id", getSessionById);

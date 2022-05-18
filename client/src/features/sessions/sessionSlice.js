@@ -108,10 +108,28 @@ export const deleteSession = createAsyncThunk(
 // like session
 export const likeSession = createAsyncThunk(
   "sessions/like",
-  async (id, thunkAPI) => {
+  async (_id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await sessionService.likeSession(id, token);
+      return await sessionService.likeSession(_id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// like session
+export const unlikeSession = createAsyncThunk(
+  "sessions/unlike",
+  async (_id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await sessionService.unlikeSession(_id, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -208,7 +226,35 @@ export const sessionSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(likeSession.pending, (state) => {
+        state.isLoading = true;
       });
+    // .addCase(likeSession.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isSuccess = true;
+    //   state.likes.push(action.payload);
+    // })
+    // .addCase(likeSession.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isError = true;
+    //   state.message = action.payload;
+    // })
+    // .addCase(unlikeSession.pending, (state) => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(unlikeSession.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isSuccess = true;
+    //   state.likes = state.likes.filter(
+    //     (session) => session._id !== action.payload.data._id
+    //   );
+    // })
+    // .addCase(unlikeSession.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isError = true;
+    //   state.message = action.payload;
+    // });
   },
 });
 
