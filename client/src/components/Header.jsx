@@ -36,10 +36,7 @@ function Header() {
               <div className="header-wrapper">
                 <div className="logo">
                   <a href="/">
-                    <img
-                      src={require("../assets/images/logo/01.png")}
-                      alt="logo"
-                    />
+                    <img src="assets/images/logo/01.png" alt="logo" />
                   </a>
                 </div>
 
@@ -51,6 +48,12 @@ function Header() {
                       </li>
 
                       <li>
+                        <a href="/gallery">Gallery</a>
+                      </li>
+                      <li>
+                        <a href="/calendar">Calendar</a>
+                      </li>
+                      {/* <li>
                         <a href="#0">Features</a>
                         <ul className="submenu">
                           <li>
@@ -81,8 +84,8 @@ function Header() {
                             <a href="coming-soon.html">Coming-soon</a>
                           </li>
                         </ul>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                         <a href="#0">Speakers</a>
                         <ul className="submenu">
                           <li>
@@ -103,7 +106,7 @@ function Header() {
                             <a href="blog-single.html">Blog Single</a>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       <li>
                         <a href="/contact">Contact</a>
                       </li>

@@ -34,7 +34,6 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  console.log("email: ", req.body);
   const { email, password, firstName, lastName, role } = req.body;
 
   try {
@@ -91,9 +90,9 @@ export const ChangeRole = async (req, res) => {
 //     const pipeline = [
 //       {
 //         '$lookup': {
-//           'from': 'categories', 
-//           'localField': 'category', 
-//           'foreignField': '_id', 
+//           'from': 'categories',
+//           'localField': 'category',
+//           'foreignField': '_id',
 //           'as': 'cat'
 //         }
 //       }
@@ -122,7 +121,6 @@ export const getSession = async (req, res) => {
 export const checkIn = async (req, res) => {
   const { role } = req.user;
   const idUser = req.params.idUser;
-  console.log(req.user);
 
   try {
     if (role === 1 || role === 2) {
@@ -154,10 +152,8 @@ export const getUsers = async (req, res) => {
 export const affectAttendeeToCategory = async (req, res) => {
   try {
     const { idUser, idCategory } = req.body;
-    console.log("user" + idUser);
-    console.log("category" + idCategory);
+
     const updatedUser = { category: idCategory };
-    console.log("updated+>" + updatedUser);
 
     const categoryUser = await User.findByIdAndUpdate(idUser, updatedUser);
 
@@ -166,5 +162,51 @@ export const affectAttendeeToCategory = async (req, res) => {
     res.send(error);
   }
 };
+
+// Category Notification
+// export const notifCategory = async (req, res) => {
+//   const { subject, message, userCategory } = req.body;
+
+//   const newUser = { subject, message, userCategory };
+
+//   try {
+//     await User.notification.save(newUser);
+
+//     res.status(201).json(newUser);
+//   } catch (error) {
+//     res.status(409).json({ message: error.message });
+//   }
+// };
+
+export const notifCategory = async (req, res) => {
+  try {
+    // const { id } = req.user;
+
+    const { userNotif, subject, message } = req.body;
+    const notif = { subject, message, userNotif };
+
+    const notificated = { notification: notif };
+
+    const categoryUser = await User.findByIdAndUpdate(userNotif, notificated);
+
+    res.status(200).send(categoryUser);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+export const getNotif = async (req, res) => {
+  const { id } = req.user;
+
+  try {
+    const Userdetails = await User.find({ _id: id });
+
+    res.status(200).send(Userdetails);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+
 
 export default router;

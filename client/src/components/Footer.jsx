@@ -1,9 +1,10 @@
 import React from "react";
-import Background from "../assets/images/bg-images/footer-bg.png";
+// import Background from "../assets/images/bg-images/footer-bg.png";
 
 function Footer() {
   var sectionStyle = {
-    backgroundImage: "url(" + "../assets/images/bg-images/footer-bg.png" + ")",
+    // backgroundImage: "url(" + "../assets/images/bg-images/footer-bg.png" + ")",
+    backgroundImage: `url("../assets/images/bg-images/footer-bg.png")`,
   };
 
   return (
@@ -17,7 +18,7 @@ function Footer() {
                   <div className="lab-inner">
                     <div className="lab-thumb">
                       <img
-                        src={require("../assets/images/footer/footer-top/01.png")}
+                        src="assets/images/footer/footer-top/01.png"
                         alt="Phone-icon"
                       />
                     </div>
@@ -32,7 +33,7 @@ function Footer() {
                   <div className="lab-inner">
                     <div className="lab-thumb">
                       <img
-                        src={require("../assets/images/footer/footer-top/02.png")}
+                        src="assets/images/footer/footer-top/02.png"
                         alt="email-icon"
                       />
                     </div>
@@ -47,7 +48,7 @@ function Footer() {
                   <div className="lab-inner">
                     <div className="lab-thumb">
                       <img
-                        src={require("../assets/images/footer/footer-top/03.png")}
+                        src="assets/images/footer/footer-top/03.png"
                         alt="location-icon"
                       />
                     </div>
@@ -76,7 +77,7 @@ function Footer() {
                       </p>
                       <img
                         className="rounded footer-abt-img"
-                        src={require("../assets/images/footer/footer-middle/01.jpg")}
+                        src="assets/images/footer/footer-middle/01.jpg"
                         alt="about-image"
                       />
                     </div>
@@ -96,7 +97,7 @@ function Footer() {
                             <a href="#">
                               {" "}
                               <img
-                                src={require("../assets/images/footer/footer-middle/02.jpg")}
+                                src="assets/images/footer/footer-middle/02.jpg"
                                 alt="footer-widget-img"
                               />
                             </a>
@@ -116,7 +117,7 @@ function Footer() {
                           <div className="lab-thumb">
                             <a href="#">
                               <img
-                                src={require("../assets/images/footer/footer-middle/03.jpg")}
+                                src="assets/images/footer/footer-middle/03.jpg"
                                 alt="footer-widget-img"
                               />
                             </a>
@@ -137,7 +138,7 @@ function Footer() {
                           <div className="lab-thumb">
                             <a href="#">
                               <img
-                                src={require("../assets/images/footer/footer-middle/04.jpg")}
+                                src="assets/images/footer/footer-middle/04.jpg"
                                 alt="footer-widget-img"
                               />
                             </a>

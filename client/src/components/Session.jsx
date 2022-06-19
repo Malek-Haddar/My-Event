@@ -34,14 +34,12 @@ function Session() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ userSession });
 
   const addLike = (data) => {
     // const data = {
     //   sessionId,
     // };
     dispatch(likeSession(data));
-    console.log("kali", data.sessionId);
   };
 
   if (isLoading) {
@@ -55,7 +53,7 @@ function Session() {
             <div className="col-lg-10">
               <div className="about-image">
                 <img
-                  src={require("../assets/images/about/01.jpg")}
+                  src="assets/images/about/01.jpg"
                   alt="about image"
                 />
                 <a
@@ -135,18 +133,18 @@ function Session() {
                                   <span className="accor-header-inner d-flex flex-wrap align-items-center">
                                     <span className="accor-thumb">
                                       <img
-                                        src={require("../assets/images/event/member/01.png")}
+                                        src="assets/images/event/member/01.png"
                                         alt="speaker"
                                       />
                                       <span className="child-thumb">
                                         <img
-                                          src={require("../assets/images/event/member/02.png")}
+                                          src="assets/images/event/member/02.png"
                                           alt="speaker"
                                         />
                                       </span>
                                       <span className="child-thumb-2">
                                         <img
-                                          src={require("../assets/images/event/member/03.png")}
+                                          src="assets/images/event/member/03.png"
                                           alt="speaker"
                                         />
                                       </span>
@@ -197,6 +195,7 @@ function Session() {
                                     <a href="/vote" className="btn-link ">
                                       <i class="icofont-thumbs-down"></i>{" "}
                                     </a> */}
+
                                     <a
                                       onClick={() =>
                                         dispatch(likeSession(session._id))
@@ -211,6 +210,8 @@ function Session() {
                                         )}
                                       </span>
                                     </a>
+
+                                    {/* {user._id === session.likes._id && ( */}
                                     <a
                                       onClick={() =>
                                         dispatch(unlikeSession(session._id))
@@ -220,6 +221,7 @@ function Session() {
                                     >
                                       <i className="icofont-thumbs-down" />
                                     </a>
+                                    {/* )} */}
                                   </ul>
                                 </div>
                               </div>

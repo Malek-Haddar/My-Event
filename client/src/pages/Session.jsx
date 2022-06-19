@@ -46,7 +46,6 @@ function Session() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(sessions);
 
   const affectEvent = () => {
     const data = {
@@ -61,7 +60,6 @@ function Session() {
       sessionId,
     };
     dispatch(deleteSession(data));
-    console.log("iddsss" + sessionId);
   };
   // const affectCategory = () => {
   //   const data = {

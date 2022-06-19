@@ -104,7 +104,7 @@ function Event() {
                 <div className="event-sponsored">
                   <p>Event Sponsored By:</p>
                   <img
-                    src={require("../assets/images/banner/02.png")}
+                    src="assets/images/banner/02.png"
                     alt="sponsor"
                     style={{
                       width: "210px",
@@ -118,10 +118,7 @@ function Event() {
             </div>
             <div className="col-lg-6 col-12">
               <div className="banner-image">
-                <img
-                  src={require("../assets/images/banner/011.png")}
-                  alt="banner-img"
-                />
+                <img src="assets/images/banner/011.png" alt="banner-img" />
               </div>
             </div>
           </div>

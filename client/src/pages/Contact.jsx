@@ -166,7 +166,7 @@ function Contact() {
                       <div className="contact-info-inner">
                         <div className="contact-info-thumb">
                           <img
-                            src={require("../assets/images/contact/01.png")}
+                            src="assets/images/contact/01.png"
                             alt="address"
                           />
                         </div>
@@ -180,7 +180,7 @@ function Contact() {
                       <div className="contact-info-inner">
                         <div className="contact-info-thumb">
                           <img
-                            src={require("../assets/images/contact/02.png")}
+                            src="assets/images/contact/02.png"
                             alt="address"
                           />
                         </div>
@@ -194,7 +194,7 @@ function Contact() {
                       <div className="contact-info-inner">
                         <div className="contact-info-thumb">
                           <img
-                            src={require("../assets/images/contact/03.png")}
+                            src="assets/images/contact/03.png"
                             alt="address"
                           />
                         </div>
@@ -208,7 +208,7 @@ function Contact() {
                       <div className="contact-info-inner">
                         <div className="contact-info-thumb">
                           <img
-                            src={require("../assets/images/contact/04.png")}
+                            src="assets/images/contact/04.png"
                             alt="address"
                           />
                         </div>
