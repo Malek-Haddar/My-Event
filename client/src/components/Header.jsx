@@ -53,6 +53,9 @@ function Header() {
                       <li>
                         <a href="/calendar">Calendar</a>
                       </li>
+                      <li>
+                        <a href="/quiz">Quiz</a>
+                      </li>
                       {/* <li>
                         <a href="#0">Features</a>
                         <ul className="submenu">

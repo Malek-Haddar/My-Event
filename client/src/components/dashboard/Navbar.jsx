@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <div style={{ background: "white" }}>
       <div className="nav-header">
-        <a href="/dashboard" className="brand-logo">
+        <Link to="/dashboard" className="brand-logo">
           <img className="logo-abbr" src="../assets/images/logo.png" alt="" />
           <img
             className="logo-compact"
@@ -14,7 +16,7 @@ function Navbar() {
             src="../assets/images/logo-text.png"
             alt=""
           />
-        </a>
+        </Link>
 
         <div className="nav-control">
           <div className="hamburger">
@@ -30,19 +32,19 @@ function Navbar() {
         <div className="custom-tab-1">
           <ul className="nav nav-tabs">
             <li className="nav-item">
-              <a className="nav-link" data-toggle="tab" href="#notes">
+              <Link className="nav-link" data-toggle="tab" to="#notes">
                 Notes
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" data-toggle="tab" href="#alerts">
+              <Link className="nav-link" data-toggle="tab" to="#alerts">
                 Alerts
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" data-toggle="tab" href="#chat">
+              <Link className="nav-link active" data-toggle="tab" to="#chat">
                 Chat
-              </a>
+              </Link>
             </li>
           </ul>
           <div className="tab-content">
@@ -53,7 +55,7 @@ function Navbar() {
             >
               <div className="card mb-sm-3 mb-md-0 contacts_card dz-chat-user-box">
                 <div className="card-header chat-list-header text-center">
-                  <a href="">
+                  <Link to="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -88,12 +90,12 @@ function Navbar() {
                         />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                   <div>
                     <h6 className="mb-1">Chat List</h6>
                     <p className="mb-0">Show All</p>
                   </div>
-                  <a href="">
+                  <Link to="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -114,7 +116,7 @@ function Navbar() {
                         <circle fill="#000000" cx="19" cy="12" r="2" />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                 </div>
                 <div
                   className="card-body contacts_body p-0 dz-scroll  "
@@ -175,7 +177,7 @@ function Navbar() {
               </div>
               <div className="card chat dz-chat-history-box d-none">
                 <div className="card-header chat-list-header text-center">
-                  <a href="" className="dz-chat-history-back">
+                  <Link to="" className="dz-chat-history-back">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -209,13 +211,13 @@ function Navbar() {
                         />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                   <div>
                     <h6 className="mb-1">Chat with Khelesh</h6>
                     <p className="mb-0 text-success">Online</p>
                   </div>
                   <div className="dropdown">
-                    <a href="" data-toggle="dropdown">
+                    <Link to="" data-toggle="dropdown">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -236,7 +238,7 @@ function Navbar() {
                           <circle fill="#000000" cx="19" cy="12" r="2" />
                         </g>
                       </svg>
-                    </a>
+                    </Link>
                     <ul className="dropdown-menu dropdown-menu-right">
                       <li className="dropdown-item">
                         <i className="fa fa-user-circle text-primary mr-2"></i>{" "}
@@ -461,7 +463,7 @@ function Navbar() {
             <div className="tab-pane fade" id="alerts" role="tabpanel">
               <div className="card mb-sm-3 mb-md-0 contacts_card">
                 <div className="card-header chat-list-header text-center">
-                  <a href="">
+                  <Link to="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -482,12 +484,12 @@ function Navbar() {
                         <circle fill="#000000" cx="19" cy="12" r="2" />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                   <div>
                     <h6 className="mb-1">Notications</h6>
                     <p className="mb-0">Show All</p>
                   </div>
-                  <a href="">
+                  <Link to="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -516,7 +518,7 @@ function Navbar() {
                         />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                 </div>
                 <div
                   className="card-body contacts_body p-0 dz-scroll"
@@ -576,7 +578,7 @@ function Navbar() {
             <div className="tab-pane fade" id="notes">
               <div className="card mb-sm-3 mb-md-0 note_card">
                 <div className="card-header chat-list-header text-center">
-                  <a href="">
+                  <Link to="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -611,12 +613,12 @@ function Navbar() {
                         />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                   <div>
                     <h6 className="mb-1">Notes</h6>
                     <p className="mb-0">Add New Nots</p>
                   </div>
-                  <a href="">
+                  <Link to="">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -645,7 +647,7 @@ function Navbar() {
                         />
                       </g>
                     </svg>
-                  </a>
+                  </Link>
                 </div>
                 <div
                   className="card-body contacts_body p-0 dz-scroll"
@@ -659,15 +661,15 @@ function Navbar() {
                           <p>10 Aug 2020</p>
                         </div>
                         <div className="ml-auto">
-                          <a
-                            href=""
+                          <Link
+                            to=""
                             className="btn btn-primary btn-xs sharp mr-1"
                           >
                             <i className="fa fa-pencil"></i>
-                          </a>
-                          <a href="" className="btn btn-danger btn-xs sharp">
+                          </Link>
+                          <Link to="" className="btn btn-danger btn-xs sharp">
                             <i className="fa fa-trash"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </li>
@@ -678,15 +680,15 @@ function Navbar() {
                           <p>10 Aug 2020</p>
                         </div>
                         <div className="ml-auto">
-                          <a
-                            href=""
+                          <Link
+                            to=""
                             className="btn btn-primary btn-xs sharp mr-1"
                           >
                             <i className="fa fa-pencil"></i>
-                          </a>
-                          <a href="" className="btn btn-danger btn-xs sharp">
+                          </Link>
+                          <Link to="" className="btn btn-danger btn-xs sharp">
                             <i className="fa fa-trash"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </li>
@@ -697,15 +699,15 @@ function Navbar() {
                           <p>10 Aug 2020</p>
                         </div>
                         <div className="ml-auto">
-                          <a
-                            href=""
+                          <Link
+                            to=""
                             className="btn btn-primary btn-xs sharp mr-1"
                           >
                             <i className="fa fa-pencil"></i>
-                          </a>
-                          <a href="" className="btn btn-danger btn-xs sharp">
+                          </Link>
+                          <Link to="" className="btn btn-danger btn-xs sharp">
                             <i className="fa fa-trash"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </li>
@@ -716,15 +718,15 @@ function Navbar() {
                           <p>10 Aug 2020</p>
                         </div>
                         <div className="ml-auto">
-                          <a
-                            href=""
+                          <Link
+                            to=""
                             className="btn btn-primary btn-xs sharp mr-1"
                           >
                             <i className="fa fa-pencil"></i>
-                          </a>
-                          <a href="" className="btn btn-danger btn-xs sharp">
+                          </Link>
+                          <Link to="" className="btn btn-danger btn-xs sharp">
                             <i className="fa fa-trash"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </li>
@@ -753,17 +755,17 @@ function Navbar() {
                     />
                     <div className="input-group-append">
                       <span className="input-group-text">
-                        <a href="">
+                        <Link to="">
                           <i className="flaticon-381-search-2"></i>
-                        </a>
+                        </Link>
                       </span>
                     </div>
                   </div>
                 </li>
                 <li className="nav-item dropdown notification_dropdown">
-                  <a
+                  <Link
                     className="nav-link  ai-icon"
-                    href=""
+                    to=""
                     role="button"
                     data-toggle="dropdown"
                   >
@@ -782,7 +784,7 @@ function Navbar() {
                       />
                     </svg>
                     <div className="pulse-css"></div>
-                  </a>
+                  </Link>
                   <div className="dropdown-menu rounded dropdown-menu-right">
                     <div
                       id="DZ_W_Notification1"
@@ -885,13 +887,13 @@ function Navbar() {
                         </li>
                       </ul>
                     </div>
-                    <a className="all-notification" href="">
+                    <Link className="all-notification" to="">
                       See all notifications <i className="ti-arrow-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </li>
                 <li className="nav-item dropdown notification_dropdown">
-                  <a className="nav-link bell bell-link" href="">
+                  <Link className="nav-link bell bell-link" to="">
                     <svg
                       width="28"
                       height="28"
@@ -907,12 +909,12 @@ function Navbar() {
                       />
                     </svg>
                     <div className="pulse-css"></div>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item dropdown header-profile">
-                  <a
+                  <Link
                     className="nav-link"
-                    href=""
+                    to=""
                     role="button"
                     data-toggle="dropdown"
                   >
@@ -927,10 +929,10 @@ function Navbar() {
                       </span>
                       <p className="fs-12 mb-0">Admin</p>
                     </div> */}
-                  </a>
+                  </Link>
                   <div className="dropdown-menu dropdown-menu-right">
-                    <a
-                      href="./app-profile.html"
+                    <Link
+                      to="./app-profile.html"
                       className="dropdown-item ai-icon"
                     >
                       <svg
@@ -950,9 +952,9 @@ function Navbar() {
                         <circle cx="12" cy="7" r="4"></circle>
                       </svg>
                       <span className="ml-2">Profile </span>
-                    </a>
-                    <a
-                      href="./email-inbox.html"
+                    </Link>
+                    <Link
+                      to="./email-inbox.html"
                       className="dropdown-item ai-icon"
                     >
                       <svg
@@ -972,9 +974,9 @@ function Navbar() {
                         <polyline points="22,6 12,13 2,6"></polyline>
                       </svg>
                       <span className="ml-2">Inbox </span>
-                    </a>
-                    <a
-                      href="./page-login.html"
+                    </Link>
+                    <Link
+                      to="./page-login.html"
                       className="dropdown-item ai-icon"
                     >
                       <svg
@@ -995,7 +997,7 @@ function Navbar() {
                         <line x1="21" y1="12" x2="9" y2="12"></line>
                       </svg>
                       <span className="ml-2">Logout </span>
-                    </a>
+                    </Link>
                   </div>
                 </li>
               </ul>
@@ -1006,38 +1008,41 @@ function Navbar() {
 
       <div className="deznav">
         <div className="deznav-scroll">
-          <a
-            href=""
+          <Link
+            to=""
             className="add-menu-sidebar"
             data-toggle="modal"
             data-target="#addOrderModalside"
           >
             + New
-          </a>
+          </Link>
           <ul className="metismenu" id="menu">
             <li>
-              <a className="has-arrow ai-icon" href="" aria-expanded="false">
+              <Link className="has-arrow ai-icon" to="" aria-expanded="false">
                 <i className="flaticon-381-networking"></i>
                 <span className="nav-text">Dashboard</span>
-              </a>
+              </Link>
               <ul aria-expanded="false">
                 <li>
-                  <a href="/dashboard">Dashboard</a>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
-                  <a href="/event">Event</a>
+                  <Link to="/event">Event</Link>
                 </li>
                 <li>
-                  <a href="/sessions">Sessions</a>
+                  <Link to="/sessions">Sessions</Link>
                 </li>
                 <li>
-                  <a href="/Attendees">Attendees</a>
+                  <Link to="/Attendees">Attendees</Link>
                 </li>
                 <li>
-                  <a href="/pictures">Gallery</a>
+                  <Link to="/pictures">Gallery</Link>
                 </li>
                 <li>
-                  <a href="/category">Categories</a>
+                  <Link to="/category">Categories</Link>
+                </li>
+                <li>
+                  <Link to="/quiz-item">Quizzes</Link>
                 </li>
               </ul>
             </li>

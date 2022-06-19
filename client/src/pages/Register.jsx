@@ -79,7 +79,7 @@ function Register() {
                 <a href="#">Features</a>
               </li>
               <li>
-                <a class="active">Registration</a>
+                <a className="active">Registration</a>
               </li>
             </ul>
           </div>

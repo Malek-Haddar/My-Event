@@ -6,6 +6,7 @@ import eventReducer from "../features/events/eventSlice";
 import galleryReducer from "../features/gallery/gallerySlice";
 import userReducer from "../features/users/userSlice";
 import categoryReducer from "../features/categories/categorySlice";
+import quizReducer from "../features/quiz/quizSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     galleries: galleryReducer,
     users: userReducer,
     categories: categoryReducer,
+    quizzes: quizReducer,
   },
 });

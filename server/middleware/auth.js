@@ -1,34 +1,39 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
-const secret = 'test';
+// const secret = 'test';
 
-const auth = async(req, res, next) => {
-    let token;
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith('Bearer')
-    ) {
-        try {
-            token = req.headers.authorization.split(' ')[1]
 
-            const decoded = jwt.verify(token, process.env.SECRET)
+export const auth = async (req, res, next) => {
+  let token;
 
-            req.user = await User.findById(decoded.id).select('-password')
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      console.log({ token });
+      token = req.headers.authorization.split(" ")[1];
 
-            next()
-        } catch (error) {
-            console.error(error)
-            throw new Error('Not authorized, token failed')
+      if (!token) return "Not authorized, token failed";
+      const decoded = jwt.verify(token, process.env.SECRET);
 
-        }
+      req.user = await User.findById(decoded.id).select("-password");
+
+      next();
+    } catch (error) {
+      console.error(error);
+      return "Not authorized, token failed";
     }
+  }
 
-    if (!token) {
-        res.status(401)
-        throw new Error('Not authorized, no token')
-    }
+  if (!token) {
+    res.status(401);
+    return "Not authorized, no token";
+  }
 };
+  
+  
 
 
 export default auth;

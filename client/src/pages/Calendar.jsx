@@ -13,10 +13,11 @@ import {
   Week,
   WorkWeek,
 } from "@syncfusion/ej2-react-schedule";
-import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserSession, reset } from "../features/sessions/sessionSlice";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+
 function Calendar() {
   const PropertyPane = (props) => <div className="mt-5">{props.children}</div>;
   const [scheduleObj, setScheduleObj] = useState();
@@ -55,18 +56,18 @@ function Calendar() {
     arg.navigation.enable = true;
   };
 
-  const scheduleData = [
-    {
-      Id: userSession[0]?.category[0]?.sessions[0]?._id,
-      Subject: userSession[0]?.category[0]?.sessions[0]?.name,
-      Location: userSession[0]?.category[0]?.sessions[0]?.details,
-      StartTime: userSession[0]?.category[0]?.sessions[0]?.start,
-      EndTime: userSession[0]?.category[0]?.sessions[0]?.end,
-      CategoryColor: "#1aaa55",
-    },
-  ];
+  const scheduleData = userSession[0]?.category[0]?.sessions.map((session) => ({
+    Id: session?._id,
+    Subject: session?.name,
+    Location: session?.details,
+    StartTime: session?.start,
+    EndTime: session?.end,
+    CategoryColor: "#1aaa55",
+  }));
   return (
     <>
+      <Header />
+
       <section className="page-header bg_img padding-tb">
         <div className="overlay"></div>
         <div className="container">
@@ -83,53 +84,55 @@ function Calendar() {
           </div>
         </div>
       </section>
-      <section>
-        <div className="m-4 md:m-10 mt-24 p-8 md:p-16 bg-white rounded-3xl">
-          <ScheduleComponent
-            height="650px"
-            ref={(schedule) => setScheduleObj(schedule)}
-            selectedDate={userSession[0]?.category[0]?.sessions[0]?.start}
-            eventSettings={{ dataSource: scheduleData }}
-            dragStart={onDragStart}
-            readonly={false}
-            // created={dispatch(createGoal()}
-          >
-            <ViewsDirective>
-              {["Day", "Week", "WorkWeek", "Month", "Agenda"].map((item) => (
-                <ViewDirective key={item} option={item} />
-              ))}
-            </ViewsDirective>
-            <Inject
-              services={[
-                Day,
-                Week,
-                WorkWeek,
-                Month,
-                Agenda,
-                Resize,
-                DragAndDrop,
-              ]}
-            />
-          </ScheduleComponent>
-          <PropertyPane>
-            <table style={{ width: "100%", background: "white" }}>
-              <tbody>
-                <tr style={{ height: "50px" }}>
-                  <td style={{ width: "100%" }}>
-                    <DatePickerComponent
-                      value={userSession[0]?.category[0]?.sessions[0]?.start}
-                      showClearButton={false}
-                      placeholder="Current Date"
-                      floatLabelType="Always"
-                      change={change}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </PropertyPane>
-        </div>
-      </section>
+      {userSession[0]?.category[0]?.sessions[0] > "0" ? (
+        <section>
+          <div className="m-4 md:m-10 mt-24 p-8 md:p-16 bg-white rounded-3xl">
+            <ScheduleComponent
+              height="650px"
+              ref={(schedule) => setScheduleObj(schedule)}
+              selectedDate={userSession[0]?.category[0]?.sessions[0]?.start}
+              eventSettings={{ dataSource: scheduleData }}
+              dragStart={onDragStart}
+              readonly={false}
+              // created={dispatch(createGoal()}
+            >
+              <ViewsDirective>
+                {["Day", "Week", "WorkWeek", "Month", "Agenda"].map((item) => (
+                  <ViewDirective key={item} option={item} />
+                ))}
+              </ViewsDirective>
+              <Inject
+                services={[
+                  Day,
+                  Week,
+                  WorkWeek,
+                  Month,
+                  Agenda,
+                  Resize,
+                  DragAndDrop,
+                ]}
+              />
+            </ScheduleComponent>
+            <PropertyPane>
+              <table style={{ width: "100%", background: "white" }}>
+                <tbody>
+                  <tr style={{ height: "50px" }}>
+                    <td style={{ width: "100%" }}>
+                      <DatePickerComponent
+                        value={userSession[0]?.category[0]?.sessions[0]?.start}
+                        showClearButton={false}
+                        placeholder="Current Date"
+                        floatLabelType="Always"
+                        change={change}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </PropertyPane>
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }

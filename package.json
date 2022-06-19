@@ -27,6 +27,10 @@
         "mongoose": "^6.1.6",
         "nodemon": "^2.0.15",
         "qrcode": "^1.5.0",
-        "socket.io": "^4.5.1"
-    }
+        "socket.io": "^4.5.1",
+        "moment": "^2.24.0",
+        "ejs": "^2.6.1"
+ 
+    },
+    "proxy": "http://localhost:5000/"
 }
