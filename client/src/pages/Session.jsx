@@ -154,15 +154,16 @@ function Session() {
                         </td>
 
                         <td>
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex align-items-center ">
                             <a
-                              className="mr-4"
+                              className="mr-4 "
                               type="submit"
                               onClick={() => {
                                 affectEvent();
                               }}
                             >
-                              <i className="las la-pencil-alt scale-2 text-danger"></i>
+                              {/* <i className="bi bi-pencil"></i> */}
+                              <i className="btn btn-info py-1 px-3">Edit</i>
                             </a>
                             <a
                               type="submit"
@@ -170,7 +171,9 @@ function Session() {
                                 clearSession();
                               }}
                             >
-                              <i className="las la-trash-alt scale-2 text-danger"></i>
+                              <i className="btn btn-danger py-1 px-3 ">
+                                Delete
+                              </i>
                             </a>
                           </div>
                         </td>

@@ -20,7 +20,7 @@ import Quiz from "./pages/Quiz";
 import QuizForm from "./components/quiz/QuizForm";
 import QuizItem from "./components/quiz/QuizItem";
 import Qr from "./pages/Qr";
-import Chat from "./pages/Chat";
+import Room from "./pages/Room";
 import ChatLogin from "./pages/ChatLogin";
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
           <Route path="/quiz-form" element={<QuizForm />} />
           <Route path="/quiz-item" element={<QuizItem />} />
           <Route path="/qr" element={<Qr />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/room" element={<Room />} />
           <Route path="/chat-login" element={<ChatLogin />} />
         </Routes>
         {/* <Footer /> */}
