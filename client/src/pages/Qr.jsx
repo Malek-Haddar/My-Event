@@ -81,7 +81,6 @@ const Qr = () => {
             onError={handleError}
             onScan={handleScan}
             style={{ width: "50%" }}
-            legacyMode={true}
           />{" "}
         </div>
         <div className="md:flex justify-center">
