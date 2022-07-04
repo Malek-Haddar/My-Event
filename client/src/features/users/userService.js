@@ -1,7 +1,12 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/user/";
-const API_URL_check = "http://localhost:5000/api/check/checkIn/";
+// const API_URL = "http://localhost:5000/api/user/";
+const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
+
+
+// const API_URL_check = "http://localhost:5000/api/check/checkIn/";
+const API_URL_check = "https://scouts-tunisienne.herokuapp.com/api/check/checkIn/";
+
 
 // Create new user
 const checkIn = async (userData, token) => {

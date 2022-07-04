@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/";
+// const API_URL = "http://localhost:5000/api/";
+const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
+
 
 // Create new event
 const createGallery = async (galleryData, token) => {

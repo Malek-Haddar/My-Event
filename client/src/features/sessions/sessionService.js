@@ -1,7 +1,12 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/user/";
-const API_URL_SESSION = "http://localhost:5000/api/";
+// const API_URL = "http://localhost:5000/api/user/";
+const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
+
+// const API_URL_SESSION = "http://localhost:5000/api/";
+const API_URL_SESSION = "https://scouts-tunisienne.herokuapp.com/api/";
+
+
 
 // Create new session
 const createSession = async (sessionData, token) => {
