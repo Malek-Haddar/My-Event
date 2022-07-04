@@ -11,10 +11,12 @@ const checkIn = async (userData, token) => {
     },
   };
 
-  const response = await axios.post(
-    API_URL_check + userData.idUser + "/" + userData.idSession,
-    config
-  );
+  const body = {
+    idUser: userData.idUser,
+    idSession: userData.idSession,
+  };
+
+  const response = await axios.patch(API_URL + "check", body, config);
 
   return response.data;
 };
@@ -46,10 +48,23 @@ const changeRole = async (token, data) => {
   return response.data;
 };
 
+// Delete customer
+const deleteCustomer = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(API_URL + "delete/" + data, config);
+
+  return response.data;
+};
+
 const UserService = {
   checkIn,
   getUsers,
   changeRole,
+  deleteCustomer,
 };
 
 export default UserService;

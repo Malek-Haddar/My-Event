@@ -4,57 +4,59 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import { signIn } from "../features/usersSlice";
+import Spinner from "../components/Spinner";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
-  const { email, password } = formData
+  const { email, password } = formData;
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
-  )
+  );
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     if (isSuccess || user) {
-      navigate('/')
+      navigate("/");
     }
 
-    dispatch(reset())
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-
-  const onChange = (e) => { 
+  const onChange = (e) => {
     setFormData((prevSate) => ({
-    ...prevSate, [e.target.name]: e.target.value,
-  })) }
+      ...prevSate,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const userData = {
       email,
       password,
-    }
+    };
 
-    dispatch(login(userData))
-  }
+    dispatch(login(userData));
+    // dispatch(signIn());
+  };
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
-
 
   return (
     <>
@@ -66,11 +68,9 @@ function Login() {
             <h4 className="ph-title">Login for Event</h4>
             <ul className="lab-ul">
               <li>
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
               </li>
-              <li>
-                <a href="#">Features</a>
-              </li>
+
               <li>
                 <a className="active">login</a>
               </li>
@@ -115,19 +115,19 @@ function Login() {
                 </div>
               </div>
               <div className="form-group">
-                <button type="submit" className="d-block lab-btn">
+                <button type="submit" className="d-block lab-btn bg-white">
                   <span>Submit Now</span>
                 </button>
               </div>
             </form>
             <div className="account-bottom">
-              <span className="d-block cate pt-10">
-                Don’t Have any Account? <a href="/register"> Sign Up</a>
-              </span>
-              <span className="or">
+              <span className="or mt-5">
                 <span>or</span>
               </span>
-              <h5 className="subtitle">Login With Social Media</h5>
+              <span className="d-block cate ">
+                Don’t Have any Account? <a href="/register"> Sign Up</a>
+              </span>
+              {/* <h5 className="subtitle">Login With Social Media</h5>
               <ul className="social-media social-color lab-ul d-flex justify-content-center">
                 <li>
                   <a href="#" className="facebook">
@@ -154,7 +154,7 @@ function Login() {
                     <i className="fab fa-pinterest"></i>
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>

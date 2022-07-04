@@ -448,7 +448,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
@@ -9310,7 +9310,7 @@ button.bg-dark:focus {
 
 .ml-3,
 .mx-3 {
-  margin-left: 1rem !important;
+  margin-left: 1rem;
 }
 
 .m-4 {
@@ -48446,14 +48446,16 @@ footer .footer-middle .footer-middle-item-wrapper .footer-middle-item .fm-item-c
   box-shadow: none;
   scroll-behavior: auto !important;
 }
+/* le9dim */
 
 body {
   background: #00163f;
-  color: #fff;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+    color: #fff;
+      /* font-family: "Poppins", sans-serif; */
+        /* font-size: 16px; */
+        /* line-height: 1.5; */
 }
+
 
 h1,
 h2,
@@ -48502,7 +48504,7 @@ h6 {
   font-size: 16px;
 }
 
-p {
+/* p {
   margin-bottom: 15px;
   font-weight: 400;
   font-size: 16px;
@@ -48510,6 +48512,7 @@ p {
   line-height: 24px;
 }
 
+*/
 a {
   color: #fff;
   -webkit-transition: all 0.3s ease;
@@ -50907,7 +50910,7 @@ ul li {
 }
 @media (min-width: 576px) {
   .banner-section .banner-wrapper .banner-content h1 {
-    font-size: 60px;
+    font-size: 40px;
   }
 }
 @media (min-width: 1200px) {
@@ -53215,7 +53218,7 @@ footer .footer-bottom {
   background: #00163f;
 }
 footer .footer-bottom .footer-bottom-content {
-  padding: 38px 0;
+  padding: 25px 0;
 }
 footer .footer-bottom .footer-bottom-content p {
   margin: 0;

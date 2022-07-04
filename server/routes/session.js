@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import {
   getSession,
   createSession,
@@ -10,10 +10,11 @@ import {
   affectSessionToCategory,
   likeSession,
   unlikeSession,
+  affectQuizToSession,
 } from "../controllers/session.js";
 
 import { body, validationResult } from "express-validator";
-import auth from "../middleware/auth.js";
+import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
 router.route("/").get(getSession);
@@ -26,9 +27,8 @@ router.patch("/sessions/affect", affectSessionToEvent);
 router.patch("/sessions/category/affect", affectSessionToCategory);
 router.patch("/like", auth, likeSession);
 router.patch("/unlike", auth, unlikeSession);
-
+router.patch("/quiz/affect", affectQuizToSession);
 
 // router.get("/session/:id", getSessionById);
-
 
 export default router;

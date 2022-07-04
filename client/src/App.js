@@ -22,6 +22,8 @@ import QuizItem from "./components/quiz/QuizItem";
 import Qr from "./pages/Qr";
 import Room from "./pages/Room";
 import ChatLogin from "./pages/ChatLogin";
+import Customers from "./pages/Customers";
+import DashCalendar from "./pages/DashCalendar";
 
 function App() {
   return (
@@ -36,9 +38,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/attendees" element={<AttendeeItem />} />
-          <Route path="/sessions" element={<Session />} />
+          {/* <Route path="/sessions" element={<Session />} /> */}
+
           <Route path="/pictures" element={<Pictures />} />
           <Route path="/category" element={<Category />} />
+
           <Route path="/event" element={<Event />} />
           <Route path="/vote" element={<Vote />} />
           <Route path="/calendar" element={<Calendar />} />
@@ -48,6 +52,9 @@ function App() {
           <Route path="/qr" element={<Qr />} />
           <Route path="/room" element={<Room />} />
           <Route path="/chat-login" element={<ChatLogin />} />
+          <Route path="/dash-calendar" element={<DashCalendar />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/sessions" element={<Session />} />
         </Routes>
         {/* <Footer /> */}
       </Router>

@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserSession, reset } from "../features/sessions/sessionSlice";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Calendar() {
   const PropertyPane = (props) => <div className="mt-5">{props.children}</div>;
@@ -25,7 +26,7 @@ function Calendar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const { userSession, isLoading, isError, message } = useSelector(
     (state) => state.sessions
   );
@@ -34,8 +35,8 @@ function Calendar() {
       console.log(message);
     }
 
-    // if (!user) {
-    //   navigate("/login");
+    // if (!user || !userSession[0]?.category) {
+    //   navigate("/");
     // }
 
     dispatch(getUserSession());
@@ -85,8 +86,8 @@ function Calendar() {
         </div>
       </section>
       {userSession[0]?.category[0]?.sessions[0] > "0" ? (
-        <section>
-          <div className="m-4 md:m-10 mt-24 p-8 md:p-16 bg-white rounded-3xl">
+        <section className="pb-36">
+          <div className=" bg-white rounded-3xl md:mx-36 md:p-4 items-center ">
             <ScheduleComponent
               height="650px"
               ref={(schedule) => setScheduleObj(schedule)}
@@ -133,6 +134,7 @@ function Calendar() {
           </div>
         </section>
       ) : null}
+      <Footer />
     </>
   );
 }

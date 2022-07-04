@@ -31,9 +31,25 @@ const getGalleries = async (token) => {
   return response.data;
 };
 
+
+// Delete gallery
+const deleteGallery = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(
+    API_URL + "gallery/" + data,
+    config
+  );
+
+  return response.data;
+};
 const galleryService = {
   createGallery,
   getGalleries,
+  deleteGallery
 };
 
 export default galleryService;

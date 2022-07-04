@@ -52,10 +52,30 @@ const affectSessionToCategory = async (token, data) => {
   return response.data;
 };
 
+
+
+
+// Delete  category  Category
+const deleteCategory = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(
+    API_URL + "category/" + data,
+    config
+  );
+
+  return response.data;
+};
+
+
 const categoryService = {
   createCategory,
   getCategories,
   affectSessionToCategory,
+  deleteCategory
 };
 
 export default categoryService;

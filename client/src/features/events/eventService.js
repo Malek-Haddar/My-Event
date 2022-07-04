@@ -27,9 +27,25 @@ const getEvents = async (token) => {
   return response.data;
 };
 
+
+// Delete event
+const deleteEvent = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(
+    API_URL + "event/delete/" + data,
+    config
+  );
+
+  return response.data;
+};
 const eventService = {
   createEvent,
   getEvents,
+  deleteEvent
 };
 
 export default eventService;

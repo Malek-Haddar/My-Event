@@ -2,6 +2,7 @@
 Core script to handle the entire theme and core functions
 **/
 
+
 var Acara = function(){
 	/* Search Bar ============ */
 	var screenWidth = $( window ).width();

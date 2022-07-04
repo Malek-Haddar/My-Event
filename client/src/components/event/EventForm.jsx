@@ -57,12 +57,12 @@ function EventForm() {
       isPublic,
       status,
     };
-    dispatch(createEvent(eventData), setFormData(""), navigate("/dashbord"));
+    dispatch(createEvent(eventData), setFormData(""));
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <div className="modal fade" id="addOrderModalside">
       <div className="modal-dialog" role="document">
@@ -136,7 +136,7 @@ function EventForm() {
                 />
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary text-black">
                   Create
                 </button>
               </div>

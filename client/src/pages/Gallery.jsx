@@ -25,14 +25,14 @@ function Gallery() {
 
     dispatch(getGalleries());
 
-    return () => {
-      dispatch(reset());
-    };
+    // return () => {
+    //   dispatch(reset());
+    // };
   }, [user, navigate, isError, message, dispatch]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <>
       <Header />
@@ -45,9 +45,7 @@ function Gallery() {
               <li>
                 <a href="/">Home</a>
               </li>
-              <li>
-                <a href="#">Feature</a>
-              </li>
+
               <li>
                 <a className="active">Photos</a>
               </li>
@@ -55,53 +53,59 @@ function Gallery() {
           </div>
         </div>
       </section>
-      <div className="gallery-section padding-tb">
-        <div className="container">
-          <ul className="filter-button-group lab-ul d-flex justify-content-center mb-4">
-            <li className="filter-btn is-checked" data-filter="*">
-              Show All <span className="filter-item-num">09</span>
-            </li>
-            <li className="filter-btn" data-filter=".eid-ul-adha">
-              Seminars <span className="filter-item-num">03</span>
-            </li>
-            <li className="filter-btn" data-filter=".eid-ul-fitr">
-              Conferences <span className="filter-item-num">05</span>
-            </li>
-            <li className="filter-btn" data-filter=".ramadan">
-              Workshops <span className="filter-item-num">06</span>
-            </li>
-            <li className="filter-btn" data-filter=".shab-e-barat">
-              Reunions <span className="filter-item-num">03</span>
-            </li>
-          </ul>
-          <div className="grid flex d-flex flex-wrap  pb-15">
-            {galleries.map((gallery) => (
-              <div
-                className="grid-item eid-ul-adha eid-ul-fitr"
-                key={gallery._id}
-              >
-                <div className="grid-inner d-flex h-100">
-                  <div className="grid-thumb ">
-                    <img
-                      style={{ backgroundSize: "contain" }}
-                      src={gallery.selectedFile}
-                      alt={gallery.name}
-                    />
-                  </div>
-                  <div className="grid-content p-2  ">
-                    <a href={gallery.selectedFile} data-rel="lightcase">
-                      <i className="icofont-expand"></i>
-                    </a>
-                    <h5>Title Goes Here</h5>
-                    <p>Subtitle Here</p>
+      <section className=" my-20">
+        <div className="gallery-section padding-tb">
+          <div className="container">
+            {/* {galleries.map((gallery) => ( */}
+            <ul className="filter-button-group lab-ul d-flex justify-content-center mb-4 w-full">
+              <li className="filter-btn is-checked" data-filter={""}>
+                Show All{" "}
+                <span className="filter-item-num"> {galleries.length} </span>
+              </li>
+              {/* <li className="filter-btn" data-filter=".eid-ul-adha">
+                Seminars <span className="filter-item-num">03</span>
+              </li>
+              <li className="filter-btn" data-filter=".eid-ul-fitr">
+                Conferences <span className="filter-item-num">05</span>
+              </li>
+              <li className="filter-btn" data-filter=".ramadan">
+                Workshops <span className="filter-item-num">06</span>
+              </li>
+              <li className="filter-btn" data-filter=".shab-e-barat">
+                Reunions <span className="filter-item-num">03</span>
+              </li> */}
+            </ul>
+            {/* ))} */}
+
+            <div className="grid flex d-flex flex-wrap  pb-15">
+              {galleries.map((gallery) => (
+                <div
+                  className="grid-item eid-ul-adha eid-ul-fitr"
+                  key={gallery._id}
+                >
+                  <div className="grid-inner d-flex h-100">
+                    <div className="grid-thumb ">
+                      <img
+                        style={{ backgroundSize: "contain" }}
+                        src={gallery.selectedFile}
+                        alt={gallery.name}
+                        value={gallery.category}
+                      />
+                    </div>
+                    <div className="grid-content p-2  ">
+                      <a href={gallery.selectedFile} data-rel="lightcase">
+                        <i className="icofont-expand"></i>
+                      </a>
+                      <h5>{gallery.name}</h5>
+                      <p>{gallery.category}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <Footer />
+      </section>
     </>
   );
 }

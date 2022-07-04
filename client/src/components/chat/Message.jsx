@@ -3,15 +3,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "./Message.css";
 
-function Message({ timestamp, message }) {
-  const { user } = useSelector((state) => state.auth);
+function Message({ timestamp, message, userName }) {
+  // const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="message">
       <Avatar src={""} />
       <div className="message__info">
         <h4>
-          {user.displayName}
+          {userName}
           <span className="message__timestamp">
             {new Date(parseInt(timestamp)).toUTCString()}
           </span>

@@ -75,9 +75,7 @@ function Register() {
               <li>
                 <a href="/">Home</a>
               </li>
-              <li>
-                <a href="#">Features</a>
-              </li>
+
               <li>
                 <a className="active">Registration</a>
               </li>
@@ -89,7 +87,7 @@ function Register() {
         <div className="container">
           <div className="account-wrapper">
             <h3 className="title">Register Now</h3>
-            <form className="account-form">
+            <form className="account-form" onSubmit={onSubmit}>
               <div className="form-group">
                 <input
                   type="text"
@@ -105,7 +103,7 @@ function Register() {
                 <input
                   type="text"
                   placeholder="Last Name"
-                  name="lastname"
+                  name="lastName"
                   className="form-control"
                   id="lastName"
                   value={lastName}
@@ -238,7 +236,7 @@ function Register() {
         </div>
       </form>
     </section> */}
-     <Footer />
+      <Footer />
     </>
   );
 }

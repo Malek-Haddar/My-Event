@@ -3,6 +3,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import User from "../models/user.js";
+import { sendmail } from "../service/mailing.js";
+import qrcode from "qrcode";
+
 const router = express.Router();
 
 export const signin = async (req, res) => {
@@ -21,7 +24,7 @@ export const signin = async (req, res) => {
 
     const token = jwt.sign(
       { email: oldUser.email, id: oldUser._id },
-      process.env.SECRET,
+      process.env.JWT_SECRET,
       {
         expiresIn: "3d",
       }
@@ -46,18 +49,23 @@ export const signup = async (req, res) => {
 
     const result = await User.create({
       email,
-      password: hashedPassword,
+      // password: hashedPassword,
       name: `${firstName} ${lastName}`,
       role,
     });
 
     const token = jwt.sign(
       { email: result.email, id: result._id },
-      process.env.SECRET,
+      process.env.JWT_SECRET,
       {
         expiresIn: "3d",
       }
     );
+    const qr = await qrcode.toDataURL(result._id.toString().toUpperCase());
+
+    sendmail(result, qr);
+    console.log({ qr });
+    console.log({ result });
 
     res.status(201).json({ result, token });
   } catch (error) {
@@ -107,9 +115,9 @@ export const getSession = async (req, res) => {
   const { id } = req.user;
 
   try {
-    const Userdetails = await User.find({ _id: id }).populate({
+    const Userdetails = await User.find({ _id: id })?.populate({
       path: "category",
-      populate: { path: "sessions" },
+      populate: { path: "sessions", populate: { path: "quiz" } },
     });
 
     res.status(200).send(Userdetails);
@@ -119,25 +127,46 @@ export const getSession = async (req, res) => {
 };
 
 export const checkIn = async (req, res) => {
-  const { role } = req.user;
-  const idUser = req.params.idUser;
-
+  const idUser = req.body.idUser;
+  const idSession = req.body.idSession;
   try {
-    if (role === 1 || role === 2) {
-      const updatedUser = await User.findByIdAndUpdate(
-        idUser,
-        {
-          checkIn: Date.now(),
-        },
-        { new: true }
-      );
-      res.status(200).send();
-    }
-    res.status(400).json({ message: "Auth Error" });
+    //if (role === 1 || role === 2 || role === 3) {
+    const checkedIn = await User.findByIdAndUpdate(
+      idUser,
+
+      { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
+      { new: true }
+    );
+
+    console.log("checked");
+    res.status(201).send(checkedIn);
+    //}
+    // res.status(400).json({ message: "Auth Error" });
   } catch (error) {
     res.status(400).json({ message: error });
   }
 };
+
+// export const checkIn = async (req, res) => {
+//   const { role } = req.user;
+//   const idUser = req.params.idUser;
+
+//   try {
+//     if (role === 1 || role === 2) {
+//       const updatedUser = await User.findByIdAndUpdate(
+//         idUser,
+//         {
+//           date: Date.now(),
+//         },
+//         { new: true }
+//       );
+//       res.status(200).send();
+//     }
+//     res.status(400).json({ message: "Auth Error" });
+//   } catch (error) {
+//     res.status(400).json({ message: error });
+//   }
+// };
 
 export const getUsers = async (req, res) => {
   try {
@@ -207,6 +236,12 @@ export const getNotif = async (req, res) => {
   }
 };
 
-
+// delete customer
+export const deleteCustomer = async (req, res) => {
+  const { customerId } = req.params;
+  User.findByIdAndRemove(customerId).then((result) => {
+    res.json({ message: "Session deleted successfully." });
+  });
+};
 
 export default router;

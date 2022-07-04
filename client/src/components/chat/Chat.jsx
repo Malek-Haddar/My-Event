@@ -16,28 +16,29 @@ const pusher = new Pusher("5421ced7a2b4aa286dad", {
 });
 
 function Chat() {
+  const [flag, setFlag] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const channelId = useSelector(selectChannelId);
   const channelName = useSelector(selectChannelName);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const getConversation = (channelId) => {
+  const getConversation = async (channelId) => {
     if (channelId) {
-      axios.get(`/get/conversation?id=${channelId}`).then((res) => {
+      await axios.get(`/get/conversation?id=${channelId}`).then((res) => {
         setMessages(res.data[0].conversation);
       });
     }
   };
 
-  useEffect(() => {
-    getConversation(channelId);
+  useEffect(async () => {
+    await getConversation(channelId);
 
-    const channel = pusher.subscribe("conversations");
-    channel.bind("newMessage", function (data) {
-      getConversation(channelId);
-    });
-  }, [channelId]);
+    // const channel = await pusher.subscribe("conversations");
+    // channel.bind("newMessage", function (data) {
+    //   getConversation(channelId);
+    // });
+  }, [channelId, flag]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -45,10 +46,10 @@ function Chat() {
     axios.post(`/new/message?id=${channelId}`, {
       message: input,
       timestamp: Date.now(),
-      user: user,
+      user: user.result._id,
     });
-
     setInput("");
+    setFlag(!flag);
   };
 
   return (
@@ -60,7 +61,7 @@ function Chat() {
           <Message
             key={message.key}
             timestamp={message.timestamp}
-            user={message.user}
+            userName={message.user.name}
             message={message.message}
           />
         ))}

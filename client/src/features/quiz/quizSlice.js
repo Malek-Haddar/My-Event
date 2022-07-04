@@ -47,6 +47,26 @@ export const getQuizzes = createAsyncThunk(
   }
 );
 
+// affect session to event
+
+export const affectQuizToSession = createAsyncThunk(
+  "quiz/affect",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await quizService.affectQuizToSession(token, data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,

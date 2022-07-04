@@ -28,7 +28,12 @@ const userSchema = mongoose.Schema(
         ref: "Event",
       },
     ],
-    checkIn: [{ type: Date }],
+    checkIn: [
+      {
+        date: { type: Date },
+        sessions: [{ type: mongoose.Types.ObjectId, ref: "Session" }],
+      },
+    ],
     notification: [
       {
         subject: { type: String },

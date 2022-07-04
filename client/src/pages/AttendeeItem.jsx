@@ -1,16 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  affectAttendeeToCategory,
-  getUsers,
-  reset,
-} from "../features/users/userSlice";
+import { getUsers, reset } from "../features/users/userSlice";
 
+import OldNavbar from "../components/dashboard/OldNavbar";
 import Spinner from "../components/Spinner";
-import Navbar from "../components/dashboard/Navbar";
-import { getCategories } from "../features/categories/categorySlice";
 import { affectCategoryToAttendee } from "../features/auth/authSlice";
+import { getCategories } from "../features/categories/categorySlice";
 
 function AttendeeItem() {
   const navigate = useNavigate();
@@ -57,12 +53,12 @@ function AttendeeItem() {
     dispatch(affectCategoryToAttendee(data));
   };
 
-  if (isLoading) {
-    return <Spinner />; 
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <>
-      <Navbar />
+      <OldNavbar />
       <div className="content-body ">
         <div className="container-fluid">
           <div className="row">

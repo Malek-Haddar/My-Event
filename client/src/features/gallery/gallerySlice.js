@@ -47,6 +47,27 @@ export const getGalleries = createAsyncThunk(
   }
 );
 
+
+// delete gallery
+
+export const deleteGallery = createAsyncThunk(
+  "galleries/delete",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await galleryService.deleteGallery(token, data.galleryId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const gallerySlice = createSlice({
   name: "gallery",
   initialState,
@@ -81,7 +102,23 @@ export const gallerySlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      });
+      })
+
+      .addCase(deleteGallery.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteGallery.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.galleries = state.galleries.filter(
+          (gallery) => gallery._id !== action.payload.data.galleryId
+        );
+      })
+      .addCase(deleteGallery.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
   },
 });
 

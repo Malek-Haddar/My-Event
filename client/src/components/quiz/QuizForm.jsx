@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../features/auth/authSlice";
 import { createQuiz, reset } from "../../features/quiz/quizSlice";
-import Navbar from "../dashboard/Navbar";
+import OldNavbar from "../dashboard/OldNavbar";
 import Spinner from "../Spinner";
 
 const QuizForm = () => {
@@ -12,10 +12,18 @@ const QuizForm = () => {
     firstAlternative: { text: "", isCorrect: false },
     secondAlternative: { text: "", isCorrect: false },
     thirdAlternative: { text: "", isCorrect: false },
+    forthAlternative: { text: "", isCorrect: false },
+    fifthAlternative: { text: "", isCorrect: false },
   });
 
-  const { description, firstAlternative, secondAlternative, thirdAlternative } =
-    formData;
+  const {
+    description,
+    firstAlternative,
+    secondAlternative,
+    thirdAlternative,
+    forthAlternative,
+    fifthAlternative,
+  } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,14 +73,22 @@ const QuizForm = () => {
           text: e.target.thirdAlternative.value,
           isCorrect: e.target.thirdCorrectAnswer.checked,
         },
+        {
+          text: e.target.forthAlternative.value,
+          isCorrect: e.target.forthCorrectAnswer.checked,
+        },
+        {
+          text: e.target.fifthAlternative.value,
+          isCorrect: e.target.fifthCorrectAnswer.checked,
+        },
       ],
     };
     dispatch(createQuiz(quizData), setFormData(""));
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <>
       <div className="modal fade" id="addOrderModalside">
@@ -102,7 +118,7 @@ const QuizForm = () => {
                     <input
                       type="checkbox"
                       name="firstCorrectAnswer"
-                      className="mr-2"
+                      className="mr-2 "
                     />
                     <input
                       type="text"
@@ -134,6 +150,32 @@ const QuizForm = () => {
                       type="text"
                       className="form-control"
                       name="thirdAlternative"
+                    />
+                  </div>
+                  <label className="text-black font-w500">Answer3</label>
+                  <div className=" d-flex align-items-center">
+                    <input
+                      type="checkbox"
+                      name="forthCorrectAnswer"
+                      className="mr-2"
+                    />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="forthAlternative"
+                    />
+                  </div>
+                  <label className="text-black font-w500">Answer3</label>
+                  <div className=" d-flex align-items-center">
+                    <input
+                      type="checkbox"
+                      name="fifthCorrectAnswer"
+                      className="mr-2"
+                    />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="fifthAlternative"
                     />
                   </div>
                 </div>
@@ -169,7 +211,7 @@ const QuizForm = () => {
                   />
                 </div> */}
                 <div className="form-group">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary text-black">
                     Create
                   </button>
                 </div>

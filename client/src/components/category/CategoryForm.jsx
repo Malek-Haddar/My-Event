@@ -50,9 +50,9 @@ function CategoryForm() {
     dispatch(createCategory(categoryData), setFormData(""));
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <div className="modal fade" id="addOrderModalside">
       <div className="modal-dialog" role="document">
@@ -76,7 +76,7 @@ function CategoryForm() {
                 />
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary text-black">
                   Create
                 </button>
               </div>

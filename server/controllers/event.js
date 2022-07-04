@@ -55,14 +55,13 @@ export const updateEvent = async(req, res) => {
     res.json(updatedEvent);
 };
 
-export const DeleteEvent = async(req, res) => {
-    const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).send("No Task Found with id : ${id} ");
 
-    await Event.findByIdAndRemove(id);
-    res.json({ message: "Task deleted successfully." });
+export const deleteEvent = async (req, res) => {
+  const { eventId } = req.params;
+  Event.findByIdAndRemove(eventId).then((result) => {
+    res.json({ message: "Event deleted successfully." });
+  });
 };
 
 export default router;

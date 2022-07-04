@@ -117,7 +117,7 @@ function GalleryForm() {
                 </div>
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary text-black">
                   Create
                 </button>
               </div>

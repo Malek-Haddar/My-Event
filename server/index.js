@@ -1,9 +1,12 @@
-import compression from "compression";
 import cors from "cors";
-import express from "express";
-import connection from "./config/database.js";
-
 import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import path from "path";
+
+import connection from "./config/database.js";
+import compression from "compression";
+
 import attendeeRoutes from "./routes/attendee.js";
 import CategoryRouter from "./routes/category.js";
 import EventRouter from "./routes/event.js";
@@ -15,20 +18,11 @@ import SessionRouter from "./routes/session.js";
 import userRoute from "./routes/user.js";
 import discord from "./models/discord.js";
 import Pusher from "pusher";
-import mongoose from "mongoose";
+const __dirname = path.resolve();
 
 dotenv.config();
 const app = express();
-
-const port = process.env.PORT || 4000;
-
-const pusher = new Pusher({
-  appId: process.env.appId,
-  key: process.env.key,
-  secret: process.env.secret,
-  cluster: "ap2",
-  useTLS: true,
-});
+app.use(cors());
 
 connection();
 
@@ -36,7 +30,6 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(express.json());
 
-app.use(cors());
 app.use(compression());
 
 app.use("/api/user", userRoute);
@@ -49,10 +42,28 @@ app.use("/api/posts", postRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/check", attendeeRoutes);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(process.cwd(), "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(process.cwd(), "client/build/index.html"));
+  });
+} else {
+  app.get("/", (req, res) => res.send("Please set to production"));
+}
+
+const port = process.env.PORT || 4000;
+
+const pusher = new Pusher({
+  appId: process.env.appId,
+  key: process.env.key,
+  secret: process.env.secret,
+  cluster: "us2",
+  useTLS: true,
+});
 mongoose.connection.once("open", () => {
   console.log("DB Connected...");
 
-  const changeStream = mongoose.connection.collection("conversations").watch();
+  const changeStream = mongoose.connection.collection("discords").watch();
 
   changeStream.on("change", (change) => {
     if (change.operationType === "insert") {
@@ -60,7 +71,7 @@ mongoose.connection.once("open", () => {
         change: change,
       });
     } else if (change.operationType === "update") {
-      pusher.trigger("conversations", "newMessage", {
+      pusher.trigger("conversation", "newMessage", {
         change: change,
       });
     } else {
@@ -106,7 +117,7 @@ app.get("/get/channelList", (req, res) => {
 
 app.post("/new/message", (req, res) => {
   // console.log(req.body);
-  discord.update(
+  discord.updateMany(
     { _id: req.query.id },
     { $push: { conversation: req.body } },
     (err, data) => {
@@ -120,16 +131,31 @@ app.post("/new/message", (req, res) => {
   );
 });
 
-app.get("/get/conversation", (req, res) => {
-  const id = req.query.id;
-  discord.find({ _id: id }, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
+app.get("/get/conversation", async (req, res) => {
+  try {
+    const id = req.query.id;
+    const conversation = await discord
+      .find({ _id: id })
+      ?.populate("conversation.user");
+
+    res.status(200).send(conversation);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
 });
+
+// app.get("/get/conversation", (req, res) => {
+//   const id = req.query.id;
+//   discord
+//     .find({ _id: id }, (err, data) => {
+//       if (err) {
+//         res.status(500).send(err);
+//       } else {
+//         res.status(200).send(data);
+//       }
+//     })
+//     ?.populate("user");
+// });
 
 //listener
 app.listen(port, () => {

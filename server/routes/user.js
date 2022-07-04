@@ -9,6 +9,7 @@ import {
   affectAttendeeToCategory,
   notifCategory,
   getNotif,
+  deleteCustomer,
 } from "../controllers/user.js";
 import { auth } from "../middleware/auth.js";
 
@@ -20,10 +21,11 @@ router.post("/signin", signin);
 router.post("/signup", signup);
 router.patch("/role/:id", ChangeRole);
 router.get("/session", auth, getSession);
-router.patch("/checkIn/:idUser", auth, checkIn);
+router.patch("/check", auth, checkIn);
 router.get("/users", auth, getUsers);
 router.patch("/users/affect", auth, affectAttendeeToCategory);
 router.patch("/notif", auth, notifCategory);
 router.get("/notif/get", auth, getNotif);
+router.delete("/delete/:customerId", deleteCustomer);
 
 export default router;

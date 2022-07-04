@@ -8,6 +8,7 @@ import Session from "../components/Session";
 
 function Home() {
   const { user } = useSelector((state) => state.auth);
+  const { sessions } = useSelector((state) => state.sessions);
 
   return (
     <>
@@ -15,6 +16,7 @@ function Home() {
       <Event />
       {/* {user ? <Session /> : ""} */}
       <Session />
+      {/* {sessions.length > 0 ? <Session /> : null} */}
       <Footer />
     </>
   );

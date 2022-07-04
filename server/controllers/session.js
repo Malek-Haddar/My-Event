@@ -187,6 +187,26 @@ export const unlikeSession = async (req, res) => {
   }
 };
 
+// affect quiz to session
+export const affectQuizToSession = async (req, res) => {
+  try {
+    const { idSession, idQuiz } = req.body;
+
+
+  const updatedQuiz = { $addToSet: { quiz: idQuiz } };
+
+
+    const QuizSession = await Session.findByIdAndUpdate(idSession, updatedQuiz);
+
+    res.status(200).send(QuizSession);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+
+
+
 // export const getSessionById = async (req, res) => {
 //   const { id } = req.params;
 //   try {

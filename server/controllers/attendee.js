@@ -32,7 +32,7 @@ export const getAttendee = async (req, res) => {
 
   try {
     const Userdetails = await Attendee.find({ _id: id }).populate({
-      path: "User",
+      path: "user",
       path: "sessions",
     });
 

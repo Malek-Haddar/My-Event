@@ -13,7 +13,9 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "./axios";
 import Pusher from "pusher-js";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { SiPingdom } from "react-icons/si";
+import { MdAutorenew } from "react-icons/md";
 
 const pusher = new Pusher("5421ced7a2b4aa286dad", {
   cluster: "us2",
@@ -21,8 +23,8 @@ const pusher = new Pusher("5421ced7a2b4aa286dad", {
 
 function Sidebar() {
   const { user } = useSelector((state) => state.auth);
-  console.log({ user });
   const [channels, setChannels] = useState([]);
+  const [flag, setFlag] = useState(false);
 
   const getChannels = () => {
     axios.get("/get/channelList").then((res) => {
@@ -36,7 +38,7 @@ function Sidebar() {
     channel.bind("newChannel", function (data) {
       getChannels();
     });
-  }, []);
+  }, [flag]);
 
   const handleAddChannel = (e) => {
     e.preventDefault();
@@ -46,12 +48,20 @@ function Sidebar() {
     if (channelName) {
       axios.post("/new/channel", { channelName: channelName });
     }
+    setFlag(!flag);
+  };
+  const handleRefresh = () => {
+    getChannels();
   };
 
   return (
     <div className="sidebar">
       <div className="sidebar__top">
-        <h3>Chatroom Application</h3>
+        <Link to="/" className="text-3xl">
+          <SiPingdom />
+        </Link>
+
+        <h3>Pin Event </h3>
         <ExpandMoreIcon />
       </div>
 
@@ -59,10 +69,23 @@ function Sidebar() {
         <div className="sidebar__channelsHeader">
           <div className="sidebar__header">
             <ExpandMoreIcon />
-            <h4>Text Channels</h4>
+            <h4>Rooms</h4>
           </div>
 
-          <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
+          <div className="flex items-center">
+            <span>
+              <MdAutorenew
+                onClick={handleRefresh}
+                className="sidebar__addChannel mr-2"
+              />
+            </span>
+            <span>
+              <AddIcon
+                onClick={handleAddChannel}
+                className="sidebar__addChannel"
+              />
+            </span>
+          </div>
         </div>
 
         <div className="sidebar__channelsList">
@@ -76,7 +99,7 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="sidebar__voice">
+      {/* <div className="sidebar__voice">
         <SignalCellularAltIcon
           className="sidebar__voiceIcon"
           fontSize="large"
@@ -91,22 +114,16 @@ function Sidebar() {
           <InfoOutlinedIcon />
           <CallIcon />
         </div>
-      </div>
+      </div> */}
 
       <div className="sidebar__profile">
         <span className="sidebar__profileAvatar">
-          <Avatar src={""} onClick={() => user.signOut()} />
+          <Avatar src={""} />
         </span>
 
         <div className="sidebar__profileInfo">
           <h3>@{user?.result?.name}</h3>
           {/* <p>#{user.uid.substring(0, 6)}</p> */}
-        </div>
-
-        <div className="sidebar__profileIcons">
-          <MicIcon />
-          <HeadsetIcon />
-          <SettingsIcon />
         </div>
       </div>
     </div>

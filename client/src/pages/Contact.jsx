@@ -63,9 +63,9 @@ function Contact() {
     setFormData("");
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <>
       <Header />

@@ -33,6 +33,12 @@ const sessionSchema = new Schema(
         },
       },
     ],
+    quiz: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Quiz",
+      },
+    ],
   },
   {
     timestamps: true,

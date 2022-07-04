@@ -47,43 +47,63 @@ export const getUsers = createAsyncThunk(
   }
 );
 
-    // Change Role
-    export const changeRole = createAsyncThunk(
-      'users/changeRole',
-      async (data,thunkAPI) => {
-        try {
-          const token = thunkAPI.getState().auth.user.token;
-          return await userService.changeRole(token, data);
-        } catch (error) {
-          const message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
-          return thunkAPI.rejectWithValue(message)
-        }
-      }
-    )
+// Change Role
+export const changeRole = createAsyncThunk(
+  "users/changeRole",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await userService.changeRole(token, data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
-    // export const affectAttendeeToCategory = createAsyncThunk(
-    //   "users/affect",
-    //   async (data, thunkAPI) => {
-    //     try {
-    //       // console.log("slice: "+data.event);
-    //       const token = thunkAPI.getState().auth.user.token;
-    //       return await userService.affectAttendeeToCategory(token, data);
-    //     } catch (error) {
-    //       const message =
-    //         (error.response &&
-    //           error.response.data &&
-    //           error.response.data.message) ||
-    //         error.message ||
-    //         error.toString();
-    //       return thunkAPI.rejectWithValue(message);
-    //     }
-    //   }
-    // );
+// delete customer Customers Customer
+
+export const deleteCustomer = createAsyncThunk(
+  "customer/delete",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await userService.deleteCustomer(token, data.customerId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// export const affectAttendeeToCategory = createAsyncThunk(
+//   "users/affect",
+//   async (data, thunkAPI) => {
+//     try {
+//       // console.log("slice: "+data.event);
+//       const token = thunkAPI.getState().auth.user.token;
+//       return await userService.affectAttendeeToCategory(token, data);
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
 
 export const userSlice = createSlice({
   name: "user",
@@ -130,6 +150,21 @@ export const userSlice = createSlice({
         state.users.push(action.payload);
       })
       .addCase(changeRole.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteCustomer.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteCustomer.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.users = state.users.filter(
+          (user) => user._id !== action.payload.data.userId
+        );
+      })
+      .addCase(deleteCustomer.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

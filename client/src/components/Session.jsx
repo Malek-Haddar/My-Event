@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getUserSession,
   likeSession,
@@ -34,6 +34,7 @@ function Session() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
+  console.log({ userSession });
 
   const addLike = (data) => {
     // const data = {
@@ -42,20 +43,17 @@ function Session() {
     dispatch(likeSession(data));
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
   return (
     <>
       <section className="about-section padding-tb padding-b">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-10">
+            <div className="col-lg-8">
               <div className="about-image">
-                <img
-                  src="assets/images/about/01.jpg"
-                  alt="about image"
-                />
+                <img src="assets/images/about/01.jpg" alt="about image" />
                 <a
                   href="https://www.youtube.com/embed/SP3yyrboTno"
                   className="play-btn"
@@ -71,7 +69,7 @@ function Session() {
                 <h2>Big Digital Meetup</h2>
                 <p>About The Digital Meetup Conference 2021</p>
               </div>
-              <div className="section-wrapper text-center">
+              <div className=" section-wrapper text-center ">
                 <p>
                   Phosrescently ntiate principle centered networks via magnetic
                   services a Entusiasticaly streamline fulys tested metricels
@@ -81,14 +79,11 @@ function Session() {
                   freproof we that and a services enabled apidiously evisculate
                   are standards compliant web services are afor error free
                 </p>
-                <div className="about-btn-grp">
-                  <a href="registration.html" className="lab-btn ">
-                    <span>Register Now</span>{" "}
-                  </a>
-                  <a href="pricing-plan.html" className="lab-btn">
-                    <span>Purchase Ticket</span>
-                  </a>
-                </div>
+                {/* <div className="about-btn-grp">
+                  <Link to="/contact" className="lab-btn">
+                    <span>Contact Us </span>
+                  </Link>
+                </div> */}
               </div>
             </div>
           </div>
@@ -101,13 +96,13 @@ function Session() {
             <h2>Event Schedule</h2>
             <p>A Representation of the event planning</p>
           </div>
-          <section className="content">
-            {userSession?.length > 0 ? (
+          <section className="content ">
+            {userSession[0]?.category?.length > 0 ? (
               <div className="container">
                 <div className="section-wrapper shape-b">
-                  <div className="row gx-4 gy-5">
+                  <div className="row gx-4 gy-5 justify-center w-full">
                     <div className="col-lg-6">
-                      {userSession[0].category[0].sessions.map((session) => (
+                      {userSession[0]?.category[0]?.sessions.map((session) => (
                         <div className="schedule-left schedule-pack">
                           <h5>
                             {new Date(session.start).toLocaleDateString()}
@@ -131,7 +126,7 @@ function Session() {
                                   aria-controls={"collapseOne" + session._id}
                                 >
                                   <span className="accor-header-inner d-flex flex-wrap align-items-center">
-                                    <span className="accor-thumb">
+                                    {/* <span className="accor-thumb">
                                       <img
                                         src="assets/images/event/member/01.png"
                                         alt="speaker"
@@ -148,8 +143,8 @@ function Session() {
                                           alt="speaker"
                                         />
                                       </span>
-                                    </span>
-                                    <span className="h7">{session.name}</span>
+                                    </span> */}
+                                    <span className=" h7">{session.name}</span>
                                   </span>
                                 </button>
                               </div>
@@ -165,10 +160,10 @@ function Session() {
                                   <ul className="ev-schedule-meta d-flex flex-wrap">
                                     <li>
                                       <p>{session.details}</p>
-                                      <span>
+                                      {/* <span>
                                         <i className="icofont-user"></i>
                                       </span>
-                                      {userSession[0]?.category[0]?.name}
+                                      {userSession[0]?.category[0]?.name} */}
                                     </li>
                                     <li>
                                       <span>
@@ -183,10 +178,10 @@ function Session() {
                                         .toLocaleString("en-us")}
                                     </li>
                                     <li>
-                                      <span>
+                                      {/* <span>
                                         <i className="icofont-location-pin"></i>
                                         Summer C
-                                      </span>
+                                      </span> */}
                                     </li>
 
                                     {/* <a href="/vote" className="btn-link ">
@@ -232,17 +227,33 @@ function Session() {
                     </div>
                   </div>
                 </div>
+                <div className="schedule-btns text-center mt-5">
+                  <Link to="/calendar" className="lab-btn">
+                    Move to Calendar
+                  </Link>
+                </div>
               </div>
             ) : (
-              <h3>You have not set any goals</h3>
+              <div className="section-header">
+                <p>No Category affected Yet</p>
+                <div className="schedule-btns text-center mt-5">
+                  <Link to="/contact" className="lab-btn">
+                    Contact Us
+                  </Link>
+                </div>
+              </div>
             )}
           </section>
 
-          <div className="schedule-btns text-center mt-5">
-            <a href="#" className="lab-btn">
-              Download Schedule
-            </a>
-          </div>
+          {/* <div className="schedule-btns text-center mt-5">
+            {}
+            <Link to="/calendar" className="lab-btn">
+              Move to Calendar
+            </Link>
+            <Link to="/contact" className="lab-btn">
+              Contact Us
+            </Link>
+          </div> */}
         </div>
       </section>
     </>

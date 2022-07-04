@@ -66,6 +66,27 @@ export const affectSessionToCategory = createAsyncThunk(
   }
 );
 
+
+// delete category  Category
+
+export const deleteCategory = createAsyncThunk(
+  "categories/delete",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await categoryService.deleteCategory(token, data.categoryId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const categorySlice = createSlice({
   name: "category",
   initialState,
@@ -97,6 +118,22 @@ export const categorySlice = createSlice({
         state.categories = action.payload;
       })
       .addCase(getCategories.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(deleteCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.categories = state.categories.filter(
+          (category) => category._id !== action.payload.data.categoryId
+        );
+      })
+      .addCase(deleteCategory.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
