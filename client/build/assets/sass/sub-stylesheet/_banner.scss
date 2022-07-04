@@ -1,0 +1,129 @@
+/*======== Banner css start here  =========*/
+.banner-section {
+    background: url(../images/banner/bg.jpg);
+    background-size: cover;
+
+    .banner-wrapper {
+        padding-top: 150px;
+        padding-bottom: 80px;
+
+        @include breakpoint(lg) {
+            padding-top: 250px;
+            padding-bottom: 85px;
+        }
+
+        .banner-content {
+            @extend %text-center;
+
+            @include breakpoint(lg) {
+                text-align: inherit;
+            }
+
+            .countdown {
+                @extend %flex;
+
+                @include breakpoint(max-lg) {
+                    justify-content: center;
+                }
+
+                column-gap: 20px;
+                row-gap: 15px;
+
+                @extend %mb-30;
+
+                .clock-item {
+                    list-style: none;
+                    width: 70px;
+                    height: auto;
+
+                    .count-number {
+                        background: $theme-color;
+                        color: $white-color;
+                        font-size: 30px;
+                        font-weight: 700;
+                        font-family: $font-family2;
+                        padding: 1rem;
+                        display: inline-block;
+                        width: 100%;
+                        text-align: center;
+                        line-height: 1;
+                        border-radius: 4px 4px 0 0;
+                    }
+
+                    .count-text {
+                        background: $white-color;
+                        font-family: $font-family2;
+                        font-size: 18px;
+                        color: $body-color !important;
+                        padding: .5rem .7rem;
+                        margin-bottom: 0;
+                        display: inline-block;
+                        width: 100%;
+                        text-align: center;
+                        line-height: 1;
+                        border-radius: 0 0 4px 4px;
+                    }
+                }
+            }
+
+            h1 {
+                text-shadow: 2px 2px 0 $theme-color;
+                font-style: italic;
+                line-height: 1.286;
+                margin-bottom: 18px;
+                font-size: 48px;
+
+                @include breakpoint(sm) {
+                    font-size: 60px;
+                }
+
+                @include breakpoint(xl) {
+                    font-size: 70px;
+                }
+            }
+
+            >p {
+                max-width: 390px;
+                font-size: 18px;
+                font-family: $font-family2;
+                line-height: 2;
+
+                @include breakpoint(max-lg) {
+                    margin: 0 auto 30px;
+                }
+            }
+
+            .lab-btn {
+                margin-bottom: 50px;
+            }
+
+            .event-sponsored {
+                @extend %flex;
+                @extend %align-items-center;
+
+                @include breakpoint(max-lg) {
+                    justify-content: center;
+                }
+
+                p {
+                    margin-bottom: 0;
+                }
+
+                img {
+                    margin-left: 20px;
+                }
+            }
+        }
+
+        .banner-image {
+            @include breakpoint(xxl) {
+                img {
+                    max-width: none;
+                    margin-left: -80px;
+                }
+            }
+        }
+    }
+}
+
+/*======== Banner css end here  =========*/
