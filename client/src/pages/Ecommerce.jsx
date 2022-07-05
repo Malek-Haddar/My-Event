@@ -23,6 +23,7 @@ import {
   medicalproBranding,
   recentTransactions,
   SparklineAreaData,
+  SparklineAreaData1,
   weeklyStats,
 } from "../data/dummy";
 import product9 from "../data/product9.jpg";
@@ -86,7 +87,7 @@ const Ecommerce = () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ users });
+  // console.log({ users });
 
   const earningData = [
     {
@@ -142,11 +143,27 @@ const Ecommerce = () => {
 
   //   }
   // };
+   const SparklineAreaData = users.map((user) => (
+    [{x: user?._id, yval: user.checkIn.length}]
+  ))
+  
+  // const checkedUser = users.map((user) => ({
+  //   checkNum: user?.checkIn,
+  // }));
 
-  const checkedUser = users.map((user) => ({
-    checkNum: user?.checkIn,
-  }));
-  console.log({ checkedUser });
+  let top = 0;
+  let topUser = null;
+
+  users.forEach((user) => {
+    if (user.checkIn.length > top) {
+      topUser = user;
+      top = user.checkIn.length;
+    }
+  });
+
+  console.log({ topUser, top });
+
+  // console.log({ checkedUser });
 
   // function getArrayMax() {
   //   return Math.max.apply(null, checkedUser.checkedUser.length);
@@ -162,6 +179,7 @@ const Ecommerce = () => {
   return (
     <div className="mt-24">
       <div className="flex flex-wrap lg:flex-nowrap justify-center ">
+     
         <div className="flex m-3 flex-wrap justify-center gap-1 items-center text-black">
           {earningData.map((item) => (
             <div
@@ -187,7 +205,67 @@ const Ecommerce = () => {
         </div>
       </div>
 
+
       <div className="flex gap-10 flex-wrap justify-center">
+        <div className="flex flex-nowrap">
+          <div
+            className=" rounded-2xl md:w-400 p-4 m-3"
+            style={{ backgroundColor: currentColor }}
+          >
+            <div className="flex justify-between items-center ">
+              <p className="font-semibold text-white text-2xl">Winner</p>
+
+              <div>
+                <p className="text-2xl text-white font-semibold mt-8">
+                  {topUser?.name}
+                </p>
+                <p className="text-gray-200">with {top} Sessions</p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <SparkLine
+                currentColor={currentColor}
+                id="column-sparkLine"
+                height="100px"
+                type="Column"
+                data={SparklineAreaData1}
+                width="320"
+                color="rgb(242, 252, 253)"
+              />
+            </div>
+          </div>
+          </div>
+          </div>
+      {/* <div className="flex gap-10 flex-wrap justify-center">
+        <div className="flex flex-nowrap">
+      <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="font-bold text-gray-400">{topUser?.name}</p>
+              <p className="text-2xl text-gray-600"> {top} sessions </p>
+            </div>
+            <button
+              type="button"
+              style={{ backgroundColor: currentColor }}
+              className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+            >
+              <BsCurrencyDollar />
+            </button>
+          </div>
+          <div className="mt-6">
+          
+            <Button
+              color="white"
+              bgColor={currentColor}
+              text="Download"
+              borderRadius="10px"
+            />
+          </div>
+        </div>
+        </div></div> */}
+
+     {/* <div className="flex gap-10 flex-wrap justify-center">
         <div className="flex flex-nowrap">
           <div
             className=" rounded-2xl md:w-400 p-4 m-3"
@@ -233,29 +311,7 @@ const Ecommerce = () => {
             </div>
           </div>
         </div>{" "}
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="font-bold text-gray-400">Winner</p>
-              <p className="text-2xl text-gray-600">{checkedUser.checkNum}</p>
-            </div>
-            <button
-              type="button"
-              style={{ backgroundColor: currentColor }}
-              className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-            >
-              <BsCurrencyDollar />
-            </button>
-          </div>
-          <div className="mt-6">
-            <Button
-              color="white"
-              bgColor={currentColor}
-              text="Download"
-              borderRadius="10px"
-            />
-          </div>
-        </div>
+        
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780  ">
           <div className="flex justify-between">
             <p className="font-semibold text-xl">Revenue Updates</p>
@@ -303,6 +359,7 @@ const Ecommerce = () => {
                 />
               </div>
               <div className="mt-10">
+
                 <Button
                   color="white"
                   bgColor={currentColor}
@@ -316,7 +373,7 @@ const Ecommerce = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>  */}
 
       {/* <div className="flex gap-10 m-4 flex-wrap justify-center">
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl">
@@ -518,6 +575,6 @@ const Ecommerce = () => {
       </div> */}
     </div>
   );
-};
+};;
 
 export default Ecommerce;

@@ -44,9 +44,9 @@ function Header() {
                           <li>
                             <a href="/calendar">Calendar</a>
                           </li>{" "}
-                          <li>
+                          {/* <li>
                             <a href="/room">Rooms</a>
-                          </li>{" "}
+                          </li>{" "} */}
                           <li>
                             <a href="/quiz">Quiz</a>
                           </li>{" "}
@@ -61,9 +61,9 @@ function Header() {
                           <li>
                             <a href="/">Home</a>
                           </li>
-                          <li>
+                          {/* <li>
                             <a href="/room">Rooms</a>
-                          </li>{" "}
+                          </li>{" "} */}
                           <li>
                             <a href="/dashboard">Dashboard</a>
                           </li>
@@ -74,9 +74,9 @@ function Header() {
                           <li>
                             <a href="/qr">CheckIn</a>
                           </li>
-                          <li>
+                          {/* <li>
                             <a href="/room">Rooms</a>
-                          </li>{" "}
+                          </li>{" "} */}
                         </>
                       )}
                     </ul>
