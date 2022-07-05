@@ -94,7 +94,7 @@ function Calendar() {
               selectedDate={userSession[0]?.category[0]?.sessions[0]?.start}
               eventSettings={{ dataSource: scheduleData }}
               dragStart={onDragStart}
-              readonly={false}
+              readonly={true}
               // created={dispatch(createGoal()}
             >
               <ViewsDirective>
