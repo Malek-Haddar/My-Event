@@ -151,7 +151,7 @@ function Register() {
             </form>
             <div className="account-bottom">
               <span className="d-block cate pt-10">
-                Are you a member? <a href="login.html">Login</a>
+                Are you a member? <a href="/login">Login</a>
               </span>
               <span className="or">
                 <span>or</span>

@@ -26,9 +26,10 @@ function Sidebar() {
   const [channels, setChannels] = useState([]);
   const [flag, setFlag] = useState(false);
 
-  const getChannels = () => {
-    axios.get("/get/channelList").then((res) => {
+  const getChannels = async () => {
+    await axios.get("/get/channelList").then((res) => {
       setChannels(res.data);
+      console.log(res.data);
     });
   };
 

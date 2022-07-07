@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import QrReader from "react-qr-reader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { getSessions, reset } from "../features/sessions/sessionSlice";
@@ -53,6 +54,7 @@ const Qr = () => {
       idSession: sessionId,
     };
     dispatch(checkIn(userData));
+    toast("User Checked ✅");
   };
 
   return (

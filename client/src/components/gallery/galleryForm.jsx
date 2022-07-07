@@ -5,6 +5,7 @@ import { createEvent, reset } from "../../features/events/eventSlice";
 import Spinner from "../../components/Spinner";
 import FileBase from "react-file-base64";
 import { createGallery } from "../../features/gallery/gallerySlice";
+import { toast } from "react-toastify";
 
 function GalleryForm() {
   const [formData, setFormData] = useState({
@@ -54,6 +55,7 @@ function GalleryForm() {
       selectedFile,
     };
     dispatch(createGallery(galleryData), setFormData(""));
+    toast("Picture added successfully👏");
   };
 
   // if (isLoading) {

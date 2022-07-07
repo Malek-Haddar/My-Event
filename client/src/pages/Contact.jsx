@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
@@ -61,6 +62,7 @@ function Contact() {
     };
     dispatch(createContact(contactData));
     setFormData("");
+    toast(" Message sent successfully 👏");
   };
 
   // if (isLoading) {

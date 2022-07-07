@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createCategory, reset } from "../../features/categories/categorySlice";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 
 function CategoryForm() {
   const [formData, setFormData] = useState({
@@ -48,6 +49,7 @@ function CategoryForm() {
       name,
     };
     dispatch(createCategory(categoryData), setFormData(""));
+    toast("Category added successfully👏");
   };
 
   // if (isLoading) {

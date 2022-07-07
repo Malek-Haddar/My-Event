@@ -36,22 +36,32 @@ function Header() {
                       {user && user.result.role === 0 && (
                         <>
                           <li>
-                            <a href="/">Home</a>
+                            <a href="/" className="hover:text-pink-600">
+                              Home
+                            </a>
                           </li>
                           <li>
-                            <a href="/gallery">Gallery</a>
+                            <a href="/gallery" className="hover:text-pink-600">
+                              Gallery
+                            </a>
                           </li>{" "}
                           <li>
-                            <a href="/calendar">Calendar</a>
+                            <a href="/calendar" className="hover:text-pink-600">
+                              Calendar
+                            </a>
                           </li>{" "}
                           {/* <li>
                             <a href="/room">Rooms</a>
                           </li>{" "} */}
                           <li>
-                            <a href="/quiz">Quiz</a>
+                            <a href="/quiz" className="hover:text-pink-600">
+                              Quiz
+                            </a>
                           </li>{" "}
                           <li>
-                            <a href="/contact">Contact</a>
+                            <a href="/contact" className="hover:text-pink-600">
+                              Contact
+                            </a>
                           </li>
                         </>
                       )}
@@ -59,35 +69,41 @@ function Header() {
                       {user && user.result.role === 3 && (
                         <>
                           <li>
-                            <a href="/">Home</a>
+                            <a href="/" className="hover:text-pink-600">
+                              Home
+                            </a>
                           </li>
                           {/* <li>
                             <a href="/room">Rooms</a>
                           </li>{" "} */}
                           <li>
-                            <a href="/dashboard">Dashboard</a>
+                            <a
+                              href="/dashboard"
+                              className="hover:text-pink-600"
+                            >
+                              Dashboard
+                            </a>
                           </li>
                         </>
                       )}
                       {user && user.result.role === 1 && (
                         <>
                           <li>
-                            <a href="/qr">CheckIn</a>
+                            <a href="/qr" className="hover:text-pink-600">
+                              CheckIn
+                            </a>
                           </li>
                           {/* <li>
                             <a href="/room">Rooms</a>
                           </li>{" "} */}
                         </>
                       )}
+                      <li>
+                        <a onClick={onLogout} type="submit">
+                          <span className="hover:text-pink-600">Logout</span>
+                        </a>
+                      </li>
                     </ul>
-                    <div className="cart-ticket">
-                      <button
-                        onClick={onLogout}
-                        className="ticket-btn lab-btn "
-                      >
-                        <span>Logout</span>
-                      </button>
-                    </div>
 
                     <div className="header-bar d-lg-none">
                       <span></span>
@@ -99,10 +115,12 @@ function Header() {
                   <div className="menu-area">
                     <ul className="menu">
                       <li>
-                        <a href="/">Home</a>
+                        <a href="/" className="hover:text-pink-600">
+                          Home
+                        </a>
                       </li>
                       <Link to="/login" className=" ticket-btn lab-btn  ">
-                        <span> Login</span>
+                        <span className="hover:text-pink-600"> Login</span>
                       </Link>
                     </ul>
                   </div>

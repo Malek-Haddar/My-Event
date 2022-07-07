@@ -21,6 +21,7 @@ import { Footer, Sidebar, ThemeSettings } from "../components/dashboard";
 
 import { useStateContext } from "../contexts/ContextProvider";
 import { SiIfixit, SiVerizon } from "react-icons/si";
+import { toast } from "react-toastify";
 
 function Category() {
   const navigate = useNavigate();
@@ -86,6 +87,7 @@ function Category() {
     };
     console.log(data);
     dispatch(affectSessionToCategory(data));
+    toast("Category Affected 👏");
   };
 
   const clearCategory = () => {
@@ -94,6 +96,7 @@ function Category() {
     };
     dispatch(deleteCategory(data));
     dispatch(getCategories());
+    toast.error("🛑 category has been deleted ");
   };
 
   return (

@@ -24,6 +24,7 @@ import Room from "./pages/Room";
 import ChatLogin from "./pages/ChatLogin";
 import Customers from "./pages/Customers";
 import DashCalendar from "./pages/DashCalendar";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/dash-calendar" element={<DashCalendar />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/sessions" element={<Session />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         {/* <Footer /> */}
       </Router>

@@ -76,7 +76,7 @@ const pusher = new Pusher({
 mongoose.connection.once("open", () => {
   console.log("DB Connected...");
 
-  const changeStream = mongoose.connection.collection("discords").watch();
+  const changeStream = mongoose.connection.collection("conversations").watch();
 
   changeStream.on("change", (change) => {
     if (change.operationType === "insert") {
@@ -84,7 +84,7 @@ mongoose.connection.once("open", () => {
         change: change,
       });
     } else if (change.operationType === "update") {
-      pusher.trigger("conversation", "newMessage", {
+      pusher.trigger("conversations", "newMessage", {
         change: change,
       });
     } else {
@@ -130,7 +130,7 @@ app.get("/get/channelList", (req, res) => {
 
 app.post("/new/message", (req, res) => {
   // console.log(req.body);
-  discord.updateMany(
+  discord.update(
     { _id: req.query.id },
     { $push: { conversation: req.body } },
     (err, data) => {
@@ -144,17 +144,15 @@ app.post("/new/message", (req, res) => {
   );
 });
 
-app.get("/get/conversation", async (req, res) => {
-  try {
-    const id = req.query.id;
-    const conversation = await discord
-      .find({ _id: id })
-      ?.populate("conversation.user");
-
-    res.status(200).send(conversation);
-  } catch (error) {
-    res.status(404).json({ message: error });
-  }
+app.get("/get/conversation", (req, res) => {
+  const id = req.query.id;
+  discord.find({ _id: id }, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 // app.get("/get/conversation", (req, res) => {

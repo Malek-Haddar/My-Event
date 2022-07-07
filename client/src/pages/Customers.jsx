@@ -37,6 +37,7 @@ import { deleteCustomer, getUsers, reset } from "../features/users/userSlice";
 import { SiIfixit, SiVerizon } from "react-icons/si";
 import { affectCategoryToAttendee } from "../features/auth/authSlice";
 import { getCategories } from "../features/categories/categorySlice";
+import { toast } from "react-toastify";
 
 const Customers = () => {
   const {
@@ -83,7 +84,7 @@ const Customers = () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(users);
+  console.log({ users });
 
   const affectCategory = () => {
     const data = {
@@ -91,6 +92,7 @@ const Customers = () => {
       idCategory: categoryId,
     };
     dispatch(affectCategoryToAttendee(data));
+    toast("User Affected 👏");
   };
 
   const clearCustomer = () => {
@@ -99,6 +101,7 @@ const Customers = () => {
     };
     dispatch(deleteCustomer(data));
     dispatch(getUsers());
+    toast.error("🛑 User has been deleted ");
   };
 
   useEffect(() => {
@@ -213,7 +216,7 @@ const Customers = () => {
                                       setCategoryId(e.target.value)
                                     }
                                   >
-                                    {users ? (
+                                    {users && user?.category[0] ? (
                                       <option value="">
                                         {user?.category[0]?.name}
                                       </option>

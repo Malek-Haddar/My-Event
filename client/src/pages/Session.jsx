@@ -38,6 +38,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import avatar3 from "../data/avatar3.png";
 import SessionForm from "../components/session/SessionForm";
 import { SiIfixit, SiVerizon } from "react-icons/si";
+import { toast } from "react-toastify";
 
 function Session() {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ function Session() {
       idEvent: eventId,
     };
     dispatch(affectSessionToEvent(data));
+    toast("Session Affected 👏");
   };
   const clearSession = () => {
     const data = {
@@ -82,6 +84,7 @@ function Session() {
     };
     dispatch(deleteSession(data));
     dispatch(getSessions());
+    toast.error("🛑 User has been deleted ");
   };
 
   const {
@@ -285,10 +288,13 @@ function Session() {
                                         setEventId(e.target.value)
                                       }
                                     >
-                                      <option value="">
-                                        {session?.event?.name}
-                                      </option>
-
+                                      {session?.event ? (
+                                        <option value="">
+                                          {session?.event?.name}
+                                        </option>
+                                      ) : (
+                                        <option value="">- Select -</option>
+                                      )}
                                       {events.map((event) => (
                                         <option
                                           key={event._id}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { login } from "../../features/auth/authSlice";
 import { createQuiz, reset } from "../../features/quiz/quizSlice";
 import OldNavbar from "../dashboard/OldNavbar";
@@ -84,6 +85,7 @@ const QuizForm = () => {
       ],
     };
     dispatch(createQuiz(quizData), setFormData(""));
+    toast("Session added successfully👏");
   };
 
   // if (isLoading) {

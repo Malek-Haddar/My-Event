@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createSession, reset } from "../../features/sessions/sessionSlice";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 
 function SessionForm() {
   const [formData, setFormData] = useState({
@@ -54,6 +55,7 @@ function SessionForm() {
       details,
     };
     dispatch(createSession(sessionData), setFormData(""));
+    toast("Session added successfully👏");
   };
 
   // if (isLoading) {

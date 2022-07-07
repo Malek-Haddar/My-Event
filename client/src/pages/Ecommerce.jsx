@@ -136,108 +136,128 @@ const Ecommerce = () => {
     text: category?.name,
   }));
 
-  // const questionz = (e) => {
-  //   for (let i = 0; i < checkedUser.length; i++) {
-  //     winner = 0
-  //    if (checkedUser[i] < checkedUser[i + 1]) {
 
-  //   }
-  // };
-   const SparklineAreaData = users.map((user) => (
-    [{x: user?._id, yval: user.checkIn.length}]
-  ))
-  
-  // const checkedUser = users.map((user) => ({
-  //   checkNum: user?.checkIn,
-  // }));
+   const SparklineAreaData = users.map((user) => [
+     { x: user?._id, yval: user.checkIn.length },
+   ]);
 
-  let top = 0;
-  let topUser = null;
+   let top = 0;
+   let topUser = null;
 
-  users.forEach((user) => {
-    if (user.checkIn.length > top) {
-      topUser = user;
-      top = user.checkIn.length;
-    }
-  });
+   users.forEach((user) => {
+     if (user.checkIn.length > top) {
+       topUser = user;
+       top = user.checkIn.length;
+     }
+   });
 
-  console.log({ topUser, top });
+   //  const onSubmit = (e) => {
+   //   e.preventDefault();
 
-  // console.log({ checkedUser });
+   //   const sessionData = {
+   //     name,
+   //     start,
+   //     end,
+   //     details,
+   //   };
+   //   dispatch(createSession(sessionData), setFormData(""));
+   //   toast("Session added successfully👏");
+   // };
 
-  // function getArrayMax() {
-  //   return Math.max.apply(null, checkedUser.checkedUser.length);
-  // }
-  // if (checkedUser.checkIn.length !== 0) {
-  //   const max = Math.max.apply(null, checkedUser.checkIn.length);
+   return (
+     <div className="mt-24">
+       <div className="flex flex-wrap lg:flex-nowrap justify-center ">
+         <div className="flex m-3 flex-wrap justify-center gap-1 items-center text-black">
+           {earningData.map((item) => (
+             <div
+               key={item.title}
+               className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl "
+             >
+               <button
+                 type="button"
+                 style={{ color: item.iconColor, backgroundColor: item.iconBg }}
+                 className="text-2xl opacity-0.9 rounded-full  p-4 hover:drop-shadow-xl"
+               >
+                 {item.icon}
+               </button>
+               <p className="mt-3">
+                 <span className="text-lg font-semibold">{item.amount}</span>
+                 <span className={`text-sm text-${item.pcColor} ml-2`}>
+                   {item.percentage}
+                 </span>
+               </p>
+               <p className="text-sm text-gray-400  mt-1">{item.title}</p>
+             </div>
+           ))}
+         </div>
+       </div>
 
-  //   console.log({ max });
-  // } else {
-  //   console.log("fama chay");
-  // }
+       <div className="flex gap-10 flex-wrap justify-center">
+         <div className="flex flex-nowrap">
+           <div
+             className=" rounded-2xl md:w-400 p-4 m-3"
+             style={{ backgroundColor: currentColor }}
+           >
+             <div className="flex justify-between items-center ">
+               <p className="font-semibold text-white text-2xl">Winner</p>
 
-  return (
-    <div className="mt-24">
-      <div className="flex flex-wrap lg:flex-nowrap justify-center ">
-     
-        <div className="flex m-3 flex-wrap justify-center gap-1 items-center text-black">
-          {earningData.map((item) => (
-            <div
-              key={item.title}
-              className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl "
-            >
-              <button
-                type="button"
-                style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-                className="text-2xl opacity-0.9 rounded-full  p-4 hover:drop-shadow-xl"
-              >
-                {item.icon}
-              </button>
-              <p className="mt-3">
-                <span className="text-lg font-semibold">{item.amount}</span>
-                <span className={`text-sm text-${item.pcColor} ml-2`}>
-                  {item.percentage}
-                </span>
-              </p>
-              <p className="text-sm text-gray-400  mt-1">{item.title}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+               <div>
+                 <p className="text-2xl text-white font-semibold mt-8">
+                   {topUser?.name}
+                 </p>
+                 <p className="text-gray-200">with {top} Sessions</p>
+               </div>
+             </div>
 
-
-      <div className="flex gap-10 flex-wrap justify-center">
-        <div className="flex flex-nowrap">
-          <div
-            className=" rounded-2xl md:w-400 p-4 m-3"
-            style={{ backgroundColor: currentColor }}
-          >
-            <div className="flex justify-between items-center ">
-              <p className="font-semibold text-white text-2xl">Winner</p>
-
-              <div>
-                <p className="text-2xl text-white font-semibold mt-8">
-                  {topUser?.name}
-                </p>
-                <p className="text-gray-200">with {top} Sessions</p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <SparkLine
-                currentColor={currentColor}
-                id="column-sparkLine"
-                height="100px"
-                type="Column"
-                data={SparklineAreaData1}
-                width="320"
-                color="rgb(242, 252, 253)"
-              />
-            </div>
-          </div>
-          </div>
-          </div>
-      {/* <div className="flex gap-10 flex-wrap justify-center">
+             <div className="mt-4">
+               <SparkLine
+                 currentColor={currentColor}
+                 id="column-sparkLine"
+                 height="100px"
+                 type="Column"
+                 data={SparklineAreaData1}
+                 width="320"
+                 color="rgb(242, 252, 253)"
+               />
+             </div>
+           </div>
+         </div>
+         <div className="flex flex-nowrap">
+           <div className=" rounded-2xl md:w-400 p-4 m-3 bg-emerald-400">
+             <div>
+               <label
+                 htmlFor="about"
+                 className="block font-semibold text-white text-2xl"
+               >
+                 Notification
+               </label>
+               <form /* onSubmit={onSubmit} */>
+                 <div className="mt-1">
+                   <textarea
+                     id="about"
+                     rows={3}
+                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md text-slate-500 "
+                     placeholder="notification message"
+                     defaultValue={""}
+                     name="notif"
+                     //  value={notif}
+                     //  onChange={onChange}
+                   />
+                 </div>
+                 <div className="flex justify-end">
+                   <button
+                     className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-amber-300 rounded-lg shadow-md hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 mt-2"
+                     type="submit"
+                   >
+                     Send
+                   </button>
+                 </div>
+               </form>
+             </div>
+           </div>
+         </div>
+       </div>
+       {/* <div className="flex gap-10 flex-wrap justify-center">
         <div className="flex flex-nowrap">
       <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
           <div className="flex justify-between items-center">
@@ -265,7 +285,7 @@ const Ecommerce = () => {
         </div>
         </div></div> */}
 
-     {/* <div className="flex gap-10 flex-wrap justify-center">
+       {/* <div className="flex gap-10 flex-wrap justify-center">
         <div className="flex flex-nowrap">
           <div
             className=" rounded-2xl md:w-400 p-4 m-3"
@@ -375,7 +395,7 @@ const Ecommerce = () => {
         </div>
       </div>  */}
 
-      {/* <div className="flex gap-10 m-4 flex-wrap justify-center">
+       {/* <div className="flex gap-10 m-4 flex-wrap justify-center">
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl">
           <div className="flex justify-between items-center gap-2">
             <p className="text-xl font-semibold">Recent Transactions</p>
@@ -573,8 +593,8 @@ const Ecommerce = () => {
           </div>
         </div>
       </div> */}
-    </div>
-  );
+     </div>
+   );
 };;
 
 export default Ecommerce;

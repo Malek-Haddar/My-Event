@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createEvent, reset } from "../../features/events/eventSlice";
 import Spinner from "../../components/Spinner";
+import { toast } from "react-toastify";
 
 function EventForm() {
   const [formData, setFormData] = useState({
@@ -58,6 +59,7 @@ function EventForm() {
       status,
     };
     dispatch(createEvent(eventData), setFormData(""));
+    toast("Event added successfully👏");
   };
 
   // if (isLoading) {
