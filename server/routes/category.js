@@ -4,7 +4,7 @@ import {
   createCategory,
   updateCategory,
   DeleteCategory,
-  notifyCategory,
+  notifCategory,
 } from "../controllers/category.js";
 import { affectSessionToCategory } from "../controllers/category.js";
 
@@ -15,7 +15,7 @@ router.post("/add", createCategory);
 router.patch("/:id", updateCategory);
 router.delete("/:id", DeleteCategory);
 router.patch("/category/affect", affectSessionToCategory);
-router.patch("/category/notifyCategory", notifyCategory);
+router.patch("/category/notifyCategory", notifCategory);
 
 
 export default router;  
