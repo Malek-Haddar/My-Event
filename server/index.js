@@ -94,7 +94,9 @@ mongoose.connection.once("open", () => {
 });
 
 //api routes
-app.get("/chat", (req, res) => res.status(200).send("hello there discord"));
+app.get("/chat", (req, res) =>
+  res.status(200).send("hello there discord form Pin Event")
+);
 
 app.post("/new/channel", (req, res) => {
   const dbData = req.body;
