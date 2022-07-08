@@ -1,70 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   affectQuizToSession,
+  deleteQuiz,
   getQuizzes,
   reset,
 } from "../../features/quiz/quizSlice";
-import Spinner from "../Spinner";
 import QuizForm from "./QuizForm";
-import {
-  GridComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  Page,
-  Selection,
-  Inject,
-  Edit,
-  Toolbar,
-  Sort,
-  Filter,
-  PdfExport,
-  ExcelExport,
-} from "@syncfusion/ej2-react-grids";
 
-import { customersData, customersGrid } from "../../data/dummy";
-import { Header } from "../dashboard";
-
-import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { FiSettings } from "react-icons/fi";
 
-import { Navbar, Footer, Sidebar, ThemeSettings } from "../dashboard";
 import "../../App.css";
+import { Footer, Navbar, Sidebar, ThemeSettings } from "../dashboard";
 
 import { useStateContext } from "../../contexts/ContextProvider";
 // import { getUsers, reset } from "../features/profiles/profileSlice";
-import avatar3 from "../../data/avatar3.png";
-import { SiIfixit, SiVerizon } from "react-icons/si";
 import { getSessions } from "../../features/sessions/sessionSlice";
+import { toast } from "react-toastify";
 
 const QuizItem = () => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const { user } = useSelector((state) => state.auth);
   const { quizzes, isLoading, isError, message } = useSelector(
     (state) => state.quizzes
   );
-
-  // useEffect(() => {
-  //   if (isError) {
-  //     console.log(message);
-  //   }
-
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-
-  //   dispatch(getQuizzes());
-
-  //   return () => {
-  //     dispatch(reset());
-  //   };
-  // }, [user, navigate, isError, message, dispatch]);
-
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
 
   const {
     setCurrentColor,
@@ -104,15 +63,6 @@ const QuizItem = () => {
   }, [navigate, isError, message, dispatch]);
   console.log({ quizzes });
 
-  // const affectCategory = () => {
-  //   const data = {
-  //     idCategory: categoryId,
-  //     idSession: sessionId,
-  //   };
-  //   console.log(data);
-  //   dispatch(affectSessionToCategory(data));
-  // };
-
   const affectToSession = () => {
     const data = {
       idQuiz: quizId,
@@ -122,29 +72,13 @@ const QuizItem = () => {
     dispatch(affectQuizToSession(data));
   };
 
-  // const clearQuiz = () => {
-  //   const data = {
-  //     quizId,
-  //   };
-  //   dispatch(deleteQuiz(data));
-  //   dispatch(getQuizzes());
-  // };
-  const selectionsettings = { persistSelection: true };
-  const toolbarOptions = [
-    "Add",
-    "Edit",
-    "Delete",
-    "Update",
-    "Cancel",
-    "PdfExport",
-    "ExcelExport",
-  ];
-  const editing = {
-    allowDeleting: true,
-    allowEditing: true,
-    allowAdding: true,
-    allowPdfExport: true,
-    allowExcelExport: true,
+  const clearQuiz = () => {
+    const data = {
+      quizId,
+    };
+    dispatch(deleteQuiz(data));
+    dispatch(getQuizzes());
+    toast.error("🛑 Quiz has been deleted ");
   };
 
   useEffect(() => {
@@ -155,18 +89,6 @@ const QuizItem = () => {
       setCurrentMode(currentThemeMode);
     }
   }, []);
-
-  const customersData = quizzes.map((profile) => ({
-    CustomerID: profile?._id,
-    CustomerName: profile?.description,
-    CustomerEmail: "",
-    CustomerImage: avatar3,
-    ProjectName: profile?.alternatives[1]?.text,
-    Status: profile?.alternatives[2]?.text,
-    Weeks: profile?.alternatives[3]?.text,
-    Budget: profile?.alternatives[4]?.text,
-    Location: profile?.alternatives[0]?.text,
-  }));
 
   return (
     <>
@@ -206,7 +128,208 @@ const QuizItem = () => {
             </div>
             <div>
               {themeSettings && <ThemeSettings />}
-              <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+              <div className="container mx-auto px-4 sm:px-8 max-w-5xl">
+                <div className="py-8">
+                  <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                    <h2 className=" text-2xl font-bold text-black">Quizzes</h2>
+                    <div className="text-end">
+                      <div className="flex flex-col md:flex-row w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+                        <button
+                          className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 text-center"
+                          type="submit"
+                          data-toggle="modal"
+                          data-target="#addOrderModalside"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                    <div className="inline-block min-w-full shadow rounded-xl overflow-hidden">
+                      <table className="min-w-full leading-normal">
+                        <thead>
+                          {/*     <th>Name</th>
+                                <th>Answers</th>
+                                <th>Session</th> */}
+                          <tr>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800   text-sm uppercase font-normal"
+                            >
+                              Name
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800   text-sm uppercase font-normal"
+                            >
+                              Answers
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800   text-sm uppercase font-normal"
+                            >
+                              Session
+                            </th>
+
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800   text-sm uppercase font-normal"
+                            ></th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800   text-sm uppercase font-normal"
+                            ></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {quizzes.map((quiz) => (
+                            <tr>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0  custom-checkbox">
+                                    <input
+                                      type="checkbox"
+                                      className="custom-control-input"
+                                      id={quiz._id}
+                                      required=""
+                                      onChange={(e) =>
+                                        setQuizId(e.target.value)
+                                      }
+                                      value={quiz._id}
+                                    />
+                                    <label
+                                      className="custom-control-label"
+                                      htmlFor={quiz._id}
+                                    ></label>
+                                  </div>
+
+                                  <div className="ml-3">
+                                    <p className="text-gray-900 whitespace-no-wrap">
+                                      {quiz.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <select className="text-gray-900  border-1 rounded-md w-full">
+                                  {quiz.alternatives.map((answer) => (
+                                    <option
+                                      key={answer._id}
+                                      value={answer.text}
+                                    >
+                                      {answer.text}
+                                    </option>
+                                  ))}
+                                </select>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <select
+                                  className="text-gray-900  border-1 rounded-md"
+                                  onChange={(e) => setSessionId(e.target.value)}
+                                >
+                                  <option value="">- Select -</option>
+
+                                  {sessions.map((session) => (
+                                    <option
+                                      key={session._id}
+                                      value={session._id}
+                                    >
+                                      {session.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </td>
+
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <a
+                                  type="submit"
+                                  className="text-green-500 hover:text-green-900"
+                                  onClick={() => {
+                                    affectToSession();
+                                  }}
+                                >
+                                  Affect
+                                </a>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <a
+                                  type="submit"
+                                  className="text-red-500 hover:text-rose-900"
+                                  onClick={() => {
+                                    clearQuiz();
+                                  }}
+                                >
+                                  Delete
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div className="px-5 bg-white py-2 flex flex-col xs:flex-row items-center xs:justify-between">
+                        <div className="flex items-center">
+                          <button
+                            type="button"
+                            className="w-full p-3 border text-base rounded-l-xl text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            <svg
+                              width="9"
+                              fill="currentColor"
+                              height="8"
+                              className=""
+                              viewBox="0 0 1792 1792"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"></path>
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border-t border-b text-base text-indigo-500 bg-white hover:bg-gray-100 "
+                          >
+                            1
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            2
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border-t border-b text-base text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            3
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            4
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full p-3 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            <svg
+                              width="9"
+                              fill="currentColor"
+                              height="8"
+                              className=""
+                              viewBox="0 0 1792 1792"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
                 <div className="flex items-center">
                   <Header category="Page" title="Quiz List" />
                   <div className="px-4 py-3 text-left sm:px-6">
@@ -349,7 +472,7 @@ const QuizItem = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <Footer />
           </div>

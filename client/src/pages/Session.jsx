@@ -96,72 +96,6 @@ function Session() {
     themeSettings,
     setThemeSettings,
   } = useStateContext();
-
-  // // const { user } = useSelector((state) => state.auth);
-  // const { users, isLoading, isError, message } = useSelector(
-  //   (state) => state.users
-  // );
-  // useEffect(() => {
-  //   if (isError) {
-  //     console.log(message);
-  //   }
-
-  //   // if (!user) {
-  //   //   navigate("/login");
-  //   // }
-
-  //   dispatch(getUsers());
-
-  //   return () => {
-  //     dispatch(reset());
-  //   };
-  // }, [navigate, isError, message, dispatch]);
-  // console.log({ users });
-  const selectionsettings = { persistSelection: true };
-  const toolbarOptions = [
-    "Add",
-    "Edit",
-    "Delete",
-    "Update",
-    "Cancel",
-    "PdfExport",
-    "ExcelExport",
-  ];
-  const editing = {
-    allowDeleting: true,
-    allowEditing: true,
-    allowAdding: true,
-    allowPdfExport: true,
-    allowExcelExport: true,
-  };
-
-  useEffect(() => {
-    const currentThemeColor = localStorage.getItem("colorMode");
-    const currentThemeMode = localStorage.getItem("themeMode");
-    if (currentThemeColor && currentThemeMode) {
-      setCurrentColor(currentThemeColor);
-      setCurrentMode(currentThemeMode);
-    }
-  }, []);
-
-  const customersData = sessions.map((profile) => ({
-    CustomerID: profile?._id,
-    CustomerName: profile?.name,
-    CustomerEmail: "",
-    CustomerImage: avatar3,
-    ProjectName: profile?.start,
-    Status: profile?.end,
-    Weeks: profile?.details,
-    Budget: profile?.likes?.length,
-    Location: "Tunisia",
-  }));
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
-  // function toggleModal() {
-  //   document.getElementById("modal").classList.toggle("hidden");
-  // }
-
   return (
     <>
       <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -194,182 +128,241 @@ function Session() {
                 : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
             }
           >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+            <div className="relative md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
               <Navbar />
             </div>
             <div>
               {themeSettings && <ThemeSettings />}
-              <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-                <div className="flex items-center">
-                  <Header category="Page" title="Sessions" />
-                  <div className="px-4 py-3 text-left sm:px-6">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      data-toggle="modal"
-                      data-target="#addOrderModalside"
-                    >
-                      Add
-                    </button>
-                  </div>
-                </div>
-                <div className="overflow-auto ">
-                  <div className="container-fluid">
-                    <div className="row">
-                      <div className="col-xl-12">
-                        <div
-                          className="table-responsive align-content-center h-4/5"
-                          style={{
-                            borderRadius: "5px",
-                          }}
+              <div className="container mx-auto px-4 sm:px-8 max-w-5xl">
+                <div className="py-8">
+                  <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                    <h2 className=" text-2xl font-bold text-black">Sessions</h2>
+                    <div className="text-end">
+                      <div className="flex flex-col md:flex-row w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+                        <button
+                          className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 text-center"
+                          type="submit"
+                          data-toggle="modal"
+                          data-target="#addOrderModalside"
                         >
-                          <table
-                            id="example2"
-                            className="table card-table display dataTablesCard table-auto overflow-scroll w-full"
-                          >
-                            <thead>
-                              <tr>
-                                <th></th>
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                    <div className="inline-block min-w-full shadow rounded-xl overflow-hidden">
+                      <table className="min-w-full leading-normal">
+                        <thead>
+                          <tr>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            >
+                              Name
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            >
+                              Start Date
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            >
+                              End Date
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            >
+                              Details
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            >
+                              Event
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            ></th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            ></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {sessions.map((session) => (
+                            <tr>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0  custom-checkbox">
+                                    <input
+                                      type="checkbox"
+                                      className="custom-control-input"
+                                      id={session._id}
+                                      required=""
+                                      onChange={(e) =>
+                                        setSessionId(e.target.value)
+                                      }
+                                      value={session._id}
+                                    />
+                                    <label
+                                      className="custom-control-label"
+                                      htmlFor={session._id}
+                                    ></label>
+                                  </div>
 
-                                <th>Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Details</th>
-                                <th>Event</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {sessions.map((session) => (
-                                <tr key={session._id}>
-                                  <td>
-                                    <div className="checkbox mr-0 align-self-center">
-                                      <div className="custom-control custom-checkbox ">
-                                        <input
-                                          type="checkbox"
-                                          className="custom-control-input"
-                                          id={session._id}
-                                          required=""
-                                          onChange={(e) =>
-                                            setSessionId(e.target.value)
-                                          }
-                                          value={session._id}
-                                        />
-                                        <label
-                                          className="custom-control-label"
-                                          htmlFor={session._id}
-                                        ></label>
-                                      </div>
-                                    </div>
-                                  </td>
-
-                                  <td> {session.name}</td>
-                                  <td>
-                                    {" "}
+                                  <div className="ml-3">
+                                    <p className="text-gray-900 whitespace-no-wrap">
+                                      {session.name}
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                  <span
+                                    aria-hidden="true"
+                                    className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                                  ></span>
+                                  <span className="relative">
                                     {new Date(session.start).toLocaleString(
                                       "en-US"
-                                    )}{" "}
-                                  </td>
-                                  <td>
-                                    {" "}
+                                    )}
+                                  </span>
+                                </span>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                  <span
+                                    aria-hidden="true"
+                                    className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
+                                  ></span>
+                                  <span className="relative">
                                     {new Date(session.end).toLocaleString(
                                       "en-US"
-                                    )}{" "}
-                                  </td>
-                                  <td>
-                                    <span className="text-nowrap">
-                                      {session.details}{" "}
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <select
-                                      className="text-primary border-1 rounded-md  rounded-md "
-                                      onChange={(e) =>
-                                        setEventId(e.target.value)
-                                      }
-                                    >
-                                      {session?.event ? (
-                                        <option value="">
-                                          {session?.event?.name}
-                                        </option>
-                                      ) : (
-                                        <option value="">- Select -</option>
-                                      )}
-                                      {events.map((event) => (
-                                        <option
-                                          key={event._id}
-                                          value={event._id}
-                                        >
-                                          {event.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </td>
+                                    )}
+                                  </span>
+                                </span>
+                              </td>
 
-                                  <td>
-                                    <div className="d-flex align-items-center ">
-                                      <a
-                                        className="mr-4 "
-                                        type="submit"
-                                        onClick={() => {
-                                          affectEvent();
-                                        }}
-                                      >
-                                        {" "}
-                                        <SiVerizon />
-                                      </a>
-                                      <a
-                                        type="submit"
-                                        onClick={() => {
-                                          clearSession();
-                                        }}
-                                      >
-                                        <SiIfixit />
-                                      </a>
-                                    </div>
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <p className="text-gray-900 whitespace-no-wrap">
+                                  {session.details}
+                                </p>
+                              </td>
+
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <select
+                                  className="text-gray-900  border-1 rounded-md "
+                                  onChange={(e) => setEventId(e.target.value)}
+                                >
+                                  {session?.event ? (
+                                    <option value="">
+                                      {session?.event?.name}
+                                    </option>
+                                  ) : (
+                                    <option value="">- Select -</option>
+                                  )}
+                                  {events.map((event) => (
+                                    <option key={event._id} value={event._id}>
+                                      {event.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <a
+                                  type="submit"
+                                  className="text-green-500 hover:text-green-900"
+                                  onClick={() => {
+                                    affectEvent();
+                                  }}
+                                >
+                                  Affect
+                                </a>
+                              </td>
+                              <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
+                                <a
+                                  type="submit"
+                                  className="text-red-500 hover:text-rose-900"
+                                  onClick={() => {
+                                    clearSession();
+                                  }}
+                                >
+                                  Delete
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div className="px-5 bg-white py-2 flex flex-col xs:flex-row items-center xs:justify-between">
+                        <div className="flex items-center">
+                          <button
+                            type="button"
+                            className="w-full p-3 border text-base rounded-l-xl text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            <svg
+                              width="9"
+                              fill="currentColor"
+                              height="8"
+                              className=""
+                              viewBox="0 0 1792 1792"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"></path>
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border-t border-b text-base text-indigo-500 bg-white hover:bg-gray-100 "
+                          >
+                            1
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            2
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border-t border-b text-base text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            3
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            4
+                          </button>
+                          <button
+                            type="button"
+                            className="w-full p-3 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100"
+                          >
+                            <svg
+                              width="9"
+                              fill="currentColor"
+                              height="8"
+                              className=""
+                              viewBox="0 0 1792 1792"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+                            </svg>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/*
-                <GridComponent
-                  id="grid"
-                  dataSource={customersData}
-                  enableHover
-                  allowPaging
-                  pageSettings={{ pageCount: 5 }}
-                  selectionSettings={selectionsettings}
-                  toolbar={toolbarOptions}
-                  editSettings={editing}
-                  allowSorting={true}
-                  allowExcelExport={true}
-                  allowPdfExport={true}
-                >
-                  <ColumnsDirective>
-                  
-                    {customersGrid.map((item, index) => (
-                      <ColumnDirective key={index} {...item} />
-                    ))}
-                  </ColumnsDirective>
-                  <Inject
-                    services={[
-                      Page,
-                      Selection,
-                      Toolbar,
-                      Edit,
-                      Sort,
-                      Filter,
-                      PdfExport,
-                      ExcelExport,
-                    ]}
-                  />
-                </GridComponent> */}
               </div>
             </div>
             <Footer />

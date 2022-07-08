@@ -195,7 +195,7 @@ function Pictures() {
                                 </p>
                               </td>
                               <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                                <a href="#" className="block relative">
+                                <a className="block relative">
                                   <img
                                     alt="photo"
                                     src={gallery.selectedFile}

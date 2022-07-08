@@ -67,6 +67,26 @@ export const affectQuizToSession = createAsyncThunk(
   }
 );
 
+// delete quiz
+
+export const deleteQuiz = createAsyncThunk(
+  "quizzes/delete",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await quizService.deleteQuiz(token, data.sessionId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,
@@ -101,7 +121,23 @@ export const quizSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      });
+      })
+      
+      .addCase(deleteQuiz.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteQuiz.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.quizzes = state.quizzes.filter(
+          (quiz) => quiz._id !== action.payload.data.quizId
+        );
+      })
+      .addCase(deleteQuiz.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
   },
 });
 

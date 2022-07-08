@@ -58,15 +58,15 @@ export const createQuiz = async (req, res) => {
 
 export const DeleteQuiz = async (req, res) => {
   try {
-    const _id = req.params.id;
+  const { sessionId } = req.params;
 
-    const question = await Quiz.deleteOne({ _id });
+  const deletedQuiz = await Quiz.deleteOne({ sessionId });
 
-    if (question.deletedCount === 0) {
-      return res.status(404).json({ message: "No Quiz found" });
-    } else {
-      return res.status(204).json();
-    }
+  if (deletedQuiz.deletedCount === 0) {
+    return res.status(404).json({ message: "No Quiz found" });
+  } else {
+    return res.status(204).json();
+  }
   } catch (error) {
     return res.status(500).json({ error: error });
   }

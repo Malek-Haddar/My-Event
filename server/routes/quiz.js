@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", getQuiz);
 router.get("/:id", getOneQuiz);
 router.post("/add", createQuiz);
-router.delete("/:id", DeleteQuiz);
+router.delete("/delete/:quizId", DeleteQuiz);
 
 
 export default router;

@@ -48,10 +48,25 @@ const affectQuizToSession = async (token, data) => {
 
   return response.data;
 };
+// Delete quiz
+const deleteQuiz = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(
+    API_URL + "quiz/delete/" + data,
+    config
+  );
+
+  return response.data;
+};
 const quizService = {
   createQuiz,
   getQuizzes,
   affectQuizToSession,
+  deleteQuiz
 };
 
 export default quizService;
