@@ -172,3 +172,81 @@ app.get("/get/conversation", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+
+// import { createServer } from "http";
+// import { Server } from "socket.io";
+
+// const httpServer = createServer(app);
+// const io = new Server(httpServer, { cors: { origin: "*" } });
+
+// io.on("connection", (socket) => {
+//   console.log("Connection established !!!");
+
+//   getApiAndEmit(socket);
+//   socket.on("disconnect", () => {
+//     console.log("Disconnected");
+//   });
+// });
+
+// const getApiAndEmit = (socket) => {
+//   const response = "response you need";
+//   socket.emit("FromAPI", response);
+// };
+
+// app.set("port", process.env.PORT || 5000);
+
+// httpServer.listen(app.get("port"), function () {
+//   var port = httpServer.address().port;
+//   console.log("Running on : ", port);
+// });
+
+/* Function ============old */
+
+// import { createServer } from "http";
+// import { Server } from "socket.io";
+
+// const httpServer = createServer();
+// const io = new Server(httpServer, {});
+
+// io.on("connection", (socket) => {
+//   console.log("connected to socket !!!");
+// });
+// io.on("connection", (socket) => {
+//   console.log("Connected to socket.io");
+//   socket.on("setup", (userData) => {
+//     socket.join(userData._id);
+//     socket.emit("connected");
+//   });
+// });
+
+// httpServer.listen(3000);
+
+// const PORT = 3000;
+
+// httpServer.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
+
+//   socket.on("join chat", (room) => {
+//     socket.join(room);
+//     console.log("User Joined Room: " + room);
+//   });
+//   socket.on("typing", (room) => socket.in(room).emit("typing"));
+//   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
+
+//   socket.on("new message", (newMessageRecieved) => {
+//     var chat = newMessageRecieved.chat;
+
+//     if (!chat.users) return console.log("chat.users not defined");
+
+//     chat.users.forEach((user) => {
+//       if (user._id == newMessageRecieved.sender._id) return;
+
+//       socket.in(user._id).emit("message recieved", newMessageRecieved);
+//     });
+//   });
+
+//   socket.off("setup", () => {
+//     console.log("USER DISCONNECTED");
+//     socket.leave(userData._id);
+//   });
+// });
