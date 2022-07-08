@@ -65,7 +65,23 @@ export const affectSessionToCategory = createAsyncThunk(
     }
   }
 );
-
+export const notifyCategory = createAsyncThunk(
+  "categories/notifyCategory",
+  async (data, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await categoryService.notifyCategory(token, data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // delete category  Category
 
@@ -134,6 +150,19 @@ export const categorySlice = createSlice({
         );
       })
       .addCase(deleteCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(notifyCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(notifyCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.categories.push(action.payload);
+      })
+      .addCase(notifyCategory.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -74,7 +74,7 @@ export const deleteQuiz = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await quizService.deleteQuiz(token, data.sessionId);
+      return await quizService.deleteQuiz(token, data.quizId);
     } catch (error) {
       const message =
         (error.response &&

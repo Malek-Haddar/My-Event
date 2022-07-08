@@ -13,6 +13,10 @@ const categorySchema = new Schema(
         ref: "Session",
       },
     ],
+    notification: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,

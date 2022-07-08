@@ -77,6 +77,7 @@ const QuizItem = () => {
       quizId,
     };
     dispatch(deleteQuiz(data));
+    console.log({ quizId });
     dispatch(getQuizzes());
     toast.error("🛑 Quiz has been deleted ");
   };
@@ -184,7 +185,7 @@ const QuizItem = () => {
                         </thead>
                         <tbody>
                           {quizzes.map((quiz) => (
-                            <tr>
+                            <tr key={quiz._id}>
                               <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
                                 <div className="flex items-center">
                                   <div className="flex-shrink-0  custom-checkbox">

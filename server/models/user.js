@@ -34,13 +34,13 @@ const userSchema = mongoose.Schema(
         sessions: [{ type: mongoose.Types.ObjectId, ref: "Session" }],
       },
     ],
-    notification: [
-      {
-        subject: { type: String },
-        message: { type: String },
-        userNotif: { type: mongoose.Types.ObjectId, ref: "User" },
-      },
-    ],
+    // notification: [
+    //   {
+    //     subject: { type: String },
+    //     message: { type: String },
+    //     userNotif: { type: mongoose.Types.ObjectId, ref: "User" },
+    //   },
+    // ],
   },
   {
     timestamps: true,

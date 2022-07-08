@@ -53,9 +53,25 @@ const affectSessionToCategory = async (token, data) => {
 
   return response.data;
 };
+const notifyCategory = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const body = {
+    idCategory: data.idCategory,
+    notification: data.notification,
+  };
+  const response = await axios.patch(
+    API_URL + "category/category/notifyCategory",
+    body,
+    config
+  );
+  console.log("data: ", response);
 
-
-
+  return response.data;
+};
 
 // Delete  category  Category
 const deleteCategory = async (token, data) => {
@@ -64,20 +80,17 @@ const deleteCategory = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(
-    API_URL + "category/" + data,
-    config
-  );
+  const response = await axios.delete(API_URL + "category/" + data, config);
 
   return response.data;
 };
-
 
 const categoryService = {
   createCategory,
   getCategories,
   affectSessionToCategory,
-  deleteCategory
+  deleteCategory,
+  notifyCategory,
 };
 
 export default categoryService;
