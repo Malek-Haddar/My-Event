@@ -153,7 +153,7 @@ const Customers = () => {
               <div className="py-8">
                 <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
                   <h2 className=" text-2xl font-bold text-black">Attendees</h2>
-                  <div className="text-end">
+                  {/* <div className="text-end">
                     <div className="flex flex-col md:flex-row w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
                       <button
                         className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 text-center"
@@ -164,7 +164,7 @@ const Customers = () => {
                         Add
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                   <div className="inline-block min-w-full shadow rounded-xl overflow-hidden">

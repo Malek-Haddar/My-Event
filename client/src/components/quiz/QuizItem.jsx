@@ -70,6 +70,8 @@ const QuizItem = () => {
     };
     console.log(data);
     dispatch(affectQuizToSession(data));
+    toast.error("Quiz affected to session 👏");
+
   };
 
   const clearQuiz = () => {

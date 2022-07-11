@@ -15,7 +15,7 @@ router.post("/add", createCategory);
 router.patch("/:id", updateCategory);
 router.delete("/:id", DeleteCategory);
 router.patch("/category/affect", affectSessionToCategory);
-router.patch("/category/notifyCategory", notifCategory);
+router.patch("/category/notification", notifCategory);
 
 
 export default router;  

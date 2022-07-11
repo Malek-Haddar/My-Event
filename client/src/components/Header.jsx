@@ -3,7 +3,8 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
-import { SiPingdom } from "react-icons/si";
+import { SiPingdom, SiStatuspal } from "react-icons/si";
+import Notification from "./Notification";
 
 function Header() {
   const navigate = useNavigate();
@@ -63,6 +64,24 @@ function Header() {
                               Contact
                             </a>
                           </li>
+                          <div className="cart-ticket">
+                            <Notification />
+                          </div>
+                          {/* <li>
+                            <span class="flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                            </span>
+                            <a href="#">notification</a>
+                            <ul className="submenu">
+                              <li>
+                                <a href="">All Speakers</a>
+                              </li>
+                              <li>
+                                <a href="">Speaker Details</a>
+                              </li>
+                            </ul>
+                          </li> */}
                         </>
                       )}
 
@@ -100,7 +119,9 @@ function Header() {
                       )}
                       <li>
                         <a onClick={onLogout} type="submit">
-                          <span className="hover:text-pink-600">Logout</span>
+                          <span className="hover:text-pink-600">
+                            <i class="icofont-power text-xl"></i>
+                          </span>
                         </a>
                       </li>
                     </ul>

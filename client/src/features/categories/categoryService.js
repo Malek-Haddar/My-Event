@@ -1,8 +1,7 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api/";
-const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
-
+const API_URL = "http://localhost:5000/api/";
+// const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
 
 // Create new Category
 const createCategory = async (categoryData, token) => {
@@ -60,11 +59,11 @@ const notifyCategory = async (token, data) => {
     },
   };
   const body = {
-    idCategory: data.idCategory,
+    categoryId: data.categoryId,
     notification: data.notification,
   };
   const response = await axios.patch(
-    API_URL + "category/category/notifyCategory",
+    API_URL + "category/category/notification",
     body,
     config
   );

@@ -105,12 +105,13 @@ function Quiz() {
       </section>
       <section className="flex item-center justify-center w-full">
         <select
-          className="text-pink-600 border-1 rounded-md"
+          className="text-pink-600 border-1 rounded-md text-center"
           onChange={(e) => {
             console.log(e.target.value);
             questionz(e.target.value);
           }}
         >
+          <option value="">-Select-</option>
           {userSession[0]?.category[0]?.sessions.map((session) => (
             <option key={session._id} value={session._id}>
               {session.name}

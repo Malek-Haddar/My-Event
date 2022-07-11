@@ -7,16 +7,16 @@ const categorySchema = new Schema(
       type: String,
       required: [true, "Please add name"],
     },
+    notification: {
+      type: String,
+      required: false,
+    },
     sessions: [
       {
         type: mongoose.Types.ObjectId,
         ref: "Session",
       },
     ],
-    notification: {
-      type: String,
-      required: false,
-    },
   },
   {
     timestamps: true,

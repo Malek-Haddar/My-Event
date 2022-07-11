@@ -73,12 +73,17 @@ export const affectSessionToCategory = async (req, res) => {
 export const notifCategory = async (req, res) => {
   try {
     const { categoryId, notification } = req.body;
+    // const notificated = { notification: notification };
 
-    const categoryNotif = await Category.findByIdAndUpdate(categoryId, {
-      notification: notification,
-    });
-
-    res.status(200).send(categoryNotif);
+    const categoryNotif = await Category.findByIdAndUpdate(
+      categoryId,
+      {
+        notification: notification,
+      },
+      { new: true }
+    );
+    console.log({ categoryNotif });
+    res.status(200).json(categoryNotif);
   } catch (error) {
     res.send(error);
   }
