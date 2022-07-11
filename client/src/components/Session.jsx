@@ -190,7 +190,9 @@ function Session() {
                                     <a href="/vote" className="btn-link ">
                                       <i class="icofont-thumbs-down"></i>{" "}
                                     </a> */}
+                                  </ul>
 
+                                  <div classname="block">
                                     <a
                                       onClick={() =>
                                         dispatch(likeSession(session._id))
@@ -216,8 +218,8 @@ function Session() {
                                     >
                                       <i className="icofont-thumbs-down" />
                                     </a>
-                                    {/* )} */}
-                                  </ul>
+                                  </div>
+                                  {/* )} */}
                                 </div>
                               </div>
                             </div>

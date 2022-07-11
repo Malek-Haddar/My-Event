@@ -3,6 +3,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getEvents, reset } from "../features/events/eventSlice";
+import CountDown from "./event/CountDown";
 import Spinner from "./Spinner";
 
 function Event() {
@@ -40,33 +41,7 @@ function Event() {
             <div className="col-lg-6 col-12 flex items-center justify-center text-center">
               <div className="banner-content">
                 <h1> {events[0]?.name} </h1>
-                {events[0]?.date && (
-                  <ul
-                    id="countdown"
-                    className="countdown count-down justify-center"
-                    data-date={events[0].date}
-                  >
-                    <li className="clock-item">
-                      <span className="count-number days px-1"></span>
-                      <p className="count-text">Days</p>
-                    </li>
-
-                    <li className="clock-item">
-                      <span className="count-number hours"></span>
-                      <p className="count-text">Hour</p>
-                    </li>
-
-                    <li className="clock-item">
-                      <span className="count-number minutes"></span>
-                      <p className="count-text">Min</p>
-                    </li>
-
-                    <li className="clock-item">
-                      <span className="count-number seconds"></span>
-                      <p className="count-text">Sec</p>
-                    </li>
-                  </ul>
-                )}
+                {events[0]?.date && <CountDown />}
                 <div className="md:flex items-center mb-4">
                   <h5 className="flex justify-center text-3xl mr-4">
                     <FaMapMarkerAlt />

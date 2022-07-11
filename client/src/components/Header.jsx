@@ -105,7 +105,7 @@ function Header() {
                       <li>
                         <a onClick={onLogout} type="submit">
                           <span className="hover:text-pink-600">
-                            <i class="icofont-power text-xl"></i>
+                            <i class="icofont-power text-xl w-full"></i>
                           </span>
                         </a>
                       </li>
