@@ -9,29 +9,29 @@ export const auth = async (req, res, next) => {
 
     if (
       req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
+      req.headers.authorization.startsWith("Bearer")
     ) {
       try {
         // Get token from header
-        token = req.headers.authorization.split(' ')[1]
-  
+        token = req.headers.authorization.split(" ")[1];
+
         // Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
-  
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
         // Get user from the token
-        req.user = await User.findById(decoded.id).select('-password')
-  
-        next()
+        req.user = await User.findById(decoded.id).select("-password");
+
+        next();
       } catch (error) {
-        console.log(error)
-        res.status(401)
-        throw new Error('Not authorized')
+        console.log(error);
+
+        return "Not authorized, token failed";
       }
     }
-  
+
     if (!token) {
-      res.status(401)
-      throw new Error('Not authorized, no token')
+      res.status(401);
+      return "Not authorized, no token";
     }
   }
   
