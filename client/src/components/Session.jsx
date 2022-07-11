@@ -177,19 +177,7 @@ function Session() {
                                         .getHours()
                                         .toLocaleString("en-us")}
                                     </li>
-                                    <li>
-                                      {/* <span>
-                                        <i className="icofont-location-pin"></i>
-                                        Summer C
-                                      </span> */}
-                                    </li>
-
-                                    {/* <a href="/vote" className="btn-link ">
-                                      <i class="icofont-thumbs-up"></i>{" "}
-                                    </a>
-                                    <a href="/vote" className="btn-link ">
-                                      <i class="icofont-thumbs-down"></i>{" "}
-                                    </a> */}
+                                    <li></li>
                                   </ul>
 
                                   <div classname="block">
