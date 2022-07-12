@@ -50519,11 +50519,13 @@ ul li {
 .header-wrapper .menu-area .cart-ticket {
   column-gap: 35px;
 }
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .header-wrapper .menu-area .cart-ticket {
     display: none;
   }
 }
+
+*/
 .header-wrapper .menu-area .cart-ticket .cart-icon a {
   color: #fff;
 }

@@ -16,7 +16,7 @@ export const getSession = async (req, res) => {
     //     },
     //   },
     // ]);
-    const Sessions = await Session.find()?.populate("event");
+    const Sessions = await Session.find()?.populate("users");
 
     res.status(200).send(Sessions);
   } catch (error) {

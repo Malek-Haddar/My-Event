@@ -50,7 +50,8 @@ const Qr = () => {
 
   const checkInSession = () => {
     const userData = {
-      idUser: state.result,
+      // idUser: state.result,
+      idUser: "62cd9818eb0089040113265a",
       idSession: sessionId,
     };
     dispatch(checkIn(userData));

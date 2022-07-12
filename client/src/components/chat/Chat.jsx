@@ -23,23 +23,22 @@ function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const getConversation = async (channelId) => {
+  const getConversation = (channelId) => {
     if (channelId) {
-      await axios.get(`/get/conversation?id=${channelId}`).then((res) => {
+      axios.get(`/get/conversation?id=${channelId}`).then((res) => {
         setMessages(res.data[0].conversation);
       });
     }
   };
 
-  useEffect(async () => {
-    await getConversation(channelId);
+  useEffect(() => {
+    getConversation(channelId);
 
-    // const channel = await pusher.subscribe("conversations");
-    // channel.bind("newMessage", function (data) {
-    //   getConversation(channelId);
-    // });
-  }, [channelId, flag]);
-
+    const channel = pusher.subscribe("conversations");
+    channel.bind("newMessage", function (data) {
+      getConversation(channelId);
+    });
+  }, [channelId]);
   const sendMessage = (e) => {
     e.preventDefault();
 
@@ -48,10 +47,9 @@ function Chat() {
       timestamp: Date.now(),
       user: user.result._id,
     });
-    setInput("");
-    setFlag(!flag);
-  };
 
+    setInput("");
+  };
   return (
     <div className="chat">
       <ChatHeader channelName={channelName} />

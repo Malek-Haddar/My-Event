@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import User from "../models/user.js";
 import { sendmail } from "../service/mailing.js";
 import qrcode from "qrcode";
+import session from "../models/session.js";
 
 const router = express.Router();
 
@@ -138,8 +139,15 @@ export const checkIn = async (req, res) => {
       { new: true }
     );
 
-    console.log("checked");
-    res.status(201).send(checkedIn);
+    const checkedSession = await session.findByIdAndUpdate(
+      idSession,
+
+      { $addToSet: { users: idUser } },
+      { new: true }
+    );
+
+    console.log({ checkedSession });
+    res.status(201).send(checkedSession);
     //}
     // res.status(400).json({ message: "Auth Error" });
   } catch (error) {

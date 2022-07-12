@@ -76,7 +76,7 @@ const pusher = new Pusher({
 mongoose.connection.once("open", () => {
   console.log("DB Connected...");
 
-  const changeStream = mongoose.connection.collection("conversations").watch();
+  const changeStream = mongoose.connection.collection("discords").watch();
 
   changeStream.on("change", (change) => {
     if (change.operationType === "insert") {
@@ -94,9 +94,7 @@ mongoose.connection.once("open", () => {
 });
 
 //api routes
-app.get("/chat", (req, res) =>
-  res.status(200).send("hello there discord form Pin Event")
-);
+app.get("/chat", (req, res) => res.status(200).send("hello world discord"));
 
 app.post("/new/channel", (req, res) => {
   const dbData = req.body;
@@ -156,6 +154,7 @@ app.get("/get/conversation", (req, res) => {
     }
   });
 });
+
 
 // app.get("/get/conversation", (req, res) => {
 //   const id = req.query.id;

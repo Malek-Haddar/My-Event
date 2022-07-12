@@ -69,6 +69,7 @@ function Session() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
+  console.log({ sessions });
 
   const affectEvent = () => {
     const data = {
@@ -183,6 +184,12 @@ function Session() {
                               scope="col"
                               className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
                             >
+                              Attendees
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
+                            >
                               Event
                             </th>
                             <th
@@ -255,6 +262,25 @@ function Session() {
                                 <p className="text-gray-900 whitespace-no-wrap">
                                   {session.details}
                                 </p>
+                              </td>
+
+                              <td className="px-3 py-2 border-b border-gray-200 bg-white text-sm">
+                                <select className="text-gray-900  border-1 rounded-md w-full">
+                                  <option
+                                    value={session?.users.length}
+                                    key={session?._id}
+                                  >
+                                    {session?.users.length} - Attendee
+                                  </option>
+                                  {session?.users.map((attendee) => (
+                                    <option
+                                      key={attendee._id}
+                                      value={attendee.name}
+                                    >
+                                      {attendee.name}
+                                    </option>
+                                  ))}
+                                </select>
                               </td>
 
                               <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">

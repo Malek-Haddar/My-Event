@@ -64,9 +64,9 @@ function Header() {
                               Contact
                             </a>
                           </li>
-                          <div className="cart-ticket">
+                          {/* <div className="cart-ticket hidden md:block ">
                             <Notification />
-                          </div>
+                          </div> */}
                         </>
                       )}
 
@@ -110,7 +110,9 @@ function Header() {
                         </a>
                       </li>
                     </ul>
-
+                    <div className="cart-ticket mr-3">
+                      <Notification />
+                    </div>
                     <div className="header-bar d-lg-none">
                       <span></span>
                       <span></span>
