@@ -13,12 +13,12 @@ export const auth = async (req, res, next) => {
       try {
         console.log({ token });
         token = req.headers.authorization.split(" ")[1];
-  
-        if (!token) return "Not authorized, token failed";
-        const decoded = jwt.verify(token, secret);
-  
+
+        // if (!token) return "Not authorized, token failed";
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
         req.user = await User.findById(decoded.id).select("-password");
-  
+
         next();
       } catch (error) {
         console.error(error);

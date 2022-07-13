@@ -102,6 +102,11 @@ function Header() {
                           </li>{" "} */}
                         </>
                       )}
+                      <li className="hidden md:flex items-center">
+                        <div className="cart-ticket ">
+                          <Notification />
+                        </div>
+                      </li>
                       <li>
                         <a onClick={onLogout} type="submit">
                           <span className="hover:text-pink-600">
@@ -110,9 +115,11 @@ function Header() {
                         </a>
                       </li>
                     </ul>
-                    <div className="cart-ticket mr-3">
-                      <Notification />
-                    </div>
+                    <li className="flex md:hidden items-center">
+                      <div className=" cart-ticket ">
+                        <Notification />
+                      </div>
+                    </li>
                     <div className="header-bar d-lg-none">
                       <span></span>
                       <span></span>
