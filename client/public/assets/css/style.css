@@ -50846,6 +50846,7 @@ ul li {
 /*======== Banner css start here  =========*/
 .banner-section {
   background: url(../images/banner/bg.jpg);
+  /* background: url(../images/banner/scout-cover.jpg); */
   background-size: cover;
 }
 .banner-section .banner-wrapper {

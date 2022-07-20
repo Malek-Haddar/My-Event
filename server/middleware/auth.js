@@ -11,8 +11,8 @@ export const auth = async (req, res, next) => {
       req.headers.authorization.startsWith("Bearer")
     ) {
       try {
-        console.log({ token });
         token = req.headers.authorization.split(" ")[1];
+        // console.log({ token });
 
         // if (!token) return "Not authorized, token failed";
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/";
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
 // const API_URL = "https://events.i-techrity.tn/backendEvents/api/";
-
 
 // Create new event
 const createEvent = async (eventData, token) => {
@@ -13,7 +12,7 @@ const createEvent = async (eventData, token) => {
     },
   };
 
-  const response = await axios.post(API_URL + "event/add", eventData, config);
+  const response = await axios.post("api/event/add", eventData, config);
 
   return response.data;
 };
@@ -26,10 +25,9 @@ const getEvents = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL + "event", config);
+  const response = await axios.get( "api/event", config);
   return response.data;
 };
-
 
 // Delete event
 const deleteEvent = async (token, data) => {
@@ -38,17 +36,14 @@ const deleteEvent = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(
-    API_URL + "event/delete/" + data,
-    config
-  );
+  const response = await axios.delete("api/event/delete/" + data, config);
 
   return response.data;
 };
 const eventService = {
   createEvent,
   getEvents,
-  deleteEvent
+  deleteEvent,
 };
 
 export default eventService;

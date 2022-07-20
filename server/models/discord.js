@@ -8,7 +8,7 @@ const discordSchema = new Schema({
       // _id: String,
       message: String,
       timestamp: String,
-      user: {
+      user: { 
         type: mongoose.Types.ObjectId,
         ref: "User",
       },
@@ -16,4 +16,4 @@ const discordSchema = new Schema({
   ],
 });
 
-export default mongoose.model("Discord", discordSchema);
+export default mongoose.model("discords", discordSchema);

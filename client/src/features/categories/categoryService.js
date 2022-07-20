@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/";
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
@@ -11,11 +11,7 @@ const createCategory = async (categoryData, token) => {
     },
   };
 
-  const response = await axios.post(
-    API_URL + "category/add",
-    categoryData,
-    config
-  );
+  const response = await axios.post("api/category/add", categoryData, config);
 
   return response.data;
 };
@@ -28,7 +24,7 @@ const getCategories = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL + "category", config);
+  const response = await axios.get("api/category", config);
   return response.data;
 };
 
@@ -44,7 +40,7 @@ const affectSessionToCategory = async (token, data) => {
     idSession: data.idSession,
   };
   const response = await axios.patch(
-    API_URL + "category/category/affect",
+    "api/category/category/affect",
     body,
     config
   );
@@ -63,7 +59,7 @@ const notifyCategory = async (token, data) => {
     notification: data.notification,
   };
   const response = await axios.patch(
-    API_URL + "category/category/notification",
+    "api/category/category/notification",
     body,
     config
   );
@@ -79,7 +75,7 @@ const deleteCategory = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(API_URL + "category/" + data, config);
+  const response = await axios.delete("api/category/" + data, config);
 
   return response.data;
 };

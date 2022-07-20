@@ -1,8 +1,11 @@
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
+import bodyParser from "body-parser";
 
 import connection from "./config/database.js";
 import compression from "compression";
@@ -18,17 +21,17 @@ import SessionRouter from "./routes/session.js";
 import userRoute from "./routes/user.js";
 import discord from "./models/discord.js";
 import Pusher from "pusher";
+import { auth } from "./middleware/auth.js";
 const __dirname = path.resolve();
 
-dotenv.config();
 const app = express();
 app.use(cors());
-
 connection();
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.json());
 
 app.use(compression());
 
@@ -42,28 +45,6 @@ app.use("/api/posts", postRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/check", attendeeRoutes);
 
-
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../client/build")));
-
-//   app.get("*", (req, res) =>
-//     res.sendFile(
-//       path.resolve(__dirname, "../", "client", "build", "index.html")
-//     )
-//   );
-// } else {
-//   app.get("/", (req, res) => res.send("Please set to production"));
-// } 
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(process.cwd(), "client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(process.cwd(), "client/build/index.html"));
-  });
-} else {
-  app.get("/", (req, res) => res.send("Please set to production"));
-}
-
 const port = process.env.PORT || 4000;
 
 const pusher = new Pusher({
@@ -73,10 +54,11 @@ const pusher = new Pusher({
   cluster: "us2",
   useTLS: true,
 });
+
 mongoose.connection.once("open", () => {
   console.log("DB Connected...");
 
-  const changeStream = mongoose.connection.collection("discords").watch();
+  const changeStream = mongoose.connection.collection("conversations").watch();
 
   changeStream.on("change", (change) => {
     if (change.operationType === "insert") {
@@ -92,12 +74,12 @@ mongoose.connection.once("open", () => {
     }
   });
 });
-
 //api routes
-app.get("/chat", (req, res) => res.status(200).send("hello world discord"));
+app.get("/api/chat", (req, res) => res.status(200).send("hello world discord"));
 
-app.post("/new/channel", (req, res) => {
+app.post("/api/new/channel", (req, res) => {
   const dbData = req.body;
+  console.log({ dbData });
 
   discord.create(dbData, (err, data) => {
     if (err) {
@@ -108,7 +90,7 @@ app.post("/new/channel", (req, res) => {
   });
 });
 
-app.get("/get/channelList", (req, res) => {
+app.get("/api/get/channelList", (req, res) => {
   discord.find((err, data) => {
     if (err) {
       res.status(500).send(err);
@@ -121,6 +103,7 @@ app.get("/get/channelList", (req, res) => {
           name: channeData.channelName,
         };
         channels.push(channelInfo);
+        console.log({ channels });
       });
 
       res.status(200).send(channels);
@@ -128,9 +111,9 @@ app.get("/get/channelList", (req, res) => {
   });
 });
 
-app.post("/new/message", (req, res) => {
+app.post("/api/new/message", (req, res) => {
   // console.log(req.body);
-  discord.update(
+  discord.updateMany(
     { _id: req.query.id },
     { $push: { conversation: req.body } },
     (err, data) => {
@@ -144,17 +127,18 @@ app.post("/new/message", (req, res) => {
   );
 });
 
-app.get("/get/conversation", (req, res) => {
-  const id = req.query.id;
-  discord.find({ _id: id }, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
+app.get("/api/get/conversation", async (req, res) => {
+  try {
+    const id = req.query.id;
+    const conversation = await discord
+      .find({ _id: id })
+      ?.populate("conversation.user");
 
+    res.status(200).send(conversation);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+});
 
 // app.get("/get/conversation", (req, res) => {
 //   const id = req.query.id;
@@ -169,85 +153,15 @@ app.get("/get/conversation", (req, res) => {
 //     ?.populate("user");
 // });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(process.cwd(), "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(process.cwd(), "client/build/index.html"));
+  });
+} else {
+  app.get("/", (req, res) => res.send("Please set to production"));
+}
 //listener
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
-
-// import { createServer } from "http";
-// import { Server } from "socket.io";
-
-// const httpServer = createServer(app);
-// const io = new Server(httpServer, { cors: { origin: "*" } });
-
-// io.on("connection", (socket) => {
-//   console.log("Connection established !!!");
-
-//   getApiAndEmit(socket);
-//   socket.on("disconnect", () => {
-//     console.log("Disconnected");
-//   });
-// });
-
-// const getApiAndEmit = (socket) => {
-//   const response = "response you need";
-//   socket.emit("FromAPI", response);
-// };
-
-// app.set("port", process.env.PORT || 5000);
-
-// httpServer.listen(app.get("port"), function () {
-//   var port = httpServer.address().port;
-//   console.log("Running on : ", port);
-// });
-
-/* Function ============old */
-
-// import { createServer } from "http";
-// import { Server } from "socket.io";
-
-// const httpServer = createServer();
-// const io = new Server(httpServer, {});
-
-// io.on("connection", (socket) => {
-//   console.log("connected to socket !!!");
-// });
-// io.on("connection", (socket) => {
-//   console.log("Connected to socket.io");
-//   socket.on("setup", (userData) => {
-//     socket.join(userData._id);
-//     socket.emit("connected");
-//   });
-// });
-
-// httpServer.listen(3000);
-
-// const PORT = 3000;
-
-// httpServer.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
-
-//   socket.on("join chat", (room) => {
-//     socket.join(room);
-//     console.log("User Joined Room: " + room);
-//   });
-//   socket.on("typing", (room) => socket.in(room).emit("typing"));
-//   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
-
-//   socket.on("new message", (newMessageRecieved) => {
-//     var chat = newMessageRecieved.chat;
-
-//     if (!chat.users) return console.log("chat.users not defined");
-
-//     chat.users.forEach((user) => {
-//       if (user._id == newMessageRecieved.sender._id) return;
-
-//       socket.in(user._id).emit("message recieved", newMessageRecieved);
-//     });
-//   });
-
-//   socket.off("setup", () => {
-//     console.log("USER DISCONNECTED");
-//     socket.leave(userData._id);
-//   });
-// });

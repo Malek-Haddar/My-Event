@@ -1,11 +1,9 @@
-import axios from "axios";
+import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/reclamation/";
 // const API_URL = "http://localhost:5000/api/";
 
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
-
-
 
 // Create new Contact
 const createContact = async (contactData, token) => {
@@ -15,7 +13,11 @@ const createContact = async (contactData, token) => {
     },
   };
 
-  const response = await axios.post(API_URL + "reclamation/add", contactData, config);
+  const response = await axios.post(
+    "api/reclamation/add",
+    contactData,
+    config
+  );
 
   return response.data;
 };
@@ -28,7 +30,7 @@ const getContacts = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL+ "reclamation", config);
+  const response = await axios.get( "api/reclamation", config);
   return response.data;
 };
 

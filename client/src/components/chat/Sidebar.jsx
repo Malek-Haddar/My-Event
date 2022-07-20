@@ -26,10 +26,9 @@ function Sidebar() {
   const [channels, setChannels] = useState([]);
   const [flag, setFlag] = useState(false);
 
-  const getChannels = async () => {
-    await axios.get("/get/channelList").then((res) => {
+  const getChannels = () => {
+    axios.get("api/get/channelList").then((res) => {
       setChannels(res.data);
-      console.log(res.data);
     });
   };
 
@@ -47,13 +46,46 @@ function Sidebar() {
     const channelName = prompt("Enter a new channel name");
 
     if (channelName) {
-      axios.post("/new/channel", { channelName: channelName });
+      axios.post("api/new/channel", { channelName: channelName });
     }
     setFlag(!flag);
   };
   const handleRefresh = () => {
     getChannels();
   };
+
+  // const getChannels = async () => {
+  //   const channelsData = await axios.get("api/get/channelList");
+  //   setChannels(channelsData.response);
+  //   console.log(channelsData);
+  // };
+
+  // useEffect(() => {
+  //   getChannels();
+  // }, []);
+
+  // useEffect(() => {
+  //   getChannels();
+  //   const channel = pusher.subscribe("channels");
+  //   channel.bind("newChannel", function (data) {
+  //     getChannels();
+  //   });
+  // }, [flag]);
+
+  // const handleAddChannel = (e) => {
+  //   e.preventDefault();
+
+  //   const channelName = prompt("Enter a new channel name");
+
+  //   if (channelName) {
+  //     axios.post("api/new/channel", { channelName: channelName });
+  //   }
+  //   setFlag(!flag);
+  // };
+
+  // const handleRefresh = () => {
+  //   getChannels();
+  // };
 
   return (
     <div className="sidebar">
@@ -88,15 +120,20 @@ function Sidebar() {
             </span>
           </div>
         </div>
-
         <div className="sidebar__channelsList">
-          {channels.map((channel) => (
-            <SidebarChannel
-              key={channel.id}
-              id={channel.id}
-              channelName={channel.name}
-            />
-          ))}
+          {channels.length > 0 ? (
+            <div className="sidebar__channelsList">
+              {channels.map((channel) => (
+                <SidebarChannel
+                  key={channel.id}
+                  id={channel.id}
+                  channelName={channel.name}
+                />
+              ))}
+            </div>
+          ) : (
+            <h1>No Data</h1>
+          )}
         </div>
       </div>
 

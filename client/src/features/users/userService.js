@@ -1,12 +1,11 @@
-import axios from "axios";
+import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/user/";
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
 
-
 // const API_URL_check = "http://localhost:5000/api/check/checkIn/";
-const API_URL_check = "https://scouts-tunisienne.herokuapp.com/api/check/checkIn/";
-
+const API_URL_check =
+  "https://scouts-tunisienne.herokuapp.com/api/check/checkIn/";
 
 // Create new user
 const checkIn = async (userData, token) => {
@@ -21,7 +20,7 @@ const checkIn = async (userData, token) => {
     idSession: userData.idSession,
   };
 
-  const response = await axios.patch(API_URL + "check", body, config);
+  const response = await axios.patch("api/user/check", body, config);
 
   return response.data;
 };
@@ -33,7 +32,7 @@ const getUsers = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get(API_URL + "users", config);
+  const response = await axios.get("api/user/users", config);
   return response.data;
 };
 
@@ -48,7 +47,7 @@ const changeRole = async (token, data) => {
     role: data.role,
   };
   const id = data.userId;
-  const response = await axios.patch(API_URL + "/role/" + id, body, config);
+  const response = await axios.patch("api/user/role/" + id, body, config);
 
   return response.data;
 };
@@ -60,7 +59,7 @@ const deleteCustomer = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(API_URL + "delete/" + data, config);
+  const response = await axios.delete("api/user/delete/" + data, config);
 
   return response.data;
 };

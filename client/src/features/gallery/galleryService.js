@@ -1,8 +1,7 @@
-import axios from "axios";
+import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/";
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
-
 
 // Create new event
 const createGallery = async (galleryData, token) => {
@@ -13,7 +12,7 @@ const createGallery = async (galleryData, token) => {
   };
 
   const response = await axios.post(
-    API_URL + "gallery/add",
+     "api/gallery/add",
     galleryData,
     config
   );
@@ -29,10 +28,9 @@ const getGalleries = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL + "gallery", config);
+  const response = await axios.get("api/gallery", config);
   return response.data;
 };
-
 
 // Delete gallery
 const deleteGallery = async (token, data) => {
@@ -41,17 +39,14 @@ const deleteGallery = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(
-    API_URL + "gallery/" + data,
-    config
-  );
+  const response = await axios.delete("api/gallery/" + data, config);
 
   return response.data;
 };
 const galleryService = {
   createGallery,
   getGalleries,
-  deleteGallery
+  deleteGallery,
 };
 
 export default galleryService;

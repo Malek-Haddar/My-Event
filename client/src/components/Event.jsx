@@ -98,10 +98,10 @@ function Event() {
               {/* ))} */}
             </div>
             <div className="col-lg-6 col-12 flex items-center justify-center">
-              <div className="banner-image ">
+              <div className="banner-image flex justify-center">
                 <img
-                  src="assets/images/banner/img1.jpg"
-                  className="rounded-full shadow-2xl"
+                  src="assets/images/banner/scout-cover.jpg"
+                  className="rounded-lg shadow-2xl w-full h-full"
                   alt="banner-img"
                 />
               </div>

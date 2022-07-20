@@ -70,6 +70,8 @@ function Pictures() {
 
   return (
     <>
+      <GalleryForm />
+
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>

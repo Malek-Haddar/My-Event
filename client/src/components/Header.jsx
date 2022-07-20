@@ -25,9 +25,13 @@ function Header() {
             <div className="container">
               <div className="header-wrapper">
                 <div className="logo flex">
-                  <a href="/" className="text-5xl ">
-                    {/* <img src="assets/images/logo/01.png" alt="logo" /> */}
-                    <SiPingdom />
+                  <a href="/" className="text-5xl w-16 h-16 ">
+                    <img
+                      src="assets/images/logo/scout-logo.jpg"
+                      className="rounded-full"
+                      alt="logo"
+                    />
+                    {/* <SiPingdom /> */}
                   </a>{" "}
                 </div>
 

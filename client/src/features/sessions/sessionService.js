@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/user/";
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
@@ -8,8 +8,6 @@ const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
 const API_URL_SESSION = "https://scouts-tunisienne.herokuapp.com/api/";
 // const API_URL_SESSION = "https://events.i-techrity.tn/backendEvents/api/";
 
-
-
 // Create new session
 const createSession = async (sessionData, token) => {
   const config = {
@@ -18,11 +16,7 @@ const createSession = async (sessionData, token) => {
     },
   };
 
-  const response = await axios.post(
-    API_URL_SESSION + "session/add",
-    sessionData,
-    config
-  );
+  const response = await axios.post("api/session/add", sessionData, config);
 
   return response.data;
 };
@@ -35,7 +29,7 @@ const getSessions = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL_SESSION + "session", config);
+  const response = await axios.get("api/session", config);
   return response.data;
 };
 
@@ -46,7 +40,7 @@ const getUserSession = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL + "session", config);
+  const response = await axios.get("api/user/session", config);
   return response.data;
 };
 
@@ -62,7 +56,7 @@ const affectSessionToEvent = async (token, data) => {
     idEvent: data.idEvent,
   };
   const response = await axios.patch(
-    API_URL_SESSION + "session/sessions/affect",
+    "api/session/sessions/affect",
     body,
     config
   );
@@ -79,10 +73,7 @@ const deleteSession = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(
-    API_URL_SESSION + "session/delete/" + data,
-    config
-  );
+  const response = await axios.delete("api/session/delete/" + data, config);
 
   return response.data;
 };
@@ -94,11 +85,7 @@ const likeSession = async (_id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.patch(
-    API_URL_SESSION + "session/like",
-    { _id },
-    config
-  );
+  const response = await axios.patch("api/session/like", { _id }, config);
 
   return response.data;
 };
@@ -109,11 +96,7 @@ const unlikeSession = async (_id, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.patch(
-    API_URL_SESSION + "session/unlike",
-    { _id },
-    config
-  );
+  const response = await axios.patch("api/session/unlike", { _id }, config);
 
   return response.data;
 };
@@ -151,7 +134,7 @@ const affectSessionToCategory = async (token, data) => {
     idCategory: data.idCategory,
   };
   const response = await axios.patch(
-    API_URL_SESSION + "session/sessions/category/affect",
+    "api/session/sessions/category/affect",
     body,
     config
   );
