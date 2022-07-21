@@ -74,7 +74,7 @@ function Header() {
                         </>
                       )}
 
-                      {user && user.result.role === 3 && (
+                      {user && user.result.role === 2 && (
                         <>
                           <li>
                             <a href="/" className="hover:text-pink-600">

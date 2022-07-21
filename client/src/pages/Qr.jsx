@@ -22,15 +22,12 @@ const Qr = () => {
       console.log(message);
     }
 
-    // if (!user || user.result.role !== 1) {
-    //   navigate("/");
-    // }
+    if (user && user.result.role === 0) {
+      navigate("/");
+    } 
 
     dispatch(getSessions());
 
-    return () => {
-      dispatch(reset());
-    };
   }, [user, navigate, isError, message, dispatch]);
 
   // let state = {
