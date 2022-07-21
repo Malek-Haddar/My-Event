@@ -50949,7 +50949,7 @@ ul li {
 @media (min-width: 1440px) {
   .banner-section .banner-wrapper .banner-image img {
     max-width: none;
-    margin-left: -80px;
+    /* margin-left: -80px; */
   }
 }
 

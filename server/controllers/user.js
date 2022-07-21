@@ -50,7 +50,7 @@ export const signup = async (req, res) => {
 
     const result = await User.create({
       email,
-      // password: hashedPassword,
+      password: hashedPassword,
       name: `${firstName} ${lastName}`,
       role,
     });
@@ -75,6 +75,15 @@ export const signup = async (req, res) => {
     console.log(error);
   }
 };
+export const hashPass = async (req, res) => {
+  const { password } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 12);
+  res.status(200).send(hashedPassword);
+
+  console.log({ hashedPassword });
+};
+
 
 export const ChangeRole = async (req, res) => {
   const { id } = req.params;

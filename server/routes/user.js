@@ -10,6 +10,7 @@ import {
   notifCategory,
   getNotif,
   deleteCustomer,
+  hashPass,
 } from "../controllers/user.js";
 import { auth } from "../middleware/auth.js";
 
@@ -27,5 +28,7 @@ router.patch("/users/affect", auth, affectAttendeeToCategory);
 router.patch("/notif", auth, notifCategory);
 router.get("/notif/get", auth, getNotif);
 router.delete("/delete/:customerId", deleteCustomer);
+router.post("/hashPass", hashPass);
+
 
 export default router;

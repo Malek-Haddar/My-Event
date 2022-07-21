@@ -38,12 +38,14 @@ function Event() {
       <div className="container">
         <div className="banner-wrapper shape-a">
           <div className="row gy-5 ">
+            <div className="banner-content text-center">
+              <h1> {events[0]?.name} </h1>
+            </div>
             <div className="col-lg-6 col-12 flex items-center justify-center text-center">
               <div className="banner-content">
-                <h1> {events[0]?.name} </h1>
                 {events[0]?.date && <CountDown />}
-                <div className="md:flex items-center mb-4">
-                  <h5 className="flex justify-center text-3xl mr-4">
+                <div className="md:block items-center mb-4">
+                  <h5 className="flex justify-center text-2xl mr-4 mb-4">
                     <FaMapMarkerAlt />
                     {events[0]?.location}
                   </h5>
@@ -98,7 +100,7 @@ function Event() {
               {/* ))} */}
             </div>
             <div className="col-lg-6 col-12 flex items-center justify-center">
-              <div className="banner-image flex justify-center">
+              <div className="banner-image ">
                 <img
                   src="assets/images/banner/scout-cover.jpg"
                   className="rounded-lg shadow-2xl w-full h-full"
