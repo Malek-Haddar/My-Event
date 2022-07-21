@@ -16,7 +16,7 @@ const checkIn = async (userData, token) => {
   };
 
   const body = {
-    idUser: userData.idUser,
+    email: userData.email,
     idSession: userData.idSession,
   };
 

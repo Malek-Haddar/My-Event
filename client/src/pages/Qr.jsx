@@ -46,8 +46,14 @@ const Qr = () => {
   };
 
   const checkInSession = () => {
+    // const mail = state.result;
+
+    // const login = mail.substring(7);
+
+    // console.log({ login });
+
     const userData = {
-      idUser: state.result,
+      email: state.result.substring(7),
       idSession: sessionId,
     };
     dispatch(checkIn(userData));

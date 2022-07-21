@@ -137,13 +137,15 @@ export const getSession = async (req, res) => {
 };
 
 export const checkIn = async (req, res) => {
-  const idUser = req.body.idUser;
+  const email = req.body.email;
   const idSession = req.body.idSession;
   try {
     //if (role === 1 || role === 2 || role === 3) {
-    const checkedIn = await User.findByIdAndUpdate(
-      idUser,
 
+    const UserEmail = await User.findOne({ email });
+    console.log({ UserEmail });
+
+    const checkedIn = await UserEmail.updateOne(
       { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
       { new: true }
     );
@@ -151,11 +153,10 @@ export const checkIn = async (req, res) => {
     const checkedSession = await session.findByIdAndUpdate(
       idSession,
 
-      { $addToSet: { users: idUser } },
+      { $addToSet: { users: UserEmail._id } },
       { new: true }
     );
 
-    console.log({ checkedSession });
     res.status(201).send(checkedSession);
     //}
     // res.status(400).json({ message: "Auth Error" });
