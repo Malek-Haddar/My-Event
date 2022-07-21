@@ -42,7 +42,7 @@ function Dashboard() {
       console.log(message);
     }
 
-    if (user && user.result.role !== 3) {
+    if (user && user.result.role !== 2) {
       navigate("/");
     }
     // if (!user || user.result.role !== 3) {

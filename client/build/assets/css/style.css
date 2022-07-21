@@ -50519,11 +50519,13 @@ ul li {
 .header-wrapper .menu-area .cart-ticket {
   column-gap: 35px;
 }
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .header-wrapper .menu-area .cart-ticket {
     display: none;
   }
 }
+
+*/
 .header-wrapper .menu-area .cart-ticket .cart-icon a {
   color: #fff;
 }
@@ -50844,6 +50846,7 @@ ul li {
 /*======== Banner css start here  =========*/
 .banner-section {
   background: url(../images/banner/bg.jpg);
+  /* background: url(../images/banner/scout-cover.jpg); */
   background-size: cover;
 }
 .banner-section .banner-wrapper {
@@ -50946,7 +50949,7 @@ ul li {
 @media (min-width: 1440px) {
   .banner-section .banner-wrapper .banner-image img {
     max-width: none;
-    margin-left: -80px;
+    /* margin-left: -80px; */
   }
 }
 
