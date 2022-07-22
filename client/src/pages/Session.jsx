@@ -275,9 +275,9 @@ function Session() {
                                   {session?.users.map((attendee) => (
                                     <option
                                       key={attendee._id}
-                                      value={attendee.name}
+                                      value={attendee.email}
                                     >
-                                      {attendee.name}
+                                      {attendee.email}
                                     </option>
                                   ))}
                                 </select>

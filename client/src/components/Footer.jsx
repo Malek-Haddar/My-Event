@@ -38,7 +38,7 @@ function Footer() {
                       />
                     </div>
                     <div className="lab-content">
-                      <span>Email : contact@i-techrity.tn</span>
+                      <span>Email : mootarabereclamation@gmail.com</span>
                     </div>
                   </div>
                 </div>
@@ -54,8 +54,8 @@ function Footer() {
                     </div>
                     <div className="lab-content">
                       <span>
-                        Address : 105, Rue Tahar Ben Ammar,
-                        <br /> Menzah 9B, 1013 Tunis
+                        Address : Centre International des Scouts
+                        <br /> Borj Cedria
                       </span>
                     </div>
                   </div>

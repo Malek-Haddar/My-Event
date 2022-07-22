@@ -33,8 +33,8 @@ export const getEvents = createAsyncThunk(
   "events/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await eventService.getEvents(token);
+      // const token = thunkAPI.getState().auth.user.token;
+      return await eventService.getEvents();
     } catch (error) {
       const message =
         (error.response &&

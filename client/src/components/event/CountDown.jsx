@@ -18,7 +18,6 @@ const CountDown = () => {
 
     dispatch(getEvents());
   }, [isError, message, dispatch]);
-  console.log({ events });
 
   return (
     <ul

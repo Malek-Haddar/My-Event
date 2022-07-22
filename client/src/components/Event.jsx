@@ -27,8 +27,7 @@ function Event() {
     // return () => {
     //   dispatch(reset());
     // };
-  }, [user, navigate, isError, message, dispatch]);
-  console.log({ events });
+  }, [navigate, isError, message, dispatch]);
 
   // if (isLoading) {
   //   return <Spinner />;
@@ -37,15 +36,24 @@ function Event() {
     <section className="banner-section ">
       <div className="container">
         <div className="banner-wrapper shape-a">
-          <div className="row gy-5 ">
+          <div className="row gy-3 flex justify-center">
             <div className="banner-content text-center">
               <h1> {events[0]?.name} </h1>
+              {events[0]?.date && <CountDown />}
+            </div>
+            <div className="event-sponsored">
+              <div className="banner-image flex justify-center">
+                <img
+                  src="assets/images/banner/cover-moot.jpg"
+                  className="rounded-lg shadow-2xl md:w-2/3 h-full"
+                  alt="banner-img"
+                />
+              </div>
             </div>
             <div className="col-lg-6 col-12 flex items-center justify-center text-center">
-              <div className="banner-content">
-                {events[0]?.date && <CountDown />}
+              <div className="banner-content ">
                 <div className="md:block items-center mb-4">
-                  <h5 className="flex justify-center text-2xl mr-4 mb-4">
+                  <h5 className="flex justify-center text-2xl mr-4 my-2 ">
                     <FaMapMarkerAlt />
                     {events[0]?.location}
                   </h5>
@@ -99,15 +107,15 @@ function Event() {
               </div>
               {/* ))} */}
             </div>
-            <div className="col-lg-6 col-12 flex items-center justify-center">
+            {/* <div className="col-lg-6 col-12 flex items-start justify-center">
               <div className="banner-image ">
                 <img
-                  src="assets/images/banner/scout-cover.jpg"
+                  src="assets/images/banner/cover-moot.jpg"
                   className="rounded-lg shadow-2xl w-full h-full"
                   alt="banner-img"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

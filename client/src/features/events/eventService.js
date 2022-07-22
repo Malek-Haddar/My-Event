@@ -19,13 +19,13 @@ const createEvent = async (eventData, token) => {
 
 // Get events
 const getEvents = async (token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // };
 
-  const response = await axios.get( "api/event", config);
+  const response = await axios.get("api/event");
   return response.data;
 };
 

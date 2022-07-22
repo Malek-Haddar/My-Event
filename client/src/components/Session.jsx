@@ -20,21 +20,20 @@ function Session() {
   );
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
+    // if (isError) {
+    //   console.log(message);
+    // }
 
-    if (!user) {
-      navigate("/login");
-    }
+    // if (!user) {
+    //   navigate("/login");
+    // }
 
     dispatch(getUserSession());
 
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, isError, message, dispatch]);
-  console.log({ userSession });
+  }, [user, navigate, message, dispatch]);
 
   const addLike = (data) => {
     // const data = {
@@ -108,44 +107,49 @@ function Session() {
           </div>
         </div>
       </section>
-
-      <section className="schedule-section padding-tb padding-b bg-image">
-        <div className="container">
-          <div className="section-header">
-            <h2>Event Schedule</h2>
-            <p>A Representation of the event planning</p>
-          </div>
-          <section className="content ">
-            {userSession[0]?.category?.length > 0 ? (
-              <div className="container">
-                <div className="section-wrapper shape-b">
-                  <div className="row gx-4 gy-5 justify-center w-full">
-                    <div className="col-lg-6">
-                      {userSession[0]?.category[0]?.sessions.map((session) => (
-                        <div className="schedule-left schedule-pack">
-                          <h5>
-                            {new Date(session.start).toLocaleDateString()}
-                          </h5>
-                          <div
-                            className="schedule-list"
-                            id={"accordionExample" + session._id}
-                            key={session._id}
-                          >
-                            <div className="accordion-item">
+      {user && (
+        <section className="schedule-section padding-tb padding-b bg-image">
+          <div className="container">
+            <div className="section-header">
+              <h2>Event Schedule</h2>
+              <p>A Representation of the event planning</p>
+            </div>
+            <section className="content ">
+              {userSession[0]?.category?.length > 0 ? (
+                <div className="container">
+                  <div className="section-wrapper shape-b">
+                    <div className="row gx-4 gy-5 justify-center w-full">
+                      <div className="col-lg-6">
+                        {userSession[0]?.category[0]?.sessions.map(
+                          (session) => (
+                            <div className="schedule-left schedule-pack">
+                              <h5>
+                                {new Date(session.start).toLocaleDateString()}
+                              </h5>
                               <div
-                                className="accordion-header"
-                                id={"headingOne" + session._id}
+                                className="schedule-list"
+                                id={"accordionExample" + session._id}
+                                key={session._id}
                               >
-                                <button
-                                  className="accordion-button collapsed"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target={"#collapseOne" + session._id}
-                                  aria-expanded="true"
-                                  aria-controls={"collapseOne" + session._id}
-                                >
-                                  <span className="accor-header-inner d-flex flex-wrap align-items-center">
-                                    {/* <span className="accor-thumb">
+                                <div className="accordion-item">
+                                  <div
+                                    className="accordion-header"
+                                    id={"headingOne" + session._id}
+                                  >
+                                    <button
+                                      className="accordion-button collapsed"
+                                      type="button"
+                                      data-bs-toggle="collapse"
+                                      data-bs-target={
+                                        "#collapseOne" + session._id
+                                      }
+                                      aria-expanded="true"
+                                      aria-controls={
+                                        "collapseOne" + session._id
+                                      }
+                                    >
+                                      <span className="accor-header-inner d-flex flex-wrap align-items-center">
+                                        {/* <span className="accor-thumb">
                                       <img
                                         src="assets/images/event/member/01.png"
                                         alt="speaker"
@@ -163,98 +167,103 @@ function Session() {
                                         />
                                       </span>
                                     </span> */}
-                                    <span className=" h7">{session.name}</span>
-                                  </span>
-                                </button>
-                              </div>
-                              <div
-                                id={"collapseOne" + session._id}
-                                className="accordion-collapse collapse"
-                                aria-labelledby={"headingOne" + session._id}
-                                data-bs-parent={
-                                  "#accordionExample" + session._id
-                                }
-                              >
-                                <div className="accordion-body">
-                                  <ul className="ev-schedule-meta d-flex flex-wrap">
-                                    <li>
-                                      <p>{session.details}</p>
-                                      {/* <span>
+                                        <span className=" h7">
+                                          {session.name}
+                                        </span>
+                                      </span>
+                                    </button>
+                                  </div>
+                                  <div
+                                    id={"collapseOne" + session._id}
+                                    className="accordion-collapse collapse"
+                                    aria-labelledby={"headingOne" + session._id}
+                                    data-bs-parent={
+                                      "#accordionExample" + session._id
+                                    }
+                                  >
+                                    <div className="accordion-body">
+                                      <ul className="ev-schedule-meta d-flex flex-wrap">
+                                        <li>
+                                          <p>{session.details}</p>
+                                          {/* <span>
                                         <i className="icofont-user"></i>
                                       </span>
                                       {userSession[0]?.category[0]?.name} */}
-                                    </li>
-                                    <li>
-                                      <span>
-                                        <i className="icofont-clock-time"></i>
-                                      </span>
-                                      {new Date(session.start).toLocaleString(
-                                        "en-us"
-                                      )}
-                                      -
-                                      {new Date(session.end)
-                                        .getHours()
-                                        .toLocaleString("en-us")}
-                                    </li>
-                                    <li></li>
-                                  </ul>
+                                        </li>
+                                        <li>
+                                          <span>
+                                            <i className="icofont-clock-time"></i>
+                                          </span>
+                                          {new Date(
+                                            session.start
+                                          ).toLocaleString("en-us")}
+                                          -
+                                          {new Date(session.end)
+                                            .getHours()
+                                            .toLocaleString("en-us")}
+                                        </li>
+                                        <li></li>
+                                      </ul>
 
-                                  <div classname="block">
-                                    <a
-                                      onClick={() =>
-                                        dispatch(likeSession(session._id))
-                                      }
-                                      type="submit"
-                                      className="btn btn-light"
-                                    >
-                                      <i className="icofont-thumbs-up" />
-                                      <span>
-                                        {session.likes?.length > 0 && (
-                                          <span>{session.likes?.length}</span>
-                                        )}
-                                      </span>
-                                    </a>
+                                      <div classname="block">
+                                        <a
+                                          onClick={() =>
+                                            dispatch(likeSession(session._id))
+                                          }
+                                          type="submit"
+                                          className="btn btn-light"
+                                        >
+                                          <i className="icofont-thumbs-up" />
+                                          <span>
+                                            {session.likes?.length > 0 && (
+                                              <span>
+                                                {session.likes?.length}
+                                              </span>
+                                            )}
+                                          </span>
+                                        </a>
 
-                                    {/* {user._id === session.likes._id && ( */}
-                                    <a
-                                      onClick={() =>
-                                        dispatch(unlikeSession(session._id))
-                                      }
-                                      type="submit"
-                                      className="btn btn-light"
-                                    >
-                                      <i className="icofont-thumbs-down" />
-                                    </a>
+                                        {/* {user._id === session.likes._id && ( */}
+                                        <a
+                                          onClick={() =>
+                                            dispatch(unlikeSession(session._id))
+                                          }
+                                          type="submit"
+                                          className="btn btn-light"
+                                        >
+                                          <i className="icofont-thumbs-down" />
+                                        </a>
+                                      </div>
+                                      {/* )} */}
+                                    </div>
                                   </div>
-                                  {/* )} */}
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      ))}
+                          )
+                        )}
+                      </div>
                     </div>
                   </div>
+                  <div className="schedule-btns text-center mt-5">
+                    <Link to="/calendar" className="lab-btn">
+                      Move to Calendar
+                    </Link>
+                  </div>
                 </div>
-                <div className="schedule-btns text-center mt-5">
-                  <Link to="/calendar" className="lab-btn">
-                    Move to Calendar
-                  </Link>
+              ) : (
+                <div className="section-header">
+                  <p>No Category affected Yet</p>
+                  <div className="schedule-btns text-center mt-5">
+                    <Link to="/contact" className="lab-btn">
+                      Contact Us
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="section-header">
-                <p>No Category affected Yet</p>
-                <div className="schedule-btns text-center mt-5">
-                  <Link to="/contact" className="lab-btn">
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            )}
-          </section>
+              )}
+            </section>
 
-          {/* <div className="schedule-btns text-center mt-5">
+            {/* <div className="schedule-btns text-center mt-5">
             {}
             <Link to="/calendar" className="lab-btn">
               Move to Calendar
@@ -263,8 +272,9 @@ function Session() {
               Contact Us
             </Link>
           </div> */}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
     </>
   );
 }

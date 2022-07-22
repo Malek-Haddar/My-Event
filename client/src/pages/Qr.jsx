@@ -24,12 +24,10 @@ const Qr = () => {
 
     if (user && user.result.role === 0) {
       navigate("/");
-    } 
+    }
 
     dispatch(getSessions());
-
   }, [user, navigate, isError, message, dispatch]);
-
   // let state = {
   //   result: "No result",
   // };
@@ -59,7 +57,7 @@ const Qr = () => {
     dispatch(checkIn(userData));
     toast("User Checked ✅");
   };
-
+  const today = new Date();
   return (
     <>
       <Header />
@@ -101,9 +99,13 @@ const Qr = () => {
                 <option value="">- Select -</option>
 
                 {sessions.map((session) => (
-                  <option key={session._id} value={session._id}>
-                    {session.name}
-                  </option>
+                  <>
+                    {/* {today.getUTCDate() === session?.start.getUTCDate() && ( */}
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                    {/* )} */}
+                  </>
                 ))}
               </select>
             </div>
