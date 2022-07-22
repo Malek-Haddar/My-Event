@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 // import Background from "../assets/images/bg-images/footer-bg.png";
+import { QRCodeSVG } from "qrcode.react";
 
 function Footer() {
+  const { user } = useSelector((state) => state.auth);
+
   var sectionStyle = {
     // backgroundImage: "url(" + "../assets/images/bg-images/footer-bg.png" + ")",
     backgroundImage: `url("../assets/images/bg-images/footer-bg.png")`,
@@ -69,6 +73,11 @@ function Footer() {
             <div className="row">
               <div className="col-12">
                 <div className="footer-bottom-content text-center">
+                  {user && (
+                    <div className="flex justify-center text-center">
+                      <QRCodeSVG value={user.result.email} />
+                    </div>
+                  )}
                   <p>© i-techrity.tn, Inc. All rights reserved.</p>
                 </div>
               </div>

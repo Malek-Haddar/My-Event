@@ -100,19 +100,14 @@ function Contact() {
         )}
       </section> */}
       <div className="contact-section">
-        <div className="contact-top padding-tb aside-bg padding-b">
+        <div className="contact-top padding-tb  padding-b">
           <div className="container">
             <div className="row">
-              <div className="col-lg-8">
+              <div className="col-lg-8 ">
                 <article className="contact-form-wrapper">
                   <div className="contact-form">
-                    <h4>Don't Be A Stranger Just Say Hello.</h4>
-                    <p className="mb-5">
-                      {" "}
-                      We do fast phone repair. In most to repair your device in
-                      just minutes, li we’ll normally get con nection inutes,
-                      we’ll normally ge.
-                    </p>
+                    {/* <h4>Don't Be A Stranger Just Say Hello.</h4> */}
+                    {/* <br /> */}
                     <form
                       onSubmit={onSubmit}
                       id="commentform"
@@ -154,8 +149,8 @@ function Contact() {
                   </div>
                 </article>
               </div>
-              <div className="col-lg-4">
-                <div className="contact-info-wrapper">
+              {/* <div className="col-lg-4">
+                <div className="contact-info-wrapper ">
                   <div className="contact-info-title">
                     <h5>Get Information</h5>
                     <p>
@@ -174,7 +169,7 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Office Address</span>
-                          <p>1201 park street, Fifth Avenue</p>
+                          <p>Centre International des Scouts Borj Cedria</p>
                         </div>
                       </div>
                     </div>
@@ -202,7 +197,7 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Send Mail</span>
-                          <p>adminKagont@gmil.com</p>
+                          <p>admin@gmil.com</p>
                         </div>
                       </div>
                     </div>
@@ -216,17 +211,17 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Our Website</span>
-                          <p>www.Kagont-event.com</p>
+                          <p>www.pin-event.com</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
-        <div className="contact-bottom">
+        {/* <div className="contact-bottom">
           <div className="contac-bottom">
             <div className="row justify-content-center g-0">
               <div className="col-12">
@@ -241,7 +236,7 @@ function Contact() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>

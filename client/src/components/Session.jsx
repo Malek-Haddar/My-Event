@@ -53,29 +53,11 @@ function Session() {
             <div className="col-lg-8">
               <div className="about-image">
                 <iframe
-                  className="w-full h-72 md:h-screen md:mt-0"
-                  src="https://www.facebook.com/plugins/video.php?height=420&href=https%3A%2F%2Fwww.facebook.com%2Farabscoutmoot21%2Fvideos%2F310104671258911%2F&show_text=false&width=560&t=0"
-                  width="560"
-                  height="420"
-                  style={{
-                    border: "none",
-                    overflow: "hidden",
-                  }}
-                  scrolling="no"
-                  frameborder="0"
-                  allowfullscreen="true"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  allowFullScreen="true"
+                  src="https://drive.google.com/file/d/1IzHryIRmEBDAuIfvKFCx4bpf_oRoXZLE/preview"
+                  className="w-full"
+                  height="480"
+                  allow="autoplay"
                 ></iframe>
-                {/* <img src="assets/images/about/01.jpg" alt="about image" />
-                <a
-                  href="https://www.youtube.com/embed/SP3yyrboTno"
-                  className="play-btn"
-                  data-rel="lightcase"
-                >
-                  <i className="icofont-ui-play"></i>
-                  <span className="pluse_2"></span>
-                </a> */}
               </div>
             </div>
             <div className="col-lg-10">
