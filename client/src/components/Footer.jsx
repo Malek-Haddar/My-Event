@@ -27,7 +27,7 @@ function Footer() {
                       />
                     </div>
                     <div className="lab-content">
-                      <span>Phone : +216 70867015</span>
+                      <span>Phone : +216 71790501</span>
                     </div>
                   </div>
                 </div>
@@ -52,15 +52,12 @@ function Footer() {
                   <div className="lab-inner">
                     <div className="lab-thumb">
                       <img
-                        src="assets/images/footer/footer-top/03.png"
+                        src="assets/images/footer/footer-top/01.png"
                         alt="location-icon"
                       />
                     </div>
                     <div className="lab-content">
-                      <span>
-                        Address : Centre International des Scouts
-                        <br /> Borj Cedria
-                      </span>
+                      <span>Instagram : arabe_scouts_moot_2022</span>
                     </div>
                   </div>
                 </div>
@@ -73,11 +70,11 @@ function Footer() {
             <div className="row">
               <div className="col-12">
                 <div className="footer-bottom-content text-center">
-                  {user && (
+                  {/* {user && (
                     <div className="flex justify-center text-center">
                       <QRCodeSVG value={user.result.email} />
                     </div>
-                  )}
+                  )} */}
                   <p>© i-techrity.tn, Inc. All rights reserved.</p>
                 </div>
               </div>

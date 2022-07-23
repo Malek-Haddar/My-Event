@@ -17,6 +17,8 @@ const Qr = () => {
   const { sessions, isLoading, isError, message } = useSelector(
     (state) => state.sessions
   );
+
+  const { users, isSuccess } = useSelector((state) => state.users);
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -55,7 +57,9 @@ const Qr = () => {
       idSession: sessionId,
     };
     dispatch(checkIn(userData));
-    toast("User Checked ✅");
+    if (isSuccess || users) {
+      toast("User Checked ✅");
+    }
   };
   const today = new Date();
   return (

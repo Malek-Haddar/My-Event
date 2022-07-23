@@ -149,7 +149,8 @@ function Contact() {
                   </div>
                 </article>
               </div>
-              {/* <div className="col-lg-4">
+
+              <div className="col-lg-4">
                 <div className="contact-info-wrapper ">
                   <div className="contact-info-title">
                     <h5>Get Information</h5>
@@ -183,7 +184,7 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Phone Number</span>
-                          <p>+22698 745 632,02 982 745</p>
+                          <p>+216 98195851</p>
                         </div>
                       </div>
                     </div>
@@ -196,8 +197,8 @@ function Contact() {
                           />
                         </div>
                         <div className="contact-info-details">
-                          <span className="fw-bold">Send Mail</span>
-                          <p>admin@gmil.com</p>
+                          <span className="fw-bold">Complaint Email</span>
+                          <p>arabscoutmoot21@gmail.com</p>
                         </div>
                       </div>
                     </div>
@@ -211,16 +212,72 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Our Website</span>
-                          <p>www.pin-event.com</p>
+                          <p>www.scouts.tn</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
+
+        {/*  <div className="col-lg-4 col-sm-6 col-12">
+            <div className="footer-top-item lab-item">
+              <div className="lab-inner">
+                <div className="lab-thumb"></div>
+                <div className="lab-content">
+                  <span>
+                    Email de reclamation : mootarabereclamation@gmail.com
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-sm-6 col-12">
+            <div className="footer-top-item lab-item">
+              <div className="lab-inner">
+                <div className="lab-thumb"></div>
+                <div className="lab-content">
+                  <span>Email : arabscoutmoot21@gmail.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-4 col-sm-6 col-12">
+            <div className="footer-top-item lab-item">
+              <div className="lab-inner">
+                <div className="lab-thumb"></div>
+                <div className="lab-content">
+                  <span>site web scout : scouts.tn </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-sm-6 col-12">
+            <div className="footer-top-item lab-item">
+              <div className="lab-inner">
+                <div className="lab-thumb"></div>
+                <div className="lab-content">
+                  <span>instagram : arabe_scouts_moot_2022 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 col-sm-6 col-12">
+            <div className="footer-top-item lab-item">
+              <div className="lab-inner">
+                <div className="lab-thumb"></div>
+                <div className="lab-content">
+                  <span>facebook : </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
+
         {/* <div className="contact-bottom">
           <div className="contac-bottom">
             <div className="row justify-content-center g-0">
