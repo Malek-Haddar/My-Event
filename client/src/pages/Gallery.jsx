@@ -93,7 +93,10 @@ function Gallery() {
                       />
                     </div>
                     <div className="grid-content p-2  ">
-                      <a href={gallery.selectedFile} data-rel="lightcase">
+                      <a
+                        href={gallery.selectedFile}
+                        data-rel={gallery.selectedFile}
+                      >
                         <i className="icofont-expand"></i>
                       </a>
                       <h5>{gallery.name}</h5>

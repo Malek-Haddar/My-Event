@@ -120,42 +120,15 @@ function Login() {
                 </button>
               </div>
             </form>
-            <div className="account-bottom">
+            {/* <div className="account-bottom">
               <span className="or mt-5">
                 <span>or</span>
               </span>
               <span className="d-block cate ">
                 Don’t Have any Account? <a href="/register"> Sign Up</a>
               </span>
-              {/* <h5 className="subtitle">Login With Social Media</h5>
-              <ul className="social-media social-color lab-ul d-flex justify-content-center">
-                <li>
-                  <a href="#" className="facebook">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="twitter">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="linkedin">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="instagram">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="pinterest">
-                    <i className="fab fa-pinterest"></i>
-                  </a>
-                </li>
-              </ul> */}
-            </div>
+              
+            </div> */}
           </div>
         </div>
       </div>
