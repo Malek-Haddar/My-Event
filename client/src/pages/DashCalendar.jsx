@@ -140,7 +140,7 @@ const DashCalendar = () => {
                     height="650px"
                     ref={(schedule) => setScheduleObj(schedule)}
                     // selectedDate={new Date(2021, 0, 10)} i change the date
-                    selectedDate={scheduleData[0]?.StartTime}
+                    selectedDate={new Date()}
                     eventSettings={{ dataSource: scheduleData || [] }}
                     dragStart={onDragStart}
                     readonly={true}
@@ -174,7 +174,7 @@ const DashCalendar = () => {
                         <td style={{ width: "100%" }}>
                           {scheduleData.length > 0 ? (
                             <DatePickerComponent
-                              value={scheduleData[0]?.StartTime}
+                              value={new Date()}
                               showClearButton={false}
                               placeholder="Current Date"
                               floatLabelType="Always"

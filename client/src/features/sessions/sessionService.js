@@ -29,6 +29,17 @@ const getSessions = async (token) => {
     },
   };
 
+  const response = await axios.get("api/session", config);
+  return response.data;
+};
+// Get sessions by date
+const getSessionsbyDate = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const response = await axios.get("api/session/all", config);
   return response.data;
 };
@@ -152,6 +163,7 @@ const sessionService = {
   deleteSession,
   likeSession,
   unlikeSession,
+  getSessionsbyDate,
 };
 
 export default sessionService;

@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { getSessions, reset } from "../features/sessions/sessionSlice";
+import {
+  getSessions,
+  getSessionsbyDate,
+  reset,
+} from "../features/sessions/sessionSlice";
 import { checkIn } from "../features/users/userSlice";
 
 const Qr = () => {
@@ -14,10 +18,10 @@ const Qr = () => {
   const [sessionId, setSessionId] = useState("");
   const [state, setState] = useState("");
   const { user } = useSelector((state) => state.auth);
-  const { sessions, isLoading, isError, message } = useSelector(
-    (state) => state.sessions
+  const { sessionsbyDate, isLoading, isError, message } = useSelector(
+    (state) => state.sessionsbyDate
   );
-  
+
   const { users, isSuccess } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -28,9 +32,9 @@ const Qr = () => {
     if (user && user.result.role === 0) {
       navigate("/");
     }
-    dispatch(getSessions());
+    dispatch(getSessionsbyDate());
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ sessions });
+  console.log({ sessionsbyDate });
 
   // let state = {
   //   result: "No result",
@@ -106,7 +110,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessions[0]?.result.map((session) => (
+                {sessionsbyDate[0]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
@@ -124,7 +128,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessions[1]?.result.map((session) => (
+                {sessionsbyDate[1]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
@@ -142,7 +146,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessions[2]?.result.map((session) => (
+                {sessionsbyDate[2]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
@@ -160,7 +164,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessions[2]?.result.map((session) => (
+                {sessionsbyDate[2]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
@@ -178,7 +182,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessions[2]?.result.map((session) => (
+                {sessionsbyDate[2]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
@@ -196,7 +200,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessions[2]?.result.map((session) => (
+                {sessionsbyDate[2]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
