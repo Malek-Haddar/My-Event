@@ -17,8 +17,9 @@ const Qr = () => {
   const { sessions, isLoading, isError, message } = useSelector(
     (state) => state.sessions
   );
-
+  
   const { users, isSuccess } = useSelector((state) => state.users);
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -27,9 +28,10 @@ const Qr = () => {
     if (user && user.result.role === 0) {
       navigate("/");
     }
-
     dispatch(getSessions());
   }, [user, navigate, isError, message, dispatch]);
+  console.log({ sessions });
+
   // let state = {
   //   result: "No result",
   // };
@@ -95,24 +97,115 @@ const Qr = () => {
             <div className="mr-8">
               <p>{state.result}</p>
             </div>
-            <div>
+
+            <div className="text-center">
+              <span>24/07</span>
               <select
                 className="text-primary border-1 rounded-md ml-3"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
 
-                {sessions.map((session) => (
+                {sessions[0]?.result.map((session) => (
                   <>
-                    {/* {today.getUTCDate() === session?.start.getUTCDate() && ( */}
                     <option key={session._id} value={session._id}>
                       {session.name}
                     </option>
-                    {/* )} */}
                   </>
                 ))}
               </select>
             </div>
+            <div className="text-center">
+              <span>25/07</span>
+
+              <select
+                className="text-primary border-1 rounded-md ml-3"
+                onChange={(e) => setSessionId(e.target.value)}
+              >
+                <option value="">- Select -</option>
+
+                {sessions[1]?.result.map((session) => (
+                  <>
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+            <div className="text-center">
+              <span>26/07</span>
+
+              <select
+                className="text-primary border-1 rounded-md ml-3"
+                onChange={(e) => setSessionId(e.target.value)}
+              >
+                <option value="">- Select -</option>
+
+                {sessions[2]?.result.map((session) => (
+                  <>
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+            <div className="text-center">
+              <span>27/07</span>
+
+              <select
+                className="text-primary border-1 rounded-md ml-3"
+                onChange={(e) => setSessionId(e.target.value)}
+              >
+                <option value="">- Select -</option>
+
+                {sessions[2]?.result.map((session) => (
+                  <>
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+            <div className="text-center">
+              <span>28/07</span>
+
+              <select
+                className="text-primary border-1 rounded-md ml-3"
+                onChange={(e) => setSessionId(e.target.value)}
+              >
+                <option value="">- Select -</option>
+
+                {sessions[2]?.result.map((session) => (
+                  <>
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+            <div className="text-center">
+              <span>29/07</span>
+
+              <select
+                className="text-primary border-1 rounded-md ml-3"
+                onChange={(e) => setSessionId(e.target.value)}
+              >
+                <option value="">- Select -</option>
+
+                {sessions[2]?.result.map((session) => (
+                  <>
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+
             <div className="ml-9 py-4">
               <a
                 className="lab-btn bg-white"

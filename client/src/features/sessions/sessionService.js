@@ -29,7 +29,7 @@ const getSessions = async (token) => {
     },
   };
 
-  const response = await axios.get("api/session", config);
+  const response = await axios.get("api/session/all", config);
   return response.data;
 };
 
