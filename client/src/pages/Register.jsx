@@ -97,6 +97,8 @@ function Register() {
                   name="firstName"
                   value={firstName}
                   onChange={onChange}
+                  minLength={3}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -108,6 +110,8 @@ function Register() {
                   id="lastName"
                   value={lastName}
                   onChange={onChange}
+                  minLength={3}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -119,6 +123,8 @@ function Register() {
                   id="email"
                   value={email}
                   onChange={onChange}
+                  minLength={9}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -130,6 +136,8 @@ function Register() {
                   id="password"
                   value={password}
                   onChange={onChange}
+                  minLength={6}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -141,6 +149,8 @@ function Register() {
                   name="password2"
                   value={password2}
                   onChange={onChange}
+                  minLength={6}
+                  required
                 />
               </div>
               <div className="form-group">

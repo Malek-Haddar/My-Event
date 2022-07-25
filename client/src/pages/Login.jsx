@@ -93,6 +93,8 @@ function Login() {
                   name="email"
                   value={email}
                   onChange={onChange}
+                  minLength={9}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -103,6 +105,8 @@ function Login() {
                   name="password"
                   value={password}
                   onChange={onChange}
+                  minLength={6}
+                  required
                 />
               </div>
               <div className="form-group">
