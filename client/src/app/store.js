@@ -15,6 +15,8 @@ export const store = configureStore({
     auth: authReducer,
     contacts: contactReducer,
     sessions: sessionReducer,
+    sessionsbyDate: sessionReducer,
+
     events: eventReducer,
     galleries: galleryReducer,
     users: userReducer,

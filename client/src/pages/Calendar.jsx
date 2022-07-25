@@ -91,7 +91,7 @@ function Calendar() {
             <ScheduleComponent
               height="650px"
               ref={(schedule) => setScheduleObj(schedule)}
-              selectedDate={userSession[0]?.category[0]?.sessions[0]?.start}
+              selectedDate={new Date()}
               eventSettings={{ dataSource: scheduleData }}
               dragStart={onDragStart}
               readonly={true}
@@ -120,7 +120,7 @@ function Calendar() {
                   <tr style={{ height: "50px" }}>
                     <td style={{ width: "100%" }}>
                       <DatePickerComponent
-                        value={userSession[0]?.category[0]?.sessions[0]?.start}
+                        value={new Date()}
                         showClearButton={false}
                         placeholder="Current Date"
                         floatLabelType="Always"

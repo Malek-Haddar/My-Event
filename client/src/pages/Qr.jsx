@@ -1,15 +1,11 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import QrReader from "react-qr-reader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import {
-  getSessions,
-  getSessionsbyDate,
-  reset,
-} from "../features/sessions/sessionSlice";
+import { getSessionsbyDate } from "../features/sessions/sessionSlice";
 import { checkIn } from "../features/users/userSlice";
 
 const Qr = () => {
@@ -18,24 +14,21 @@ const Qr = () => {
   const [sessionId, setSessionId] = useState("");
   const [state, setState] = useState("");
   const { user } = useSelector((state) => state.auth);
-  const { sessionsbyDate, isLoading, isError, message } = useSelector(
-    (state) => state.sessionsbyDate
-  );
+  const { sessionsbyDate } = useSelector((state) => state.sessionsbyDate);
 
   const { users, isSuccess } = useSelector((state) => state.users);
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
+    // if (isError) {
+    //   console.log(message);
+    // }
 
     if (user && user.result.role === 0) {
       navigate("/");
     }
     dispatch(getSessionsbyDate());
-  }, [user, navigate, isError, message, dispatch]);
+  }, [user, navigate, , dispatch]);
   console.log({ sessionsbyDate });
-
   // let state = {
   //   result: "No result",
   // };
@@ -96,16 +89,15 @@ const Qr = () => {
             style={{ width: "50%" }}
           />{" "}
         </div>
+        <div className="flex items-center justify-center">
+          <p>{state.result}</p>
+        </div>
         <div className="md:flex justify-center">
-          <div className="md:flex mx-auto items-center justify-center mb-16 w-1/2">
-            <div className="mr-8">
-              <p>{state.result}</p>
-            </div>
-
-            <div className="text-center">
+          <div className="md:flex items-center justify-center md:mb-8 md:w-2/3 space-y-3  space-x-2 text-center">
+            <div className="text-center ">
               <span>24/07</span>
               <select
-                className="text-primary border-1 rounded-md ml-3"
+                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
@@ -119,11 +111,11 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-            <div className="text-center">
+            <div className="text-center ">
               <span>25/07</span>
 
               <select
-                className="text-primary border-1 rounded-md ml-3"
+                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
@@ -137,11 +129,11 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-            <div className="text-center">
+            <div className="text-center ">
               <span>26/07</span>
 
               <select
-                className="text-primary border-1 rounded-md ml-3"
+                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
@@ -155,11 +147,11 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-            <div className="text-center">
+            <div className="text-center ">
               <span>27/07</span>
 
               <select
-                className="text-primary border-1 rounded-md ml-3"
+                className="text-primary border-1 rounded-md ml-3  w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
@@ -173,11 +165,11 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-            <div className="text-center">
+            <div className="text-center ">
               <span>28/07</span>
 
               <select
-                className="text-primary border-1 rounded-md ml-3"
+                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
@@ -191,11 +183,11 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-            <div className="text-center">
+            <div className="text-center ">
               <span>29/07</span>
 
               <select
-                className="text-primary border-1 rounded-md ml-3"
+                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
                 <option value="">- Select -</option>
@@ -209,19 +201,18 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-
-            <div className="ml-9 py-4">
-              <a
-                className="lab-btn bg-white"
-                type="submit"
-                onClick={() => {
-                  checkInSession();
-                }}
-              >
-                ChekIn
-              </a>
-            </div>
           </div>
+        </div>
+        <div className="flex item-center justify-center my-3">
+          <a
+            className="lab-btn bg-white mb-8"
+            type="submit"
+            onClick={() => {
+              checkInSession();
+            }}
+          >
+            ChekIn
+          </a>
         </div>
       </section>
       <Footer />

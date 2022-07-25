@@ -214,10 +214,10 @@ const Ecommerce = () => {
               <p className="font-semibold text-white text-2xl">Winner</p>
 
               <div>
-                <p className="text-2xl text-white font-semibold mt-8">
-                  {topUser?.name}
+                <p className="text-lg text-white font-semibold mt-8">
+                  {topUser?.email}
                 </p>
-                <p className="text-gray-200">with {top} Sessions</p>
+                <p className="text-gray-200 text-center">with {top} Sessions</p>
               </div>
             </div>
 

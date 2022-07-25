@@ -45,6 +45,7 @@ export const getAllSession = async (req, res) => {
             $push: {
               name: "$name",
               details: "$details",
+              _id: "$_id",
             },
           },
         },

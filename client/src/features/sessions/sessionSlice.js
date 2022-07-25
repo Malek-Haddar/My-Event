@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import sessionService from "./sessionService";
 
 const initialState = {
+  sessionsbyDate: [],
   sessions: [],
   userSession: [],
   isError: false,

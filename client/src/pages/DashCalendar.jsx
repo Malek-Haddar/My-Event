@@ -139,7 +139,7 @@ const DashCalendar = () => {
                   <ScheduleComponent
                     height="650px"
                     ref={(schedule) => setScheduleObj(schedule)}
-                    // selectedDate={new Date(2021, 0, 10)} i change the date
+                    // selectedDate={new Date(2021, 0, 10)} i change the date*
                     selectedDate={new Date()}
                     eventSettings={{ dataSource: scheduleData || [] }}
                     dragStart={onDragStart}
