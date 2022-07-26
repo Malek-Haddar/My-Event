@@ -95,7 +95,7 @@ const Qr = () => {
         <div className="md:flex justify-center">
           <div className="md:flex items-center justify-center md:mb-8 md:w-2/3 space-y-3  space-x-2 text-center">
             <div className="text-center ">
-              <span>24/07</span>
+              <span>23/07</span>
               <select
                 className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
@@ -112,7 +112,7 @@ const Qr = () => {
               </select>
             </div>
             <div className="text-center ">
-              <span>25/07</span>
+              <span>23/07</span>
 
               <select
                 className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
@@ -130,7 +130,7 @@ const Qr = () => {
               </select>
             </div>
             <div className="text-center ">
-              <span>26/07</span>
+              <span>25/07</span>
 
               <select
                 className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
@@ -148,7 +148,7 @@ const Qr = () => {
               </select>
             </div>
             <div className="text-center ">
-              <span>27/07</span>
+              <span>26/07</span>
 
               <select
                 className="text-primary border-1 rounded-md ml-3  w-1/2 md:w-full text-center"
@@ -156,7 +156,25 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessionsbyDate[2]?.result.map((session) => (
+                {sessionsbyDate[3]?.result.map((session) => (
+                  <>
+                    <option key={session._id} value={session._id}>
+                      {session.name}
+                    </option>
+                  </>
+                ))}
+              </select>
+            </div>
+            <div className="text-center ">
+              <span>27/07</span>
+
+              <select
+                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
+                onChange={(e) => setSessionId(e.target.value)}
+              >
+                <option value="">- Select -</option>
+
+                {sessionsbyDate[4]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
@@ -174,25 +192,7 @@ const Qr = () => {
               >
                 <option value="">- Select -</option>
 
-                {sessionsbyDate[2]?.result.map((session) => (
-                  <>
-                    <option key={session._id} value={session._id}>
-                      {session.name}
-                    </option>
-                  </>
-                ))}
-              </select>
-            </div>
-            <div className="text-center ">
-              <span>29/07</span>
-
-              <select
-                className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
-                onChange={(e) => setSessionId(e.target.value)}
-              >
-                <option value="">- Select -</option>
-
-                {sessionsbyDate[2]?.result.map((session) => (
+                {sessionsbyDate[5]?.result.map((session) => (
                   <>
                     <option key={session._id} value={session._id}>
                       {session.name}
