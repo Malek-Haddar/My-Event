@@ -153,14 +153,14 @@ app.get("/api/get/conversation", async (req, res) => {
 //     ?.populate("user");
 // });
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.resolve(process.cwd(), "client/build")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(process.cwd(), "client/build/index.html"));
-//   });
-// } else {
-//   app.get("/", (req, res) => res.send("Please set to production"));
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(process.cwd(), "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(process.cwd(), "client/build/index.html"));
+  });
+} else {
+  app.get("/", (req, res) => res.send("Please set to production"));
+}
 //listener
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

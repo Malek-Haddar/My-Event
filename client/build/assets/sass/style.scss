@@ -1,0 +1,57 @@
+/*! @@@@@@@@@@@@@@@@@@@@@@
+Template Name: Kagont
+Template URI: https://themeforest.net/user/labartisan
+Author: LabArtisan
+Author URI: https://themeforest.net/user/labartisan
+Description: Description
+Version: 1.0.0
+Text Domain: Kagont
+Tags: bootstrap, program, event, event schedule, arrangment, event site, official event,corporate event,music concert.
+
+@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+/* @@@@@@@@@@@@@@@@@@@@@@
+>>> TABLE OF CONTENTS START:
+
+01. Extended CSS
+02. Normalize CSS
+03. Normalization CSS
+04. Global CSS
+05. Header
+06. Home Page all section CSS
+07. Blog Section & Blog pages CSS
+08. Shop Pages & Cart Pages CSS
+09. Gallery Page CSS
+10. Speaker CSs
+11. Contact CSS
+12. Footer Section CSS
+
+
+
+
+>>> TABLE OF CONTENTS END:
+@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+// Core variables and mixins
+@import "sub-stylesheet/_variables";
+@import "sub-stylesheet/_mixins";
+@import "sub-stylesheet/extend";
+
+
+
+// Core CSS
+@import "sub-stylesheet/_normalize";
+@import "sub-stylesheet/_global";
+@import "sub-stylesheet/header";
+@import "sub-stylesheet/banner";
+@import "sub-stylesheet/home";
+@import "sub-stylesheet/blog-post";
+@import "sub-stylesheet/shop-cart";
+@import "sub-stylesheet/gallery";
+@import "sub-stylesheet/_speakers";
+@import "sub-stylesheet/contact";
+@import "sub-stylesheet/footer";
+
+// Components
