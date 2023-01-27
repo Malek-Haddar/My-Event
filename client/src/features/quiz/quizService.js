@@ -1,10 +1,10 @@
 import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/";
-const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
+// const API_URL = "https://scouts-tunisienne.herokuapp.com/api/";
 
 // const API_URL_SESSION = "http://localhost:5000/api/session/";
-const API_URL_SESSION = "https://scouts-tunisienne.herokuapp.com/api/session/";
+// const API_URL_SESSION = "https://scouts-tunisienne.herokuapp.com/api/session/";
 
 // Create new quiz
 const createQuiz = async (quizData, token) => {

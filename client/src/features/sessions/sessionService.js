@@ -1,11 +1,11 @@
 import axios from "../../components/chat/axios";
 
 // const API_URL = "http://localhost:5000/api/user/";
-const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
+// const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
 // const API_URL = "https://events.i-techrity.tn/backendEvents/api/user/";
 
 // const API_URL_SESSION = "http://localhost:5000/api/";
-const API_URL_SESSION = "https://scouts-tunisienne.herokuapp.com/api/";
+// const API_URL_SESSION = "https://scouts-tunisienne.herokuapp.com/api/";
 // const API_URL_SESSION = "https://events.i-techrity.tn/backendEvents/api/";
 
 // Create new session
