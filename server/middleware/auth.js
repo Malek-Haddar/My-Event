@@ -1,36 +1,38 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user.js";
+import Utilisateur from "../models/utilisateur.js";
 
-const secret = 'test';
+const secret = "test";
 
 export const auth = async (req, res, next) => {
-    let token;
-  
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
-      try {
-        token = req.headers.authorization.split(" ")[1];
-        // console.log({ token });
+  let token;
 
-        // if (!token) return "Not authorized, token failed";
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+      //   console.log({ token });
 
-        req.user = await User.findById(decoded.id).select("-password");
+      // if (!token) return "Not authorized, token failed";
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log({ decoded });
+      req.utilisateur = await Utilisateur.findById(decoded.id).select(
+        "-password"
+      );
 
-        next();
-      } catch (error) {
-        console.error(error);
-        return "Not authorized, token failed";
-      }
+      next();
+    } catch (error) {
+      console.error(error);
+      return "Not authorized, token failed";
     }
-  
-    if (!token) {
-      res.status(401);
-      return "Not authorized, no token";
-    }
-  };
+  }
+
+  if (!token) {
+    res.status(401);
+    return "Not authorized, no token";
+  }
+};
   
 // export const auth = async (req, res, next) => {
 //     let token

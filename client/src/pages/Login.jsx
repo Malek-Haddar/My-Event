@@ -124,15 +124,14 @@ function Login() {
                 </button>
               </div>
             </form>
-            {/* <div className="account-bottom">
+            <div className="account-bottom">
               <span className="or mt-5">
                 <span>or</span>
               </span>
               <span className="d-block cate ">
                 Don’t Have any Account? <a href="/register"> Sign Up</a>
               </span>
-              
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

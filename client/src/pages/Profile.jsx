@@ -1,312 +1,278 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { QRCodeSVG } from "qrcode.react";
+import QRCode from "react-qr-code";
+import Spinner from "../components/Spinner";
+import { register, reset, updateProfile } from "../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Profile() {
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    profession: "",
+  });
+  const { firstName, lastName, email, phone, profession } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onChange = (e) => {
+    setFormData((prevSate) => ({
+      ...prevSate,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      profession,
+    };
+    dispatch(updateProfile(userData));
+    navigate("/");
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
-    <div className="container mx-auto px-4 sm:px-8 max-w-5xl">
-      <div className="py-8">
-        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
-          <h2 className="text-2xl leading-tight">Users</h2>
-          <div className="text-end">
-            <form className="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
-              <div className=" relative ">
-                <input
-                  type="text"
-                  id='"form-subscribe-Filter'
-                  className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                  placeholder="name"
-                />
-              </div>
-              <button
-                className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-                type="submit"
-              >
-                Filter
-              </button>
-            </form>
+    <>
+      <Header />
+      <section className="page-header bg_img padding-tb">
+        <div className="overlay"></div>
+        <div className="container">
+          <div className="page-header-content-area">
+            <h4 className="ph-title">Your Profile</h4>
+            <ul className="lab-ul">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a className="active">Profile</a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <table className="min-w-full leading-normal">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    User
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    Role
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    Created at
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    status
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  ></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0">
-                        <a href="#" className="block relative">
+      </section>
+
+      <div className="contact-section">
+        <div className="contact-top padding-tb  padding-b">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8 ">
+                <article className="contact-form-wrapper">
+                  <div className="contact-form">
+                    {/* <h4>Don't Be A Stranger Just Say Hello.</h4> */}
+                    {/* <br /> */}
+                    <form
+                      onSubmit={onSubmit}
+                      id="commentform"
+                      className="comment-form"
+                    >
+                      <input
+                        type="text"
+                        placeholder={
+                          user?.result?.name
+                            ? user?.result?.name.split(" ").slice(0, -1)
+                            : "First Name"
+                        }
+                        className="form-control"
+                        id="firstName"
+                        name="firstName"
+                        value={firstName}
+                        onChange={onChange}
+                        minLength={3}
+                        required
+                      />
+                      <input
+                        type="text"
+                        placeholder={
+                          user?.result?.name
+                            ? user?.result?.name.split(" ").slice(-1)
+                            : "Last Name"
+                        }
+                        name="lastName"
+                        className="form-control"
+                        id="lastName"
+                        value={lastName}
+                        onChange={onChange}
+                        minLength={3}
+                        required
+                      />
+                      <input
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        placeholder={
+                          user?.result?.email ? user?.result?.email : "Email"
+                        }
+                        id="email"
+                        value={email}
+                        onChange={onChange}
+                      />
+
+                      <input
+                        className="form-control"
+                        placeholder={
+                          user?.result?.phone
+                            ? user?.result?.phone
+                            : "Phone Number"
+                        }
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        value={phone}
+                        onChange={onChange}
+                      />
+                      <input
+                        className="form-control"
+                        placeholder={
+                          user?.result?.profession
+                            ? user?.result?.profession
+                            : "Your Profession"
+                        }
+                        type="text"
+                        id="profession"
+                        name="profession"
+                        value={profession}
+                        onChange={onChange}
+                      />
+                      {/* <textarea
+                        cols="30"
+                        rows="9"
+                        placeholder="Message*"
+                        type="textarea"
+                        id="messages"
+                        name="messages"
+                        // value={messages}
+                        // onChange={onChange}
+                      ></textarea> */}
+                      <button type="submit" className="lab-btn">
+                        <span>Update Profile</span>
+                      </button>
+                    </form>
+                  </div>
+                </article>
+              </div>
+
+              <div className="col-lg-4">
+                <div className="contact-info-wrapper ">
+                  {/* <div className="contact-info-title">
+                    <h5>Get Information</h5>
+                    <p>
+                      Our Contact information Details and Follow us on social
+                      media
+                    </p>
+                  </div> */}
+                  <div className="contact-info-content">
+                    {/* <div className="contact-info-item">
+                      <div className="contact-info-inner">
+                        <div className="contact-info-thumb">
                           <img
-                            alt="profil"
-                            src="/images/person/8.jpg"
-                            className="mx-auto object-cover rounded-full h-10 w-10 "
+                            src="assets/images/contact/01.png"
+                            alt="address"
                           />
-                        </a>
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Jean marc
-                        </p>
+                        </div>
+                        <div className="contact-info-details">
+                          <span className="fw-bold">Office Address</span>
+                          <p>Centre International des Scouts Borj Cedria</p>
+                        </div>
                       </div>
                     </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">Admin</p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      12/09/2020
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative">active</span>
-                    </span>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0">
-                        <a href="#" className="block relative">
+                    <div className="contact-info-item">
+                      <div className="contact-info-inner">
+                        <div className="contact-info-thumb">
                           <img
-                            alt="profil"
-                            src="/images/person/9.jpg"
-                            className="mx-auto object-cover rounded-full h-10 w-10 "
+                            src="assets/images/contact/02.png"
+                            alt="address"
                           />
-                        </a>
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Marcus coco
-                        </p>
+                        </div>
+                        <div className="contact-info-details">
+                          <span className="fw-bold">Phone Number</span>
+                          <p>+216 98195851</p>
+                        </div>
                       </div>
                     </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">Designer</p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      01/10/2012
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative">active</span>
-                    </span>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0">
-                        <a href="#" className="block relative">
+                    <div className="contact-info-item">
+                      <div className="contact-info-inner">
+                        <div className="contact-info-thumb">
                           <img
-                            alt="profil"
-                            src="/images/person/10.jpg"
-                            className="mx-auto object-cover rounded-full h-10 w-10 "
+                            src="assets/images/contact/03.png"
+                            alt="address"
                           />
-                        </a>
+                        </div>
+                        <div className="contact-info-details">
+                          <span className="fw-bold">Complaint Email</span>
+                          <p>arabscoutmoot21@gmail.com</p>
+                        </div>
                       </div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Ecric marc
-                        </p>
+                    </div> */}
+                    <div className="contact-info-item flex">
+                      <div className="contact-info-inner justify-content-center">
+                        <div className="contact-info-thumb">
+                          <img
+                            src="assets/images/contact/04.png"
+                            alt="address"
+                          />
+                        </div>
+                        {user.result.name &&
+                        user.result.phone &&
+                        user.result.profession ? (
+                          <div className="contact-info-details">
+                            <span className="fw-bold">Your Code QR</span>
+                            <p>
+                              {user && (
+                                <div
+                                  style={{
+                                    height: "auto",
+                                    margin: "0 auto",
+                                    maxWidth: 128,
+                                    width: "100%",
+                                  }}
+                                >
+                                  <img
+                                    size={256}
+                                    style={{
+                                      height: "auto",
+                                      maxWidth: "100%",
+                                      width: "100%",
+                                    }}
+                                    src={user.qr}
+                                  />
+                                  {/* <QRCodeSVG value={user.result.id} /> */}
+                                </div>
+                              )}
+                            </p>
+                          </div>
+                        ) : (
+                          <div>
+                            Complete Your Profile Please <br /> to get your
+                            Event Pass
+                          </div>
+                        )}
                       </div>
                     </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      Developer
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      02/10/2018
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative">active</span>
-                    </span>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0">
-                        <a href="#" className="block relative">
-                          <img
-                            alt="profil"
-                            src="/images/person/6.jpg"
-                            className="mx-auto object-cover rounded-full h-10 w-10 "
-                          />
-                        </a>
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Julien Huger
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">User</p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      23/09/2010
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                      ></span>
-                      <span className="relative">active</span>
-                    </span>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
-              <div className="flex items-center">
-                <button
-                  type="button"
-                  className="w-full p-4 border text-base rounded-l-xl text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  <svg
-                    width="9"
-                    fill="currentColor"
-                    height="8"
-                    className=""
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z"></path>
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  className="w-full px-4 py-2 border-t border-b text-base text-indigo-500 bg-white hover:bg-gray-100 "
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  className="w-full px-4 py-2 border-t border-b text-base text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  3
-                </button>
-                <button
-                  type="button"
-                  className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  4
-                </button>
-                <button
-                  type="button"
-                  className="w-full p-4 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  <svg
-                    width="9"
-                    fill="currentColor"
-                    height="8"
-                    className=""
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
-                  </svg>
-                </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

@@ -45,12 +45,29 @@ const affectCategoryToAttendee = async (token, data) => {
 
   return response.data;
 };
+// updateProfile
+const updateProfile = async (token, data) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-const authService = {
+  const response = await axios.patch("api/user/profile", data, config);
+  // if (response.data) {
+  // localStorage.removeItem("user");
+
+  //   localStorage.setItem("user", JSON.stringify(response.data));
+  // }
+  return response.data;
+};
+
+const authService = { 
   register,
   logout,
   login,
   affectCategoryToAttendee,
+  updateProfile,
 };
 
 export default authService;

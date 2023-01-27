@@ -170,7 +170,10 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Office Address</span>
-                          <p>Centre International des Scouts Borj Cedria</p>
+                          <p>
+                            105, Avenue Tahar Ben Ammar, Menzah 9B, Tunis,
+                            Tunisia
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -184,7 +187,7 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Phone Number</span>
-                          <p>+216 98195851</p>
+                          <p>+216 70 867 014</p>
                         </div>
                       </div>
                     </div>
@@ -198,7 +201,7 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Complaint Email</span>
-                          <p>arabscoutmoot21@gmail.com</p>
+                          <p>contact@iwatch.tn</p>
                         </div>
                       </div>
                     </div>
@@ -212,7 +215,7 @@ function Contact() {
                         </div>
                         <div className="contact-info-details">
                           <span className="fw-bold">Our Website</span>
-                          <p>www.scouts.tn</p>
+                          <p>https://www.iwatch.tn/ar/</p>
                         </div>
                       </div>
                     </div>

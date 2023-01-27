@@ -97,6 +97,11 @@ function Session() {
     themeSettings,
     setThemeSettings,
   } = useStateContext();
+
+
+  const emails = sessions[17]?.users.map((attendee) => attendee.email);
+  console.log(sessions[17]?.name);
+  console.log({ emails });
   return (
     <>
       <div className={currentMode === "Dark" ? "dark" : ""}>

@@ -16,11 +16,13 @@ const Qr = () => {
   const { user } = useSelector((state) => state.auth);
   const { sessionsbyDate } = useSelector((state) => state.sessionsbyDate);
 
-  const { users, isSuccess } = useSelector((state) => state.users);
+  const { users, isSuccess, isError, isLoading, message } = useSelector(
+    (state) => state.users
+  );
 
   useEffect(() => {
     // if (isError) {
-    //   console.log(message);
+    //   toast(message);
     // }
 
     if (user && user.result.role === 0) {
@@ -28,7 +30,7 @@ const Qr = () => {
     }
     dispatch(getSessionsbyDate());
   }, [user, navigate, , dispatch]);
-  console.log({ sessionsbyDate });
+
   // let state = {
   //   result: "No result",
   // };
@@ -52,12 +54,14 @@ const Qr = () => {
     // console.log({ login });
 
     const userData = {
-      email: state.result.substring(7),
+      idUser: state.result,
       idSession: sessionId,
     };
     dispatch(checkIn(userData));
-    if (isSuccess || users) {
+    if (isSuccess) {
       toast("User Checked ✅");
+    } else if (isError) {
+      toast(message);
     }
   };
   const today = new Date();

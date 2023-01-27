@@ -6,6 +6,8 @@ import User from "../models/user.js";
 import { sendmail } from "../service/mailing.js";
 import qrcode from "qrcode";
 import session from "../models/session.js";
+import Utilisateur from "../models/utilisateur.js";
+import utilisateur from "../models/utilisateur.js";
 
 const router = express.Router();
 
@@ -13,7 +15,7 @@ export const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const oldUser = await User.findOne({ email });
+    const oldUser = await Utilisateur.findOne({ email });
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -31,28 +33,37 @@ export const signin = async (req, res) => {
       }
     );
 
-    res.status(200).json({ result: oldUser, token });
+    const qr = await qrcode.toDataURL(oldUser._id.toString().toUpperCase());
+    console.log({ qr });
+
+    res.status(200).json({ result: oldUser, token, qr });
   } catch (err) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
 export const signup = async (req, res) => {
-  const { email, password, firstName, lastName, role } = req.body;
+  const { email, password, firstName, lastName, role, phone, profession } =
+    req.body;
 
   try {
-    const oldUser = await User.findOne({ email });
+    const oldUser = await Utilisateur.findOne({ email });
 
     if (oldUser)
       return res.status(400).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
+    const ObjectId = mongoose.Types.ObjectId;
 
-    const result = await User.create({
+    const result = await Utilisateur.create({
       email,
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
       role,
+      phone,
+      profession,
+      // category: ObjectId("62d883fc8539a7ae226e1977"),
+      category: [new ObjectId("62d883fc8539a7ae226e1977")],
     });
 
     const token = jwt.sign(
@@ -65,10 +76,8 @@ export const signup = async (req, res) => {
     const qr = await qrcode.toDataURL(result._id.toString().toUpperCase());
 
     sendmail(result, qr);
-    console.log({ qr });
-    console.log({ result });
 
-    res.status(201).json({ result, token });
+    res.status(201).json({ result, token, qr });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
 
@@ -84,7 +93,6 @@ export const hashPass = async (req, res) => {
   console.log({ hashedPassword });
 };
 
-
 export const ChangeRole = async (req, res) => {
   const { id } = req.params;
   const { role } = req.body;
@@ -92,7 +100,7 @@ export const ChangeRole = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No Task Found ! ");
 
-  const updated = await User.findByIdAndUpdate(
+  const updated = await Utilisateur.findByIdAndUpdate(
     id,
     { role: role },
     { new: true }
@@ -100,32 +108,11 @@ export const ChangeRole = async (req, res) => {
   res.status(200).send(updated);
 };
 
-// export const getSession = async (req, res) => {
-//   const { id } = req.user;
-//   console.log(req.user.id);
-
-//   try {
-//     const pipeline = [
-//       {
-//         '$lookup': {
-//           'from': 'categories',
-//           'localField': 'category',
-//           'foreignField': '_id',
-//           'as': 'cat'
-//         }
-//       }
-//     ]
-//     const Userdetails = await User.aggregate(pipeline)
-//     res.status(200).send(Userdetails);
-//   } catch (error) {
-//     res.status(404).json({ message: error });
-//   }
-// };
 export const getSession = async (req, res) => {
-  const { id } = req.user;
+  const { id } = req.utilisateur;
 
   try {
-    const Userdetails = await User.find({ _id: id })?.populate({
+    const Userdetails = await Utilisateur.find({ _id: id })?.populate({
       path: "category",
       populate: { path: "sessions", populate: { path: "quiz" } },
     });
@@ -137,58 +124,39 @@ export const getSession = async (req, res) => {
 };
 
 export const checkIn = async (req, res) => {
-  const email = req.body.email;
+  const idUser = req.body.idUser;
   const idSession = req.body.idSession;
+
   try {
+    const US = await Utilisateur.findById(idUser);
+
     //if (role === 1 || role === 2 || role === 3) {
+    // if (US.name && US.phone && US.profession) {
+      const checkedIn = await Utilisateur.findByIdAndUpdate(
+        idUser,
 
-    const UserEmail = await User.findOne({ email });
-    console.log({ UserEmail });
+        { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
+        { new: true }
+      );
 
-    const checkedIn = await UserEmail.updateOne(
-      { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
-      { new: true }
-    );
+      const checkedSession = await session.findByIdAndUpdate(
+        idSession,
 
-    const checkedSession = await session.findByIdAndUpdate(
-      idSession,
+        { $addToSet: { users: idUser } },
+        { new: true }
+      );
 
-      { $addToSet: { users: UserEmail._id } },
-      { new: true }
-    );
-
-    res.status(201).send(checkedSession);
-    //}
-    // res.status(400).json({ message: "Auth Error" });
+      res.status(201).json(checkedSession);
+    // }
+    // res.status(400).write({ message: "Complete Your Profile !" });
   } catch (error) {
     res.status(400).json({ message: error });
   }
 };
 
-// export const checkIn = async (req, res) => {
-//   const { role } = req.user;
-//   const idUser = req.params.idUser;
-
-//   try {
-//     if (role === 1 || role === 2) {
-//       const updatedUser = await User.findByIdAndUpdate(
-//         idUser,
-//         {
-//           date: Date.now(),
-//         },
-//         { new: true }
-//       );
-//       res.status(200).send();
-//     }
-//     res.status(400).json({ message: "Auth Error" });
-//   } catch (error) {
-//     res.status(400).json({ message: error });
-//   }
-// };
-
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find()?.populate("category");
+    const users = await Utilisateur.find()?.populate("category");
 
     res.status(200).send(users);
   } catch (error) {
@@ -202,28 +170,16 @@ export const affectAttendeeToCategory = async (req, res) => {
 
     const updatedUser = { category: idCategory };
 
-    const categoryUser = await User.findByIdAndUpdate(idUser, updatedUser);
+    const categoryUser = await Utilisateur.findByIdAndUpdate(
+      idUser,
+      updatedUser
+    );
 
     res.status(200).send(categoryUser);
   } catch (error) {
     res.send(error);
   }
 };
-
-// Category Notification
-// export const notifCategory = async (req, res) => {
-//   const { subject, message, userCategory } = req.body;
-
-//   const newUser = { subject, message, userCategory };
-
-//   try {
-//     await User.notification.save(newUser);
-
-//     res.status(201).json(newUser);
-//   } catch (error) {
-//     res.status(409).json({ message: error.message });
-//   }
-// };
 
 export const notifCategory = async (req, res) => {
   try {
@@ -234,7 +190,10 @@ export const notifCategory = async (req, res) => {
 
     const notificated = { notification: notif };
 
-    const categoryUser = await User.findByIdAndUpdate(userNotif, notificated);
+    const categoryUser = await Utilisateur.findByIdAndUpdate(
+      userNotif,
+      notificated
+    );
 
     res.status(200).send(categoryUser);
   } catch (error) {
@@ -246,7 +205,7 @@ export const getNotif = async (req, res) => {
   const { id } = req.user;
 
   try {
-    const Userdetails = await User.find({ _id: id });
+    const Userdetails = await Utilisateur.find({ _id: id });
 
     res.status(200).send(Userdetails);
   } catch (error) {
@@ -257,9 +216,32 @@ export const getNotif = async (req, res) => {
 // delete customer
 export const deleteCustomer = async (req, res) => {
   const { customerId } = req.params;
-  User.findByIdAndRemove(customerId).then((result) => {
+  Utilisateur.findByIdAndRemove(customerId).then((result) => {
     res.json({ message: "Session deleted successfully." });
   });
+};
+
+export const updateProfile = async (req, res) => {
+  const { id } = req.utilisateur;
+  const { firstName, lastName, email, phone, profession } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No Task Found ! ");
+
+  const updatedProfile = {
+    name: `${firstName} ${lastName}`,
+    email,
+    phone,
+    profession,
+    _id: id,
+  };
+
+  await utilisateur.findByIdAndUpdate(id, updatedProfile, {
+    new: true,
+  });
+  res.json(updatedProfile);
+
+  // return US;
 };
 
 export default router;

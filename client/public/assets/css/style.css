@@ -48576,12 +48576,12 @@ ul li {
 
 /* @@@@@@@@@@@@@  Common CSS Writing Now  @@@@@@@@@@@@@@ */
 .padding-tb {
-  padding-top: 80px;
+  padding-top: 20px;
   padding-bottom: 55px;
 }
 @media (min-width: 992px) {
   .padding-tb {
-    padding-top: 120px;
+    padding-top: 20px;
     padding-bottom: 105px;
   }
 }
@@ -50851,12 +50851,12 @@ ul li {
 }
 .banner-section .banner-wrapper {
   padding-top: 150px;
-  padding-bottom: 80px;
+  padding-bottom: 5px;
 }
 @media (min-width: 992px) {
   .banner-section .banner-wrapper {
     padding-top: 250px;
-    padding-bottom: 85px;
+    padding-bottom: 5px;
   }
 }
 @media (min-width: 992px) {

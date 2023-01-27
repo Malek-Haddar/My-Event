@@ -14,6 +14,7 @@ const userSchema = mongoose.Schema(
       {
         type: mongoose.Types.ObjectId,
         ref: "Category",
+        // default: "62d883fc8539a7ae226e1977",
       },
     ],
     sessions: [

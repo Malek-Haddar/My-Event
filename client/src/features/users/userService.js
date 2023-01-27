@@ -1,6 +1,5 @@
 import axios from "../../components/chat/axios";
 
-// const API_URL = "http://localhost:5000/api/user/";
 const API_URL = "https://scouts-tunisienne.herokuapp.com/api/user/";
 
 // const API_URL_check = "http://localhost:5000/api/check/checkIn/";
@@ -16,7 +15,9 @@ const checkIn = async (userData, token) => {
   };
 
   const body = {
-    email: userData.email,
+    // email: userData.email,
+    idUser: userData.idUser,
+
     idSession: userData.idSession,
   };
 

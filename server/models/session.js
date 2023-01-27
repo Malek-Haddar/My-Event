@@ -22,14 +22,14 @@ const sessionSchema = new Schema(
     users: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Utilisateur",
       },
     ],
     likes: [
       {
         user: {
           type: Schema.Types.ObjectId,
-          ref: "User",
+          ref: "Utilisateur",
         },
       },
     ],

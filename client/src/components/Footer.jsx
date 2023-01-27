@@ -27,7 +27,7 @@ function Footer() {
                       />
                     </div>
                     <div className="lab-content">
-                      <span>Phone : +216 71790501</span>
+                      <span>Phone : +216 70 867 014</span>
                     </div>
                   </div>
                 </div>
@@ -42,7 +42,7 @@ function Footer() {
                       />
                     </div>
                     <div className="lab-content">
-                      <span>Email : mootarabereclamation@gmail.com</span>
+                      <span>Email : contact@iwatch.tn</span>
                     </div>
                   </div>
                 </div>
@@ -57,7 +57,15 @@ function Footer() {
                       />
                     </div>
                     <div className="lab-content">
-                      <span>Instagram : arabe_scouts_moot_2022</span>
+                      <span>
+                        <a
+                          href="https://www.instagram.com/iwatchtn/?fbclid=IwAR0NZSJ5U9RhwQjwsLyLfNrqy7KJY71kPsirEo5cas0s3X5ufJDbwLK4Hfs"
+                          target="_blank"
+                        >
+                          {" "}
+                          Instagram
+                        </a>{" "}
+                      </span>
                     </div>
                   </div>
                 </div>

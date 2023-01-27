@@ -44,7 +44,7 @@ function Event() {
             <div className="event-sponsored">
               <div className="banner-image flex justify-center">
                 <img
-                  src="assets/images/banner/cover-moot.jpg"
+                  src="assets/images/banner/integrity.jpg"
                   className="rounded-lg shadow-2xl md:w-2/3 h-full"
                   alt="banner-img"
                 />
@@ -53,10 +53,10 @@ function Event() {
             <div className="col-lg-6 col-12 flex items-center justify-center text-center">
               <div className="banner-content ">
                 <div className="md:block items-center mb-4">
-                  <h5 className="flex justify-center text-2xl mr-4 my-2 ">
+                  {/* <h5 className="flex justify-center text-2xl mr-4 my-2 ">
                     <FaMapMarkerAlt />
                     {events[0]?.location}
-                  </h5>
+                  </h5> */}
 
                   <h5 className="text-2xl ">
                     {events[0]?.description} <br />{" "}
@@ -79,7 +79,7 @@ function Event() {
                         ) : (
                           [
                             <Link to="/login" className="lab-btn">
-                              <span>Sign In</span>{" "}
+                              <span>JOIN US</span>{" "}
                             </Link>,
                           ]
                         ),

@@ -25,10 +25,10 @@ function Header() {
             <div className="container">
               <div className="header-wrapper">
                 <div className="logo flex">
-                  <a href="/" className="text-5xl w-16 h-16 ">
+                  <a href="/" className="text-5xl w-44 h-16 ">
                     <img
-                      src="assets/images/logo/scout-logo.jpg"
-                      className="rounded-full"
+                      src="assets/images/logo/mac2023-02.png"
+                      className="rounded-none"
                       alt="logo"
                     />
                     {/* <SiPingdom /> */}
@@ -38,7 +38,7 @@ function Header() {
                 {user ? (
                   <div className="menu-area">
                     <ul className="menu">
-                      {user && user.result.role === 0 && (
+                      {user && user?.result?.role === 0 && (
                         <>
                           <li>
                             <a href="/" className="hover:text-pink-600">
@@ -57,10 +57,15 @@ function Header() {
                           </li>{" "}
                           {/* <li>
                             <a href="/room">Rooms</a>
-                          </li>{" "} */}
+                          </li>{" "}
                           <li>
                             <a href="/quiz" className="hover:text-pink-600">
                               Quiz
+                            </a>
+                          </li>{" "} */}
+                          <li>
+                            <a href="/profile" className="hover:text-pink-600">
+                              Profile
                             </a>
                           </li>{" "}
                           <li>
@@ -81,9 +86,9 @@ function Header() {
                               Home
                             </a>
                           </li>
-                          {/* <li>
+                          <li>
                             <a href="/room">Rooms</a>
-                          </li>{" "} */}
+                          </li>{" "}
                           <li>
                             <a
                               href="/dashboard"

@@ -14,9 +14,12 @@ function Register() {
     email: "",
     password: "",
     password2: "",
+    phone: "",
+    profession: "",
   });
 
-  const { firstName, lastName, email, password, password2 } = formData;
+  const { firstName, lastName, email, password, password2, phone, profession } =
+    formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,9 +32,10 @@ function Register() {
     if (isError) {
       toast.error(message);
     }
-   
+
+    if (isSuccess || user) {
       navigate("/");
-    
+    }
 
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
@@ -54,6 +58,8 @@ function Register() {
         lastName,
         email,
         password,
+        phone,
+        profession,
       };
       dispatch(register(userData));
     }
@@ -154,6 +160,33 @@ function Register() {
                 />
               </div>
               <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  name="phone"
+                  className="form-control"
+                  id="phone"
+                  value={phone}
+                  onChange={onChange}
+                  minLength={8}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Profession"
+                  name="profession"
+                  className="form-control"
+                  id="profession"
+                  value={profession}
+                  onChange={onChange}
+                  minLength={3}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
                 <button className="d-block lab-btn">
                   <span>Get Started Now</span>
                 </button>
@@ -163,7 +196,7 @@ function Register() {
               <span className="d-block cate pt-10">
                 Are you a member? <a href="/login">Login</a>
               </span>
-              <span className="or">
+              {/* <span className="or">
                 <span>or</span>
               </span>
               <h5 className="subtitle">Register With Social Media</h5>
@@ -193,7 +226,7 @@ function Register() {
                     <i className="fab fa-pinterest"></i>
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>

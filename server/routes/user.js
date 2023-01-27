@@ -11,6 +11,7 @@ import {
   getNotif,
   deleteCustomer,
   hashPass,
+  updateProfile,
 } from "../controllers/user.js";
 import { auth } from "../middleware/auth.js";
 
@@ -30,5 +31,6 @@ router.get("/notif/get", auth, getNotif);
 router.delete("/delete/:customerId", deleteCustomer);
 router.post("/hashPass", hashPass);
 
+router.patch("/profile", auth, updateProfile);
 
 export default router;
