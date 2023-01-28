@@ -64,7 +64,6 @@ const DashCalendar = () => {
       dispatch(reset());
     };
   }, [navigate, isError, message, dispatch]);
-  console.log({ sessions });
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem("colorMode");

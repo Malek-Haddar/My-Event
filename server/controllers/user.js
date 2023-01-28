@@ -132,21 +132,21 @@ export const checkIn = async (req, res) => {
 
     //if (role === 1 || role === 2 || role === 3) {
     // if (US.name && US.phone && US.profession) {
-      const checkedIn = await Utilisateur.findByIdAndUpdate(
-        idUser,
+    const checkedIn = await Utilisateur.findByIdAndUpdate(
+      idUser,
 
-        { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
-        { new: true }
-      );
+      { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
+      { new: true }
+    );
 
-      const checkedSession = await session.findByIdAndUpdate(
-        idSession,
+    const checkedSession = await session.findByIdAndUpdate(
+      idSession,
 
-        { $addToSet: { users: idUser } },
-        { new: true }
-      );
+      { $addToSet: { checkIn: { date: Date.now(), users: idUser } } },
+      { new: true }
+    );
 
-      res.status(201).json(checkedSession);
+    res.status(201).json(checkedSession);
     // }
     // res.status(400).write({ message: "Complete Your Profile !" });
   } catch (error) {
@@ -228,20 +228,36 @@ export const updateProfile = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No Task Found ! ");
 
+  // const completeUser = await utilisateur.findById(id);
   const updatedProfile = {
+    // ...completeUser,
     name: `${firstName} ${lastName}`,
     email,
     phone,
     profession,
-    _id: id,
   };
 
+  // await utilisateur.findByIdAndUpdate(id, updatedProfile, {
+  //   new: true,
+  // });
   await utilisateur.findByIdAndUpdate(id, updatedProfile, {
     new: true,
   });
   res.json(updatedProfile);
 
   // return US;
+};
+
+export const getUtilisateur = async (req, res) => {
+  const { id } = req.utilisateur;
+
+  try {
+    const result = await Utilisateur.find({ _id: id });
+
+    res.status(200).send({ result: result });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
 };
 
 export default router;

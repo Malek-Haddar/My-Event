@@ -12,6 +12,7 @@ import {
   deleteCustomer,
   hashPass,
   updateProfile,
+  getUtilisateur,
 } from "../controllers/user.js";
 import { auth } from "../middleware/auth.js";
 
@@ -32,5 +33,7 @@ router.delete("/delete/:customerId", deleteCustomer);
 router.post("/hashPass", hashPass);
 
 router.patch("/profile", auth, updateProfile);
+router.get("/details", auth, getUtilisateur);
+
 
 export default router;

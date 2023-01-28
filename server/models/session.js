@@ -19,12 +19,13 @@ const sessionSchema = new Schema(
       ref: "Event",
     },
 
-    users: [
+    checkIn: [
       {
-        type: mongoose.Types.ObjectId,
-        ref: "Utilisateur",
+        date: { type: Date },
+        users: [{ type: mongoose.Types.ObjectId, ref: "Utilisateur" }],
       },
     ],
+
     likes: [
       {
         user: {

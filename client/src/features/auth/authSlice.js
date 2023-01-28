@@ -6,6 +6,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: user ? user : null,
+  // profile: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -73,6 +74,7 @@ export const updateProfile = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+
       return await authService.updateProfile(token, data);
     } catch (error) {
       const message =
@@ -85,6 +87,24 @@ export const updateProfile = createAsyncThunk(
     }
   }
 );
+// // get user details
+// export const UtilisateurDetails = createAsyncThunk(
+//   "auth/UtilisateurDetails",
+//   async (thunkAPI) => {
+//     try {
+//       const token = thunkAPI.getState().auth.user.token;
+//       return await authService.UtilisateurDetails(token);
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
 
 export const authSlice = createSlice({
   name: "auth",
@@ -131,13 +151,14 @@ export const authSlice = createSlice({
 
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
-      });
+      })
 
-    // .addCase(updateProfile.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isSuccess = true;
-    //   state.user = action.payload;
-    // });
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user.result = action.payload;
+        // state.user = { ...state.user.result, ...action.payload };
+      });
   },
 });
 

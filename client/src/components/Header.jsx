@@ -86,9 +86,9 @@ function Header() {
                               Home
                             </a>
                           </li>
-                          <li>
+                          {/* <li>
                             <a href="/room">Rooms</a>
-                          </li>{" "}
+                          </li>{" "} */}
                           <li>
                             <a
                               href="/dashboard"

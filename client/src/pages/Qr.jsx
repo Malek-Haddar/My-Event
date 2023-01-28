@@ -99,7 +99,7 @@ const Qr = () => {
         <div className="md:flex justify-center">
           <div className="md:flex items-center justify-center md:mb-8 md:w-2/3 space-y-3  space-x-2 text-center">
             <div className="text-center ">
-              <span>23/07</span>
+              <span>04/02</span>
               <select
                 className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
@@ -116,7 +116,7 @@ const Qr = () => {
               </select>
             </div>
             <div className="text-center ">
-              <span>23/07</span>
+              <span>05/02</span>
 
               <select
                 className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
@@ -133,7 +133,7 @@ const Qr = () => {
                 ))}
               </select>
             </div>
-            <div className="text-center ">
+            {/* <div className="text-center ">
               <span>25/07</span>
 
               <select
@@ -204,7 +204,7 @@ const Qr = () => {
                   </>
                 ))}
               </select>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex item-center justify-center my-3">

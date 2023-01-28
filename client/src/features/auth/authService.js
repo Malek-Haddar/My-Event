@@ -52,22 +52,41 @@ const updateProfile = async (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
   const response = await axios.patch("api/user/profile", data, config);
-  // if (response.data) {
-  // localStorage.removeItem("user");
+  // const response = await axios.get("api/user/details", config);
+  if (response.data) {
+    // localStorage.setItem("user", JSON.stringify({ ...response.data.result }));
+    // localStorage.setItem(
+    //   "user",
+    //   JSON.stringify({
+    //     ...response.data.result,
+    //     lastUpdated: Date.now(),
+    //   })
+    // );
+  }
 
-  //   localStorage.setItem("user", JSON.stringify(response.data));
-  // }
+  return response.data;
+};
+// updateProfile
+const UtilisateurDetails = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get("api/user/details", config);
+
   return response.data;
 };
 
-const authService = { 
+const authService = {
   register,
   logout,
   login,
   affectCategoryToAttendee,
   updateProfile,
+  UtilisateurDetails,
 };
 
 export default authService;

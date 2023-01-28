@@ -5,21 +5,27 @@ import Header from "../components/Header";
 import { QRCodeSVG } from "qrcode.react";
 import QRCode from "react-qr-code";
 import Spinner from "../components/Spinner";
-import { register, reset, updateProfile } from "../features/auth/authSlice";
+import {
+  fetchData,
+  register,
+  reset,
+  updateProfile,
+  UtilisateurDetails,
+} from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Profile() {
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, profile, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
     profession: "",
   });
-  const { firstName, lastName, email, phone, profession } = formData;
+  const { firstName, lastName, phone, profession } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,16 +38,16 @@ function Profile() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-
+    if (!firstName || !lastName || !phone || !profession) {
+      toast("Complete your profile please !");
+      return;
+    }
     const userData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      profession,
+      ...formData,
     };
     dispatch(updateProfile(userData));
-    navigate("/");
+
+    // navigate("/login");
   };
 
   if (isLoading) {
@@ -83,30 +89,30 @@ function Profile() {
                     >
                       <input
                         type="text"
-                        placeholder={
-                          user?.result?.name
-                            ? user?.result?.name.split(" ").slice(0, -1)
-                            : "First Name"
-                        }
+                        placeholder={!user?.result?.name && "First Name"}
                         className="form-control"
                         id="firstName"
                         name="firstName"
-                        value={firstName}
+                        defaultValue={
+                          user?.result?.name
+                            ? user?.result?.name.split(" ").slice(0, -1)
+                            : firstName
+                        }
                         onChange={onChange}
                         minLength={3}
                         required
                       />
                       <input
                         type="text"
-                        placeholder={
-                          user?.result?.name
-                            ? user?.result?.name.split(" ").slice(-1)
-                            : "Last Name"
-                        }
+                        placeholder={!user?.result?.name && "Last Name"}
                         name="lastName"
                         className="form-control"
                         id="lastName"
-                        value={lastName}
+                        defaultValue={
+                          user?.result?.name
+                            ? user?.result?.name.split(" ").slice(-1)
+                            : lastName
+                        }
                         onChange={onChange}
                         minLength={3}
                         required
@@ -115,39 +121,42 @@ function Profile() {
                         type="email"
                         name="email"
                         className="form-control"
-                        placeholder={
-                          user?.result?.email ? user?.result?.email : "Email"
-                        }
+                        // placeholder={!user?.result?.email && "Email"}
                         id="email"
-                        value={email}
+                        // defaultValue={
+                        //   user?.result?.email ? user?.result?.email : email
+                        // }
+                        value={user?.result?.email}
                         onChange={onChange}
+                        required
+                        disabled
                       />
 
                       <input
                         className="form-control"
-                        placeholder={
-                          user?.result?.phone
-                            ? user?.result?.phone
-                            : "Phone Number"
-                        }
+                        placeholder={!user?.result?.phone && "Phone"}
                         type="text"
                         id="phone"
                         name="phone"
-                        value={phone}
+                        defaultValue={
+                          user?.result?.phone ? user?.result?.phone : phone
+                        }
                         onChange={onChange}
+                        required
                       />
                       <input
                         className="form-control"
-                        placeholder={
-                          user?.result?.profession
-                            ? user?.result?.profession
-                            : "Your Profession"
-                        }
+                        placeholder={!user?.result?.profession && "Profession"}
                         type="text"
                         id="profession"
                         name="profession"
-                        value={profession}
+                        defaultValue={
+                          user?.result?.profession
+                            ? user?.result?.profession
+                            : profession
+                        }
                         onChange={onChange}
+                        required
                       />
                       {/* <textarea
                         cols="30"
@@ -159,7 +168,11 @@ function Profile() {
                         // value={messages}
                         // onChange={onChange}
                       ></textarea> */}
-                      <button type="submit" className="lab-btn">
+                      <button
+                        type="submit"
+                        className="lab-btn"
+                        // onClick={refreshData}
+                      >
                         <span>Update Profile</span>
                       </button>
                     </form>
@@ -227,9 +240,9 @@ function Profile() {
                             alt="address"
                           />
                         </div>
-                        {user.result.name &&
-                        user.result.phone &&
-                        user.result.profession ? (
+                        {user?.result?.name &&
+                        user?.result?.phone &&
+                        user?.result?.profession ? (
                           <div className="contact-info-details">
                             <span className="fw-bold">Your Code QR</span>
                             <p>

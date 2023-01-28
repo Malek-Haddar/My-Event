@@ -44,6 +44,7 @@ const Notification = () => {
                     <img
                       src="assets/images/footer/footer-middle/02.jpg"
                       alt="product"
+                      className="rounded-md ml-1"
                     />
                   </div>
                   <div className="cart-details">
@@ -54,7 +55,7 @@ const Notification = () => {
                     </h5>
                     <p>
                       {" "}
-                      <span className="text-xs"> from Organizer</span>
+                      <span className="text-xs"> By I watch</span>
                     </p>
                     <div className="close-btn">
                       <a href="#">

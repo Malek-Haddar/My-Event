@@ -53,7 +53,7 @@ function Session() {
             <div className="col-lg-8">
               <div className="about-image">
                 <iframe
-                  className="md:w-full w-full"
+                  className="w-full"
                   style={{ height: "38rem" }}
                   src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FI.WATCH.Organization%2Fvideos%2F1350888112403862%2F&show_text=false&t=0"
                   // width="100%"

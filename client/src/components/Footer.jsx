@@ -63,7 +63,7 @@ function Footer() {
                           target="_blank"
                         >
                           {" "}
-                          Instagram
+                          Instagram : iwatchtn
                         </a>{" "}
                       </span>
                     </div>

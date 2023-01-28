@@ -100,8 +100,7 @@ function Session() {
 
 
   const emails = sessions[17]?.users.map((attendee) => attendee.email);
-  console.log(sessions[17]?.name);
-  console.log({ emails });
+
   return (
     <>
       <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -272,19 +271,18 @@ function Session() {
                               <td className="px-3 py-2 border-b border-gray-200 bg-white text-sm">
                                 <select className="text-gray-900  border-1 rounded-md w-full">
                                   <option
-                                    value={session?.users.length}
-                                    key={session?._id}
+                                    value={session?.checkIn.length}
+                                    key={session?.checkIn?._id}
                                   >
-                                    {session?.users.length} - Attendee
+                                    {session?.checkIn.length} - Attendee
                                   </option>
-                                  {session?.users.map((attendee) => (
-                                    <option
-                                      key={attendee._id}
-                                      value={attendee.email}
-                                    >
-                                      {attendee.email}
-                                    </option>
-                                  ))}
+                                  {session?.checkIn.map((attendee) =>
+                                    attendee.users.map((user) => (
+                                      <option key={user._id} value={user.email}>
+                                        {user.email}
+                                      </option>
+                                    ))
+                                  )}
                                 </select>
                               </td>
 
