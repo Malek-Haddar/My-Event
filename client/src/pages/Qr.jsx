@@ -56,31 +56,37 @@ const Qr = () => {
       setState({
         result: data,
       });
+      const checkInSession = () => {
+        const userData = {
+          idUser: state.result,
+          idSession: sessionId,
+        };
+        dispatch(checkIn(userData));
+        if (isSuccess) {
+          toast("User Checked ✅");
+        } else if (isError) {
+          toast(message);
+        }
+      };
+      checkInSession();
     }
   };
   const handleError = (err) => {
     console.error(err);
   };
 
-  const checkInSession = () => {
-    // const mail = state.result;
-
-    // const login = mail.substring(7);
-
-    // console.log({ login });
-
-    const userData = {
-      idUser: state.result,
-      idSession: sessionId,
-    };
-    dispatch(checkIn(userData));
-    if (isSuccess) {
-      toast("User Checked ✅");
-    } else if (isError) {
-      toast(message);
-    }
-  };
-  console.log({ details });
+  // const checkInSession = () => {
+  //   const userData = {
+  //     idUser: state.result,
+  //     idSession: sessionId,
+  //   };
+  //   dispatch(checkIn(userData));
+  //   if (isSuccess) {
+  //     toast("User Checked ✅");
+  //   } else if (isError) {
+  //     toast(message);
+  //   }
+  // };
   const today = new Date();
   return (
     <>
@@ -225,7 +231,7 @@ const Qr = () => {
             </div> */}
           </div>
         </div>
-        <div className="flex item-center justify-center my-3">
+        {/* <div className="flex item-center justify-center my-3">
           <a
             className="lab-btn bg-white mb-8"
             type="submit"
@@ -235,7 +241,7 @@ const Qr = () => {
           >
             ChekIn
           </a>
-        </div>
+        </div> */}
         {/* <div className="flex item-center justify-center my-3">
           <a
             className="lab-btn bg-white mb-8"

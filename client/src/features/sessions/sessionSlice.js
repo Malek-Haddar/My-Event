@@ -184,6 +184,7 @@ export const unlikeSession = createAsyncThunk(
 export const sessionSlice = createSlice({
   name: "session",
   initialState,
+
   reducers: {
     reset: (state) => initialState,
   },
@@ -216,7 +217,7 @@ export const sessionSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      
+
       .addCase(getSessionsbyDate.pending, (state) => {
         state.isLoading = true;
       })
@@ -230,7 +231,6 @@ export const sessionSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-
 
       .addCase(getUserSession.pending, (state) => {
         state.isLoading = true;

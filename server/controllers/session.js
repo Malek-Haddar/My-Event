@@ -149,12 +149,14 @@ export const deleteSession = async (req, res) => {
 export const likeSession = async (req, res) => {
   try {
     const session = await Session.findById(req.body._id);
+    console.log({ session });
     // Check if the post has already been liked
     if (session.likes.some((like) => like.user.toString() === req.user.id)) {
       return res.status(400).json({ msg: "Session already liked" });
     }
 
     session.likes.unshift({ user: req.user.id });
+    console.log(req.user.id);
 
     await session.save();
 

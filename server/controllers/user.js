@@ -7,7 +7,6 @@ import { sendmail } from "../service/mailing.js";
 import qrcode from "qrcode";
 import session from "../models/session.js";
 import Utilisateur from "../models/utilisateur.js";
-import utilisateur from "../models/utilisateur.js";
 
 const router = express.Router();
 
@@ -109,7 +108,7 @@ export const ChangeRole = async (req, res) => {
 };
 
 export const getSession = async (req, res) => {
-  const { id } = req.utilisateur;
+  const { id } = req.user;
 
   try {
     const Userdetails = await Utilisateur.find({ _id: id })?.populate({
@@ -141,10 +140,19 @@ export const checkIn = async (req, res) => {
 
     const checkedSession = await session.findByIdAndUpdate(
       idSession,
-
       { $addToSet: { checkIn: { date: Date.now(), users: idUser } } },
       { new: true }
     );
+
+    // const checkedSession = await session.findById(idSession);
+
+    // console.log({ checkedSession });
+    // if (checkedSession.checkIn[0].users[0]._id !== idUser) {
+    //   await session.updateMany(
+    //     { $addToSet: { checkIn: { date: Date.now(), users: idUser } } },
+    //     { new: true }
+    //   );
+    // } else console.log("already checked in");
 
     res.status(201).json(checkedSession);
     // }
@@ -222,7 +230,7 @@ export const deleteCustomer = async (req, res) => {
 };
 
 export const updateProfile = async (req, res) => {
-  const { id } = req.utilisateur;
+  const { id } = req.user;
   const { firstName, lastName, email, phone, profession } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
@@ -240,7 +248,7 @@ export const updateProfile = async (req, res) => {
   // await utilisateur.findByIdAndUpdate(id, updatedProfile, {
   //   new: true,
   // });
-  await utilisateur.findByIdAndUpdate(id, updatedProfile, {
+  await Utilisateur.findByIdAndUpdate(id, updatedProfile, {
     new: true,
   });
   res.json(updatedProfile);
@@ -249,7 +257,7 @@ export const updateProfile = async (req, res) => {
 };
 
 export const getUtilisateur = async (req, res) => {
-  const { id } = req.utilisateur;
+  const { id } = req.user;
 
   try {
     const result = await Utilisateur.find({ _id: id });

@@ -78,7 +78,7 @@ function Event() {
                           </Link>
                         ) : (
                           [
-                            <Link to="/login" className="lab-btn">
+                            <Link to="/register" className="lab-btn">
                               <span>JOIN US</span>{" "}
                             </Link>,
                           ]

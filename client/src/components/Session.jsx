@@ -30,9 +30,9 @@ function Session() {
 
     dispatch(getUserSession());
 
-    return () => {
-      dispatch(reset());
-    };
+    // return () => {
+    //   dispatch(reset());
+    // };
   }, [user, navigate, message, dispatch]);
 
   const addLike = (data) => {

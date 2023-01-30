@@ -16,10 +16,7 @@ export const auth = async (req, res, next) => {
 
       // if (!token) return "Not authorized, token failed";
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log({ decoded });
-      req.utilisateur = await Utilisateur.findById(decoded.id).select(
-        "-password"
-      );
+      req.user = await Utilisateur.findById(decoded.id).select("-password");
 
       next();
     } catch (error) {
