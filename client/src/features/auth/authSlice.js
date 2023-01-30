@@ -6,6 +6,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: user ? user : null,
+  details: {},
   // profile: user ? user : null,
   isError: false,
   isSuccess: false,
@@ -87,24 +88,27 @@ export const updateProfile = createAsyncThunk(
     }
   }
 );
-// // get user details
-// export const UtilisateurDetails = createAsyncThunk(
-//   "auth/UtilisateurDetails",
-//   async (thunkAPI) => {
-//     try {
-//       const token = thunkAPI.getState().auth.user.token;
-//       return await authService.UtilisateurDetails(token);
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
+// get user details
+export const getDetailsById = createAsyncThunk(
+  "auth/Qr-Details",
+  async (data, thunkAPI) => {
+    try {
+      // const body = {
+      //   id: id,
+      // };
+      // const {id} = req.body
+      return await authService.getDetailsById(data.id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -157,6 +161,12 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.user.result = action.payload;
+        // state.user = { ...state.user.result, ...action.payload };
+      })
+      .addCase(getDetailsById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.details = action.payload;
         // state.user = { ...state.user.result, ...action.payload };
       });
   },

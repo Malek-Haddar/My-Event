@@ -1,3 +1,5 @@
+import axios from "../components/chat/axios";
+
 import React, { useEffect, useState } from "react";
 import QrReader from "react-qr-reader";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { getDetailsById } from "../features/auth/authSlice";
 import { getSessionsbyDate } from "../features/sessions/sessionSlice";
 import { checkIn } from "../features/users/userSlice";
 
@@ -13,7 +16,7 @@ const Qr = () => {
   const dispatch = useDispatch();
   const [sessionId, setSessionId] = useState("");
   const [state, setState] = useState("");
-  const { user } = useSelector((state) => state.auth);
+  const { user, details } = useSelector((state) => state.auth);
   const { sessionsbyDate } = useSelector((state) => state.sessionsbyDate);
 
   const { users, isSuccess, isError, isLoading, message } = useSelector(
@@ -25,11 +28,24 @@ const Qr = () => {
     //   toast(message);
     // }
 
-    if (user && user.result.role === 0) {
+    if (user && user.result === 0) {
       navigate("/");
     }
     dispatch(getSessionsbyDate());
-  }, [user, navigate, , dispatch]);
+    if (user && state) {
+      const data = {
+        id: state.result,
+      };
+      dispatch(getDetailsById(data));
+    }
+  }, [user, navigate, state, dispatch]);
+
+  // const getDetailsById = async () => {
+  //   const id = "63d591ebaeefb360ff0ed9ac";
+
+  //   const response = await axios.get("api/user/qr-details/" + id);
+  //   return response.data;
+  // };
 
   // let state = {
   //   result: "No result",
@@ -64,6 +80,7 @@ const Qr = () => {
       toast(message);
     }
   };
+  console.log({ details });
   const today = new Date();
   return (
     <>
@@ -93,8 +110,9 @@ const Qr = () => {
             style={{ width: "50%" }}
           />{" "}
         </div>
-        <div className="flex items-center justify-center">
+        <div className="text-center my-3">
           <p>{state.result}</p>
+          <p>{details.email}</p>
         </div>
         <div className="md:flex justify-center">
           <div className="md:flex items-center justify-center md:mb-8 md:w-2/3 space-y-3  space-x-2 text-center">
@@ -218,6 +236,17 @@ const Qr = () => {
             ChekIn
           </a>
         </div>
+        {/* <div className="flex item-center justify-center my-3">
+          <a
+            className="lab-btn bg-white mb-8"
+            type="submit"
+            onClick={() => {
+              getDetailsById();
+            }}
+          >
+            User Details
+          </a>
+        </div> */}
       </section>
       <Footer />
     </>

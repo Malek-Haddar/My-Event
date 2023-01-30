@@ -74,9 +74,16 @@ const UtilisateurDetails = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
   const response = await axios.get("api/user/details", config);
-
+  return response.data;
+};
+// updateProfile
+const getDetailsById = async (data) => {
+  // const body = {
+  //   id: id,
+  // };
+  const response = await axios.get("api/user/qr-details/" + data);
+  console.log("here" + response.data);
   return response.data;
 };
 
@@ -87,6 +94,7 @@ const authService = {
   affectCategoryToAttendee,
   updateProfile,
   UtilisateurDetails,
+  getDetailsById,
 };
 
 export default authService;

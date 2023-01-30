@@ -260,4 +260,16 @@ export const getUtilisateur = async (req, res) => {
   }
 };
 
+export const getDetailsById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const Userdetails = await Utilisateur.findById(id);
+
+    res.status(200).send(Userdetails);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
 export default router;
