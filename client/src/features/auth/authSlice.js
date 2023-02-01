@@ -110,6 +110,40 @@ export const getDetailsById = createAsyncThunk(
   }
 );
 
+// resetPassword
+export const resetPassword = createAsyncThunk(
+  "auth/resetPassword",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.resetPassword(user);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+export const resetSubmission = createAsyncThunk(
+  "auth/resetSubmission",
+  async (data, thunkAPI) => {
+    try {
+      return await authService.resetSubmission(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -168,6 +202,12 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.details = action.payload;
         // state.user = { ...state.user.result, ...action.payload };
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        // state.details = action.payload;
+        state.user = { ...state.user.result, ...action.payload };
       });
   },
 });

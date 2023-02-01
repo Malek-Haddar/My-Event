@@ -51,29 +51,13 @@ const Qr = () => {
   //   result: "No result",
   // };
 
-  const handleScan = (data) => {
-    if (data) {
-      setState({
-        result: data,
-      });
-      const checkInSession = () => {
-        const userData = {
-          idUser: state.result,
-          idSession: sessionId,
-        };
-        dispatch(checkIn(userData));
-        if (isSuccess) {
-          toast("User Checked ✅");
-        } else if (isError) {
-          toast(message);
-        }
-      };
-      checkInSession();
+  useEffect(() => {
+    if (isSuccess) {
+      toast("User Checked ✅");
+    } else if (isError) {
+      toast(message);
     }
-  };
-  const handleError = (err) => {
-    console.error(err);
-  };
+  }, [isSuccess, isError]);
 
   // const checkInSession = () => {
   //   const userData = {
@@ -81,12 +65,37 @@ const Qr = () => {
   //     idSession: sessionId,
   //   };
   //   dispatch(checkIn(userData));
-  //   if (isSuccess) {
-  //     toast("User Checked ✅");
-  //   } else if (isError) {
-  //     toast(message);
-  //   }
+  //   // if (isSuccess) {
+  //   //   toast("User Checked ✅");
+  //   // } else if (isError) {
+  //   //   toast("something went wrong");
+  //   // }
   // };
+
+  const handleScan = (data) => {
+    if (data) {
+      setState({
+        result: data,
+      });
+      checkInSession();
+    }
+  };
+  const handleError = (err) => {
+    console.error(err);
+  };
+
+  const checkInSession = () => {
+    const userData = {
+      idUser: state.result,
+      idSession: sessionId,
+    };
+    dispatch(checkIn(userData));
+    // if (isSuccess) {
+    //   toast("User Checked ✅");
+    // } else if (isError) {
+    //   toast(message);
+    // }
+  };
   const today = new Date();
   return (
     <>

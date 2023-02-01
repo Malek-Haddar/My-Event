@@ -22,11 +22,24 @@ import userRoute from "./routes/user.js";
 import discord from "./models/discord.js";
 import Pusher from "pusher";
 import { auth } from "./middleware/auth.js";
+import flash from "connect-flash";
+import session from "express-session";
+
 const __dirname = path.resolve();
 
 const app = express();
 app.use(cors());
 connection();
+// configure the flash middleware
+app.use(flash());
+app.set("view engine", "ejs");
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));

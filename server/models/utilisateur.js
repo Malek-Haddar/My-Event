@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const utilisateurSchema = mongoose.Schema(
   {
@@ -7,18 +9,18 @@ const utilisateurSchema = mongoose.Schema(
       type: String,
       required: [false, "Please add an email"],
       unique: false,
+      trim: true,
     },
     password: { type: String, required: [false, "Please add a password"] },
     role: { type: Number, required: false, default: 0 },
     phone: { type: String, required: [false, "Please your phone number"] },
     profession: { type: String, required: [false, "Please add a profession"] },
-
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     category: [
       {
         type: mongoose.Types.ObjectId,
         ref: "Category",
-        // default: "62d883fc8539a7ae226e1977",
-        // default: mongoose.Types.ObjectId("62d883fc8539a7ae226e1977"),
       },
     ],
     sessions: [
@@ -39,17 +41,26 @@ const utilisateurSchema = mongoose.Schema(
         sessions: [{ type: mongoose.Types.ObjectId, ref: "Session" }],
       },
     ],
-    // notification: [
-    //   {
-    //     subject: { type: String },
-    //     message: { type: String },
-    //     userNotif: { type: mongoose.Types.ObjectId, ref: "User" },
-    //   },
-    // ],
   },
   {
     timestamps: true,
   }
 );
+// utilisateurSchema.pre("save", async function (next) {
+//   const user = this;
+//   if (user.isModified("password")) {
+//     user.password = await bcrypt.hash(user.password, 8);
+//   }
+//   next();
+// });
 
+// Generate a password reset token
+utilisateurSchema.methods.createResetToken = function () {
+  const resetToken = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: "3d",
+  });
+  this.resetPasswordToken = resetToken;
+  this.resetPasswordExpires = Date.now() + 600000; // 10 minutes
+  return resetToken;
+};
 export default mongoose.model("Utilisateur", utilisateurSchema);

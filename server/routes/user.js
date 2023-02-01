@@ -14,6 +14,9 @@ import {
   updateProfile,
   getUtilisateur,
   getDetailsById,
+  reset,
+  resetPassword,
+  resetSubmission,
 } from "../controllers/user.js";
 import { auth } from "../middleware/auth.js";
 
@@ -37,5 +40,14 @@ router.patch("/profile", auth, updateProfile);
 router.get("/details", auth, getUtilisateur);
 router.get("/qr-details/:id", getDetailsById);
 
-
+/* reset routes */
+router.get("/reset-password", (req, res) => {
+  res.render("reset-password");
+});
+router.get("/reset", (req, res) => {
+  res.render("reset");
+});
+router.post("/reset", reset);
+router.get("/reset/:token", resetPassword);
+router.post("/reset-password", resetSubmission);
 export default router;

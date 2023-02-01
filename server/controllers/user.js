@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import User from "../models/user.js";
-import { sendmail } from "../service/mailing.js";
+import { sendmail, sendResetEmail } from "../service/mailing.js";
 import qrcode from "qrcode";
 import session from "../models/session.js";
 import Utilisateur from "../models/utilisateur.js";
@@ -123,41 +123,38 @@ export const getSession = async (req, res) => {
 };
 
 export const checkIn = async (req, res) => {
-  const idUser = req.body.idUser;
-  const idSession = req.body.idSession;
-
   try {
-    const US = await Utilisateur.findById(idUser);
+    const idUser = req.body.idUser;
+    const idSession = req.body.idSession;
 
-    //if (role === 1 || role === 2 || role === 3) {
-    // if (US.name && US.phone && US.profession) {
-    const checkedIn = await Utilisateur.findByIdAndUpdate(
-      idUser,
+    const userCheckIn = await Utilisateur.findOne({
+      _id: idUser,
+      "checkIn.sessions": idSession,
+    });
+    if (!userCheckIn) {
+      await Utilisateur.findByIdAndUpdate(
+        idUser,
+        { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
+        { new: true }
+      );
+    }
+    const sessionCheckIn = await session.findOne({
+      _id: idSession,
+      "checkIn.users": idUser,
+    });
+    if (!sessionCheckIn) {
+      await session.findByIdAndUpdate(
+        idSession,
+        { $addToSet: { checkIn: { date: Date.now(), users: idUser } } },
+        { new: true }
+      );
+    }
 
-      { $addToSet: { checkIn: { date: Date.now(), sessions: idSession } } },
-      { new: true }
-    );
-
-    const checkedSession = await session.findByIdAndUpdate(
-      idSession,
-      { $addToSet: { checkIn: { date: Date.now(), users: idUser } } },
-      { new: true }
-    );
-
-    // const checkedSession = await session.findById(idSession);
-
-    // console.log({ checkedSession });
-    // if (checkedSession.checkIn[0].users[0]._id !== idUser) {
-    //   await session.updateMany(
-    //     { $addToSet: { checkIn: { date: Date.now(), users: idUser } } },
-    //     { new: true }
-    //   );
-    // } else console.log("already checked in");
-
-    res.status(201).json(checkedSession);
-    // }
-    // res.status(400).write({ message: "Complete Your Profile !" });
+    res.status(201).json({ message: "Checked in successfully" });
   } catch (error) {
+    // if( sessionCheckIn || userCheckIn ){
+    // res.status(400).json({ message: "already checked !" });
+    // }
     res.status(400).json({ message: error });
   }
 };
@@ -246,7 +243,7 @@ export const updateProfile = async (req, res) => {
   };
 
   // await utilisateur.findByIdAndUpdate(id, updatedProfile, {
-  //   new: true,
+  // new: true,
   // });
   await Utilisateur.findByIdAndUpdate(id, updatedProfile, {
     new: true,
@@ -280,4 +277,87 @@ export const getDetailsById = async (req, res) => {
   }
 };
 
+// Route to handle password reset form submission
+export const reset = async (req, res) => {
+  try {
+    const user = await Utilisateur.findOne({ email: req.body.email });
+    console.log({ user });
+    if (!user) {
+      req.flash("error", "No account with that email exists");
+      return res.redirect("/reset");
+    }
+
+    // Generate reset token and email link
+    const resetToken = user.createResetToken();
+    await user.save({ validateBeforeSave: false });
+    // const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetUrl = `https://mall.iwatch.tn/reset-password/${resetToken}`;
+    // Send reset email
+    await sendResetEmail(user, resetUrl);
+
+    // await sendmail({
+    // to: user.email,
+    // subject: "Password reset",
+    // text: `To reset your password, please click the following link: \n\n ${resetUrl}`,
+    // });
+    req.flash("success", "Check your email for a password reset link");
+    res.redirect("/login");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Something went wrong. Please try again later");
+    res.redirect("/reset");
+  }
+};
+
+// Route for reset password form
+export const resetPassword = async (req, res) => {
+  try {
+    const user = await Utilisateur.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+    console.log({ user });
+    if (!user) {
+      req.flash("error", "Password reset is invalid or has expired");
+      return res.redirect("/reset");
+    }
+    // res.redirect("password");
+    res.render("reset-password", {
+      token: req.params.token,
+    });
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Something went wrong. Please try again later");
+    res.redirect("/reset");
+  }
+};
+
+export const resetSubmission = async (req, res) => {
+  try {
+    const { token } = req.query;
+    const { password } = req.body;
+    console.log(req);
+    console.log(password, token);
+    const user = await Utilisateur.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ error: "Password reset token is invalid or has expired" });
+    }
+    user.password = await bcrypt.hash(password, 12);
+    user.resetPasswordToken = "";
+    user.resetPasswordExpires = "";
+    console.log("here" + user);
+    await user.save();
+    res.json({ message: "Password reset successful" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "Something went wrong. Please try again later" });
+  }
+};
 export default router;

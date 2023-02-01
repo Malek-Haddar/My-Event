@@ -25,6 +25,8 @@ import ChatLogin from "./pages/ChatLogin";
 import Customers from "./pages/Customers";
 import DashCalendar from "./pages/DashCalendar";
 import Profile from "./pages/Profile";
+import Reset from "./pages/Reset";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -57,6 +59,14 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/sessions" element={<Session />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route
+            path="/reset-password/:token"
+            loader={async ({ params }) => {
+              console.log(params);
+            }}
+            element={<ResetPassword />}
+          />
         </Routes>
         {/* <Footer /> */}
       </Router>

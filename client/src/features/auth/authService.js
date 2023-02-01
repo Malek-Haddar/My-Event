@@ -86,7 +86,29 @@ const getDetailsById = async (data) => {
   console.log("here" + response.data);
   return response.data;
 };
+// resetPassword
+const resetPassword = async (userData) => {
+  const response = await axios.post("api/user/reset", userData);
 
+ 
+  return response.data;
+};
+const resetSubmission = async (data) => {
+
+  // headers: { Authorization: `Bearer ${token}
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+  // const token = props.match.params.token
+  console.log({data});
+  const response = await axios.post("/api/user/reset-password",{password:data.password},{ params: {
+    token:data.token
+  }});
+
+  return response.data;
+};
 const authService = {
   register,
   logout,
@@ -95,6 +117,8 @@ const authService = {
   updateProfile,
   UtilisateurDetails,
   getDetailsById,
+  resetPassword,
+  resetSubmission
 };
 
 export default authService;

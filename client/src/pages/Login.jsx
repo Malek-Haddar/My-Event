@@ -115,7 +115,7 @@ function Login() {
                     <input type="checkbox" name="remember" id="remember" />
                     <label htmlFor="remember">Remember Me</label>
                   </div>
-                  <a href="#">Forget Password?</a>
+                  <a href="/reset">Forget Password?</a>
                 </div>
               </div>
               <div className="form-group">
