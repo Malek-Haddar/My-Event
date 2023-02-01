@@ -5,8 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { getEvents, reset } from "../features/events/eventSlice";
 import CountDown from "./event/CountDown";
 import Spinner from "./Spinner";
+import { useTranslation, initReactI18next } from "react-i18next";
+
 
 function Event() {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -67,19 +71,19 @@ function Event() {
                     {events[0]?.isPublic === true &&
                     events[0]?.status === "open" ? (
                       <Link to="/" className="lab-btn">
-                        <span>Join Now</span>{" "}
+                        <span>{t('Join Now')}</span>{" "}
                       </Link>
                     ) : (
                       [
                         events[0]?.status === "closed" ||
                         events[0]?.status === "full" ? (
                           <Link to="#" className="lab-btn disable ">
-                            <span>closed</span>{" "}
+                            <span>{t('closed')}</span>{" "}
                           </Link>
                         ) : (
                           [
                             <Link to="/login" className="lab-btn">
-                              <span>JOIN US</span>{" "}
+                              <span>{t('Join US')}</span>{" "}
                             </Link>,
                           ]
                         ),
@@ -88,7 +92,7 @@ function Event() {
                   </>
                 ) : (
                   <Link to="/calendar" className="lab-btn disable ">
-                    <span>consulte schedule</span>{" "}
+                    <span> {t('Consulte Schedule')}</span>{" "}
                   </Link>
                 )}
 

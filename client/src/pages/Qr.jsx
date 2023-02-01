@@ -10,8 +10,12 @@ import Header from "../components/Header";
 import { getDetailsById } from "../features/auth/authSlice";
 import { getSessionsbyDate } from "../features/sessions/sessionSlice";
 import { checkIn } from "../features/users/userSlice";
+import { useTranslation, initReactI18next } from "react-i18next";
+
 
 const Qr = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sessionId, setSessionId] = useState("");
@@ -89,13 +93,13 @@ const Qr = () => {
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
-            <h4 className="ph-title">QR Code Scanner</h4>
+            <h4 className="ph-title">{t('QR Code Scanner')}</h4>
             <ul className="lab-ul">
               <li>
-                <a href="/">Home</a>
+                <a href="/"> {t('Home')}</a>
               </li>
               <li>
-                <a className="active">QR</a>
+                <a className="active"> {t('QR')}</a>
               </li>
             </ul>
           </div>
@@ -140,7 +144,7 @@ const Qr = () => {
                 className="text-primary border-1 rounded-md ml-3 w-1/2 md:w-full text-center"
                 onChange={(e) => setSessionId(e.target.value)}
               >
-                <option value="">- Select -</option>
+                <option value="">- {t('Select')}  -</option>
 
                 {sessionsbyDate[1]?.result.map((session) => (
                   <>
@@ -233,7 +237,7 @@ const Qr = () => {
               checkInSession();
             }}
           >
-            ChekIn
+            {t('CheckIn')}
           </a>
         </div>
         {/* <div className="flex item-center justify-center my-3">
