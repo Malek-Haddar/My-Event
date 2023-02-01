@@ -6,12 +6,14 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { ContextProvider } from "./contexts/ContextProvider";
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 
 i18n
+.use(LanguageDetector)
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     // the translations
@@ -107,7 +109,6 @@ i18n
         }
       }
     },
-    lng: localStorage.getItem('I18N_LANGUAGE'), // if you're using a language detector, do not define the lng option
     fallbackLng: "en",
     detection:{
       order: ['localStorage']

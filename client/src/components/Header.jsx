@@ -6,6 +6,8 @@ import { logout, reset } from "../features/auth/authSlice";
 import { SiPingdom, SiStatuspal } from "react-icons/si";
 import Notification from "./Notification";
 import { useTranslation, initReactI18next } from "react-i18next";
+import i18n from  'i18next';
+
 import { useEffect } from "react";
 
 
@@ -14,6 +16,17 @@ function Header() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const currentLang = localStorage.getItem("I18N_LANGUAGE");
+  if (currentLang == "en") {
+    document.body.dir = "ltr";
+  }else{
+    document.body.dir = "rtl";
+  }
+
+  const lngs = [
+    { code: 'en', nativeName: 'English' },
+    { code: 'ar', nativeName: 'Arabic' },
+  ];
   const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
@@ -30,8 +43,12 @@ function Header() {
     let lang = localStorage.getItem("I18N_LANGUAGE");
   if (lang == "en") {
     document.body.dir = "ltr";
+    i18n.changeLanguage(lang);
+    // document.location.reload();
   }else{
     document.body.dir = "rtl";
+    i18n.changeLanguage(lang);
+    // document.location.reload();
   }
   
 
@@ -55,9 +72,8 @@ function Header() {
                   </a>{" "}
                 </div>
                 <select class="p-1 bg-dark text-white rounded" onChange={onChange}>
-                  <option selected>Open</option>
-                  <option value="ar">ar</option>
-                  <option value="en">en</option>
+                  <option value="ar" selected={currentLang == "ar" ? true : false} >ar</option>
+                  <option value="en" selected={currentLang == "en" ? true : false}>en</option>
                 </select><>
                 </>
                 {user ? (
