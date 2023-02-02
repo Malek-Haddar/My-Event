@@ -103,9 +103,15 @@ const resetSubmission = async (data) => {
   // };
   // const token = props.match.params.token
   console.log({data});
-  const response = await axios.post("/api/user/reset-password",{password:data.password},{ params: {
-    token:data.token
-  }});
+  const response = await axios.post(
+    "api/user/reset-password",
+    { password: data.password },
+    {
+      params: {
+        token: data.token,
+      },
+    }
+  );
 
   return response.data;
 };

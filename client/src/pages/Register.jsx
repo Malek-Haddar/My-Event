@@ -72,7 +72,7 @@ function Register() {
   return (
     <>
       <Header />
-      <section className="page-header bg_img padding-tb">
+      <section className="page-header bg_img padding">
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
@@ -172,7 +172,7 @@ function Register() {
                   required
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <input
                   type="text"
                   placeholder="Profession"
@@ -184,6 +184,27 @@ function Register() {
                   minLength={3}
                   required
                 />
+              </div> */}
+              <div className="form-group">
+                <select
+                  name="profession"
+                  className="form-control border-0 rounded-sm text-white"
+                  style={{ backgroundColor: "#1A2843" }}
+                  id="profession"
+                  value={profession}
+                  onChange={onChange}
+                  required
+                >
+                  <option value="">-- Select --</option>
+                  <option value="volunteer">Volunteer</option>
+                  <option value="municipality">Municipality</option>
+                  <option value="association">Association</option>
+                  <option value="public-institution">Public Institution</option>
+                  <option value="activiste">Activist</option>
+                  <option value="citizen">Citizen</option>
+                  <option value="other">Other</option>
+                  ...
+                </select>
               </div>
 
               <div className="form-group">

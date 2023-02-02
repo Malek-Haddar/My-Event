@@ -336,20 +336,20 @@ export const resetSubmission = async (req, res) => {
   try {
     const { token } = req.query;
     const { password } = req.body;
-    console.log(req);
     console.log(password, token);
     const user = await Utilisateur.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() },
     });
+    console.log("usssser" + user);
     if (!user) {
       return res
         .status(400)
         .json({ error: "Password reset token is invalid or has expired" });
     }
     user.password = await bcrypt.hash(password, 12);
-    user.resetPasswordToken = "";
-    user.resetPasswordExpires = "";
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
     console.log("here" + user);
     await user.save();
     res.json({ message: "Password reset successful" });

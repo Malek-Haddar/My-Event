@@ -57,10 +57,10 @@ const utilisateurSchema = mongoose.Schema(
 // Generate a password reset token
 utilisateurSchema.methods.createResetToken = function () {
   const resetToken = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: "3d",
+    expiresIn: "10min",
   });
   this.resetPasswordToken = resetToken;
-  this.resetPasswordExpires = Date.now() + 600000; // 10 minutes
+  this.resetPasswordExpires = Date.now() + 4200000; // 10 minutes
   return resetToken;
 };
 export default mongoose.model("Utilisateur", utilisateurSchema);
