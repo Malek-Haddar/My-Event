@@ -60,9 +60,6 @@ function SessionForm() {
     toast("Session added successfully👏");
   };
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
   return (
     <div className="modal fade" id="addOrderModalside">
       <div className="modal-dialog" role="document">
