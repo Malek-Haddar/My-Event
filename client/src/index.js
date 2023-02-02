@@ -61,7 +61,15 @@ i18n
           "Event Calendar":"Event Calendar",
           "QR Code Scanner":"QR Code Scanner",
           "QR":"QR",
-          "Select":"Select"
+          "Select":"Select",
+          "Registration":"Registration",
+          "Register Now":"Register Now",
+          "First Name":"First Name",
+          "Last Name":"Last Name",
+          "Confirm password":"Confirm password",
+          "Phone Number":"Phone Number",
+          "Profession":"Profession",
+          "Are you a member?":"Are you a member?"
         }
       },
       ar: {
@@ -94,6 +102,7 @@ i18n
           "Event Schedule":"الجدول الزمني للفعاليات",
           "Contact us via mail":"اتصل بنا عبر البريد",
           "Subject":"الموضوع",
+          "Profession":"المهنة",
           "message": "الرسالة",
           "Send Our Message":"أرسل الرسالة",
           "Get Information":" احصل على المعلومات",
@@ -105,7 +114,14 @@ i18n
           "Event Calendar": "تقويم الحدث",
           "QR Code Scanner" :"ماسح رمز الاستجابة",
           "QR": " رمز الاستجابة",
-          "Select": "اختر"
+          "Select": "اختر",
+          "Registration": "صنع حساب",
+          "Register Now":"إصنع حساب الان",
+          "First Name":"الاسم",
+          "Last Name": "اللقب",
+          "confirm password":"أكد رقمك السري",
+          "Phone Number":"رقم الهاتف",
+          "Are you a member?" : "هل لديك حساب؟"
         }
       }
     },
