@@ -78,7 +78,8 @@ i18n
           "Show All":"Show All",
           "Recent Event Photos":"Recent Event Photos",
           "Update Profile": "Update Profile",
-          "Your Code QR" : "Your Code QR"
+          "Your Code QR" : "Your Code QR",
+          "Complete Your Profile Please":"Complete Your Profile Please"
 
         }
       },

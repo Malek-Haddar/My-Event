@@ -275,7 +275,7 @@ function Profile() {
                           </div>
                         ) : (
                           <div>
-                            Complete Your Profile Please <br /> to get your
+                             {t('Complete Your Profile Please')}<br /> to get your
                             Event Pass
                           </div>
                         )}
