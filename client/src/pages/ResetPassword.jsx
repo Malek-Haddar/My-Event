@@ -1,21 +1,16 @@
-import { useState, useEffect } from "react";
-import { FaSignInAlt } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  login,
-  reset,
-  resetPassword,
-  resetSubmission,
-} from "../features/auth/authSlice";
-import { signIn } from "../features/usersSlice";
-import Spinner from "../components/Spinner";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useParams } from "react-router-dom";
+import Header from "../components/Header";
+import Spinner from "../components/Spinner";
+import { reset, resetSubmission } from "../features/auth/authSlice";
 
 function ResetPassword(props, params) {
+  const { t } = useTranslation();
+
   let { token } = useParams();
 
   const [password, setPassword] = useState("");
@@ -64,14 +59,14 @@ function ResetPassword(props, params) {
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
-            <h4 className="ph-title">Reset Your Password Now</h4>
+            <h4 className="ph-title">{t("Reset Now")}</h4>
             <ul className="lab-ul">
               <li>
-                <a href="/">Home</a>
+                <a href="/">{t("Home")}</a>
               </li>
 
               <li>
-                <a className="active">Reset Password</a>
+                <a className="active">{t("Reset")}</a>
               </li>
             </ul>
           </div>
@@ -81,13 +76,13 @@ function ResetPassword(props, params) {
       <div className="login-section padding-tb">
         <div className=" container">
           <div className="account-wrapper">
-            <h3 className="title">Reset Password</h3>
+            <h3 className="title">{t("Reset")}</h3>
 
             <form className="account-form" onSubmit={onSubmit}>
               <div className="form-group">
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("password")}
                   id="password"
                   name="password"
                   value={password}
@@ -108,7 +103,7 @@ function ResetPassword(props, params) {
               </div> */}
               <div className="form-group">
                 <button type="submit" className="d-block lab-btn bg-white">
-                  <span>Confirm</span>
+                  <span>{t("Confirm")}</span>
                 </button>
               </div>
             </form>

@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUser } from "react-icons/fa";
-import { register, reset } from "../features/auth/authSlice";
-import Spinner from "../components/Spinner";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useTranslation, initReactI18next } from "react-i18next";
-
+import Header from "../components/Header";
+import Spinner from "../components/Spinner";
+import { register, reset } from "../features/auth/authSlice";
 
 function Register() {
   const { t } = useTranslation();
@@ -80,14 +78,14 @@ function Register() {
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
-            <h4 className="ph-title">{t('Registration')}</h4>
+            <h4 className="ph-title">{t("Registration")}</h4>
             <ul className="lab-ul">
               <li>
-                <a href="/">{t('Home')}</a>
+                <a href="/">{t("Home")}</a>
               </li>
 
               <li>
-                <a className="active">{t('Registration')}</a>
+                <a className="active">{t("Registration")}</a>
               </li>
             </ul>
           </div>
@@ -96,12 +94,12 @@ function Register() {
       <div className="login-section padding-tb">
         <div className="container">
           <div className="account-wrapper">
-            <h3 className="title">{t('Register Now')}</h3>
+            <h3 className="title">{t("Register Now")}</h3>
             <form className="account-form" onSubmit={onSubmit}>
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder={t('First Name')}
+                  placeholder={t("First Name")}
                   className="form-control"
                   id="firstName"
                   name="firstName"
@@ -114,7 +112,7 @@ function Register() {
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder={t('First Name')}
+                  placeholder={t("First Name")}
                   name="lastName"
                   className="form-control"
                   id="lastName"
@@ -126,7 +124,7 @@ function Register() {
               </div>
               <div className="form-group">
                 <input
-                  placeholder={t('email')}
+                  placeholder={t("email")}
                   name="email"
                   type="email"
                   className="form-control"
@@ -140,7 +138,7 @@ function Register() {
               <div className="form-group">
                 <input
                   type="password"
-                  placeholder={t('password')}
+                  placeholder={t("password")}
                   name="password"
                   className="form-control"
                   id="password"
@@ -153,7 +151,7 @@ function Register() {
               <div className="form-group">
                 <input
                   type="password"
-                  placeholder={t('confirm password')}
+                  placeholder={t("confirm password")}
                   className="form-control"
                   id="password2"
                   name="password2"
@@ -166,7 +164,7 @@ function Register() {
               <div className="form-group">
                 <input
                   type="text"
-                  placeholder={t('Phone Number')}
+                  placeholder={t("Phone Number")}
                   name="phone"
                   className="form-control"
                   id="phone"
@@ -213,13 +211,13 @@ function Register() {
 
               <div className="form-group">
                 <button className="d-block lab-btn">
-                  <span>{t('Register Now')}</span>
+                  <span>{t("Register Now")}</span>
                 </button>
               </div>
             </form>
             <div className="account-bottom">
               <span className="d-block cate pt-10">
-                 {t('Are you a member?')} <a href="/login">{t('Login')}</a>
+                {t("Are you a member?")} <a href="/login">{t("Login")}</a>
               </span>
               {/* <span className="or">
                 <span>or</span>

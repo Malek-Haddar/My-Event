@@ -1,15 +1,12 @@
 /* eslint-disable react/jsx-no-undef */
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
-import { SiPingdom, SiStatuspal } from "react-icons/si";
 import Notification from "./Notification";
-import { useTranslation, initReactI18next } from "react-i18next";
-import i18n from  'i18next';
 
 import { useEffect } from "react";
-
 
 function Header() {
   const { t } = useTranslation();
@@ -19,13 +16,13 @@ function Header() {
   const currentLang = localStorage.getItem("I18N_LANGUAGE");
   if (currentLang == "en") {
     document.body.dir = "ltr";
-  }else{
+  } else {
     document.body.dir = "rtl";
   }
 
   const lngs = [
-    { code: 'en', nativeName: 'English' },
-    { code: 'ar', nativeName: 'Arabic' },
+    { code: "en", nativeName: "English" },
+    { code: "ar", nativeName: "Arabic" },
   ];
   const { user } = useSelector((state) => state.auth);
 
@@ -34,25 +31,23 @@ function Header() {
     dispatch(reset());
     navigate("/");
   };
-  useEffect (()=> {
-    localStorage.getItem("I18N_LANGUAGE")
-  },[])
-  
-  const onChange = (e)=> {
-    localStorage.setItem("I18N_LANGUAGE", e.target.value) ;
-    let lang = localStorage.getItem("I18N_LANGUAGE");
-  if (lang == "en") {
-    document.body.dir = "ltr";
-    i18n.changeLanguage(lang);
-    // document.location.reload();
-  }else{
-    document.body.dir = "rtl";
-    i18n.changeLanguage(lang);
-    // document.location.reload();
-  }
-  
+  useEffect(() => {
+    localStorage.getItem("I18N_LANGUAGE");
+  }, []);
 
-}
+  const onChange = (e) => {
+    localStorage.setItem("I18N_LANGUAGE", e);
+    let lang = localStorage.getItem("I18N_LANGUAGE");
+    if (lang == "en") {
+      document.body.dir = "ltr";
+      i18n.changeLanguage(lang);
+      // document.location.reload();
+    } else {
+      document.body.dir = "rtl";
+      i18n.changeLanguage(lang);
+      // document.location.reload();
+    }
+  };
 
   return (
     <>
@@ -70,12 +65,46 @@ function Header() {
                     />
                     {/* <SiPingdom /> */}
                   </a>{" "}
+                  {currentLang === "ar" ? (
+                    <a
+                      onClick={() => onChange("en")}
+                      className="md:my-auto mx-2 "
+                    >
+                      <span className="hover:text-pink-600">
+                        <i class="icofont-globe text-4xl w-full"></i>
+                      </span>
+                    </a>
+                  ) : (
+                    <a
+                      onClick={() => onChange("ar")}
+                      className="md:my-auto mx-2"
+                    >
+                      <span className="hover:text-pink-600">
+                        <i class="icofont-globe text-4xl w-full"></i>
+                      </span>
+                    </a>
+                  )}
                 </div>
-                <select class="p-1 bg-dark text-white rounded" onChange={onChange}>
-                  <option value="ar" selected={currentLang == "ar" ? true : false} >ar</option>
-                  <option value="en" selected={currentLang == "en" ? true : false}>en</option>
-                </select><>
-                </>
+
+                {/* <select
+                  class="p-1 text-dark rounded bg-transparent"
+                  onChange={onChange}
+                  // style={{ color: "#df01ae" }}
+                >
+                  <option
+                    value="ar"
+                    selected={currentLang == "ar" ? true : false}
+                  >
+                    العربية
+                  </option>
+                  <option
+                    value="en"
+                    selected={currentLang == "en" ? true : false}
+                  >
+                    English
+                  </option>
+                </select> */}
+
                 {user ? (
                   <div className="menu-area">
                     <ul className="menu">
@@ -83,17 +112,17 @@ function Header() {
                         <>
                           <li>
                             <a href="/" className="hover:text-pink-600">
-                              {t('Login')}
+                              {t("Login")}
                             </a>
                           </li>
                           <li>
                             <a href="/gallery" className="hover:text-pink-600">
-                              {t('Gallery')}
+                              {t("Gallery")}
                             </a>
                           </li>{" "}
                           <li>
                             <a href="/calendar" className="hover:text-pink-600">
-                              {t('Calendar')}
+                              {t("Calendar")}
                             </a>
                           </li>{" "}
                           {/* <li>
@@ -106,12 +135,12 @@ function Header() {
                           </li>{" "} */}
                           <li>
                             <a href="/profile" className="hover:text-pink-600">
-                              {t('Profile')}
+                              {t("Profile")}
                             </a>
                           </li>{" "}
                           <li>
                             <a href="/contact" className="hover:text-pink-600">
-                              {t('Contact')}
+                              {t("Contact")}
                             </a>
                           </li>
                           {/* <div className="cart-ticket hidden md:block ">
@@ -124,7 +153,7 @@ function Header() {
                         <>
                           <li>
                             <a href="/" className="hover:text-pink-600">
-                              {t('Home')}
+                              {t("Home")}
                             </a>
                           </li>
                           {/* <li>
@@ -135,7 +164,7 @@ function Header() {
                               href="/dashboard"
                               className="hover:text-pink-600"
                             >
-                              {t('Dashboard')}
+                              {t("Dashboard")}
                             </a>
                           </li>
                         </>
@@ -144,7 +173,7 @@ function Header() {
                         <>
                           <li>
                             <a href="/qr" className="hover:text-pink-600">
-                              {t('CheckIn')}
+                              {t("CheckIn")}
                             </a>
                           </li>
                           {/* <li>
@@ -181,11 +210,14 @@ function Header() {
                     <ul className="menu">
                       <li>
                         <a href="/" className="hover:text-pink-600">
-                          {t('Home')}
+                          {t("Home")}
                         </a>
                       </li>
                       <Link to="/login" className=" ticket-btn lab-btn  ">
-                        <span className="hover:text-pink-600"> {t('Login')}</span>
+                        <span className="hover:text-pink-600">
+                          {" "}
+                          {t("Login")}
+                        </span>
                       </Link>
                     </ul>
                   </div>
