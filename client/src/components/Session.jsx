@@ -102,8 +102,8 @@ function Session() {
         <section className="schedule-section padding-tb padding-b bg-image">
           <div className="container">
             <div className="section-header">
-              <h2>{t('Event Schedule')}</h2>
-              <p>{t('A Representation of the event planning')}</p>
+              <h2>{t("Event Schedule")}</h2>
+              <p>{t("A Representation of the event planning")}</p>
             </div>
             <section className="content ">
               {userSession[0]?.category?.length > 0 ? (
@@ -176,12 +176,15 @@ function Session() {
                                       <ul className="ev-schedule-meta d-flex flex-wrap">
                                         <li>
                                           <p>{session.details}</p>
-                                          {/* <span>
-                                        <i className="icofont-user"></i>
-                                      </span>
-                                      {userSession[0]?.category[0]?.name} */}
                                         </li>
-                                        <li>
+                                        <li className="flex">
+                                          <span className="mx-2">
+                                            <p>
+                                              <i className="icofont-location-pin">
+                                                {session?.location}
+                                              </i>
+                                            </p>
+                                          </span>
                                           <span>
                                             <i className="icofont-clock-time"></i>
                                           </span>
@@ -238,16 +241,16 @@ function Session() {
                   </div>
                   <div className="schedule-btns text-center mt-5">
                     <Link to="/calendar" className="lab-btn">
-                      {t('Move to Calendar')}
+                      {t("Move to Calendar")}
                     </Link>
                   </div>
                 </div>
               ) : (
                 <div className="section-header">
-                  <p> {t('No Category affected Yet')}</p>
+                  <p> {t("No Category affected Yet")}</p>
                   <div className="schedule-btns text-center mt-5">
                     <Link to="/contact" className="lab-btn">
-                      {t('Contact Us')}
+                      {t("Contact Us")}
                     </Link>
                   </div>
                 </div>

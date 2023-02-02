@@ -11,9 +11,10 @@ function SessionForm() {
     start: "",
     end: "",
     details: "",
+    location: "",
   });
 
-  const { name, start, end, details } = formData;
+  const { name, start, end, details, location } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function SessionForm() {
       start,
       end,
       details,
+      location,
     };
     dispatch(createSession(sessionData), setFormData(""));
     toast("Session added successfully👏");
@@ -111,6 +113,16 @@ function SessionForm() {
                   className="form-control"
                   name="details"
                   value={details}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <label className="text-black font-w500">Location</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="location"
+                  value={location}
                   onChange={onChange}
                 />
               </div>

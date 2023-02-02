@@ -75,6 +75,7 @@ export const createSession = async (req, res) => {
   newSession.start = req.body.start;
   newSession.end = req.body.end;
   newSession.details = req.body.details;
+  newSession.location = req.body.location;
   // newSession.category = req.body.category;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

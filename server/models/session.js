@@ -8,6 +8,7 @@ const sessionSchema = new Schema(
     start: { type: Date, required: [true, "Please add the start date"] },
     end: { type: Date, required: [true, "Please add the end date"] },
     details: { type: String, required: [true, "Please add some details"] },
+    location: { type: String, required: [true, "Please add location"] },
     categories: [
       {
         type: mongoose.Types.ObjectId,

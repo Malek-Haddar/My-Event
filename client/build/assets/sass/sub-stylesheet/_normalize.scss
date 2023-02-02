@@ -1,0 +1,124 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	box-shadow: none;
+	scroll-behavior: auto !important;
+}
+
+body {
+	background: $body-color;
+	color: $white-color;
+	font-family: $font-family1;
+	font-size: $fs-base;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $white-color;
+	font-weight: 700;
+	font-family: $font-family2;
+}
+
+a>h1,
+a>h2,
+a>h3,
+a>h4,
+a>h5,
+a>h6 {
+	@include transition($transition);
+}
+
+h1 {
+	font-size: $fs-h1;
+}
+
+h2 {
+	font-size: $fs-h3;
+}
+
+h3 {
+	font-size: $fs-h4;
+}
+
+h4 {
+	font-size: $fs-h5;
+}
+
+h5 {
+	font-size: $fs-h6;
+	margin-top: -5px;
+}
+
+h6 {
+	font-size: $fs-base;
+}
+
+p {
+	margin-bottom: 15px;
+	font-weight: 400;
+	font-size: $fs-base;
+	color: $white-color;
+	line-height: 24px;
+}
+
+a {
+	color: $white-color;
+	@include transition($transition);
+	display: inline-block;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: $theme-color;
+	text-decoration: none;
+	outline: none;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+@include breakpoint(sm) {
+	h1 {
+		font-size: $fs-h1;
+	}
+
+	h2 {
+		font-size: $fs-h2;
+	}
+
+	h3 {
+		font-size: $fs-h3;
+	}
+
+	h4 {
+		font-size: $fs-h4;
+	}
+
+	h5 {
+		font-size: $fs-h5;
+	}
+
+	h6 {
+		font-size: $fs-h6;
+	}
+}
+
+ul {
+	margin: 0;
+	padding-left: 0;
+
+	li {
+		list-style: none;
+	}
+}

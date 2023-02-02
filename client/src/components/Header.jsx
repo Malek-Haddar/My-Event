@@ -112,7 +112,7 @@ function Header() {
                         <>
                           <li>
                             <a href="/" className="hover:text-pink-600">
-                              {t("Login")}
+                              {t("Home")}
                             </a>
                           </li>
                           <li>
@@ -124,7 +124,7 @@ function Header() {
                             <a href="/calendar" className="hover:text-pink-600">
                               {t("Calendar")}
                             </a>
-                          </li>{" "}
+                          </li>
                           {/* <li>
                             <a href="/room">Rooms</a>
                           </li>{" "}
