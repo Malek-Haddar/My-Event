@@ -95,7 +95,6 @@ const Ecommerce = () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  // console.log({ users });
 
   const earningData = [
     {

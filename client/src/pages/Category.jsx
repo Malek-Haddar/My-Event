@@ -78,14 +78,12 @@ function Category() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(categories);
 
   const affectCategory = () => {
     const data = {
       idCategory: categoryId,
       idSession: sessionId,
     };
-    console.log(data);
     dispatch(affectSessionToCategory(data));
     toast("Category Affected 👏");
   };

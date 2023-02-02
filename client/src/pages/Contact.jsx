@@ -43,7 +43,6 @@ function Contact() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log(contacts);
 
   const onChange = (e) => {
     setFormData((prevSate) => ({

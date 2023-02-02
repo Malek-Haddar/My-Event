@@ -41,7 +41,6 @@ const affectCategoryToAttendee = async (token, data) => {
     idUser: data.idUser,
   };
   const response = await axios.patch("api/user/users/affect", body, config);
-  console.log("data: ", response);
 
   return response.data;
 };
@@ -83,18 +82,15 @@ const getDetailsById = async (data) => {
   //   id: id,
   // };
   const response = await axios.get("api/user/qr-details/" + data);
-  console.log("here" + response.data);
   return response.data;
 };
 // resetPassword
 const resetPassword = async (userData) => {
   const response = await axios.post("api/user/reset", userData);
 
- 
   return response.data;
 };
 const resetSubmission = async (data) => {
-
   // headers: { Authorization: `Bearer ${token}
   // const config = {
   //   headers: {
@@ -102,7 +98,6 @@ const resetSubmission = async (data) => {
   //   },
   // };
   // const token = props.match.params.token
-  console.log({data});
   const response = await axios.post(
     "api/user/reset-password",
     { password: data.password },

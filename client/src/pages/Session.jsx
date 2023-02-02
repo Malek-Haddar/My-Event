@@ -69,7 +69,6 @@ function Session() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ sessions });
 
   const affectEvent = () => {
     const data = {

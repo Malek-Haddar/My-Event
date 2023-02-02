@@ -33,7 +33,6 @@ export const signin = async (req, res) => {
     );
 
     const qr = await qrcode.toDataURL(oldUser._id.toString().toUpperCase());
-    console.log({ qr });
 
     res.status(200).json({ result: oldUser, token, qr });
   } catch (err) {
@@ -88,8 +87,6 @@ export const hashPass = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 12);
   res.status(200).send(hashedPassword);
-
-  console.log({ hashedPassword });
 };
 
 export const ChangeRole = async (req, res) => {
@@ -281,7 +278,6 @@ export const getDetailsById = async (req, res) => {
 export const reset = async (req, res) => {
   try {
     const user = await Utilisateur.findOne({ email: req.body.email });
-    console.log({ user });
     if (!user) {
       req.flash("error", "No account with that email exists");
       return res.redirect("/reset");
@@ -316,7 +312,6 @@ export const resetPassword = async (req, res) => {
       resetPasswordToken: req.params.token,
       resetPasswordExpires: { $gt: Date.now() },
     });
-    console.log({ user });
     if (!user) {
       req.flash("error", "Password reset is invalid or has expired");
       return res.redirect("/reset");
@@ -336,12 +331,10 @@ export const resetSubmission = async (req, res) => {
   try {
     const { token } = req.query;
     const { password } = req.body;
-    console.log(password, token);
     const user = await Utilisateur.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() },
     });
-    console.log("usssser" + user);
     if (!user) {
       return res
         .status(400)
@@ -350,7 +343,6 @@ export const resetSubmission = async (req, res) => {
     user.password = await bcrypt.hash(password, 12);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
-    console.log("here" + user);
     await user.save();
     res.json({ message: "Password reset successful" });
   } catch (error) {

@@ -37,7 +37,6 @@ function Quiz() {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ userSession });
 
   // if (isLoading) {
   //   return <Spinner />;
@@ -62,7 +61,6 @@ function Quiz() {
       }
     }
   };
-  console.log({ questionss });
 
   const questions = questionss.map((question) => ({
     questionText: question?.description,

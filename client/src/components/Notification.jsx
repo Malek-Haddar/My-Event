@@ -27,7 +27,6 @@ const Notification = () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ userSession });
   return (
     <>
       {userSession[0]?.category[0]?.notification?.length > 0 ? (

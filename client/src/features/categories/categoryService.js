@@ -44,7 +44,6 @@ const affectSessionToCategory = async (token, data) => {
     body,
     config
   );
-  console.log("data: ", response);
 
   return response.data;
 };
@@ -63,7 +62,6 @@ const notifyCategory = async (token, data) => {
     body,
     config
   );
-  console.log("data: ", response);
 
   return response.data;
 };

@@ -82,7 +82,6 @@ export const notifCategory = async (req, res) => {
       },
       { new: true }
     );
-    console.log({ categoryNotif });
     res.status(200).json(categoryNotif);
   } catch (error) {
     res.send(error);

@@ -84,7 +84,6 @@ const Customers = () => {
       dispatch(reset());
     };
   }, [user, navigate, isError, message, dispatch]);
-  console.log({ users });
 
   const affectCategory = () => {
     const data = {

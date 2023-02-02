@@ -61,17 +61,14 @@ const QuizItem = () => {
       dispatch(reset());
     };
   }, [navigate, isError, message, dispatch]);
-  console.log({ quizzes });
 
   const affectToSession = () => {
     const data = {
       idQuiz: quizId,
       idSession: sessionId,
     };
-    console.log(data);
     dispatch(affectQuizToSession(data));
     toast.error("Quiz affected to session 👏");
-
   };
 
   const clearQuiz = () => {
@@ -79,7 +76,6 @@ const QuizItem = () => {
       quizId,
     };
     dispatch(deleteQuiz(data));
-    console.log({ quizId });
     dispatch(getQuizzes());
     toast.error("🛑 Quiz has been deleted ");
   };

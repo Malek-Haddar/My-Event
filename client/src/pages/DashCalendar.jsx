@@ -92,7 +92,6 @@ const DashCalendar = () => {
     EndTime: session?.end,
     CategoryColor: "#1aaa55",
   }));
-  console.log({ scheduleData });
 
   return (
     !!sessions && (

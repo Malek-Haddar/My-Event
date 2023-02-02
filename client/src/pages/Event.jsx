@@ -61,7 +61,6 @@ function Event() {
     }
 
     dispatch(getEvents());
-    console.log({ events });
     dispatch(getSessions());
 
     return () => {

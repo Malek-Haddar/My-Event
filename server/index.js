@@ -92,7 +92,6 @@ app.get("/api/chat", (req, res) => res.status(200).send("hello world discord"));
 
 app.post("/api/new/channel", (req, res) => {
   const dbData = req.body;
-  console.log({ dbData });
 
   discord.create(dbData, (err, data) => {
     if (err) {

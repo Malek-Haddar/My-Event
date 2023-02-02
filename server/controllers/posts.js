@@ -62,7 +62,6 @@ export const getPost = async(req, res) => {
 
 export const createPost = async(req, res) => {
     const post = req.body;
-    console.log(req.user.id);
     const newPostMessage = new PostMessage({...post, creator: req.user.id, createdAt: new Date().toISOString() })
 
     try {

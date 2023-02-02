@@ -48,7 +48,6 @@ function Pictures() {
     }
 
     dispatch(getGalleries());
-    console.log(galleries);
 
     return () => {
       dispatch(reset());

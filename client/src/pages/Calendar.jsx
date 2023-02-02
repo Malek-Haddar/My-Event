@@ -45,7 +45,6 @@ function Calendar() {
       dispatch(reset());
     };
   }, [navigate, isError, message, dispatch]);
-  console.log({ userSession });
 
   const change = (args) => {
     scheduleObj.selectedDate = args.value;

@@ -71,7 +71,6 @@ const affectSessionToEvent = async (token, data) => {
     body,
     config
   );
-  console.log("data: ", response);
 
   return response.data;
 };
@@ -90,7 +89,6 @@ const deleteSession = async (token, data) => {
 };
 // like session
 const likeSession = async (_id, token) => {
-  console.log({ _id, token });
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -149,7 +147,6 @@ const affectSessionToCategory = async (token, data) => {
     body,
     config
   );
-  console.log("data: ", response);
 
   return response.data;
 };
