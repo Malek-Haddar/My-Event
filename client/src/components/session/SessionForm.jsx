@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createSession, reset } from "../../features/sessions/sessionSlice";
-import Spinner from "../../components/Spinner";
 import { toast } from "react-toastify";
+import { createSession, reset } from "../../features/sessions/sessionSlice";
 
 function SessionForm() {
   const [formData, setFormData] = useState({
