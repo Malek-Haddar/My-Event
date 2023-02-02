@@ -69,7 +69,17 @@ i18n
           "Confirm password":"Confirm password",
           "Phone Number":"Phone Number",
           "Profession":"Profession",
-          "Are you a member?":"Are you a member?"
+          "Are you a member?":"Are you a member?",
+          "Days":"Days",
+          "Hour":"Hour",
+          "Min":"Min",
+          "Sec":"Sec",
+          "Photos":"Photos",
+          "Show All":"Show All",
+          "Recent Event Photos":"Recent Event Photos",
+          "Update Profile": "Update Profile",
+          "Your Code QR" : "Your Code QR"
+
         }
       },
       ar: {
@@ -121,7 +131,16 @@ i18n
           "Last Name": "اللقب",
           "confirm password":"أكد رقمك السري",
           "Phone Number":"رقم الهاتف",
-          "Are you a member?" : "هل لديك حساب؟"
+          "Are you a member?" : "هل لديك حساب؟",
+          "Days":"ايام",
+          "Hour":"ساعة",
+          "Min":"دقق",
+          "Sec":"ثانية",
+          "Photos" :"الصور",
+          "Show All":"عرض الكل",
+          "Recent Event Photos": "صور الأحداث الأخيرة",
+          "Update Profile" : "تحديث الملف الشخصي",
+          "Your Code QR" :"رمز QR الخاص بك"
         }
       }
     },
