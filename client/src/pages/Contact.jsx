@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
+import { useTranslation, initReactI18next } from "react-i18next";
+
 import {
   getContacts,
   createContact,
@@ -12,6 +14,8 @@ import {
 } from "../features/contacts/contactSlice";
 
 function Contact() {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     email: "",
     subject: "",
@@ -74,13 +78,13 @@ function Contact() {
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
-            <h4 className="ph-title">Contact us via mail</h4>
+            <h4 className="ph-title">{t('Contact us via mail')}</h4>
             <ul className="lab-ul">
               <li>
-                <a href="/">Home</a>
+                <a href="/">{t('Home')}</a>
               </li>
               <li>
-                <a className="active">Contact us</a>
+                <a className="active">{t('Contact Us')}</a>
               </li>
             </ul>
           </div>
@@ -116,7 +120,7 @@ function Contact() {
                         type="email"
                         name="email"
                         className=""
-                        placeholder="Email*"
+                        placeholder={t('email')}
                         id="email"
                         value={email}
                         onChange={onChange}
@@ -124,7 +128,7 @@ function Contact() {
 
                       <input
                         className=""
-                        placeholder="Subject*"
+                        placeholder={t('Subject')}
                         type="text"
                         id="subject"
                         name="subject"
@@ -134,7 +138,7 @@ function Contact() {
                       <textarea
                         cols="30"
                         rows="9"
-                        placeholder="Message*"
+                        placeholder={t('message')}
                         type="textarea"
                         id="messages"
                         name="messages"
@@ -142,7 +146,7 @@ function Contact() {
                         onChange={onChange}
                       ></textarea>
                       <button type="submit" className="lab-btn">
-                        <span>Send Our Message</span>
+                        <span>{t('Send Our Message')}</span>
                       </button>
                     </form>
                   </div>
@@ -152,10 +156,10 @@ function Contact() {
               <div className="col-lg-4">
                 <div className="contact-info-wrapper ">
                   <div className="contact-info-title">
-                    <h5>Get Information</h5>
+                    <h5>{t('Get Information')}</h5>
                     <p>
-                      Our Contact information Details and Follow us on social
-                      media
+                      {t('Our Contact information')}
+                      
                     </p>
                   </div>
                   <div className="contact-info-content">
@@ -168,10 +172,9 @@ function Contact() {
                           />
                         </div>
                         <div className="contact-info-details">
-                          <span className="fw-bold">Office Address</span>
+                          <span className="fw-bold">{t('Office Address')}</span>
                           <p>
-                            105, Avenue Tahar Ben Ammar, Menzah 9B, Tunis,
-                            Tunisia
+                            {t('Address')}
                           </p>
                         </div>
                       </div>
@@ -185,7 +188,7 @@ function Contact() {
                           />
                         </div>
                         <div className="contact-info-details">
-                          <span className="fw-bold">Phone Number</span>
+                          <span className="fw-bold">{t('Phone Number')}</span>
                           <p>+216 70 867 014</p>
                         </div>
                       </div>
@@ -199,7 +202,7 @@ function Contact() {
                           />
                         </div>
                         <div className="contact-info-details">
-                          <span className="fw-bold">Complaint Email</span>
+                          <span className="fw-bold">{t('email')}</span>
                           <p>contact@iwatch.tn</p>
                         </div>
                       </div>
@@ -213,7 +216,7 @@ function Contact() {
                           />
                         </div>
                         <div className="contact-info-details">
-                          <span className="fw-bold">Our Website</span>
+                          <span className="fw-bold">{t('our website')}</span>
                           <p>https://www.iwatch.tn/ar/</p>
                         </div>
                       </div>

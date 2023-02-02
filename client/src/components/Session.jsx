@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation, initReactI18next } from "react-i18next";
+
 import {
   getUserSession,
   likeSession,
@@ -10,6 +12,7 @@ import {
 import Spinner from "./Spinner";
 
 function Session() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -99,8 +102,8 @@ function Session() {
         <section className="schedule-section padding-tb padding-b bg-image">
           <div className="container">
             <div className="section-header">
-              <h2>Event Schedule</h2>
-              <p>A Representation of the event planning</p>
+              <h2>{t('Event Schedule')}</h2>
+              <p>{t('A Representation of the event planning')}</p>
             </div>
             <section className="content ">
               {userSession[0]?.category?.length > 0 ? (
@@ -235,16 +238,16 @@ function Session() {
                   </div>
                   <div className="schedule-btns text-center mt-5">
                     <Link to="/calendar" className="lab-btn">
-                      Move to Calendar
+                      {t('Move to Calendar')}
                     </Link>
                   </div>
                 </div>
               ) : (
                 <div className="section-header">
-                  <p>No Category affected Yet</p>
+                  <p> {t('No Category affected Yet')}</p>
                   <div className="schedule-btns text-center mt-5">
                     <Link to="/contact" className="lab-btn">
-                      Contact Us
+                      {t('Contact Us')}
                     </Link>
                   </div>
                 </div>

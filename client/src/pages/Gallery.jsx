@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
 import { getGalleries, reset } from "../features/gallery/gallerySlice";
+import { useTranslation, initReactI18next } from "react-i18next";
+
 import Footer from "../components/Footer";
 
 function Gallery() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -40,14 +43,14 @@ function Gallery() {
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
-            <h4 className="ph-title">Recent Event Photos</h4>
+            <h4 className="ph-title">{t('Recent Event Photos')}</h4>
             <ul className="lab-ul">
               <li>
-                <a href="/">Home</a>
+                <a href="/">{t('Home')}</a>
               </li>
 
               <li>
-                <a className="active">Photos</a>
+                <a className="active">{t('Photos')}</a>
               </li>
             </ul>
           </div>
@@ -59,7 +62,7 @@ function Gallery() {
             {/* {galleries.map((gallery) => ( */}
             <ul className="filter-button-group lab-ul d-flex justify-content-center mb-4 w-full">
               <li className="filter-btn is-checked" data-filter={""}>
-                Show All{" "}
+                {t('Show All')}{" "}
                 <span className="filter-item-num"> {galleries.length} </span>
               </li>
               {/* <li className="filter-btn" data-filter=".eid-ul-adha">

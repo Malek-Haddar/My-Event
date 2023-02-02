@@ -18,10 +18,13 @@ import { getUserSession, reset } from "../features/sessions/sessionSlice";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useTranslation, initReactI18next } from "react-i18next";
+
 
 function Calendar() {
   const PropertyPane = (props) => <div className="mt-5">{props.children}</div>;
   const [scheduleObj, setScheduleObj] = useState();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,13 +75,13 @@ function Calendar() {
         <div className="overlay"></div>
         <div className="container">
           <div className="page-header-content-area">
-            <h4 className="ph-title">Event Calendar</h4>
+            <h4 className="ph-title">{t('Event Calendar')}</h4>
             <ul className="lab-ul">
               <li>
-                <a href="/">Home</a>
+                <a href="/">{t('Home')}</a>
               </li>
               <li>
-                <a className="active">Calendar</a>
+                <a className="active">{t('Calendar')}</a>
               </li>
             </ul>
           </div>
